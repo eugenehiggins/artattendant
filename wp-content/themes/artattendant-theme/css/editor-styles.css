@@ -1,0 +1,19 @@
+html .mceContentBody {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+
+
+html .mceContentBody a.btn {
+	background: #EEE;
+	border-radius: 3px;
+	display: inline-block;
+	padding: 2px 5px 2px;
+	text-decoration: none;
+}
+html .mceContentBody a.btn:hover {
+	color:#000;
+	text-decoration: none;
+}
+
+

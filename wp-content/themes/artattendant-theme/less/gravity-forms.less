@@ -1,0 +1,389 @@
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+.input-checkbox  {
+  /* Remove First */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+       outline: none;
+       box-shadow: none !important;
+}
+
+
+.button{
+	.btn();
+	.btn-default();
+}
+
+
+/* =Forms
+--------------------------------------------------------------------------------------------------------*/
+
+.hidden_sub_label,
+.hidden_label .gfield_label{
+	display: none;
+}
+.gform_title{
+	margin-top: 0;
+}
+.gform_wrapper{
+
+}
+.gform_wrapper ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+}
+.gform_wrapper ul{
+	list-style: none;
+
+}
+.gform_ajax_spinner{
+	padding-left: 10px;
+	display: inline;
+}
+.name_first{
+	margin-bottom: 10px;
+}
+
+.gfield_required{
+	color:red;
+	padding-left: 2px;
+}
+
+label {
+    font-weight: normal;
+}
+
+.gfield_label{
+	    font-weight: bold;
+}
+
+
+	.gfield_radio .radio input[type='text'] {
+		.form-control();
+		    width: 200px;
+    height: 28px;
+    padding: 3px 8px;
+
+	}
+
+.gform_confirmation_wrapper {
+	font-size: 120%;
+}
+
+.gform_wrapper .gform_fileupload_multifile .gform_drop_area {
+    padding: 25px;
+    border: 2px dashed #ddd;
+    text-align: center;
+    color: #AAA;
+    margin-bottom: 10px;
+}
+
+/*light checkout*/
+.lc-input,
+.fcWrapper {
+	-moz-transition: 1s;
+	-ms-transition: 1s;
+	-o-transition: 1s;
+	-webkit-transition: 1s;
+	transition: 1s;
+	overflow: hidden;
+	max-height: 250px;
+}
+.lc-input.lc-hide {
+	max-height: 0;
+}
+.lc-input span.noNumError {
+	display: block;
+	color: #d41515;
+	padding: 5px 0;
+}
+
+/*Credit card*/
+.panel-creditcard {
+    border: 1px solid #f0f0f0;
+    background: #f9f9f9;
+    position: relative;
+        max-width: 400px;
+}
+
+.panel-creditcard label{
+	    display: block;
+}
+
+.gform_wrapper .ginput_complex span.ginput_cardextras,
+.panel-creditcard .ginput_full,
+.panel-creditcard .ginput_card_expiration_container{
+	    display: block;
+    margin-bottom: 10px;
+        overflow: auto;
+}
+
+
+.ginput_card_expiration_container .form-control{
+	width: 50%;
+}
+
+
+
+.ginput_container_creditcard{
+margin-bottom: 20px;
+}
+.gform_card_icon_container{
+	margin-bottom: 20px;
+}
+.gform_card_icon_container .gform_card_icon{
+	display: inline;
+	padding-right: 10px;
+}
+
+
+.gfield_total{
+	    background: #fafafa;
+    color: #666;
+    padding: 0.5em 1.387em;
+        border: 1px solid #eee;
+            max-width: 400px;
+}
+
+.gfield_total .gfield_label {
+    display: inline-block;
+}
+.gfield_total .ginput_container_total{
+    display: inline-block;
+    padding-left: 10px;
+}
+
+
+/*.
+gform_wrapper {
+
+	ul {
+		.list-unstyled();
+	}
+
+	li {
+		.form-group();
+	}
+
+	form {
+		margin-bottom: 0;
+	}
+
+	.gfield_required {
+		padding-left: 1px;
+		color:        @state-danger-text;
+	}
+
+	.ginput_container input,
+	.ginput_container select,
+	.ginput_container textarea {
+		.form-control();
+	}
+
+	.ginput_container textarea {
+		height: auto;
+	}
+
+	.gform_button {
+		.btn();
+		.btn-primary();
+	}
+
+	.gfield_error {
+
+		.gfield_label {
+			color: @state-danger-text;
+		}
+
+		input,
+		select,
+		textarea {
+			border-color:     @alert-danger-border;
+			background-color: @alert-danger-bg;
+			color:            @alert-danger-text;
+
+			.form-control-focus(@alert-danger-text);
+		}
+	}
+
+	.validation_error {
+		.alert();
+		.alert-danger();
+	}
+
+	#gforms_confirmation_message {
+		.alert();
+		.alert-success();
+	}
+
+	input, select {
+
+		&.medium {
+			width: 47%;
+		}
+
+		&.small {
+			width: 25%;
+		}
+
+	}
+
+	textarea {
+
+		&.large {
+			height: 250px;
+		}
+
+		&.medium {
+			height: 150px;
+		}
+
+		&.small {
+			height: 80px;
+		}
+
+	}
+
+	select[multiple] {
+		height: auto;
+	}
+
+	input[type='checkbox'], input[type='radio'] {
+		width:   auto;
+		height:  15px;
+		display: inline-block;
+		margin:  0px;
+
+		&:focus {
+			border:     none;
+			box-shadow: none;
+		}
+
+	}
+
+	input.datepicker {
+		width: 100px;
+	}
+
+	.gfield_time_hour, .gfield_time_minute, .gfield_date_month, .gfield_date_day, .gfield_date_year {
+		width:   70px;
+		display: inline-block;
+
+		input {
+			width: 70%;
+		}
+
+		label {
+			font-size: 11px;
+		}
+
+	}
+
+	.gfield_time_ampm {
+		vertical-align: top;
+		display:        inline-block;
+
+		select {
+			width: 60px;
+		}
+	}
+
+	.gfield_checkbox label, .gfield_radio label {
+		font-weight:    normal;
+		padding-left:   4px;
+		vertical-align: middle;
+		margin:         0;
+	}
+
+	.ginput_complex {
+
+		.ginput_left {
+			width: 50%;
+			float: left;
+		}
+
+		.ginput_right {
+			width:        50%;
+			float:        right;
+			padding-left: 8px;
+		}
+
+		span {
+			display: block;
+		}
+
+		label {
+			font-size: 11px;
+		}
+
+	}
+
+	li {
+		clear: both;
+
+	}
+
+	.ginput_container {
+		input, select, textarea, .gform_button {
+			font-size: @font-size-small;
+		}
+	}
+
+	.gfield_description {
+		font-size: @font-size-small;
+	}
+	.gform_button {
+		background:    @brand-info;
+		border-radius: 0;
+		padding:       10px 20px;
+		border:        none;
+	}
+	.ginput_container {
+		input,
+		select,
+		textarea {
+			border-radius:  0;
+			box-shadow:     none;
+			border:         1px solid @gray-light;
+			vertical-align: text-top;
+		}
+	}
+	.ginput_complex {
+		.ginput_left {
+			width: 48%;
+			float: left;
+		}
+	}
+	.gfield_checkbox, .gfield_radio, .ginput_complex {
+		li {
+			margin-bottom: 0
+		}
+		br {
+			display: none;
+		}
+	}
+
+	#gform_fields_15 li {
+		margin-bottom: 0;
+	}
+	.gform_validation_container, .validation_error, .gfield_required {
+		display: none;
+	}
+
+	.ui-datepicker {
+		.ui-datepicker-title {
+			select {
+				color: #000000;
+			}
+		}
+
+	}
+
+}
+*/

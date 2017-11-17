@@ -1,0 +1,183 @@
+@grid-columns:              12;
+
+@media only screen and (max-width: 800px) {
+
+    /* Force table to not be like tables anymore */
+	#no-more-tables table,
+	#no-more-tables thead,
+	#no-more-tables tbody,
+	#no-more-tables th,
+	#no-more-tables td,
+	#no-more-tables tr {
+		display: block;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#no-more-tables thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	#no-more-tables tr { border: 1px solid #ccc; }
+
+	#no-more-tables td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+		white-space: normal;
+		text-align:left;
+	}
+
+	#no-more-tables td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+		text-align:left;
+		font-weight: bold;
+	}
+
+	/*
+	Label the data
+	*/
+	#no-more-tables td:before { content: attr(data-title); }
+}
+
+/*==================================================
+=            Bootstrap 3 Media Queries             =
+==================================================*/
+
+
+
+
+    /*==========  Mobile First Method  ==========*/
+
+    /* Custom, iPhone Retina */
+    @media only screen and (min-width : 320px) {
+
+    }
+
+    /* Extra Small Devices, Phones */
+    @media only screen and (min-width : 480px) {
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+
+    }
+
+
+
+    /*==========  Non-Mobile First Method  ==========*/
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) {
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) {
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+		.textContainer {
+		    height: auto;
+		    line-height: 1.4;
+		    padding-bottom: 30px;
+		    text-align: center;
+		}
+		.landing-block {
+		    border-bottom:30px;
+		    padding: 20px 0;
+		}
+		.dash-widgets span {
+		    font-size: 22px;
+		}
+		.dash-icon {
+		    width: 50px;
+		    height: 50px;
+		    line-height: 30px;
+		}
+		#fes-vendor-dashboard {
+		    position: relative;
+		}
+
+/*
+    .affix {
+        position: static;
+    }
+*/
+
+
+		.refiner{
+/*
+			border-left: 0;
+			padding-left: 25px;
+*/
+		}
+		.container-fluid.main-content{
+			padding: 0;
+		}
+		.search-box{
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+		.filter-bar .select2-container--filter .select2-selection--single,
+		.select2-container--filter .select2-search--dropdown .select2-search__field{
+		    border: 1px solid #cacaca;
+		}
+		.select2-container--filter .select2-results {
+		    margin-top: 0;
+		    border: 1px solid #cacaca;
+		    padding: 10px 0;
+		    border-top: 0;
+		    -webkit-box-shadow: none;
+		    -moz-box-shadow: none;
+		    box-shadow: none;
+
+	    }
+	    .select2-container--filter .select2-results__option {
+		    padding-left: 10px;
+		    font-size: 18px;
+		    line-height: 1.2;
+		}
+
+
+    }
+
+    /* Extra Small Devices, Phones */
+    @media only screen and (max-width : 480px) {
+
+	.page-template-template-login-join .navbar-default{
+		display: none;
+	}
+	.landing-logo {
+	    max-width: 300px;
+	}
+
+    }
+
+    /* Custom, iPhone Retina */
+    @media only screen and (max-width : 320px) {
+
+    }
