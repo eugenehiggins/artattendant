@@ -1,0 +1,18 @@
+#icon-usersnap {
+    background: transparent url( 'usersnap_32x32.png' ) no-repeat;
+}
+
+div.us-box {
+	margin:10px 0;
+	padding: 10px;
+	max-width: 500px;
+	background-color:white;
+	border:1px solid rgb(229,229,229);
+	box-shadow: rgba(0, 0, 0, 0.0392157) 0px 1px 1px 0px;
+}
+
+
+#us-visible-roles {
+	display: none;
+	margin-left:2em;
+}

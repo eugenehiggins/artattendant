@@ -1,0 +1,179 @@
+== Changelog ==
+
+= 2.0.6 =
+Release Date: July 26th, 2017
+
+* [Improved] ACF Date settings is now set to ACF format by default
+
+= 2.0.5 =
+Release Date: July 3rd, 2017
+
+* [Fixed] ACF4 date editing with custom save format
+* [Improved] Meta changes
+* [Improved] Datepicker now support first day of the week as set in ACF date field
+
+= 2.0.4 =
+Release Date: May 23rd, 2017
+
+* [Fixed] ACF4 date editing with custom save format
+* [Fixed] ACF User field inline edit dropdown now gives the corresponding options
+
+= 2.0.3 =
+Release Date: May 3rd, 2017
+
+* [Fixed] Compatibility issue with WooCommerce has been solved
+* [Fixed] ACF column will display a message when there are no ACF fields available
+
+= 2.0.2 =
+Release Date: April 25th, 2017
+
+* [Important] Only compatible with Admin Columns Pro 4.0.3
+
+= 2.0.1 =
+Release Date: April 11th, 2017
+
+* [Added] Sorting and filtering support for ACF Date Time picker
+* [Fixed] Inline Edit ACF4 Post Object fatal error fixed
+* [Fixed] ACF Taxonomy Field Filtering does not give any options in the dropdown
+* [Fixed] HTML entities in ACF relationship column
+
+= 2.0 =
+Release Date: April 4th, 2017
+
+* [Important] Only compatible with Admin Columns Pro 4.0
+* [Added] Filtering support for ACF Relation field
+* [Added] Filtering support multiselect fields
+* [Added] Colorpicker added for inline edit
+* [Fixed] Support new ACF5 dates
+* [Fixed] ACF Nullable select column can now be cleared
+* [Refactor] Autoloader added
+* [Refactor] Moved all ACF methods from Admin Columns Pro to the ACF addon
+* [Refactor] This addon now requires Admin Column Pro 4 or greater to function
+* [Refactor] Each ACF field now has it's own class for sorting, editing and filtering.
+* [Refactor] Created a new class for each ACF field
+
+= 1.3.5.2 =
+Release Date: August 29th, 2016
+
+* [Fixed] Catch possible unsupported ACF5 date formats
+
+= 1.3.5.1 =
+Release Date: August 22th, 2016
+
+* [Fixed] ACF5 new date format support
+
+= 1.3.5 =
+* [Fixed] ACF4 dates now displays the correct date based on the saved format
+
+= 1.3.4 =
+Release Date: March 16th, 2016
+
+* [Fixed] Changed path from api.php to absolute utility file
+* [Fixed] Replaced FamFam icon with dashicons
+
+= 1.3.3 =
+Release Date: Januari 20th, 2016
+
+* [Added] Sorting support for ACF addon: Date Time field
+* [Fixed] Fixed the styling for ACF repeater fields. Added option to choose display format.
+
+= 1.3.2 =
+Release Date: November 26th, 2015
+
+* [Added] Oembed field support with a video preview
+* [Fixed] Prepend and append from the field will not get added when the value is empty
+* [Updated] Changed plugin name from ACF add-on to Advanced Custom Fields add-on
+
+= 1.3.1 =
+Release Date: October 13th, 2015
+
+* [Fixed] Replaced text-domains
+* [Fixed] Translations will be loaded from pro version
+* [Fixed] Error when Flexible box column was no longer available
+
+= 1.3 =
+Release Date: May 4th, 2015
+
+* [Added] Support for comments
+* [Added] Added method get_field_label() to column.
+* [Added] ACF Fields are sorted by label
+
+= 1.2.2 =
+Release Date: Februari 24th, 2015
+
+* [Fixed] Issue solved where ACF values for users were not displaying correctly
+
+= 1.2.1 =
+Release Date: Januari 5th, 2015
+
+* [Added] Improved ACF 4 support
+* [Added] Method CPAC_ACF_Column_ACF_Field::get_sorting_value()
+* [Improved] ACF text value will be html_entity_decoded before displaying, meaning it will display HTML elements.
+* [Changed] Deprecated filter 'cpac/acf/column-acf_field/format_acf_value' and replaced with 'cac/acf/format_acf_value'
+
+= 1.2 =
+Release Date: December 22nd, 2015
+
+* [Added] Select the display format for User fieldtype.
+* [Added] Repeater fieldtype has the option to select a subfield.
+* [Added] Flexibele Content fieldtype will display used layouts with counter.
+
+= 1.1 =
+Release Date: December 11th, 2015
+
+* [Added] Support for all location rules
+
+= 1.0.8 =
+Release Date: December 5th, 2014
+
+* [Fixed] Display ACF fields for user with location "Role" selected.
+
+= 1.0.7 =
+Release Date: November 3rd, 2014
+
+* [Fixed] When using the exported ACF fields (php) the column selection dropdown was not being populate correctly.
+
+= 1.0.6 =
+Release Date: October 10th, 2014
+
+* [Fixed] Support for repeater fields in ACF 5
+
+= 1.0.5 =
+Release Date: October 1st, 2014
+
+* [Added] Support for "Page Template" location rule.
+* [Added] Support for URL field added in ACF 5.0.5
+
+= 1.0.4 =
+Release Date: August 15th, 2014
+
+* [Added] Improved support ACF PRO 5.0.3
+* [Added] Field Types "Page Link", "Post Object" and "Taxonomy" will link directly to the edit screen.
+* [Added] Support for relationship field.
+
+= 1.0.3 =
+Release Date: July 22nd, 2014
+
+* [Fixed] Date picker fallback for php 5.2 and lower. Use PHP 5.3 for optimal results.
+* [Fixed] Check if type output of text is a string.
+* [Added] Added action cpac-acf/loaded for addon setup
+* [Updated] Adhere to new Admin Columns add-on structure
+* [Tweak] Minor code formatting changes
+* [Added] ACF 5.0 beta support ( in development )
+
+= 1.0.2 =
+Release Date: June 25th, 2014
+
+* [Updated] ACF field renamed to Advanced Custom Field
+* [Updated] Placed ACF under field group Third Party Plugin integration.
+* [Updated] Column class structure change
+
+= 1.0.1 =
+Release Date: May 7th, 2014
+
+* [Added] location support for taxonomies, users and media
+
+= 1.0 =
+Release Date: May 3rd, 2014
+
+* Initial release

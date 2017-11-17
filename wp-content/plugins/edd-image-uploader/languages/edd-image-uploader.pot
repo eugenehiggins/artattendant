@@ -1,0 +1,360 @@
+# Copyright (C) 2015 Easy Digital Downloads - Simple Shipping
+# This file is distributed under the same license as the Easy Digital Downloads - Simple Shipping package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Digital Downloads - Simple Shipping 2.1.4\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/edd-simple-"
+"shipping\n"
+"POT-Creation-Date: 2015-05-11 20:08:27+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: class-shipping-export.php:36
+msgid "Order ID"
+msgstr ""
+
+#: class-shipping-export.php:37
+msgid "Date"
+msgstr ""
+
+#: class-shipping-export.php:38
+msgid "First Name"
+msgstr ""
+
+#: class-shipping-export.php:39
+msgid "Last Name"
+msgstr ""
+
+#: class-shipping-export.php:40
+msgid "Email"
+msgstr ""
+
+#: class-shipping-export.php:41
+msgid "Address"
+msgstr ""
+
+#: class-shipping-export.php:42
+msgid "Address Line 2"
+msgstr ""
+
+#: class-shipping-export.php:43 edd-simple-shipping.php:791
+msgid "City"
+msgstr ""
+
+#: class-shipping-export.php:44 edd-simple-shipping.php:808
+msgid "State / Province"
+msgstr ""
+
+#: class-shipping-export.php:45
+msgid "Zip / Postal Code"
+msgstr ""
+
+#: class-shipping-export.php:46
+msgid "Country"
+msgstr ""
+
+#: class-shipping-export.php:47
+msgid "Amount"
+msgstr ""
+
+#: class-shipping-export.php:48
+msgid "Tax"
+msgstr ""
+
+#: class-shipping-export.php:49
+msgid "Payment Method"
+msgstr ""
+
+#: class-shipping-export.php:50
+msgid "Purchase Key"
+msgstr ""
+
+#: class-shipping-export.php:51
+msgid "Products"
+msgstr ""
+
+#: class-shipping-export.php:52
+msgid "Payment Status"
+msgstr ""
+
+#: edd-simple-shipping.php:244
+msgid "Shipping Options"
+msgstr ""
+
+#: edd-simple-shipping.php:248
+msgid "Enable shipping for this %s"
+msgstr ""
+
+#: edd-simple-shipping.php:255
+msgid "Domestic Rate:"
+msgstr ""
+
+#: edd-simple-shipping.php:265
+msgid "International Rate:"
+msgstr ""
+
+#: edd-simple-shipping.php:294 edd-simple-shipping.php:1472
+#: edd-simple-shipping.php:1485
+msgid "Shipping"
+msgstr ""
+
+#: edd-simple-shipping.php:316
+msgid "Check to enable shipping costs for this price."
+msgstr ""
+
+#: edd-simple-shipping.php:561
+msgid "%s Shipping"
+msgstr ""
+
+#: edd-simple-shipping.php:770
+msgid "Ship to Different Address?"
+msgstr ""
+
+#: edd-simple-shipping.php:777
+msgid "Shipping Details"
+msgstr ""
+
+#: edd-simple-shipping.php:779 edd-simple-shipping.php:1021
+#: edd-simple-shipping.php:1386
+msgid "Shipping Address"
+msgstr ""
+
+#: edd-simple-shipping.php:780
+msgid "The address to ship your purchase to."
+msgstr ""
+
+#: edd-simple-shipping.php:781
+msgid "Address line 1"
+msgstr ""
+
+#: edd-simple-shipping.php:784
+msgid "Shipping Address Line 2"
+msgstr ""
+
+#: edd-simple-shipping.php:785
+msgid "The suite, apt no, PO box, etc, associated with your shipping address."
+msgstr ""
+
+#: edd-simple-shipping.php:786
+msgid "Address line 2"
+msgstr ""
+
+#: edd-simple-shipping.php:789
+msgid "Shipping City"
+msgstr ""
+
+#: edd-simple-shipping.php:790
+msgid "The city for your shipping address."
+msgstr ""
+
+#: edd-simple-shipping.php:794
+msgid "Shipping Country"
+msgstr ""
+
+#: edd-simple-shipping.php:795
+msgid "The country for your shipping address."
+msgstr ""
+
+#: edd-simple-shipping.php:806
+msgid "Shipping State / Province"
+msgstr ""
+
+#: edd-simple-shipping.php:807
+msgid "The state / province for your shipping address."
+msgstr ""
+
+#: edd-simple-shipping.php:827
+msgid "Shipping Zip / Postal Code"
+msgstr ""
+
+#: edd-simple-shipping.php:828
+msgid "The zip / postal code for your shipping address."
+msgstr ""
+
+#: edd-simple-shipping.php:829
+msgid "Zip / Postal code"
+msgstr ""
+
+#: edd-simple-shipping.php:859 edd-simple-shipping.php:871
+msgid "Please enter a shipping address"
+msgstr ""
+
+#: edd-simple-shipping.php:862 edd-simple-shipping.php:874
+msgid "Please enter a city for shipping"
+msgstr ""
+
+#: edd-simple-shipping.php:865 edd-simple-shipping.php:877
+msgid "Please enter a zip/postal code for shipping"
+msgstr ""
+
+#: edd-simple-shipping.php:1031
+msgid "Street Address Line 1:"
+msgstr ""
+
+#: edd-simple-shipping.php:1035
+msgid "Street Address Line 2:"
+msgstr ""
+
+#: edd-simple-shipping.php:1042
+msgctxt "Address City"
+msgid "City:"
+msgstr ""
+
+#: edd-simple-shipping.php:1047
+msgctxt "Zip / Postal code of address"
+msgid "Zip / Postal Code:"
+msgstr ""
+
+#: edd-simple-shipping.php:1054
+msgctxt "Address country"
+msgid "Country:"
+msgstr ""
+
+#: edd-simple-shipping.php:1066
+msgctxt "State / province of address"
+msgid "State / Province:"
+msgstr ""
+
+#: edd-simple-shipping.php:1086
+msgid "Check if this purchase has been shipped."
+msgstr ""
+
+#: edd-simple-shipping.php:1110
+msgid "Shipped?"
+msgstr ""
+
+#: edd-simple-shipping.php:1111
+msgid "Status"
+msgstr ""
+
+#: edd-simple-shipping.php:1165 edd-simple-shipping.php:1323
+msgid "No"
+msgstr ""
+
+#: edd-simple-shipping.php:1167 edd-simple-shipping.php:1325
+msgid "Yes"
+msgstr ""
+
+#: edd-simple-shipping.php:1169 edd-simple-shipping.php:1327
+msgid "N/A"
+msgstr ""
+
+#: edd-simple-shipping.php:1193
+msgid "Shipping Details:"
+msgstr ""
+
+#: edd-simple-shipping.php:1194
+msgid "Address:"
+msgstr ""
+
+#: edd-simple-shipping.php:1195
+msgid "Address Line 2:"
+msgstr ""
+
+#: edd-simple-shipping.php:1196
+msgid "City:"
+msgstr ""
+
+#: edd-simple-shipping.php:1197
+msgid "Zip/Postal Code:"
+msgstr ""
+
+#: edd-simple-shipping.php:1198
+msgid "Country:"
+msgstr ""
+
+#: edd-simple-shipping.php:1199
+msgid "State:"
+msgstr ""
+
+#: edd-simple-shipping.php:1218
+msgid "Export Unshipped Orders to CSV"
+msgstr ""
+
+#: edd-simple-shipping.php:1220
+msgid "Download a CSV of all unshipped orders."
+msgstr ""
+
+#: edd-simple-shipping.php:1221
+msgid "Generate CSV"
+msgstr ""
+
+#: edd-simple-shipping.php:1255
+msgid "Simple Shipping"
+msgstr ""
+
+#: edd-simple-shipping.php:1262
+msgid "Base Region"
+msgstr ""
+
+#: edd-simple-shipping.php:1263
+msgid "Choose the country your store is based in"
+msgstr ""
+
+#: edd-simple-shipping.php:1281
+msgid "Set as Shipped"
+msgstr ""
+
+#: edd-simple-shipping.php:1308
+msgid "Shipped"
+msgstr ""
+
+#: edd-simple-shipping.php:1343 edd-simple-shipping.php:1383
+msgid "Mark as not shipped"
+msgstr ""
+
+#: edd-simple-shipping.php:1343 edd-simple-shipping.php:1383
+msgid "Mark as shipped"
+msgstr ""
+
+#: edd-simple-shipping.php:1421
+msgid ""
+"<div><strong>%1$s %2$s</strong></div><div>%3$s</div><div>%4$s</div>%5$s, "
+"%6$s %7$s</div><div>%8$s</div>"
+msgstr ""
+
+#: edd-simple-shipping.php:1574
+msgid "Enable Shipping"
+msgstr ""
+
+#: edd-simple-shipping.php:1577
+msgid "Domestic"
+msgstr ""
+
+#: edd-simple-shipping.php:1578
+msgid "International"
+msgstr ""
+
+#: edd-simple-shipping.php:1579
+msgid "Enter the domestic shipping charge amount"
+msgstr ""
+
+#: edd-simple-shipping.php:1580
+msgid "Enter the international shipping charge amount"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Easy Digital Downloads - Simple Shipping"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://easydigitaldownloads.com/extension/simple-shipping"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Provides the ability to charge simple shipping fees for physical products in "
+"EDD"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Pippin Williamson"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://pippinsplugins.com"
+msgstr ""

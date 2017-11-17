@@ -1,0 +1,66 @@
+/* EDD Chimp Styles */
+#eddms_dashboard_widget .secondary-stat-block {
+	background-color: #F3F3F3;
+	color: #3F3F38;
+	border: 1px solid #CCC;
+	padding: 0 10px 25px 10px;
+	border-image: initial;
+}
+
+#eddms_dashboard_widget .stat-block {
+	text-align: center;
+	min-height: 100px;
+}
+
+#eddms_dashboard_widget .rounded {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#eddms_dashboard_widget .secondary-stat-block .label {
+	display: block;
+	margin: 0 -10px;
+	font-size: 11px;
+	text-transform: capitalize;
+	margin: 0 -10px;
+	border-bottom: 1px solid #CCC;
+	padding: 10px 0;
+	font-weight: bold;
+	background-color: #E7E7E7;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	-webkit-box-shadow: 0px 1px 0px rgba(255, 255, 255, .7);
+	-moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, .7);
+	box-shadow: 0px 1px 0px rgba(255, 255, 255, .7);
+}
+
+#eddms_dashboard_widget .secondary-stat-block .small-meta {
+	display: block;
+	font-size: 11px;
+	line-height: 1.3em;
+	margin-top: 5px;
+	color: #3F3F38;
+}
+
+#eddms_dashboard_widget .secondary-stat-block .stat {
+	font-size: 30px;
+	font-weight: normal;
+	margin: 20px 0 10px;
+	display: block;
+}
+
+#eddms_dashboard_widget .yui3-g .stat-block {
+	margin-right:3px;
+}
+#eddms_dashboard_widget #eddms-logo{
+}
+
+/*
+YUI 3.4.1 (build 4118)
+Copyright 2011 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+.edds-u-g{letter-spacing:-0.31em;*letter-spacing:normal;word-spacing:-0.43em}.edds-u,.edds-u-1,.edds-u-1-2,.edds-u-1-3,.edds-u-2-3,.edds-u-1-4,.edds-u-3-4,.edds-u-1-5,.edds-u-2-5,.edds-u-3-5,.edds-u-4-5,.edds-u-1-6,.edds-u-5-6,.edds-u-1-8,.edds-u-3-8,.edds-u-5-8,.edds-u-7-8,.edds-u-1-12,.edds-u-5-12,.edds-u-7-12,.edds-u-11-12,.edds-u-1-24,.edds-u-5-24,.edds-u-7-24,.edds-u-11-24,.edds-u-13-24,.edds-u-17-24,.edds-u-19-24,.edds-u-23-24{display:inline-block;zoom:1;*display:inline;letter-spacing:normal;word-spacing:normal;vertical-align:top}.edds-u-1{display:block}.edds-u-1-2{width:50%}.edds-u-1-3{width:33.33333%}.edds-u-2-3{width:66.66666%}.edds-u-1-4{width:25%}.edds-u-3-4{width:75%}.edds-u-1-5{width:20%}.edds-u-2-5{width:40%}.edds-u-3-5{width:60%}.edds-u-4-5{width:80%}.edds-u-1-6{width:16.656%}.edds-u-5-6{width:83.33%}.edds-u-1-8{width:12.5%}.edds-u-3-8{width:37.5%}.edds-u-5-8{width:62.5%}.edds-u-7-8{width:87.5%}.edds-u-1-12{width:8.3333%}.edds-u-5-12{width:41.6666%}.edds-u-7-12{width:58.3333%}.edds-u-11-12{width:91.6666%}.edds-u-1-24{width:4.1666%}.edds-u-5-24{width:20.8333%}.edds-u-7-24{width:29.1666%}.edds-u-11-24{width:45.8333%}.edds-u-13-24{width:54.1666%}.edds-u-17-24{width:70.8333%}.edds-u-19-24{width:79.1666%}.edds-u-23-24{width:95.8333%}

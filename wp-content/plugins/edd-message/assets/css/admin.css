@@ -1,0 +1,28 @@
+#poststuff.edd-message {
+    min-width: auto;
+}
+.edd-message input, .edd-message .edd-select-chosen, .edd-message table {
+    min-width: 100%;
+}
+.edd-message .edd-select-chosen {
+    margin-bottom: 12px;
+}
+.edd-message .postbox {
+    margin-bottom: 0px;
+}
+.edd-message h3.hndle {
+    display: inline-block;
+}
+.edd-message-logs {
+    display: inline-block;
+    width: 98%;
+    padding: 1% 1%;
+    background-color: #f1f1f1;
+}
+.edd-message-logs .inside {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+.edd-message-logs .postbox .hndle {
+    border-bottom: none;
+}

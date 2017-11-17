@@ -1,0 +1,570 @@
+# Copyright (C) 2015 Easy Digital Downloads - Commissions
+# This file is distributed under the same license as the Easy Digital Downloads - Commissions package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Digital Downloads - Commissions 3.1.2\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/EDD-Commissions\n"
+"POT-Creation-Date: 2015-03-24 15:55:31+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-01-14 18:08+0330\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: includes/EDD_C_List_Table.php:49
+msgid "View all commissions for this item"
+msgstr "مشاهده تمام کمیسیون های این آیتم"
+
+#: includes/EDD_C_List_Table.php:52
+msgid "View payment details"
+msgstr "مشاهده جزئیات پرداخت"
+
+#: includes/EDD_C_List_Table.php:64
+msgid "Accept"
+msgstr "پذیرفتن"
+
+#: includes/EDD_C_List_Table.php:66 includes/EDD_C_List_Table.php:124
+msgid "Mark as Unpaid"
+msgstr "علامت گذاری به عنوان پرداخت نشده"
+
+#: includes/EDD_C_List_Table.php:68 includes/EDD_C_List_Table.php:123
+msgid "Mark as Paid"
+msgstr "علامت گذاری به عنوان پرداخت شده"
+
+#: includes/EDD_C_List_Table.php:69
+msgid "Revoke"
+msgstr "لغو"
+
+#: includes/EDD_C_List_Table.php:71
+msgid "Edit"
+msgstr "ویرایش"
+
+#: includes/EDD_C_List_Table.php:72 includes/EDD_C_List_Table.php:126
+msgid "Delete"
+msgstr "حذف"
+
+#: includes/EDD_C_List_Table.php:79
+msgid "View all commissions for this user"
+msgstr "مشاهده تمامی کمیسیون های این کاربر"
+
+#: includes/EDD_C_List_Table.php:97
+msgid "User"
+msgstr "کاربر"
+
+#: includes/EDD_C_List_Table.php:99
+msgid "Payment"
+msgstr "پرداخت"
+
+#: includes/EDD_C_List_Table.php:100 includes/admin/add.php:34 includes/admin/edit.php:30
+#: includes/admin/widgets.php:60 includes/admin/widgets.php:114 includes/short-codes.php:99
+#: includes/short-codes.php:157 includes/short-codes.php:214
+msgid "Rate"
+msgstr "نرخ"
+
+#: includes/EDD_C_List_Table.php:101 includes/admin/add.php:43 includes/admin/edit.php:39
+#: includes/admin/widgets.php:59 includes/admin/widgets.php:113
+#: includes/class-commissions-export.php:99 includes/short-codes.php:98 includes/short-codes.php:156
+#: includes/short-codes.php:213
+msgid "Amount"
+msgstr "مبلغ"
+
+#: includes/EDD_C_List_Table.php:102
+msgid "Status"
+msgstr "وضعیت"
+
+#: includes/EDD_C_List_Table.php:103 includes/admin/widgets.php:61 includes/admin/widgets.php:115
+#: includes/class-commissions-export.php:100 includes/short-codes.php:100
+msgid "Date"
+msgstr "تاریخ"
+
+#: includes/EDD_C_List_Table.php:112
+msgid "All"
+msgstr "همه"
+
+#: includes/EDD_C_List_Table.php:113
+msgid "Unpaid"
+msgstr "پرداخت نشده"
+
+#: includes/EDD_C_List_Table.php:114
+msgid "Revoked"
+msgstr "لغو شده"
+
+#: includes/EDD_C_List_Table.php:115
+msgid "Paid"
+msgstr "پرداخت شده"
+
+#: includes/EDD_C_List_Table.php:125
+msgid "Mark as Revoked"
+msgstr "علامت گذاری به عنوان لغو شده"
+
+#: includes/admin/add.php:1 includes/admin/add.php:55 includes/admin/list.php:57
+msgid "Add Commission"
+msgstr "افزودن کمیسیون"
+
+#: includes/admin/add.php:7 includes/admin/edit.php:12
+msgid "User ID"
+msgstr "شماره کاربر"
+
+#: includes/admin/add.php:11 includes/admin/edit.php:16
+msgid "The ID of the user that received this commission"
+msgstr "شماره کاربری که این کمیسیون را دریافت می کند"
+
+#: includes/admin/add.php:16 includes/admin/edit.php:21
+msgid "Download ID"
+msgstr "شماره دانلود"
+
+#: includes/admin/add.php:20 includes/admin/edit.php:25
+msgid "The ID of the product this commission was for"
+msgstr "شماره محصولی که این کمیسیون بابت آن پرداخت می شود"
+
+#: includes/admin/add.php:25
+msgid "Payment ID"
+msgstr "شماره پرداخت"
+
+#: includes/admin/add.php:29
+msgid "The payment ID this commission is related to (optional)."
+msgstr "شماره پرداختی که این کمیسیون مربوط به آن است (اختیاری)"
+
+#: includes/admin/add.php:38 includes/admin/edit.php:34
+msgid "The percentage rate of this commission"
+msgstr "نرخ درصدی این کمیسیون"
+
+#: includes/admin/add.php:47 includes/admin/edit.php:43
+msgid "The total amount of this commission"
+msgstr "مبلغ کل کمیسیون"
+
+#: includes/admin/edit.php:6 includes/post-type.php:23
+msgid "Edit Commission"
+msgstr "ویرایش کمیسیون"
+
+#: includes/admin/edit.php:52
+msgid "Update"
+msgstr "به روز رسانی"
+
+#: includes/admin/list.php:14 includes/admin/list.php:57
+msgid "Easy Digital Download Commissions"
+msgstr "کمیسیون دانلودها"
+
+#: includes/admin/list.php:14 includes/post-type.php:31 includes/reports.php:13
+#: includes/reports.php:126
+msgid "Commissions"
+msgstr "کمیسیون ها"
+
+#: includes/admin/list.php:63
+msgid "Generating a payout file will mark all unpaid commissions as paid. Do you want to continue?"
+msgstr ""
+"ایجاد یک پرداخت انبوده باعث تغییر حالت کلیه پرداخت نشده ها به پرداخت شده می شود. ادامه می دهید؟"
+
+#: includes/admin/list.php:77
+msgid "From - mm/dd/yyyy"
+msgstr "از - mm/dd/yyyy"
+
+#: includes/admin/list.php:78
+msgid "To - mm/dd/yyyy"
+msgstr "تا - mm/dd/yyyy"
+
+#: includes/admin/list.php:83
+msgid "Generate Mass Payment File"
+msgstr "ایجاد فایل پرداخت انبوه"
+
+#: includes/admin/list.php:97
+msgid "Total Unpaid:"
+msgstr "مجموع پرداخت نشده ها:"
+
+#: includes/admin/list.php:159
+msgid "You do not have permission to record commissions"
+msgstr "شما مجوز ذخیره کمیسیون ها را ندارید"
+
+#: includes/admin/metabox.php:6
+msgid "Commission"
+msgstr "کمیسیون"
+
+#: includes/admin/metabox.php:41
+msgid "Check to enable commissions"
+msgstr "فعال کردن کمیسیون ها"
+
+#: includes/admin/metabox.php:46
+msgid "Type"
+msgstr "نوع"
+
+#: includes/admin/metabox.php:48
+msgid "Percentage"
+msgstr "درصد"
+
+#: includes/admin/metabox.php:49
+msgid "Flat"
+msgstr "ثابت"
+
+#: includes/admin/metabox.php:50
+msgid "Select the type of commission(s) to record."
+msgstr "نوع کمیسیون برای ذخیره سازی"
+
+#: includes/admin/metabox.php:55
+msgid "User(s)"
+msgstr "کاربران"
+
+#: includes/admin/metabox.php:58
+msgid "Enter the user ID that should receive a commission of each sale. Separate user IDs by a comma."
+msgstr "شماره کاربرانی که کمیسیون دریافت خواهند کرد وارد کنید. با کاما از هم جدا کنید"
+
+#: includes/admin/metabox.php:63
+msgid "Rate(s)"
+msgstr "نرخ ها"
+
+#: includes/admin/metabox.php:66
+msgid "Enter the amount the user(s) should receive of each sale. Separate rates by a comma."
+msgstr "مبلغ کمیسیون کاربران برای هر فروش را وارد کنید. با کاما جدا شود"
+
+#: includes/admin/upgrades.php:25
+msgid ""
+"Easy Digital Downloads needs to upgrade the commission records, click %shere%s to start the upgrade."
+msgstr ""
+"ایزی‌دیجیتال‌دانلودز نیاز دارد تا رکوردها و اطلاعات کمیسیون را بروزرسانی کند. برای شروع بروزرسانی "
+"%sاینجا%s را کلیک کنید."
+
+#: includes/admin/widgets.php:14
+msgid "Commissions Summary"
+msgstr "خلاصه کمیسیون ها"
+
+#: includes/admin/widgets.php:54 includes/short-codes.php:92
+msgid "Unpaid Commissions"
+msgstr "کمیسیون های پرداخت نشده"
+
+#: includes/admin/widgets.php:58 includes/admin/widgets.php:112 includes/short-codes.php:21
+#: includes/short-codes.php:97 includes/short-codes.php:155 includes/short-codes.php:212
+msgid "Item"
+msgstr "آیتم"
+
+#: includes/admin/widgets.php:84 includes/short-codes.php:125
+msgid "No unpaid commissions"
+msgstr "کمیسیون پرداخت نشده ای وجود ندارد"
+
+#: includes/admin/widgets.php:90 includes/short-codes.php:130
+msgid "Total unpaid:"
+msgstr "مجموع پرداخت نشده ها:"
+
+#: includes/admin/widgets.php:108 includes/short-codes.php:150
+msgid "Paid Commissions"
+msgstr "کمیسیون های پرداخت شده"
+
+#: includes/admin/widgets.php:138 includes/short-codes.php:182
+msgid "No paid commissions"
+msgstr "کمیسیون پرداخت شده ای وجود ندارد"
+
+#: includes/admin/widgets.php:144 includes/short-codes.php:187
+msgid "Total paid:"
+msgstr "مجموع پرداخت:"
+
+#: includes/admin/widgets.php:160 includes/short-codes.php:262
+msgid "Export Paid Commissions"
+msgstr "استخراج کمیسیون های پرداخت شده"
+
+#: includes/admin/widgets.php:165 includes/short-codes.php:267
+msgid "Download CSV"
+msgstr "دانلود CSV"
+
+#: includes/class-commissions-export.php:98
+msgid "Product"
+msgstr "محصول"
+
+#: includes/commission-functions.php:654
+msgid "No commissions to be paid"
+msgstr "کمیسیونی برای پرداخت وجود ندارد"
+
+#: includes/commission-functions.php:654
+msgid "Error"
+msgstr "خطا"
+
+#: includes/commission-functions.php:692
+msgid "Commission of %s recorded for %s &ndash; <a href=\"%s\">View</a>"
+msgstr "کمیسیون %s برای %s – <a href=\"\"%s\"\">مشاهده</a>"
+
+#: includes/email-functions.php:21
+msgid "Hello {name},"
+msgstr "درود {name},"
+
+#: includes/email-functions.php:21
+msgid "You have made a new sale on %s!"
+msgstr "تبریک! یک فروش جدید انجام شده در %s"
+
+#: includes/email-functions.php:22
+msgid "Item sold: "
+msgstr "آیتم فروخته شده:"
+
+#: includes/email-functions.php:23
+msgid "Amount: "
+msgstr "مبلغ:"
+
+#: includes/email-functions.php:24
+msgid "Commission Rate: "
+msgstr "نرخ کمیسیون:"
+
+#: includes/email-functions.php:25
+msgid "Thank you"
+msgstr "با تشکر"
+
+#: includes/email-functions.php:59
+msgid "The name of the purchased %s"
+msgstr "نام خریداری شده %s"
+
+#: includes/email-functions.php:63
+msgid "The value of the purchased %s"
+msgstr "مبلغ خریداری شده %s"
+
+#: includes/email-functions.php:67
+msgid "The date of the purchase"
+msgstr "تاریخ خرید"
+
+#: includes/email-functions.php:71
+msgid "The commission rate of the user"
+msgstr "نرخ کمیسیون کاربر"
+
+#: includes/email-functions.php:75
+msgid "The first name of the user"
+msgstr "نام کوچک کاربر"
+
+#: includes/email-functions.php:79
+msgid "The full name of the user"
+msgstr "نام خانوادگی کاربر"
+
+#: includes/email-functions.php:146 includes/settings.php:89
+msgid "New Sale!"
+msgstr "فروش جدید!"
+
+#: includes/masspay/class-paypal-masspay.php:87
+msgid "No vendors found to pay. Maybe they haven't set a PayPal address?"
+msgstr "فروشنده ای برای پرداخت یافت نشد. شاید آدرس پی پال تنظیم نشده است؟"
+
+#: includes/masspay/class-paypal-masspay.php:130
+msgid "Error: %s"
+msgstr "خطا: %s"
+
+#: includes/masspay/class-paypal-masspay.php:146
+msgid "All due commission has been paid for."
+msgstr "کلیه کمیسیون های معوق پرداخت شده"
+
+#: includes/masspay/class-paypal-masspay.php:152
+msgid ""
+"All due commission has been paid for, but I could not clear it from their profiles due to an "
+"internal error. Commission will still be listed as due. Please manually mark the commission as paid "
+"from the Commissions page."
+msgstr ""
+"کلیه کمیسیون های معوق پرداخت شده، اما امکان تفکیک از پروفایل ها، به دلیل وجود خطای داخلی نیست. "
+"کمیسیون ها همچنان به عنوان معوق باقی مانده است. لطفا از صفحه کمیسیون ها، به صورت دستی وضعیت کمیسیون "
+"ها را به پرداخت شده تغییر دهید."
+
+#: includes/masspay/class-paypal-masspay.php:178
+msgid "Hello! A payment was just triggered to mass pay all vendors their due commission."
+msgstr "سلام! پرداختی باعث شده است تمامی کمیسیون های معوق فروشندگان به صورت پرداخت انبوه تسویه گردد."
+
+#: includes/masspay/class-paypal-masspay.php:179
+msgid "Payment status: %s."
+msgstr "وضعیت پرداخت: %s."
+
+#: includes/masspay/class-paypal-masspay.php:180
+msgid "Payment message: %s."
+msgstr "پیغام پرداخت: %s."
+
+#: includes/masspay/class-paypal-masspay.php:183
+msgid "Payment total: %s."
+msgstr "جمع پرداخت: %s."
+
+#: includes/masspay/class-paypal-masspay.php:187
+msgid "EDD Commissions: Mass payments for vendors update"
+msgstr "کمیسیون دانلودها: پرداخت انبوه فروشندگان به روز رسانی شد"
+
+#: includes/post-type.php:19
+msgctxt "post type general name"
+msgid "Commissions"
+msgstr "کمیسیون ها"
+
+#: includes/post-type.php:20
+msgctxt "post type singular name"
+msgid "Commission"
+msgstr "کمیسیون"
+
+#: includes/post-type.php:21
+msgid "Add New"
+msgstr "افزودن"
+
+#: includes/post-type.php:22
+msgid "Add New Commission"
+msgstr "افزودن کمیسیون"
+
+#: includes/post-type.php:24
+msgid "New Commission"
+msgstr "کمیسیون جدید"
+
+#: includes/post-type.php:25
+msgid "All Commissions"
+msgstr "همه کمیسیون ها"
+
+#: includes/post-type.php:26
+msgid "View Commission"
+msgstr "مشاهده کمیسیون ها"
+
+#: includes/post-type.php:27
+msgid "Search Commissions"
+msgstr "جستجوی کمیسیون ها"
+
+#: includes/post-type.php:28
+msgid "No Commissions found"
+msgstr "کمیسیونی یافت نشد"
+
+#: includes/post-type.php:29
+msgid "No Commissions found in Trash"
+msgstr "کمیسیونی در زباله دان یافت نشد"
+
+#: includes/reports.php:132
+msgid "Commissions Paid Over Time"
+msgstr "کمیسیون های اضافه پرداختی"
+
+#: includes/reports.php:137
+msgid "Showing commissions paid to %s"
+msgstr "نمایش کمیسیون های پرداخت شده به %s"
+
+#: includes/reports.php:138
+msgid "clear"
+msgstr "پاک کردن"
+
+#: includes/reports.php:147
+msgid "Total commissions for period shown: "
+msgstr "مجموع کمیسیون ها در این دوره:"
+
+#: includes/scheduled-payouts.php:81
+msgid "Once every two weeks"
+msgstr "هر دو هفته یکبار"
+
+#: includes/scheduled-payouts.php:86
+msgid "Once a month"
+msgstr "هر ماه"
+
+#: includes/settings.php:15
+msgid "Commissions Settings"
+msgstr "تنظیمات کمیسیون ها"
+
+#: includes/settings.php:22
+msgid "Default rate"
+msgstr "نرخ پیش فرض"
+
+#: includes/settings.php:23
+msgid ""
+"Enter the default rate recipients should receive. This can be overwritten on a per-product basis. "
+"10 = 10%"
+msgstr "نرخ پیش فرض کمیسیون فروش. این نرخ می تواند بر اساس هر محصول رونویسی شود. 10 = 10%"
+
+#: includes/settings.php:29
+msgid "Calculation Base"
+msgstr "مبنای محاسبه"
+
+#: includes/settings.php:30
+msgid ""
+"Should commissions be calculated from the subtotal (before taxes and discounts) or from the total "
+"purchase amount (after taxes and discounts)? "
+msgstr ""
+"کمیسیون از جمع کل (قبل از مالیات و تخفیف) و یا از مقدار کل خرید (بعد از مالیات و تخفیف) محاسبه شود؟"
+
+#: includes/settings.php:33
+msgid "Subtotal (default)"
+msgstr "جمع کل (پیش فرض)"
+
+#: includes/settings.php:34
+msgid "Total with Taxes"
+msgstr "جمع کل با مالیات"
+
+#: includes/settings.php:35
+msgid "Total without Taxes"
+msgstr "جمع کل بدون مالیات"
+
+#: includes/settings.php:40
+msgid "Instant Pay Commmissions"
+msgstr "پرداخت فوری کمیسیون ها"
+
+#: includes/settings.php:41
+msgid ""
+"If checked and <a href=\"%s\">PayPal Adaptive Payments</a> gateway is installed, EDD will "
+"automatically pay commissions at the time of purchase"
+msgstr ""
+"اگر فعال شود و <a href=\"%s\"> درگاه پی پال </a> نصب شده باشد، کمیسیون به صورت خودکار در زمان خرید "
+"به کاربر پرداخت می شود."
+
+#: includes/settings.php:78
+msgid "Commission Notifications"
+msgstr "اطلاعیه های کمیسیون"
+
+#: includes/settings.php:85
+msgid "Email Subject"
+msgstr "عنوان"
+
+#: includes/settings.php:86
+msgid "Enter the subject for commission emails."
+msgstr "عنوان ایمیل کمیسیون را وارد کنید"
+
+#: includes/settings.php:93
+msgid "Email Body"
+msgstr "محتوا"
+
+#: includes/settings.php:94
+msgid "Enter the content for commission emails. HTML is accepted. Available template tags:"
+msgstr "محتوای ایمیل کمیسیون را وارد کنید. کدهای HTML پذیرفته شده است. تگ های قابل استفاده:"
+
+#: includes/short-codes.php:16
+msgid "Your Items"
+msgstr "آیتم های شما"
+
+#: includes/short-codes.php:22
+msgid "Sales"
+msgstr "فروش ها"
+
+#: includes/short-codes.php:39
+msgid "No item"
+msgstr "بدون آیتم"
+
+#: includes/short-codes.php:207
+msgid "Revoked Commissions"
+msgstr "کمیسیون های لفو شده"
+
+#: includes/short-codes.php:239
+msgid "No revoked commissions"
+msgstr "کمیسیون لغو شده ای وجود ندارد"
+
+#: includes/user-meta.php:5
+msgid "Easy Digital Downloads Commissions"
+msgstr "کمیسیون های دانلود"
+
+#: includes/user-meta.php:9
+msgid "User's PayPal Email"
+msgstr "ایمیل پی پال کاربر"
+
+#: includes/user-meta.php:12
+msgid "If the user's PayPal address is different than their account email, enter it here."
+msgstr "اگر ایمیل پی پال کاربر با ایمیل وارد شده هنگام ثبت نام متفاوت است این فیلد را پر کنید"
+
+#: includes/user-meta.php:16
+msgid "User's Global Rate"
+msgstr "نرخ پایه کاربران"
+
+#: includes/user-meta.php:19
+msgid ""
+"Enter a global commission rate for this user. If a rate is not specified for a product, this rate "
+"will be used."
+msgstr ""
+"نرخ پایه کمیسیون های کاربر را وارد نمایید. در صورتی که برای محصول نرخی در نظر گرفته نشود این نرخ "
+"استفاده می شود"
+
+#: includes/user-meta.php:24
+msgid "PayPal Email"
+msgstr "ایمیل پی پال"
+
+#: includes/user-meta.php:27
+msgid "If your PayPal address is different than your account email, enter it here."
+msgstr "اگر ایمیل پی پال کاربر با ایمیل وارد شده هنگام ثبت نام متفاوت است این فیلد را پر کنید"
+
+#. Description of the plugin/theme
+msgid "Record commisions automatically for users in your site when downloads are sold"
+msgstr "هرگاه محصولی در سایت شما به فروش برسد ، اطلاعات کمیسیونی کاربران به صورت خودکار ثبت خواهد شد"

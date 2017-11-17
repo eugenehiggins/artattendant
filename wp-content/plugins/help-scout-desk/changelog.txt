@@ -1,0 +1,156 @@
+= 4.1 =
+
+* New: Option to reset customer ids
+
+= 4.0.5 =
+
+* Fix: Variable typos
+
+= 4.0.4 =
+
+* Fix: WYSIWYG editor not showing for HSD
+* Fix: Explicitly send credentials for AJAX requests, since WPEngine has some issues.
+
+= 4.0.3 =
+
+* Fix: Message body being sent as HTML instead of plain text.
+
+= 4.0.2 =
+
+* Fix: Admin hidden becuase of missing capability
+
+= 4.0 =
+
+* New: Support for Free Help Scout Plugin
+* Fix: All tags will be in-sync
+
+= 3.2 =
+
+* New: Beacon support
+
+= 3.1.4 =
+
+* Fix: Table display with (private) tags
+
+= 3.1.3 =
+
+* Fix: Table display with tags
+* Fix: WooCommerce
+
+= 3.1 =
+
+* NEW: WP e-Commerce Integration
+
+= 3.0.1 =
+
+* NEW: Removing "Previews" from the conversation_table.php template since notes and drafts could be shown.
+
+= 3.0 =
+
+* NEW: Help Scout Tags support
+* NEW: WooCommerce Integration
+* NEW: Sync WordPress users with Help Scout Customers
+* NEW: Localization Changes
+
+= 2.0.1 =
+
+* Fix: WYSIWYG editor not showing if form is on a different page than the table.
+
+= 2.0 =
+
+* NEW: Pagination
+* Fix: Fix for transient cache keys being too long and failing - https://core.trac.wordpress.org/ticket/15058
+* Updated: filters for EDD
+
+= 1.9.2 =
+
+* Updated: Cache refresh improvements
+
+= 1.9 =
+
+* FIX: Caching issues
+* New: Filter response
+
+= 1.8 =
+
+* NEW: EDD Integration Updates
+
+= 1.7.2 =
+
+* Fix: PHP Notice fix after thread is created.
+
+= 1.7.1 =
+
+* Cached customer ids were improperly returned.
+
+= 1.7 =
+
+* Thread embeds
+
+= 1.6 =
+
+* Attachments
+
+= 1.5 =
+
+* Localization
+* Code cleanup
+* Security update for add_query_arg instances
+
+= 1.4.6 =
+
+* Remove notes and drafts from conversations
+* Add filter to enable drafts and notes - hsd_hide_drafts_and_notes (return FALSE)
+
+= 1.4.5 =
+
+* Make mailbox id only number
+* Updater updated
+
+= 1.4.2 =
+
+* Bug fix for link truncation and autolinking.
+
+= 1.4.1 =
+
+* Bug fix for conversation table.
+
+= 1.4 =
+
+* Email login functionality available. Drop `Email_Login::init();` into your theme's functions.php file to activate.
+* Added default messaging for when a form is submitted.
+* Better error handling.
+
+= 1.3 =
+
+* Refactored EDD support.
+** New layout 
+** Easily send purchase receipt
+** Easily deactivate licensed sites
+** Better handling for unlicensed users
+* Status updates view (when no message is attached).
+* Incorrect numbering bugfix.
+* Minor styling/markup bug fixes.
+
+
+= 1.2 = 
+
+* Allow support threads to be closed
+* Mailbox specific shortcodes. 
+** The Mailbox id setting is now a default if the shortcode doesn't include a mailbox_id attribute.
+
+
+= 1.1.1 = 
+
+* Tons of hooks and filters added. So many that it's probably too much.
+
+= 1.1 = 
+
+* EDD callback url 
+* Attachments
+
+= 1.0 =
+
+* Auto upgrades
+* Better code abstraction and notes
+* Bug fixing

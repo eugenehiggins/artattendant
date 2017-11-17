@@ -1,0 +1,53 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Restrict Content Pro - Easy Digital Downloads Vendor "
+"Submission Limits\n"
+"POT-Creation-Date: 2016-05-12 12:34-0400\n"
+"PO-Revision-Date: 2016-05-12 12:34-0400\n"
+"Last-Translator: John Parris <public@johnparris.com>\n"
+"Language-Team: John Parris <public@johnparris.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: rcp-edd-fes-submission-limits.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: rcp-edd-fes-submission-limits.php:34
+#, php-format
+msgid "%s Product Limit"
+msgstr ""
+
+#: rcp-edd-fes-submission-limits.php:38
+#, php-format
+msgid "The number of %s a %s is allowed to submit per subscription period."
+msgstr ""
+
+#: rcp-edd-fes-submission-limits.php:108
+#, php-format
+msgid ""
+"You have published the maximum number of %s allowed by your subscription. <a "
+"href=\"%s\">Upgrade your membership</a> to publish more."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Restrict Content Pro - Easy Digital Downloads Vendor Submission Limits"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Control the number of products a vendor can publish using Frontend "
+"Submissions for Easy Digital Downloads."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Restrict Content Pro Team"
+msgstr ""

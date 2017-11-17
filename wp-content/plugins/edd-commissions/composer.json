@@ -1,0 +1,17 @@
+{
+   	"name": "pippin/easy-digital-downloads-commissions",
+   	"type": "wordpress-plugin",
+	"description": "Record commisions automatically for users in your site when downloads are sold",
+	"keywords": [ "edd", "pippin"],
+	"homepage": "https://easydigitaldownloads.com/extensions/commissions/",
+	"authors": [
+	    {
+	      	"name": "Pippin Williamson",
+	      	"email": "pippin@pippinsplugins.com",
+	      	"homepage": "https://easydigitaldownloads.com/"
+	    }
+	],
+   	"require": {
+     	"composer/installers": "~1.0.6"
+   	}
+}

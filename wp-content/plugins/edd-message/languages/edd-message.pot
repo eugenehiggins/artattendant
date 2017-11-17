@@ -1,0 +1,224 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Digital Downloads - Message\n"
+"POT-Creation-Date: 2016-09-06 12:35-0500\n"
+"PO-Revision-Date: 2016-09-06 12:34-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: edd-message.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/admin/class-email-logs-list-table.php:103
+msgid "Log ID"
+msgstr ""
+
+#: includes/admin/class-email-logs-list-table.php:104
+msgid "Sent by"
+msgstr ""
+
+#: includes/admin/class-email-logs-list-table.php:105
+msgid "Recipient"
+msgstr ""
+
+#: includes/admin/class-email-logs-list-table.php:106
+msgid "Subject"
+msgstr ""
+
+#: includes/admin/class-email-logs-list-table.php:107
+msgid "Date"
+msgstr ""
+
+#: includes/admin/customer.php:25 includes/admin/customer.php:75
+#: includes/logging.php:31
+msgid "Messages"
+msgstr ""
+
+#: includes/admin/customer.php:90
+msgid "Choose one or more email addresses"
+msgstr ""
+
+#: includes/admin/customer.php:102
+msgid "More fields"
+msgstr ""
+
+#: includes/admin/customer.php:108 includes/fes/frontend.php:77
+msgid "From name: "
+msgstr ""
+
+#: includes/admin/customer.php:115 includes/fes/frontend.php:84
+msgid "From email: "
+msgstr ""
+
+#: includes/admin/customer.php:122 includes/fes/frontend.php:91
+msgid "Reply to: "
+msgstr ""
+
+#: includes/admin/customer.php:129 includes/fes/frontend.php:98
+msgid "CC: "
+msgstr ""
+
+#: includes/admin/customer.php:136 includes/fes/frontend.php:105
+msgid "BCC: "
+msgstr ""
+
+#: includes/admin/customer.php:147 includes/fes/frontend.php:112
+msgid "Subject: "
+msgstr ""
+
+#: includes/admin/customer.php:152 includes/fes/frontend.php:117
+msgid "Message:"
+msgstr ""
+
+#: includes/admin/customer.php:160 includes/logging.php:117
+msgid "Attachments:"
+msgstr ""
+
+#: includes/admin/customer.php:183
+msgid "Upload or enter the file URL"
+msgstr ""
+
+#: includes/admin/customer.php:188
+msgid "Insert File"
+msgstr ""
+
+#: includes/admin/customer.php:189
+msgid "Insert"
+msgstr ""
+
+#: includes/admin/customer.php:191
+msgid "Upload a File"
+msgstr ""
+
+#: includes/admin/customer.php:200
+msgid "Remove file option 1"
+msgstr ""
+
+#: includes/admin/customer.php:207
+msgid "Add New File"
+msgstr ""
+
+#: includes/admin/customer.php:219 includes/fes/frontend.php:31
+#: includes/fes/frontend.php:129
+msgid "Send message"
+msgstr ""
+
+#: includes/class.extension-activation.php:47
+msgid "This plugin"
+msgstr ""
+
+#: includes/class.extension-activation.php:84
+msgid "activate it"
+msgstr ""
+
+#: includes/class.extension-activation.php:87
+msgid "install it"
+msgstr ""
+
+#: includes/class.extension-activation.php:90
+#, php-format
+msgid " requires Easy Digital Downloads! Please %s to continue!"
+msgstr ""
+
+#: includes/fes/backend.php:40
+msgid "Message Vendor"
+msgstr ""
+
+#: includes/fes/frontend.php:18
+msgid "Message"
+msgstr ""
+
+#: includes/fes/frontend.php:51
+msgid "Attachments"
+msgstr ""
+
+#: includes/fes/frontend.php:70
+msgid "To: "
+msgstr ""
+
+#: includes/fes/frontend.php:142
+msgid "A recipient is required."
+msgstr ""
+
+#: includes/fes/frontend.php:153
+msgid "A message is required."
+msgstr ""
+
+#: includes/fes/frontend.php:164
+msgid "A subject is required."
+msgstr ""
+
+#: includes/fes/frontend.php:189 includes/functions.php:59
+msgid "Cheatin' eh?!"
+msgstr ""
+
+#: includes/fes/frontend.php:195
+msgid "Message sent successfully."
+msgstr ""
+
+#: includes/functions.php:63
+msgid "A message is required"
+msgstr ""
+
+#: includes/logging.php:70
+msgid "Message history"
+msgstr ""
+
+#: includes/logging.php:87
+msgid "Toggle panel:"
+msgstr ""
+
+#: includes/logging.php:102
+msgid "To:"
+msgstr ""
+
+#: includes/logging.php:108
+msgid "From:"
+msgstr ""
+
+#: includes/logging.php:109
+msgid "Reply to:"
+msgstr ""
+
+#: includes/logging.php:110
+msgid "CC:"
+msgstr ""
+
+#: includes/logging.php:111
+msgid "BCC:"
+msgstr ""
+
+#: includes/logging.php:113
+msgid "Message body:"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Easy Digital Downloads - Message"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://realbigplugins.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"EDD Message adds powerful email messaging capabilities through which store "
+"owners can correspond with customers and vendors."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Kyle Maurer"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://realbigplugins.com"
+msgstr ""

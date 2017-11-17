@@ -1,0 +1,17 @@
+{
+    "name": "easydigitaldownloads/edd-simple-shipping",
+    "type": "wordpress-plugin",
+    "description": "Simple Shipping Extension for EDD",
+    "keywords": [ "edd", "shipping", "plugin"],
+    "homepage": "http://easydigitaldownloads.com.com",
+    "authors": [
+        {
+            "name": "Pippin Williamson",
+            "email": "pippin@pippinsplugins.com",
+            "homepage": "http://pippinsplugins.com"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0.6"
+    }
+}
