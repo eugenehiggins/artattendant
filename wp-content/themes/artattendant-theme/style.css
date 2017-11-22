@@ -11099,6 +11099,33 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .section2 .row .item > span a {
   color: #c90e17;
 }
+.page-id-102 .section3 * {
+  color: #414042;
+}
+.page-id-102 .section3 h2 {
+  text-align: center;
+  font-size: 40px;
+  font-family: 'Muli';
+  font-weight: 600;
+  margin: 44px 0;
+}
+.page-id-102 .section3 .audiences .audience {
+  height: 320px;
+}
+.page-id-102 .section3 .audiences #artists img {
+  display: block;
+}
+.page-id-102 .section3 .audiences #artists span {
+  display: none;
+  font-family: "Muli";
+  font-weight: 700;
+}
+.page-id-102 .section3 .audiences #artists:hover img {
+  display: none;
+}
+.page-id-102 .section3 .audiences #artists:hover span {
+  display: block;
+}
 .btn-aqua.btn:hover {
   color: #000;
 }

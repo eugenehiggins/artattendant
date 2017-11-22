@@ -70,22 +70,46 @@ get_header('pre'); ?>
 
 </section>
 
-<div class="container-fluid">
+<!--<div class="container-fluid">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-sm-12">-->
+<!--                <div class="about-block">-->
+<!--                    --><?php //while (have_posts()) : the_post(); ?>
+<!--                        --><?php //the_content(); ?>
+<!---->
+<!---->
+<!--                        --><?php ////echo do_shortcode('[gravityform id="4" title="true" description="false" ajax="true"]'); ?>
+<!---->
+<!--                    --><?php //endwhile; // end of the loop. ?>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<section class="container-fluid section3">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="about-block">
-                    <?php while (have_posts()) : the_post(); ?>
-                        <?php the_content(); ?>
+                <div class="audiences">
+                    <h2 class="col-12">Serving the Arts Community</h2>
+                    <div class="col-xs-12 col-sm-6 col-lg-8">
+                        <div id="artists" class="audience">
+                            Artists
+                            <img src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg" alt="Artists">
 
-
-                        <?php //echo do_shortcode('[gravityform id="4" title="true" description="false" ajax="true"]'); ?>
-
-                    <?php endwhile; // end of the loop. ?>
+                            <span>
+                                Upload, organize, promote and sell your artwork on artAttendant. Get organized today and be rewarded with a free home for your digital archive.  We only charge 10% commission and 3% credit card processing fees on art sales with no up-front fees or monthly subscription costs. Our site is intuitive and does not have complicated features or cumbersome interfaces.
+                            </span>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="col-xs-6 col-lg-4">col 2</div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 <?php get_footer('pre'); ?>
 
