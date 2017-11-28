@@ -29,12 +29,11 @@ get_header('pre'); ?>
     <div class="row">
         <div class="item">
 
+            <div class="scaling-svg-container">
 
-            <span class="fa-stack fa-5x">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-cloud-upload fa-stack-1x fa-inverse"></i>
-            </span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29"  class="scaling-svg"><defs><style>.cls-1{fill:#fff;stroke:#d81f2c;}.cls-1,.cls-2{stroke-miterlimit:10;stroke-width:3px;}.cls-2{fill:#d81f2c;stroke:#fff;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/><path class="cls-2" d="M37.92,92.87a21.83,21.83,0,0,1-3.59-11.18c-.14-8,4.29-14.18,15-14.34,10.06-.14,17.56,9.8,17.56,9.8s-3.87-38,43.29-38c48.28,0,46.86,57.29,46.86,57.29s21.23-.7,22.39,21.8c.86,16.81-10.4,23.95-21.09,24.79-9,.71-36,0-36,0v7.77h-8.14V114.71h16.17L98.19,78.57,66.06,114.71h16v36.14h-8v-7.77s-22.78,1.05-30.27,0c-8.89-1.25-25.82-7.39-25.95-24.79C17.79,106.66,24.71,97.43,37.92,92.87Z"/></g></g></svg>
 
+            </div>
             <h3>
                 Upload and organize unlimited art for free
             </h3>
@@ -43,10 +42,45 @@ get_header('pre'); ?>
         </span>
         </div>
         <div class="item">
-            <span class="fa-stack fa-5x">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-            </span>
+            <div class="scaling-svg-container">
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
+                    <defs>
+                        <style>.cls-1 {
+                                fill: #fff;
+                                stroke: #d81f2c;
+                            }
+
+                            .cls-1, .cls-2, .cls-3 {
+                                stroke-miterlimit: 10;
+                            }
+
+                            .cls-1, .cls-2 {
+                                stroke-width: 3px;
+                            }
+
+                            .cls-2, .cls-3 {
+                                fill: #d81f2c;
+                                stroke: #fff;
+                            }</style>
+                    </defs>
+                    <title>Asset 1</title>
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="Layer_1-2" data-name="Layer 1">
+                            <path class="cls-1"
+                                  d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/>
+                            <path class="cls-2"
+                                  d="M45.77,67.19l1.74,6.08A4.86,4.86,0,0,1,38.17,76l-2.51-8.76H27.8l17.86,68.58h100l17.85-68.58Z"/>
+                            <circle class="cls-2" cx="68.87" cy="152.72" r="11.58"/>
+                            <circle class="cls-2" cx="131.75" cy="152.72" r="11.58"/>
+                            <path class="cls-3"
+                                  d="M44.18,79.07a4.87,4.87,0,0,1-6-3.32L35.66,67,28.84,43.18a4.87,4.87,0,0,1,3.32-6A4.7,4.7,0,0,1,33.49,37a4.88,4.88,0,0,1,4.68,3.52L45.77,67l1.74,6.08A4.86,4.86,0,0,1,44.18,79.07Z"/>
+                        </g>
+                    </g>
+                </svg>
+
+            </div>
             <h3>
                 Buy, sell, rent or loan art on our marketplace
             </h3>
@@ -55,10 +89,11 @@ get_header('pre'); ?>
         </span>
         </div>
         <div class="item">
-            <span class="fa-stack fa-5x">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-archive fa-stack-1x fa-inverse"></i>
-            </span>
+            <div class="scaling-svg-container">
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg"><defs><style>.cls-1,.cls-3{fill:#fff;}.cls-1{stroke:#d81f2c;stroke-miterlimit:10;}.cls-1,.cls-2,.cls-3{stroke-width:3px;}.cls-2{fill:#d81f2c;}.cls-2,.cls-3{stroke:#fff;stroke-linecap:round;stroke-linejoin:round;}</style></defs><title>Asset 3</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/><rect class="cls-2" x="29.7" y="80.15" width="136.8" height="67.83"/><path class="cls-3" d="M85.84,101.81a6.13,6.13,0,0,1,0-12.25h24.51a6.13,6.13,0,0,1,0,12.25Z"/><rect class="cls-2" x="25.24" y="58.33" width="145.71" height="21.82"/></g></g></svg>
+
+            </div>
             <h3>
                 Low-cost professional art archive services
             </h3>

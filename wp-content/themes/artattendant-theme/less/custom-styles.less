@@ -115,6 +115,34 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   
   .section2 {
     background-color: #e1e3e6;
+  
+    .scaling-svg-container {
+      position: relative;
+      height: 0;
+      width: 50%;
+      padding: 0;
+      padding-bottom: 60%;
+      /* override this inline for aspect ratio other than square */
+    }
+    @media screen and (min-width: @screen-sm-min){
+      .scaling-svg-container {
+        padding-bottom: 45%;
+      }
+      .scaling-svg {
+      
+      }
+    }
+    .scaling-svg {
+      position: absolute;
+
+      left: 0;
+      top: 0;
+      image {
+        width: ~"calc( 30px + 3vw)";
+        //transform: translateX(33%);
+      }
+    }
+    
     .row {
       display: flex;
       flex-direction: column;
@@ -125,15 +153,18 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
         font-family: 'Muli';
         padding: 40px;
         color: @artattend-gray;
-        * {
-          text-align: center;
-        }
+        
+        //> * {
+        //  text-align: center;
+        //  width: 100%;
+        //}
         .fa-stack {
           color: @artattend-red;
         }
         > h3 {
           font-size: 24px;
           font-weight: 400;
+          margin: 0 40px;
         }
         > span {
           font-weight: 400;
