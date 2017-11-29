@@ -31,7 +31,33 @@ get_header('pre'); ?>
 
             <div class="scaling-svg-container">
 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29"  class="scaling-svg"><defs><style>.cls-1{fill:#fff;stroke:#d81f2c;}.cls-1,.cls-2{stroke-miterlimit:10;stroke-width:3px;}.cls-2{fill:#d81f2c;stroke:#fff;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/><path class="cls-2" d="M37.92,92.87a21.83,21.83,0,0,1-3.59-11.18c-.14-8,4.29-14.18,15-14.34,10.06-.14,17.56,9.8,17.56,9.8s-3.87-38,43.29-38c48.28,0,46.86,57.29,46.86,57.29s21.23-.7,22.39,21.8c.86,16.81-10.4,23.95-21.09,24.79-9,.71-36,0-36,0v7.77h-8.14V114.71h16.17L98.19,78.57,66.06,114.71h16v36.14h-8v-7.77s-22.78,1.05-30.27,0c-8.89-1.25-25.82-7.39-25.95-24.79C17.79,106.66,24.71,97.43,37.92,92.87Z"/></g></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
+                    <defs>
+                        <style>.cls-1 {
+                                fill: #fff;
+                                stroke: #d81f2c;
+                            }
+
+                            .cls-1, .cls-2 {
+                                stroke-miterlimit: 10;
+                                stroke-width: 3px;
+                            }
+
+                            .cls-2 {
+                                fill: #d81f2c;
+                                stroke: #fff;
+                            }</style>
+                    </defs>
+                    <title>Asset 2</title>
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="Layer_1-2" data-name="Layer 1">
+                            <path class="cls-1"
+                                  d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/>
+                            <path class="cls-2"
+                                  d="M37.92,92.87a21.83,21.83,0,0,1-3.59-11.18c-.14-8,4.29-14.18,15-14.34,10.06-.14,17.56,9.8,17.56,9.8s-3.87-38,43.29-38c48.28,0,46.86,57.29,46.86,57.29s21.23-.7,22.39,21.8c.86,16.81-10.4,23.95-21.09,24.79-9,.71-36,0-36,0v7.77h-8.14V114.71h16.17L98.19,78.57,66.06,114.71h16v36.14h-8v-7.77s-22.78,1.05-30.27,0c-8.89-1.25-25.82-7.39-25.95-24.79C17.79,106.66,24.71,97.43,37.92,92.87Z"/>
+                        </g>
+                    </g>
+                </svg>
 
             </div>
             <h3>
@@ -91,7 +117,43 @@ get_header('pre'); ?>
         <div class="item">
             <div class="scaling-svg-container">
 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg"><defs><style>.cls-1,.cls-3{fill:#fff;}.cls-1{stroke:#d81f2c;stroke-miterlimit:10;}.cls-1,.cls-2,.cls-3{stroke-width:3px;}.cls-2{fill:#d81f2c;}.cls-2,.cls-3{stroke:#fff;stroke-linecap:round;stroke-linejoin:round;}</style></defs><title>Asset 3</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/><rect class="cls-2" x="29.7" y="80.15" width="136.8" height="67.83"/><path class="cls-3" d="M85.84,101.81a6.13,6.13,0,0,1,0-12.25h24.51a6.13,6.13,0,0,1,0,12.25Z"/><rect class="cls-2" x="25.24" y="58.33" width="145.71" height="21.82"/></g></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
+                    <defs>
+                        <style>.cls-1, .cls-3 {
+                                fill: #fff;
+                            }
+
+                            .cls-1 {
+                                stroke: #d81f2c;
+                                stroke-miterlimit: 10;
+                            }
+
+                            .cls-1, .cls-2, .cls-3 {
+                                stroke-width: 3px;
+                            }
+
+                            .cls-2 {
+                                fill: #d81f2c;
+                            }
+
+                            .cls-2, .cls-3 {
+                                stroke: #fff;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                            }</style>
+                    </defs>
+                    <title>Asset 3</title>
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="Layer_1-2" data-name="Layer 1">
+                            <path class="cls-1"
+                                  d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/>
+                            <rect class="cls-2" x="29.7" y="80.15" width="136.8" height="67.83"/>
+                            <path class="cls-3"
+                                  d="M85.84,101.81a6.13,6.13,0,0,1,0-12.25h24.51a6.13,6.13,0,0,1,0,12.25Z"/>
+                            <rect class="cls-2" x="25.24" y="58.33" width="145.71" height="21.82"/>
+                        </g>
+                    </g>
+                </svg>
 
             </div>
             <h3>
@@ -129,19 +191,138 @@ get_header('pre'); ?>
             <div class="col-sm-12">
                 <div class="audiences">
                     <h2 class="col-12">Serving the Arts Community</h2>
-                    <div class="col-xs-12 col-sm-6 col-lg-8">
+                    <div class="col-xs-12 col-sm-6">
                         <div id="artists" class="audience">
                             Artists
+                            <span>
+                                Upload, organize, promote and sell your artwork on artAttendant. Get organized today and be rewarded with a free home for your digital archive.  We only charge 10% commission and 3% credit card processing fees on art sales with no up-front fees or monthly subscription costs. Our site is intuitive and does not have complicated features or cumbersome interfaces.
+                            </span>
                             <img src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg" alt="Artists">
+
+                        </div>
+                        <div>sdafdsfa</div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div id="collectors" class="audience">
+                            Art Collectors
+                            <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg
+" alt="Art Collectors">
 
                             <span>
                                 Upload, organize, promote and sell your artwork on artAttendant. Get organized today and be rewarded with a free home for your digital archive.  We only charge 10% commission and 3% credit card processing fees on art sales with no up-front fees or monthly subscription costs. Our site is intuitive and does not have complicated features or cumbersome interfaces.
                             </span>
                         </div>
-                        <div></div>
+
                     </div>
-                    <div class="col-xs-6 col-lg-4">col 2</div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div id="collectors" class="audience">
+                            Galleries & Art Dealers
+                            <img src="<?php bloginfo('template_url'); ?>/img/frontpage/galleries.jpg
+" alt="Art Collectors">
+
+                            <span>
+Upload and manage multiple artists and collections in our intuitive online database. List artwork for sale, rent or loan and connect with a wider community through visibility on the site. Our services have no monthly fees, subscriptions or up-front costs. We only charge a competitive low 10% commission on sales and we provide credit card processing fees for 3%. We allow buyers to purchase directly from art attendant.                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div id="collectors" class="audience">
+                            Institutions & Organizations
+                            <img src="<?php bloginfo('template_url'); ?>/img/frontpage/institutions.jpg
+" alt="Art Collectors">
+
+                            <span>
+                                Upload, organize, promote and sell your artwork on artAttendant. Get organized today and be rewarded with a free home for your digital archive.  We only charge 10% commission and 3% credit card processing fees on art sales with no up-front fees or monthly subscription costs. Our site is intuitive and does not have complicated features or cumbersome interfaces.
+                            </span>
+                        </div>
+
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid section4">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <h2 class="col-12">10 Reasons</h2>
+                <h3 class="col-12">to use artAttendant</h3>
+                <div class="wrapper">
+                    <div class="col-xs-12 col-sm-6">
+                        <ol class="first-list">
+                            <li>Free
+                                <div>Our artwork database is free</div>
+                            </li>
+                            <li>Unlimited
+                                <div>Upload, organize and manage unlimited artwork records</div>
+                            </li>
+                            <li>Easy
+                                <div>Simple, streamlined and intuitive art database</div>
+                            </li>
+                            <li>Secure
+                                <div>Secure and encrypted cloud-based database - keep your collection private or promote
+                                    and share it with the public
+                                </div>
+                            </li>
+                            <li>Sales
+                                <div>Promote art for sale, rent or loan with very low commissions (10%) and no up front
+                                    fees
+                                </div>
+                            </li>
+
+                        </ol>
+                        <div class="col-md-4 text-center"><button class="btn btn-default btn-aqua btn-lg">Join Now</button></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <ol class="second-list" start="6">
+                            <li>Community
+                                <div>Explore, discover and connect with other artists, collectors and dealers
+                                    worldwide/div>
+                            </li>
+                            <li>Access
+                                <div>Access your collection from any device, art attendant makes mobile art sales easy
+                                    and accessible
+                                </div>
+                            </li>
+                            <li>Organization
+                                <div>Visually organize your art collection with sortable fields for multiple viewing
+                                    options in your own private database
+                                </div>
+                            </li>
+                            <li>Guarantee
+                                <div>Artwork purchases through the website are guaranteed - if you buy artwork and
+                                    aren’t satisfied you can return it for a full refund (minus shipping)
+                                </div>
+                            </li>
+                            <li>Services
+                                <div>Contract us for affordable and professional art data entry and database
+                                    migration.
+                                </div>
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- testimonial-->
+<section class="container-fluid section5 testimonial">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 image">
+                <img class="img-responsive img-circle" src="<?php bloginfo('template_url'); ?>/img/frontpage/NancyPic.jpg
+" alt="Nancy Testimony">
+            </div>
+            <div class="col-sm-12 col-md-8 text text-center">
+                “Easy to use wether you are an artist, collector, gallery or museum. I can finally make direct online marketplace sales and increase visibility to my program without paying a fortune. I'm thrilled to now be using art attendant!”
+                <div>-Nancy Zastudil, Art Dealer, Art Collector, Arts Writer</div>
             </div>
         </div>
     </div>

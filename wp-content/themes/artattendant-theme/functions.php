@@ -215,6 +215,11 @@ window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.h
 // Add hook for front-end <head></head>
 add_action('wp_head', 'my_custom_js');
 
+function frontpage_js() {
+    wp_enqueue_script('frontpage-scripts', (get_template_directory_uri()."/js/frontpage-scripts.js"),array('jquery'),filemtime( get_stylesheet_directory().'/js/frontpage-scripts.js'),true);
+}
+add_action( 'wp_enqueue_scripts' , 'frontpage_js');
+
 
 /**
  * Custom Theme functions

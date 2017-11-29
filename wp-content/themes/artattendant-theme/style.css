@@ -11131,19 +11131,100 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .section3 .audiences .audience {
   height: 320px;
 }
-.page-id-102 .section3 .audiences #artists img {
+.page-id-102 .section3 .audiences .audience span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+.page-id-102 .section3 .audiences .audience img {
   display: block;
 }
-.page-id-102 .section3 .audiences #artists span {
-  display: none;
+.page-id-102 .section3 .audiences .audience span {
   font-family: "Muli";
   font-weight: 700;
 }
-.page-id-102 .section3 .audiences #artists:hover img {
-  display: none;
+.page-id-102 .section4 {
+  background-color: #e1e3e6;
+  color: #414042;
+  font-family: 'Muli';
 }
-.page-id-102 .section3 .audiences #artists:hover span {
-  display: block;
+.page-id-102 .section4 h2 {
+  font-size: 40px;
+}
+.page-id-102 .section4 h3 {
+  font-size: 28px;
+  font-weight: 600;
+}
+.page-id-102 .section4 .wrapper {
+  padding-top: 30px;
+}
+.page-id-102 .section4 .wrapper > div {
+  padding: 0;
+}
+.page-id-102 .section4 .text-center {
+  width: 100%;
+}
+.page-id-102 .section4 .btn-aqua {
+  font-family: 'Palanquin';
+  background-color: #b9e2dd;
+  border-radius: 16px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  color: #414042;
+  font-weight: 700;
+  font-size: 18px;
+  width: 30%;
+}
+.page-id-102 .section4 ol {
+  list-style-type: none;
+  padding: 0;
+}
+.page-id-102 .section4 ol.first-list {
+  counter-reset: step-counter;
+}
+.page-id-102 .section4 ol.second-list {
+  counter-reset: step-counter 5;
+}
+.page-id-102 .section4 ol.first-list li:before,
+.page-id-102 .section4 ol.second-list li:before {
+  content: counter(step-counter);
+  counter-increment: step-counter;
+}
+.page-id-102 .section4 ol li {
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.page-id-102 .section4 ol li:before {
+  margin-right: 10px;
+  font-size: 80%;
+  background-color: #c90e17;
+  color: white;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+.page-id-102 .section4 ol li div {
+  font-weight: 400;
+  margin-left: 30px;
+}
+.page-id-102 .section5.testimonial {
+  background-color: #b9e2dd;
+}
+.page-id-102 .section5.testimonial .container .row {
+  padding: 60px 0;
+}
+.page-id-102 .section5.testimonial .container .row .image {
+  background-color: transparent;
+}
+.page-id-102 .section5.testimonial .container .row .text {
+  font-size: 24px;
+  font-weight: 600;
+}
+.page-id-102 .section5.testimonial .container .row .text div {
+  font-size: 18px;
 }
 .btn-aqua.btn:hover {
   color: #000;
@@ -12193,6 +12274,7 @@ html {
 }
 body {
   margin-bottom: 30px;
+  color: #414042;
 }
 #footer {
   position: absolute;
