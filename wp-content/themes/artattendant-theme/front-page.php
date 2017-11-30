@@ -67,7 +67,7 @@ get_header('pre'); ?>
             We offer a free, secure, easy-to-use, cloud-based <a href="<?php echo get_the_permalink(85); ?>">artwork inventory database</a> to document, manage and track art collections. Our members can choose to make their art collection public or keep it private. Collection management, insurance valuation, estate planning, publishing archive records and social sharing are all incorporated into our intuitive online platform.
         </span>
         </div>
-        <div class="item">
+        <div class="item text-center">
             <div class="scaling-svg-container">
 
 
@@ -114,7 +114,7 @@ get_header('pre'); ?>
             Promote artwork for sale, rent or loan in our public online art marketplace. Buy art directly from other artAttendant community members. artAttendant is one of the most affordable ways to sell artwork online as we only charge a 10% commission and 3% credit card processing fees. We have no up-front costs, and no membership fees for displaying artwork for sale, rent or loan.
         </span>
         </div>
-        <div class="item">
+        <div class="item text-center">
             <div class="scaling-svg-container">
 
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
