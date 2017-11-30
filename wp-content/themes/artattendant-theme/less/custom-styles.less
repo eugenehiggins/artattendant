@@ -184,8 +184,14 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   }
   .section3 {
   
-    border-bottom: 87px solid #e1e3e6;
-    border-right: 1500px solid transparent;
+    &:after {
+      border-bottom: 30vh solid #e1e3e6;
+      border-right: 100vw solid transparent;
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      z-index: -10;
+    }
     
     * {
       color: @artattend-dark-gray;

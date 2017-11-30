@@ -11131,9 +11131,13 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     width: 33vw;
   }
 }
-.page-id-102 .section3 {
-  border-bottom: 87px solid #e1e3e6;
-  border-right: 1500px solid transparent;
+.page-id-102 .section3:after {
+  border-bottom: 30vh solid #e1e3e6;
+  border-right: 100vw solid transparent;
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  z-index: -10;
 }
 .page-id-102 .section3 * {
   color: #414042;
