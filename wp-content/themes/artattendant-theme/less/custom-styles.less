@@ -1,4 +1,5 @@
-@artattend-gray: #414042;
+@artattend-dark-gray: #414042;
+@artattend-gray: #757777;
 @artattend-red: #c90e17;
 @artattend-aqua: #b9e2dd;
 
@@ -81,7 +82,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     width: 100%;
   }
   .landing-intro-text {
-    color: @artattend-gray;
+    color: @artattend-dark-gray;
     div.button-block {
       display: flex;
       justify-content: space-between;
@@ -91,7 +92,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
           background-color: #b9e2dd;
           border-radius: 16px;
           box-shadow: none;
-          color: @artattend-gray;
+          color: @artattend-dark-gray;
           font-weight: 700;
           font-size: 18px;
           width: 30%;
@@ -153,7 +154,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
         align-items: center;
         font-family: 'Muli';
         padding: 40px;
-        color: @artattend-gray;
+        color: @artattend-dark-gray;
         
         //> * {
         //  text-align: center;
@@ -178,7 +179,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   }
   .section3 {
     * {
-      color: @artattend-gray;
+      color: @artattend-dark-gray;
     }
     h2 {
       text-align: center;
@@ -225,7 +226,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   // 10 reasons
   .section4 {
     background-color: #e1e3e6;
-    color: @artattend-gray;
+    color: @artattend-dark-gray;
     font-family: 'Muli';
     h2 {
       font-size: 40px;
@@ -248,7 +249,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       background-color: @artattend-aqua;
       border-radius: 16px;
       box-shadow: none;
-      color: @artattend-gray;
+      color: @artattend-dark-gray;
       font-weight: 700;
       font-size: 18px;
       width: 30%;
@@ -287,7 +288,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
         }
         div {
           font-weight: 400;
-          margin-left: 30px;
+          margin-left: 33px;
         }
       }
     }
@@ -299,6 +300,8 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       padding: 60px 0;
       .image {
         background-color: transparent;
+        margin-left: auto;
+        margin-right: auto;
       }
       .text {
         font-size: 24px;
@@ -896,32 +899,60 @@ ul.links li a.active {
 --------------------------------------------------------------------------------------------------------*/
 
 #footer {
-  border-top: 1px solid #afb1b4;
+  background-color: @artattend-gray;
+  color: white;
+  font-family: 'Muli';
+  font-size: 14px;
+  font-weight: 100;
+  .svg-container {
+    width: ~"calc( 80px + 3vw )";
+  }
+  #menu-footer.nav {
+    width: 100%;
+    display: flex;
+    > li {
+      flex: 1 1 auto;
+      text-align: center;
+      > a {
+        font-family: 'Palanquin';
+        font-weight: 700;
+        font-size: 18px;
+        color: white;
+      }
+    }
+    
+  }
+  .wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    > div {
+      flex: 1 1 auto;
+      .fa-circle {
+        color: @artattend-red;
+      }
+    }
+  }
 }
 
-#menu-footer {
-  border-radius: 0;
-  margin: 0 auto;
-  border: 0;
-  min-height: 0px;
-}
 
-#menu-footer.nav > li > a {
-  position: relative;
-  display: block;
-  padding: 5px 10px;
-}
 
-#menu-footer.navbar > li > a {
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 12px;
-  color: @artattend-gray;
-}
-
-#menu-footer.navbar > li.active > a {
-  color: #d2232a;
-}
+//#menu-footer.nav > li > a {
+//  position: relative;
+//  display: inline-block;
+//  padding: 5px 10px;
+//}
+//
+//#menu-footer.navbar > li > a {
+//  text-transform: uppercase;
+//  font-weight: 600;
+//  font-size: 12px;
+//  color: @artattend-dark-gray;
+//}
+//
+//#menu-footer.navbar > li.active > a {
+//  color: #d2232a;
+//}
 
 /* =Content
 --------------------------------------------------------------------------------------------------------*/
@@ -1561,14 +1592,14 @@ html {
 
 body {
   margin-bottom: 30px;
-  color: @artattend-gray;
+  color: @artattend-dark-gray;
 }
 
 #footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 30px;
+  //position: absolute;
+  //bottom: 0;
+  //width: 100%;
+  //height: 30px;
   
 }
 

@@ -27,7 +27,7 @@ get_header('pre'); ?>
 
 <section class="container-fluid section2">
     <div class="row">
-        <div class="item">
+        <div class="item text-center">
 
             <div class="scaling-svg-container">
 
@@ -160,7 +160,7 @@ get_header('pre'); ?>
                 Low-cost professional art archive services
             </h3>
             <span>
-            Archived art collections have greater value than undocumented collections. Art Attendant was developed by professional art dealer and archivist with over 25 years of experience. If your collection needs help and more personalized service, our art archive services start as low as $25/hour. Contact us to discuss your collection and develop a customized affordable solution.
+            Archived art collections have greater value than undocumented collections. Art Attendant was developed by professional art dealer and archivist with over 25 years of experience. If your collection needs help and more personalized service, our art archive services start as low as $30/hour. Contact us to discuss your collection and develop a customized affordable solution.
         </span>
         </div>
     </div>
