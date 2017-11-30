@@ -11118,6 +11118,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .section2 .row .item > span a {
   color: #c90e17;
 }
+.page-id-102 .section3 {
+  border-bottom: 87px solid #e1e3e6;
+  border-right: 1500px solid transparent;
+}
 .page-id-102 .section3 * {
   color: #414042;
 }
@@ -11153,6 +11157,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 }
 .page-id-102 .section4 h2 {
   font-size: 40px;
+  margin-top: 0;
 }
 .page-id-102 .section4 h3 {
   font-size: 28px;
