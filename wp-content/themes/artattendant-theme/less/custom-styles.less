@@ -86,6 +86,8 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     div.button-block {
       display: flex;
       justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
       .btn-aqua {
         &.btn {
           font-family: 'Palanquin';
@@ -95,29 +97,42 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
           color: @artattend-dark-gray;
           font-weight: 700;
           font-size: 18px;
-          width: 30%;
+          width: 90%;
+          margin: 5px;
+        }
+      }
+      @media screen and (min-width: @screen-sm-min) {
+        flex-direction: row;
+        .btn-aqua.btn {
+          width: 33%
         }
       }
     }
     div.text {
       max-width: 590px;
       width: 100%;
-      margin: 60px auto;
+      margin: 26px auto;
       font-family: 'Muli';
       h1 {
         font-size: 40px;
-        padding-top: 60px;
+        padding-top: 25px;
         font-weight: 400;
       }
       strong {
         font-size: 14px;
+      }
+      @media screen and (min-width: @screen-sm-min) {
+        margin: 60px auto;
+        h1 {
+          padding-top: 60px;
+        }
       }
     }
   }
   
   .section2 {
     background-color: #e1e3e6;
-  
+    
     .scaling-svg-container {
       position: relative;
       height: 0;
@@ -126,13 +141,14 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       height: 45vh;
       /* override this inline for aspect ratio other than square */
     }
-    @media screen and (min-width: @screen-sm-min){
+    @media screen and (min-width: @screen-sm-min) {
       .scaling-svg-container {
         height: 12vw;
-
+        
       }
+      
       .scaling-svg {
-
+      
       }
     }
     .scaling-svg {
@@ -150,6 +166,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     .row {
       display: flex;
       flex-direction: column;
+      padding-bottom: 40px;
       .item {
         display: flex;
         flex-direction: column;
@@ -183,7 +200,8 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     }
   }
   .section3 {
-  
+    
+    padding-bottom: 120px;
     &:after {
       border-bottom: 30vh solid #e1e3e6;
       border-right: 100vw solid transparent;
@@ -203,39 +221,19 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       font-weight: 600;
       margin: 44px 0;
     }
-    .audiences {
-      .audience {
-        height: 320px;
-        span {
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: auto;
-        }
-        img {
-          display: block;
-        }
-        span {
-          //display: inline;
-          font-family: "Muli";
-          font-weight: 700;
-        }
-        //&:hover {
-        //  img {
-        //    display: none;
-        //  }
-        //  span {
-        //    display: block;
-        //  }
-        //}
-      }
-      #artists {
-      
-      
-      }
+    h3 {
+      font-size: 24px;
+      margin-bottom: 0;
+      font-weight: 400;
     }
+    .first-col {
+      padding-right: 0;
+    }
+    .second-col{
+      padding-left: 0;
+      padding-top: 90px;
+    }
+    
   }
   
   // 10 reasons
@@ -273,10 +271,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     ol {
       list-style-type: none;
       padding: 0;
-
+      
       &.first-list {
         counter-reset: step-counter;
-
+        
       }
       &.second-list {
         counter-reset: step-counter 5;
@@ -314,8 +312,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     background-color: @artattend-aqua;
     .container .row {
       padding: 60px 0;
-      .image {
-        background-color: transparent;
+      .image img {
         margin-left: auto;
         margin-right: auto;
       }
@@ -328,11 +325,78 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       }
     }
   }
+  
+  /* entire container, keeps perspective */
+  .flip-container {
+    perspective: 1000px;
+    .fa-stack {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      z-index: 10;
+    
+      .fa-circle {
+        color: red;
+      }
+      .fa-plus {
+        color: white;
+      }
+    }
+  }
+  /* flip the pane when hovered */
+  .flip-container:hover .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-container, .front, .back {
+    width: 100%;
+    //height: 76vh;
+    @media screen and (min-width: @screen-sm-min) {
+      //height: 332px;
+    }
+  }
+  
+  /* flip speed goes here */
+  .flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    
+    position: relative;
+    height: 107vh;
+    @media screen and (min-width: @screen-sm-min) {
+      height: ~"calc(100px + 45vh)";
+      overflow: hidden;
+    }
+  }
+  
+  /* hide back of pane during swap */
+  .front, .back {
+    backface-visibility: hidden;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  /* front pane, placed above back */
+  .front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+    img {
+      width: 100%;
+    }
+  }
+  
+  /* back, initially hidden pane */
+  .back {
+    transform: rotateY(180deg);
+  }
 }
 
 .btn-aqua.btn:hover {
   color: #000;
-
+  
 }
 
 .btn-red.btn {
@@ -944,14 +1008,18 @@ ul.links li a.active {
     align-items: center;
     > div {
       flex: 1 1 auto;
+    }
+    .contact {
+      text-align: center;
+    }
+    .social {
+      text-align: right;
       .fa-circle {
         color: @artattend-red;
       }
     }
   }
 }
-
-
 
 //#menu-footer.nav > li > a {
 //  position: relative;

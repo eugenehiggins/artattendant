@@ -19,7 +19,7 @@
 					<div class="site-credit  col-xs-6"> Powered by <a href="http://anagr.am" target="_blank"><img src="<?php bloginfo('template_directory'); ?>/img/anagram/anagram-logo.png" alt="Anagram"  /></a></div>
 				</div>-->
             <div class="wrapper">
-                <div class="">
+                <div class="icon">
                     <div class="svg-container">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                              viewBox="0 0 86 85">
@@ -39,11 +39,11 @@
                         </svg>
                     </div>
                 </div>
-                <div class="">
+                <div class="contact">
                     <div>505.321.3182 | connect@artAttendant.com</div>
                     <div>2017 artAttendant. All rights reserved</div>
                 </div>
-                <div class="">
+                <div class="social">
 
                     <span class="fa-stack fa-lg">
                       <i class="fa fa-circle fa-stack-2x"></i>

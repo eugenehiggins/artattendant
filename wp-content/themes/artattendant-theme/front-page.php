@@ -191,52 +191,108 @@ get_header('pre'); ?>
             <div class="col-sm-12">
                 <div class="audiences">
                     <h2 class="col-12">Serving the Arts Community</h2>
-                    <div class="col-xs-12 col-sm-6">
-                        <div id="artists" class="audience">
-                            Artists
-                            <span>
-                                Upload, organize, promote and sell your artwork on artAttendant. Get organized today and be rewarded with a free home for your digital archive.  We only charge 10% commission and 3% credit card processing fees on art sales with no up-front fees or monthly subscription costs. Our site is intuitive and does not have complicated features or cumbersome interfaces.
-                            </span>
-                            <img src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg" alt="Artists">
+                    <div class="col-xs-12 col-sm-6 first-col">
 
-                        </div>
-                        <div>sdafdsfa</div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <div id="collectors" class="audience">
-                            Art Collectors
-                            <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg
-" alt="Art Collectors">
-
-                            <span>
-                                Upload, organize, promote and sell your artwork on artAttendant. Get organized today and be rewarded with a free home for your digital archive.  We only charge 10% commission and 3% credit card processing fees on art sales with no up-front fees or monthly subscription costs. Our site is intuitive and does not have complicated features or cumbersome interfaces.
-                            </span>
-                        </div>
-
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <div id="collectors" class="audience">
-                            Galleries & Art Dealers
-                            <img src="<?php bloginfo('template_url'); ?>/img/frontpage/galleries.jpg
-" alt="Art Collectors">
-
-                            <span>
-Upload and manage multiple artists and collections in our intuitive online database. List artwork for sale, rent or loan and connect with a wider community through visibility on the site. Our services have no monthly fees, subscriptions or up-front costs. We only charge a competitive low 10% commission on sales and we provide credit card processing fees for 3%. We allow buyers to purchase directly from art attendant.                            </span>
-                        </div>
-
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <div id="collectors" class="audience">
-                            Institutions & Organizations
-                            <img src="<?php bloginfo('template_url'); ?>/img/frontpage/institutions.jpg
-" alt="Art Collectors">
-
-                            <span>
-                                Upload, organize, promote and sell your artwork on artAttendant. Get organized today and be rewarded with a free home for your digital archive.  We only charge 10% commission and 3% credit card processing fees on art sales with no up-front fees or monthly subscription costs. Our site is intuitive and does not have complicated features or cumbersome interfaces.
+                        <div id="artists" class="flip-container audience"
+                             ontouchstart="this.classList.toggle('hover');">
+                            <h3>Artists</h3>
+                            <div class="flipper">
+                                <div class="front">
+                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg"
+                                         alt="Artists">
+                                </div>
+                                <div class="back">
+                                    Upload, organize, promote and sell your artwork on artAttendant. Get organized today
+                                    and be rewarded with a free home for your digital archive. We only charge 10%
+                                    commission and 3% credit card processing fees on art sales with no up-front fees or
+                                    monthly subscription costs. Our site is intuitive and does not have complicated
+                                    features or cumbersome interfaces.
+                                </div>
+                            </div>
+                            <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
                             </span>
                         </div>
-
+                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                            <h3>Galleries & Art Dealers</h3>
+                            <div class="flipper">
+                                <div class="front">
+                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/galleries.jpg"
+                                         alt="Art Collectors">
+                                </div>
+                                <div class="back">
+                                    Upload and manage multiple artists and collections in our intuitive online database.
+                                    List artwork for sale, rent or loan and connect with a wider community through
+                                    visibility on the site. Our services have no monthly fees, subscriptions or up-front
+                                    costs. We only charge a competitive low 10% commission on sales and we provide
+                                    credit card processing fees for 3%. We allow buyers to purchase directly from art
+                                    attendant.
+                                </div>
+                            </div>
+                            <span class="fa-stack fa-lg">
+                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+                        </div>
                     </div>
+                    <div class="col-xs-12 col-sm-6 second-col">
+
+                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                            <h3>Galleries & Art Dealers</h3>
+                            <div class="flipper">
+                                <div class="front">
+
+                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg" alt="Art Collectors">
+                                </div>
+                                <div class="back">
+                                    Organize, archive and manage your collection in our secure and private online
+                                    database. Collectors can opt to make your collection visible to the public in or
+                                    simply kept private in our cloud-based personal database. artAttendant is the free
+                                    online solution for collectors to help with insurance valuation, estate planning and
+                                    publishing archive records.
+                                </div>
+
+
+                            </div>
+                            <span class="fa-stack fa-lg">
+                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                                </span>
+                        </div>
+
+                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                            <h3>Institutions & Organizations</h3>
+                            <div class="flipper">
+                                <div class="front">
+                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/institutions.jpg"
+                                         alt="Art Collectors">
+                                </div>
+                                <div class="back">
+                                    Manage all of your artwork collection and assets on our free online portal. Our site
+                                    was designed to incorporate all of the features you need and is simple and easy to
+                                    use for efficient artwork collection management for professional institutions and
+                                    organizations. List artworks for loan or sale through our artwork marketplace.
+                                    Promote your organizations artwork and easily share on social media. Find new
+                                    artwork available to borrow, rent or purchase in our discover art
+                                    marketplace.                             </span>
+                                </div>
+
+                            </div>
+                            <span class="fa-stack fa-lg">
+                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!--                    <div class="col-xs-12 col-sm-6">-->
+                    <!---->
+                    <!---->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-xs-12 col-sm-6">-->
+                    <!---->
+                    <!---->
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -274,7 +330,9 @@ Upload and manage multiple artists and collections in our intuitive online datab
                             </li>
 
                         </ol>
-                        <div class="col-md-4 text-center"><button class="btn btn-default btn-aqua btn-lg">Join Now</button></div>
+                        <div class="col-md-4 text-center">
+                            <button class="btn btn-default btn-aqua btn-lg">Join Now</button>
+                        </div>
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <ol class="second-list" start="6">
@@ -321,7 +379,9 @@ Upload and manage multiple artists and collections in our intuitive online datab
 " alt="Nancy Testimony">
             </div>
             <div class="col-sm-12 col-md-8 text text-center">
-                “Easy to use wether you are an artist, collector, gallery or museum. I can finally make direct online marketplace sales and increase visibility to my program without paying a fortune. I'm thrilled to now be using art attendant!”
+                “Easy to use wether you are an artist, collector, gallery or museum. I can finally make direct online
+                marketplace sales and increase visibility to my program without paying a fortune. I'm thrilled to now be
+                using art attendant!”
                 <div>-Nancy Zastudil, Art Dealer, Art Collector, Arts Writer</div>
             </div>
         </div>

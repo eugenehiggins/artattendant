@@ -11015,6 +11015,14 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
           box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
 }
+.page-id-102 {
+  /* entire container, keeps perspective */
+  /* flip the pane when hovered */
+  /* flip speed goes here */
+  /* hide back of pane during swap */
+  /* front pane, placed above back */
+  /* back, initially hidden pane */
+}
 .page-id-102 .landing-logo {
   margin-bottom: 60px;
   max-width: 590px;
@@ -11030,6 +11038,13 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .page-id-102 .landing-intro-text div.button-block .btn-aqua.btn {
   font-family: 'Palanquin';
@@ -11040,21 +11055,41 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   color: #414042;
   font-weight: 700;
   font-size: 18px;
-  width: 30%;
+  width: 90%;
+  margin: 5px;
+}
+@media screen and (min-width: 768px) {
+  .page-id-102 .landing-intro-text div.button-block {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .page-id-102 .landing-intro-text div.button-block .btn-aqua.btn {
+    width: 33%;
+  }
 }
 .page-id-102 .landing-intro-text div.text {
   max-width: 590px;
   width: 100%;
-  margin: 60px auto;
+  margin: 26px auto;
   font-family: 'Muli';
 }
 .page-id-102 .landing-intro-text div.text h1 {
   font-size: 40px;
-  padding-top: 60px;
+  padding-top: 25px;
   font-weight: 400;
 }
 .page-id-102 .landing-intro-text div.text strong {
   font-size: 14px;
+}
+@media screen and (min-width: 768px) {
+  .page-id-102 .landing-intro-text div.text {
+    margin: 60px auto;
+  }
+  .page-id-102 .landing-intro-text div.text h1 {
+    padding-top: 60px;
+  }
 }
 .page-id-102 .section2 {
   background-color: #e1e3e6;
@@ -11090,6 +11125,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding-bottom: 40px;
 }
 .page-id-102 .section2 .row .item {
   display: -webkit-box;
@@ -11131,6 +11167,9 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     width: 33vw;
   }
 }
+.page-id-102 .section3 {
+  padding-bottom: 120px;
+}
 .page-id-102 .section3:after {
   border-bottom: 30vh solid #e1e3e6;
   border-right: 100vw solid transparent;
@@ -11149,23 +11188,17 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   font-weight: 600;
   margin: 44px 0;
 }
-.page-id-102 .section3 .audiences .audience {
-  height: 320px;
+.page-id-102 .section3 h3 {
+  font-size: 24px;
+  margin-bottom: 0;
+  font-weight: 400;
 }
-.page-id-102 .section3 .audiences .audience span {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
+.page-id-102 .section3 .first-col {
+  padding-right: 0;
 }
-.page-id-102 .section3 .audiences .audience img {
-  display: block;
-}
-.page-id-102 .section3 .audiences .audience span {
-  font-family: "Muli";
-  font-weight: 700;
+.page-id-102 .section3 .second-col {
+  padding-left: 0;
+  padding-top: 90px;
 }
 .page-id-102 .section4 {
   background-color: #e1e3e6;
@@ -11238,8 +11271,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .section5.testimonial .container .row {
   padding: 60px 0;
 }
-.page-id-102 .section5.testimonial .container .row .image {
-  background-color: transparent;
+.page-id-102 .section5.testimonial .container .row .image img {
   margin-left: auto;
   margin-right: auto;
 }
@@ -11249,6 +11281,69 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 }
 .page-id-102 .section5.testimonial .container .row .text div {
   font-size: 18px;
+}
+.page-id-102 .flip-container {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+.page-id-102 .flip-container .fa-stack {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  z-index: 10;
+}
+.page-id-102 .flip-container .fa-stack .fa-circle {
+  color: red;
+}
+.page-id-102 .flip-container .fa-stack .fa-plus {
+  color: white;
+}
+.page-id-102 .flip-container:hover .flipper,
+.page-id-102 .flip-container.hover .flipper {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+.page-id-102 .flip-container,
+.page-id-102 .front,
+.page-id-102 .back {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+}
+.page-id-102 .flipper {
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  position: relative;
+  height: 107vh;
+}
+@media screen and (min-width: 768px) {
+  .page-id-102 .flipper {
+    height: calc(100px + 45vh);
+    overflow: hidden;
+  }
+}
+.page-id-102 .front,
+.page-id-102 .back {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.page-id-102 .front {
+  z-index: 2;
+  /* for firefox 31 */
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+}
+.page-id-102 .front img {
+  width: 100%;
+}
+.page-id-102 .back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 .btn-aqua.btn:hover {
   color: #000;
@@ -11795,7 +11890,13 @@ ul.links li {
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
 }
-#footer .wrapper > div .fa-circle {
+#footer .wrapper .contact {
+  text-align: center;
+}
+#footer .wrapper .social {
+  text-align: right;
+}
+#footer .wrapper .social .fa-circle {
   color: #c90e17;
 }
 /* =Content
