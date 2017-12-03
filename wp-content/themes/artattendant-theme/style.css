@@ -11017,6 +11017,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 }
 .page-id-102 {
   /* entire container, keeps perspective */
+  /* entire container, keeps perspective */
   /* flip the pane when hovered */
   /* flip speed goes here */
   /* hide back of pane during swap */
@@ -11167,8 +11168,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     width: 33vw;
   }
 }
-.page-id-102 .section3 {
-  padding-bottom: 120px;
+@media screen and (min-width: 992px) {
+  .page-id-102 .section3 {
+    padding-bottom: 120px;
+  }
 }
 .page-id-102 .section3:after {
   border-bottom: 30vh solid #e1e3e6;
@@ -11198,12 +11201,21 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 }
 .page-id-102 .section3 .second-col {
   padding-left: 0;
-  padding-top: 90px;
+}
+@media screen and (min-width: 768px) {
+  .page-id-102 .section3 .second-col {
+    padding-top: 90px;
+  }
 }
 .page-id-102 .section4 {
   background-color: #e1e3e6;
   color: #414042;
   font-family: 'Muli';
+}
+@media screen and (min-width: 768px) {
+  .page-id-102 .section4 .container {
+    margin-top: -75px;
+  }
 }
 .page-id-102 .section4 h2 {
   font-size: 40px;
@@ -11298,6 +11310,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .flip-container .fa-stack .fa-plus {
   color: white;
 }
+.page-id-102 .flip-container {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
 .page-id-102 .flip-container:hover .flipper,
 .page-id-102 .flip-container.hover .flipper {
   -webkit-transform: rotateY(180deg);
@@ -11306,9 +11322,8 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .flip-container,
 .page-id-102 .front,
 .page-id-102 .back {
-  width: 100%;
-}
-@media screen and (min-width: 768px) {
+  width: 320px;
+  height: 480px;
 }
 .page-id-102 .flipper {
   -webkit-transition: 0.6s;
@@ -11316,13 +11331,6 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   position: relative;
-  height: 107vh;
-}
-@media screen and (min-width: 768px) {
-  .page-id-102 .flipper {
-    height: calc(100px + 45vh);
-    overflow: hidden;
-  }
 }
 .page-id-102 .front,
 .page-id-102 .back {
@@ -11337,9 +11345,6 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   /* for firefox 31 */
   -webkit-transform: rotateY(0deg);
           transform: rotateY(0deg);
-}
-.page-id-102 .front img {
-  width: 100%;
 }
 .page-id-102 .back {
   -webkit-transform: rotateY(180deg);

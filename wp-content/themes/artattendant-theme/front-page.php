@@ -193,9 +193,7 @@ get_header('pre'); ?>
                     <h2 class="col-12">Serving the Arts Community</h2>
                     <div class="col-xs-12 col-sm-6 first-col">
 
-                        <div id="artists" class="flip-container audience"
-                             ontouchstart="this.classList.toggle('hover');">
-                            <h3>Artists</h3>
+                        <div id="artists" class="flip-container audience" ontouchstart="this.classList.toggle('hover');">
                             <div class="flipper">
                                 <div class="front">
                                     <img src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg"
@@ -209,10 +207,7 @@ get_header('pre'); ?>
                                     features or cumbersome interfaces.
                                 </div>
                             </div>
-                            <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                            </span>
+
                         </div>
                         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
                             <h3>Galleries & Art Dealers</h3>
