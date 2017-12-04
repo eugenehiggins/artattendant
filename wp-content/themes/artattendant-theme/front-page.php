@@ -193,21 +193,30 @@ get_header('pre'); ?>
                     <h2 class="col-12">Serving the Arts Community</h2>
                     <div class="col-xs-12 col-sm-6 first-col">
 
-                        <div id="artists" class="flip-container audience" ontouchstart="this.classList.toggle('hover');">
+                        <div id="artists" class="flip-container audience"
+                             ontouchstart="this.classList.toggle('hover');">
+                            <h3>Artists</h3>
                             <div class="flipper">
-                                <div class="front">
-                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg"
-                                         alt="Artists">
-                                </div>
-                                <div class="back">
-                                    Upload, organize, promote and sell your artwork on artAttendant. Get organized today
-                                    and be rewarded with a free home for your digital archive. We only charge 10%
-                                    commission and 3% credit card processing fees on art sales with no up-front fees or
-                                    monthly subscription costs. Our site is intuitive and does not have complicated
-                                    features or cumbersome interfaces.
+                                <div class="content">
+                                    <div class="front">
+                                        <img src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg"
+                                             alt="Artists">
+                                    </div>
+                                    <div class="back">
+                                        Upload, organize, promote and sell your artwork on artAttendant. Get organized
+                                        today
+                                        and be rewarded with a free home for your digital archive. We only charge 10%
+                                        commission and 3% credit card processing fees on art sales with no up-front fees
+                                        or
+                                        monthly subscription costs. Our site is intuitive and does not have complicated
+                                        features or cumbersome interfaces.
+                                    </div>
                                 </div>
                             </div>
-
+                            <span class="fa-stack fa-lg">
+                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
                         </div>
                         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
                             <h3>Galleries & Art Dealers</h3>
@@ -238,7 +247,8 @@ get_header('pre'); ?>
                             <div class="flipper">
                                 <div class="front">
 
-                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg" alt="Art Collectors">
+                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg"
+                                         alt="Art Collectors">
                                 </div>
                                 <div class="back">
                                     Organize, archive and manage your collection in our secure and private online
