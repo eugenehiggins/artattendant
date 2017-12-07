@@ -11355,9 +11355,6 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .flipper > .content span:after {
   content: "9";
 }
-.page-id-102 .flipper .content {
-  background-color: #b9e2dd;
-}
 .page-id-102 .flipper img {
   width: 100%;
 }
@@ -11376,6 +11373,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
           transform: rotateY(0deg);
 }
 .page-id-102 .back {
+  background-color: #b9e2dd;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
   padding: 30px;
