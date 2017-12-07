@@ -1,4 +1,5 @@
 @artattend-dark-gray: #414042;
+@artattend-lt-gray: #e1e3e6;
 @artattend-gray: #757777;
 @artattend-red: #c90e17;
 @artattend-aqua: #b9e2dd;
@@ -130,11 +131,14 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
           box-shadow: none;
           color: @artattend-dark-gray;
           font-weight: 700;
-          font-size: 18px;
+          font-size: 22px;
           width: 90%;
           margin: 0 20px 20px;
           @media screen and (min-width: @screen-sm-min) {
             margin-bottom: 0;
+          }
+          &:hover {
+            background-color: @artattend-lt-gray;
           }
         }
       }
@@ -316,7 +320,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       box-shadow: none;
       color: @artattend-dark-gray;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 22px;
       width: 30%;
     }
     ol {

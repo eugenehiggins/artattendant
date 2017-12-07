@@ -11072,7 +11072,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
           box-shadow: none;
   color: #414042;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 22px;
   width: 90%;
   margin: 0 20px 20px;
 }
@@ -11080,6 +11080,9 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   .page-id-102 .landing-intro-text div.button-block .btn-aqua.btn {
     margin-bottom: 0;
   }
+}
+.page-id-102 .landing-intro-text div.button-block .btn-aqua.btn:hover {
+  background-color: #e1e3e6;
 }
 @media screen and (min-width: 768px) {
   .page-id-102 .landing-intro-text div.button-block {
@@ -11266,7 +11269,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
           box-shadow: none;
   color: #414042;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 22px;
   width: 30%;
 }
 .page-id-102 .section4 ol {
