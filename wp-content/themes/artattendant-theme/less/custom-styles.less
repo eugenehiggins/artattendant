@@ -113,6 +113,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       justify-content: space-between;
       flex-direction: column;
       align-items: center;
+      min-width: 100px;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
       .btn-aqua {
         &.btn {
           font-family: 'Palanquin';
@@ -123,7 +127,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
           font-weight: 700;
           font-size: 18px;
           width: 90%;
-          margin: 5px;
+          margin: 0 20px 20px;
+          @media screen and (min-width: @screen-sm-min) {
+            margin-bottom: 0;
+          }
         }
       }
       @media screen and (min-width: @screen-sm-min) {
@@ -140,8 +147,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       font-family: 'Muli';
       h1 {
         font-size: 40px;
+        font-family: 'Muli';
         padding-top: 25px;
         font-weight: 400;
+        
       }
       strong {
         font-size: 14px;
@@ -333,8 +342,8 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
           background-color: @artattend-red;
           color: white;
           font-weight: bold;
-          padding: 3px 8px;
-          border-radius: 12px;
+          padding: 4px 8px;
+          border-radius: 20px;
         }
         div {
           font-weight: 400;
@@ -354,7 +363,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       }
       .text {
         font-size: 24px;
-        font-weight: 600;
+        font-weight: 400;
         div {
           font-size: 18px;
         }
@@ -365,19 +374,29 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   /* entire container, keeps perspective */
   .flip-container {
     perspective: 1000px;
-    .fa-stack {
+    .svg-container {
       position: absolute;
-      right: 10px;
-      top: 28px;
-      z-index: 10;
-    
-      .fa-circle {
-        color: red;
-      }
-      .fa-plus {
-        color: white;
+      top: 26px;
+      right: 18px;
+      width: 44px;
+      .cls-2 {
+        font-size: 49px;
+        stroke-width: 0;
       }
     }
+    //.fa-stack {
+    //  position: absolute;
+    //  right: 10px;
+    //  top: 28px;
+    //  z-index: 10;
+    //
+    //  .fa-circle {
+    //    color: red;
+    //  }
+    //  .fa-plus {
+    //    color: white;
+    //  }
+    //}
   }
 
   /* flip the pane when hovered */
@@ -1023,7 +1042,7 @@ ul.links li a.active {
   font-weight: 100;
   padding-bottom: 40px;
   .svg-container {
-    width: ~"calc( 80px + 3vw )";
+    //width: ~"calc( 80px + 3vw )";
   }
   #menu-footer.nav {
     width: 100%;
@@ -1046,6 +1065,11 @@ ul.links li a.active {
     align-items: center;
     > div {
       flex: 1 1 auto;
+    }
+    .icon {
+      img {
+        width: 100px;
+      }
     }
     .contact {
       text-align: center;

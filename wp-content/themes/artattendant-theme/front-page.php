@@ -9,7 +9,7 @@ get_header('pre'); ?>
                 <div class="button-block text-center">
                     <a href="<?php echo get_the_permalink(85); ?>" class="btn btn-default btn-aqua btn-lg">Discover
                         Art</a>
-                    <a href="<?php echo get_the_permalink(20); ?>" class="btn btn-default btn-aqua btn-lg">Organize
+                    <a href="<?php echo get_the_permalink(74); ?>" class="btn btn-default btn-aqua btn-lg">Organize
                         Art</a>
                     <a href="<?php echo get_the_permalink(20); ?>" class="btn btn-default btn-aqua btn-lg">Archive
                         Services</a>
@@ -18,8 +18,6 @@ get_header('pre'); ?>
                     <h1>Free Unlimited Art Archive</h1>
                     <strong>We believe in connecting the vibrant and diverse worldwide arts community.</strong>
                 </div>
-
-
             </div><!-- .entry-content -->
         </header><!-- close .*-inner (main-content or sidebar, depending if sidebar is used) -->
     </div><!-- close .row -->
@@ -69,8 +67,6 @@ get_header('pre'); ?>
         </div>
         <div class="item text-center">
             <div class="scaling-svg-container">
-
-
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
                     <defs>
                         <style>.cls-1 {
@@ -100,12 +96,11 @@ get_header('pre'); ?>
                                   d="M45.77,67.19l1.74,6.08A4.86,4.86,0,0,1,38.17,76l-2.51-8.76H27.8l17.86,68.58h100l17.85-68.58Z"/>
                             <circle class="cls-2" cx="68.87" cy="152.72" r="11.58"/>
                             <circle class="cls-2" cx="131.75" cy="152.72" r="11.58"/>
-                            <path class="cls-3"
+                            <path class="cls-2"
                                   d="M44.18,79.07a4.87,4.87,0,0,1-6-3.32L35.66,67,28.84,43.18a4.87,4.87,0,0,1,3.32-6A4.7,4.7,0,0,1,33.49,37a4.88,4.88,0,0,1,4.68,3.52L45.77,67l1.74,6.08A4.86,4.86,0,0,1,44.18,79.07Z"/>
                         </g>
                     </g>
                 </svg>
-
             </div>
             <h3>
                 Buy, sell, rent or loan art on our marketplace
@@ -213,31 +208,92 @@ get_header('pre'); ?>
                                     </div>
                                 </div>
                             </div>
-                            <span class="fa-stack fa-lg">
-                                      <i class="fa fa-circle fa-stack-2x"></i>
-                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                            </span>
+                            <!--                            <span class="fa-stack fa-lg">-->
+                            <!--                                      <i class="fa fa-circle fa-stack-2x"></i>-->
+                            <!--                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>-->
+                            <!--                            </span>-->
+                            <div class="svg-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 57 57">
+                                    <defs>
+                                        <style>.cls-1 {
+                                                fill: #d22329;
+                                            }
+
+                                            .cls-2 {
+                                                font-size: 48px;
+                                                fill: #fafafa;
+                                                font-family: Muli-Light, Muli;
+                                            }</style>
+                                    </defs>
+                                    <title>Asset 1</title>
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="ServingBoxes">
+                                            <g id="BoxHead1">
+                                                <g id="Circle_" data-name="Circle+">
+                                                    <g id="Shape_3" data-name="Shape 3">
+                                                        <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                                    </g>
+                                                    <g id="_" data-name="+">
+                                                        <text class="cls-2" transform="translate(11.83 41.09)">+</text>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
                             <h3>Galleries & Art Dealers</h3>
                             <div class="flipper">
-                                <div class="front">
-                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/galleries.jpg"
-                                         alt="Art Collectors">
-                                </div>
-                                <div class="back">
-                                    Upload and manage multiple artists and collections in our intuitive online database.
-                                    List artwork for sale, rent or loan and connect with a wider community through
-                                    visibility on the site. Our services have no monthly fees, subscriptions or up-front
-                                    costs. We only charge a competitive low 10% commission on sales and we provide
-                                    credit card processing fees for 3%. We allow buyers to purchase directly from art
-                                    attendant.
+                                <div class="content">
+                                    <div class="front">
+                                        <img src="<?php bloginfo('template_url'); ?>/img/frontpage/galleries.jpg"
+                                             alt="Art Collectors">
+                                    </div>
+                                    <div class="back">
+                                        Upload and manage multiple artists and collections in our intuitive online
+                                        database.
+                                        List artwork for sale, rent or loan and connect with a wider community through
+                                        visibility on the site. Our services have no monthly fees, subscriptions or
+                                        up-front
+                                        costs. We only charge a competitive low 10% commission on sales and we provide
+                                        credit card processing fees for 3%. We allow buyers to purchase directly from
+                                        art
+                                        attendant.
+                                    </div>
                                 </div>
                             </div>
-                            <span class="fa-stack fa-lg">
-                                      <i class="fa fa-circle fa-stack-2x"></i>
-                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                            </span>
+                            <div class="svg-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 57 57">
+                                    <defs>
+                                        <style>.cls-1 {
+                                                fill: #d22329;
+                                            }
+
+                                            .cls-2 {
+                                                font-size: 48px;
+                                                fill: #fafafa;
+                                                font-family: Muli-Light, Muli;
+                                            }</style>
+                                    </defs>
+                                    <title>Asset 1</title>
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="ServingBoxes">
+                                            <g id="BoxHead1">
+                                                <g id="Circle_" data-name="Circle+">
+                                                    <g id="Shape_3" data-name="Shape 3">
+                                                        <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                                    </g>
+                                                    <g id="_" data-name="+">
+                                                        <text class="cls-2" transform="translate(11.83 41.09)">+</text>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 second-col">
@@ -245,49 +301,110 @@ get_header('pre'); ?>
                         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
                             <h3>Galleries & Art Dealers</h3>
                             <div class="flipper">
-                                <div class="front">
+                                <div class="content">
+                                    <div class="front">
 
-                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg"
-                                         alt="Art Collectors">
-                                </div>
-                                <div class="back">
-                                    Organize, archive and manage your collection in our secure and private online
-                                    database. Collectors can opt to make your collection visible to the public in or
-                                    simply kept private in our cloud-based personal database. artAttendant is the free
-                                    online solution for collectors to help with insurance valuation, estate planning and
-                                    publishing archive records.
+                                        <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg"
+                                             alt="Art Collectors">
+                                    </div>
+                                    <div class="back">
+                                        Organize, archive and manage your collection in our secure and private online
+                                        database. Collectors can opt to make your collection visible to the public in or
+                                        simply kept private in our cloud-based personal database. artAttendant is the
+                                        free
+                                        online solution for collectors to help with insurance valuation, estate planning
+                                        and
+                                        publishing archive records.
+                                    </div>
                                 </div>
 
 
                             </div>
-                            <span class="fa-stack fa-lg">
-                                      <i class="fa fa-circle fa-stack-2x"></i>
-                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                                </span>
+                            <div class="svg-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 57 57">
+                                    <defs>
+                                        <style>.cls-1 {
+                                                fill: #d22329;
+                                            }
+
+                                            .cls-2 {
+                                                font-size: 48px;
+                                                fill: #fafafa;
+                                                font-family: Muli-Light, Muli;
+                                            }</style>
+                                    </defs>
+                                    <title>Asset 1</title>
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="ServingBoxes">
+                                            <g id="BoxHead1">
+                                                <g id="Circle_" data-name="Circle+">
+                                                    <g id="Shape_3" data-name="Shape 3">
+                                                        <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                                    </g>
+                                                    <g id="_" data-name="+">
+                                                        <text class="cls-2" transform="translate(11.83 41.09)">+</text>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
 
                         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
                             <h3>Institutions & Organizations</h3>
                             <div class="flipper">
-                                <div class="front">
-                                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/institutions.jpg"
-                                         alt="Art Collectors">
-                                </div>
-                                <div class="back">
-                                    Manage all of your artwork collection and assets on our free online portal. Our site
-                                    was designed to incorporate all of the features you need and is simple and easy to
-                                    use for efficient artwork collection management for professional institutions and
-                                    organizations. List artworks for loan or sale through our artwork marketplace.
-                                    Promote your organizations artwork and easily share on social media. Find new
-                                    artwork available to borrow, rent or purchase in our discover art
-                                    marketplace.                             </span>
+                                <div class="content">
+                                    <div class="front">
+                                        <img src="<?php bloginfo('template_url'); ?>/img/frontpage/institutions.jpg"
+                                             alt="Art Collectors">
+                                    </div>
+                                    <div class="back">
+                                        Manage all of your artwork collection and assets on our free online portal. Our
+                                        site
+                                        was designed to incorporate all of the features you need and is simple and easy
+                                        to
+                                        use for efficient artwork collection management for professional institutions
+                                        and
+                                        organizations. List artworks for loan or sale through our artwork marketplace.
+                                        Promote your organizations artwork and easily share on social media. Find new
+                                        artwork available to borrow, rent or purchase in our discover art
+                                        marketplace.                             </span>
+                                    </div>
                                 </div>
 
                             </div>
-                            <span class="fa-stack fa-lg">
-                                      <i class="fa fa-circle fa-stack-2x"></i>
-                                      <i class="fa fa-plus fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                            </span>
+                            <div class="svg-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 57 57">
+                                    <defs>
+                                        <style>.cls-1 {
+                                                fill: #d22329;
+                                            }
+
+                                            .cls-2 {
+                                                font-size: 48px;
+                                                fill: #fafafa;
+                                                font-family: Muli-Light, Muli;
+                                            }</style>
+                                    </defs>
+                                    <title>Asset 1</title>
+                                    <g id="Layer_2" data-name="Layer 2">
+                                        <g id="ServingBoxes">
+                                            <g id="BoxHead1">
+                                                <g id="Circle_" data-name="Circle+">
+                                                    <g id="Shape_3" data-name="Shape 3">
+                                                        <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                                    </g>
+                                                    <g id="_" data-name="+">
+                                                        <text class="cls-2" transform="translate(11.83 41.09)">+</text>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                     <!--                    <div class="col-xs-12 col-sm-6">-->
@@ -380,11 +497,10 @@ get_header('pre'); ?>
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-2 image">
-                <img class="img-responsive img-circle" src="<?php bloginfo('template_url'); ?>/img/frontpage/NancyPic.jpg
-" alt="Nancy Testimony">
+                <img class="img-responsive img-circle" src="<?php bloginfo('template_url'); ?>/img/frontpage/NancyPic.jpg" alt="Nancy Testimony">
             </div>
             <div class="col-sm-12 col-md-8 text text-center">
-                “Easy to use wether you are an artist, collector, gallery or museum. I can finally make direct online
+                “Easy to use whether you are an artist, collector, gallery or museum. I can finally make direct online
                 marketplace sales and increase visibility to my program without paying a fortune. I'm thrilled to now be
                 using art attendant!”
                 <div>-Nancy Zastudil, Art Dealer, Art Collector, Arts Writer</div>
