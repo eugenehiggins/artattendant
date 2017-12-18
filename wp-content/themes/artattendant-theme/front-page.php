@@ -67,7 +67,7 @@ get_header('pre'); ?>
         </div>
         <div class="item text-center">
             <div class="scaling-svg-container">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg gh">
                     <defs>
                         <style>.cls-1 {
                                 fill: #fff;
@@ -96,7 +96,7 @@ get_header('pre'); ?>
                                   d="M45.77,67.19l1.74,6.08A4.86,4.86,0,0,1,38.17,76l-2.51-8.76H27.8l17.86,68.58h100l17.85-68.58Z"/>
                             <circle class="cls-2" cx="68.87" cy="152.72" r="11.58"/>
                             <circle class="cls-2" cx="131.75" cy="152.72" r="11.58"/>
-                            <path class="cls-2"
+                            <path class="cls-3"
                                   d="M44.18,79.07a4.87,4.87,0,0,1-6-3.32L35.66,67,28.84,43.18a4.87,4.87,0,0,1,3.32-6A4.7,4.7,0,0,1,33.49,37a4.88,4.88,0,0,1,4.68,3.52L45.77,67l1.74,6.08A4.86,4.86,0,0,1,44.18,79.07Z"/>
                         </g>
                     </g>
@@ -112,7 +112,7 @@ get_header('pre'); ?>
         <div class="item text-center">
             <div class="scaling-svg-container">
 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg low-cost">
                     <defs>
                         <style>.cls-1, .cls-3 {
                                 fill: #fff;
@@ -135,7 +135,9 @@ get_header('pre'); ?>
                                 stroke: #fff;
                                 stroke-linecap: round;
                                 stroke-linejoin: round;
-                            }</style>
+                            }
+
+                        </style>
                     </defs>
                     <title>Asset 3</title>
                     <g id="Layer_2" data-name="Layer 2">
@@ -189,7 +191,9 @@ get_header('pre'); ?>
                     <div class="col-xs-12 col-sm-6 first-col">
 
                         <div id="artists" class="flip-container audience"
-                             ontouchstart="this.classList.toggle('hover');">
+                             ontouchstart="this.classList.toggle('hover');"
+                             data-aos="fade-zoom-in" data-aos-offset="200" data-aos-easing="ease-in-sine"
+                             data-aos-duration="600">
                             <h3>Artists</h3>
                             <div class="flipper">
                                 <div class="content">
@@ -352,7 +356,8 @@ get_header('pre'); ?>
                             </div>
                         </div>
 
-                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flip-container institutions" ontouchstart="this.classList.toggle('hover');"
+                             data-aos="">
                             <h3>Institutions & Organizations</h3>
                             <div class="flipper">
                                 <div class="content">
@@ -362,15 +367,12 @@ get_header('pre'); ?>
                                     </div>
                                     <div class="back">
                                         Manage all of your artwork collection and assets on our free online portal. Our
-                                        site
-                                        was designed to incorporate all of the features you need and is simple and easy
-                                        to
-                                        use for efficient artwork collection management for professional institutions
-                                        and
-                                        organizations. List artworks for loan or sale through our artwork marketplace.
-                                        Promote your organizations artwork and easily share on social media. Find new
-                                        artwork available to borrow, rent or purchase in our discover art
-                                        marketplace.                             </span>
+                                        site was designed to incorporate all of the features you need and is simple and
+                                        easy to use for efficient artwork collection management for professional
+                                        institutions and organizations. List artworks for loan or sale through our
+                                        artwork marketplace. Promote your organizations artwork and easily share on
+                                        social media. Find new artwork available to borrow, rent or purchase in our
+                                        discover art marketplace.
                                     </div>
                                 </div>
 
@@ -497,7 +499,8 @@ get_header('pre'); ?>
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-2 image">
-                <img class="img-responsive img-circle" src="<?php bloginfo('template_url'); ?>/img/frontpage/NancyPic.jpg" alt="Nancy Testimony">
+                <img class="img-responsive img-circle"
+                     src="<?php bloginfo('template_url'); ?>/img/frontpage/NancyPic.jpg" alt="Nancy Testimony">
             </div>
             <div class="col-sm-12 col-md-8 text text-center">
                 “Easy to use whether you are an artist, collector, gallery or museum. I can finally make direct online

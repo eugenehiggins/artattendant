@@ -11154,6 +11154,16 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .section2 .scaling-svg image {
   width: calc( 30px + 3vw);
 }
+.page-id-102 .section2 .scaling-svg .cls-1 {
+  fill: white;
+}
+.page-id-102 .section2 .scaling-svg .cls-2,
+.page-id-102 .section2 .scaling-svg .cls-3 {
+  fill: #c90e17;
+}
+.page-id-102 .section2 .scaling-svg.low-cost .cls-3 {
+  fill: white;
+}
 .page-id-102 .section2 .row {
   display: -webkit-box;
   display: -ms-flexbox;

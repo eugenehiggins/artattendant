@@ -114,6 +114,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 
 .page-id-102 {
   
+  .aos-animate {
+    //transform: translate(120px, 50%);
+  }
+  
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Muli';
   }
@@ -214,6 +218,15 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       image {
         width: ~"calc( 30px + 3vw)";
         //transform: translateX(33%);
+      }
+      .cls-1 {
+        fill: white;
+      }
+      .cls-2, .cls-3 {
+        fill: @artattend-red;
+      }
+      &.low-cost .cls-3 {
+        fill: white;
       }
     }
     

@@ -217,6 +217,9 @@ add_action('wp_head', 'my_custom_js');
 
 function frontpage_js() {
     wp_enqueue_script('frontpage-scripts', (get_template_directory_uri()."/js/frontpage-scripts.js"),array('jquery'),filemtime( get_stylesheet_directory().'/js/frontpage-scripts.js'),true);
+    wp_enqueue_style( 'aos-css', (get_template_directory_uri()."/node_modules/aos/dist/aos.css"), false );
+
+    wp_enqueue_script('aos-script', (get_template_directory_uri()."/node_modules/aos/dist/aos.js"),array(),2.2,true);
 }
 add_action( 'wp_enqueue_scripts' , 'frontpage_js');
 

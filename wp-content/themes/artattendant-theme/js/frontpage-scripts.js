@@ -1,5 +1,30 @@
 jQuery(document).ready(function($){
 
+    AOS.init();
+
+    $(window).scroll(function(){
+        var windowH = $(window).height();
+        var lastPosition =;
+
+        if ( $(".institutions").length > 0 ){
+            var originalPosition = $(".institutions").offset();
+            if ( ($(this).scrollTop() + windowH) > originalPosition.top) {
+                // var travel = ($(this).scrollTop() + windowH) - originalPosition.top;
+                console.log()
+                $(".institutions").css({
+                    position: 'relative',
+                    left: 5
+                }, 500, "linear", function() {
+                    left: 0
+                });
+            }
+        }
+        $(".aos-animate").css({
+            // 'transform': "translate(50px, 100px)"
+        }, 500, "linear", function() {
+            left: 0
+        });
+    })
 
 
     // var handlerIn = function(e){

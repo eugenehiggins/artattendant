@@ -1,0 +1,32 @@
+{
+  "name": "artattendant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eugenehiggins/artattendent.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eugenehiggins/artattendent/issues"
+  },
+  "homepage": "https://github.com/eugenehiggins/artattendent#readme",
+  "devDependencies": {
+    "autoprefixer": "^7.1.6",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2",
+    "gulp-postcss": "^7.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-util": "^3.0.8",
+    "path": "^0.12.7"
+  },
+  "dependencies": {
+    "aos": "^2.2.0"
+  }
+}
