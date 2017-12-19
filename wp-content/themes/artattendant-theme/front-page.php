@@ -462,7 +462,7 @@ get_header('pre'); ?>
                         <ol class="second-list" start="6">
                             <li>Community
                                 <div>Explore, discover and connect with other artists, collectors and dealers
-                                    worldwide/div>
+                                    worldwide</div>
                             </li>
                             <li>Access
                                 <div>Access your collection from any device, art attendant makes mobile art sales easy
