@@ -7,12 +7,9 @@ get_header('pre'); ?>
             <div class="landing-logo"><?php echo anagramLoadFile(get_template_directory_uri() . "/img/artattendant-logo.svg"); ?></div>
             <div class="landing-intro-text">
                 <div class="button-block text-center">
-                    <a href="<?php echo get_the_permalink(85); ?>" class="btn btn-default btn-aqua btn-lg">Discover
-                        Art</a>
-                    <a href="<?php echo get_the_permalink(74); ?>" class="btn btn-default btn-aqua btn-lg">Organize
-                        Art</a>
-                    <a href="<?php echo get_the_permalink(20); ?>" class="btn btn-default btn-aqua btn-lg">Archive
-                        Services</a>
+                    <a href="/discover" class="btn btn-default btn-aqua btn-lg">Discover Art</a>
+                    <a href="/collection" class="btn btn-default btn-aqua btn-lg">Organize Art</a>
+                    <a href="#" class="btn btn-default btn-aqua btn-lg">Archive Services</a>
                 </div>
                 <div class="text">
                     <h1>Free Unlimited Art Archive</h1>
@@ -29,7 +26,7 @@ get_header('pre'); ?>
 
             <div class="scaling-svg-container">
 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
+                <a href="/collection"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg">
                     <defs>
                         <style>.cls-1 {
                                 fill: #fff;
@@ -55,18 +52,19 @@ get_header('pre'); ?>
                                   d="M37.92,92.87a21.83,21.83,0,0,1-3.59-11.18c-.14-8,4.29-14.18,15-14.34,10.06-.14,17.56,9.8,17.56,9.8s-3.87-38,43.29-38c48.28,0,46.86,57.29,46.86,57.29s21.23-.7,22.39,21.8c.86,16.81-10.4,23.95-21.09,24.79-9,.71-36,0-36,0v7.77h-8.14V114.71h16.17L98.19,78.57,66.06,114.71h16v36.14h-8v-7.77s-22.78,1.05-30.27,0c-8.89-1.25-25.82-7.39-25.95-24.79C17.79,106.66,24.71,97.43,37.92,92.87Z"/>
                         </g>
                     </g>
-                </svg>
+                </svg></a>
 
             </div>
             <h3>
                 Upload and organize unlimited art for free
             </h3>
             <span>
-            We offer a free, secure, easy-to-use, cloud-based <a href="<?php echo get_the_permalink(85); ?>">artwork inventory database</a> to document, manage and track art collections. Our members can choose to make their art collection public or keep it private. Collection management, insurance valuation, estate planning, publishing archive records and social sharing are all incorporated into our intuitive online platform.
+            We offer a free, secure, easy-to-use, cloud-based <a href="/collection">artwork inventory database</a> to document, manage and track art collections. Our members can choose to make their art collection public or keep it private. Collection management, insurance valuation, estate planning, publishing archive records and social sharing are all incorporated into our intuitive online platform.
         </span>
         </div>
         <div class="item text-center">
             <div class="scaling-svg-container">
+                <a href="/discover">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg gh">
                     <defs>
                         <style>.cls-1 {
@@ -100,13 +98,13 @@ get_header('pre'); ?>
                                   d="M44.18,79.07a4.87,4.87,0,0,1-6-3.32L35.66,67,28.84,43.18a4.87,4.87,0,0,1,3.32-6A4.7,4.7,0,0,1,33.49,37a4.88,4.88,0,0,1,4.68,3.52L45.77,67l1.74,6.08A4.86,4.86,0,0,1,44.18,79.07Z"/>
                         </g>
                     </g>
-                </svg>
+                </svg></a>
             </div>
             <h3>
                 Buy, sell, rent or loan art on our marketplace
             </h3>
             <span>
-            Promote artwork for sale, rent or loan in our public online art marketplace. Buy art directly from other artAttendant community members. artAttendant is one of the most affordable ways to sell artwork online as we only charge a 10% commission and 3% credit card processing fees. We have no up-front costs, and no membership fees for displaying artwork for sale, rent or loan.
+            Promote artwork for sale, rent or loan in our public <a href="/discover">online art marketplace</a>. Buy art directly from other artAttendant community members. artAttendant is one of the most affordable ways to sell artwork online as we only charge a 10% commission and 3% credit card processing fees. We have no up-front costs, and no membership fees for displaying artwork for sale, rent or loan.
         </span>
         </div>
         <div class="item text-center">
@@ -157,7 +155,7 @@ get_header('pre'); ?>
                 Low-cost professional art archive services
             </h3>
             <span>
-            Archived art collections have greater value than undocumented collections. Art Attendant was developed by professional art dealer and archivist with over 25 years of experience. If your collection needs help and more personalized service, our art archive services start as low as $30/hour. Contact us to discuss your collection and develop a customized affordable solution.
+            Archived art collections have greater value than undocumented collections. Art Attendant was developed by professional art dealer and archivist with over 25 years of experience. If your collection needs help and more personalized service, our <a href="#">art archive services</a> start as low as $30/hour. Contact us to discuss your collection and develop a customized affordable solution.
         </span>
         </div>
     </div>
@@ -455,7 +453,7 @@ get_header('pre'); ?>
 
                         </ol>
                         <div class="col-md-4 text-center">
-                            <button class="btn btn-default btn-aqua btn-lg">Join Now</button>
+                            <a href="/join" class="btn btn-default btn-aqua btn-lg">Join Now</a>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6">

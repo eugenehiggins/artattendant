@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
 
     $(window).scroll(function(){
         var windowH = $(window).height();
-        var lastPosition =;
+        // var lastPosition =;
 
         if ( $(".institutions").length > 0 ){
             var originalPosition = $(".institutions").offset();
@@ -25,6 +25,8 @@ jQuery(document).ready(function($){
             left: 0
         });
     })
+
+
 
 
     // var handlerIn = function(e){

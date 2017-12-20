@@ -41,19 +41,19 @@
 <!--                    </div>-->
                 </div>
                 <div class="contact">
-                    <div>505.321.3182 | connect@artAttendant.com</div>
+                    <div>505.321.3182 | <a href="mailto:connect@artAttendant.com">connect@artAttendant.com</a></div>
                     <div>2017 artAttendant. All rights reserved</div>
                 </div>
                 <div class="social">
 
-                    <span class="fa-stack fa-lg">
+                    <a href="https://www.facebook.com/artAttendant/"><span class="fa-stack fa-lg">
                       <i class="fa fa-circle fa-stack-2x"></i>
                       <i class="fa fa-facebook fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                    </span>
-                    <span class="fa-stack fa-lg">
+                    </span></a>
+                    <a href="https://www.instagram.com/artattendant/"><span class="fa-stack fa-lg">
                       <i class="fa fa-circle fa-stack-2x"></i>
                       <i class="fa fa-instagram fa-stack-1x fa-inverse" aria-hidden="true"></i>
-                    </span>
+                    </span></a>
 
                 </div>
             </div>

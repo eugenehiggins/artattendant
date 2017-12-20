@@ -11359,6 +11359,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .section5.testimonial .container .row .text {
   font-size: 24px;
   font-weight: 400;
+  line-height: 38px;
 }
 .page-id-102 .section5.testimonial .container .row .text div {
   font-size: 18px;
@@ -11988,6 +11989,9 @@ ul.links li {
 }
 #footer .wrapper .contact {
   text-align: center;
+}
+#footer .wrapper .contact a {
+  color: white;
 }
 #footer .wrapper .social {
   text-align: right;
