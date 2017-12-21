@@ -1,32 +1,44 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(function ($) {
 
-    AOS.init();
+    // AOS.init();
 
-    $(window).scroll(function(){
+    $('.section3 .box').hover(function (e) {
+            $(this).find('img').hide("slide", {direction: "up"}, 500)
+            //e.stopPropagation();
+
+            console.log('mouse enter')
+        },
+        function () {
+            $(this).find('img').show("slide", {direction: "up"}, 500);
+            console.log('mouse leave')
+
+        }
+    )
+
+
+    $(window).scroll(function () {
         var windowH = $(window).height();
         // var lastPosition =;
 
-        if ( $(".institutions").length > 0 ){
+        if ($(".institutions").length > 0) {
             var originalPosition = $(".institutions").offset();
-            if ( ($(this).scrollTop() + windowH) > originalPosition.top) {
+            if (($(this).scrollTop() + windowH) > originalPosition.top) {
                 // var travel = ($(this).scrollTop() + windowH) - originalPosition.top;
                 console.log()
                 $(".institutions").css({
                     position: 'relative',
                     left: 5
-                }, 500, "linear", function() {
+                }, 500, "linear", function () {
                     left: 0
                 });
             }
         }
         $(".aos-animate").css({
             // 'transform': "translate(50px, 100px)"
-        }, 500, "linear", function() {
+        }, 500, "linear", function () {
             left: 0
         });
     })
-
-
 
 
     // var handlerIn = function(e){

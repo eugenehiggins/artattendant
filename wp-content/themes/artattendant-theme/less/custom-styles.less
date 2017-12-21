@@ -274,6 +274,35 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       padding-bottom: 120px;
     }
     
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 8vw;
+      .box {
+        width: 50%;
+        min-height: 420px;
+        > div {
+          position: relative;
+          max-height: 100%;
+          background-color: @artattend-aqua;
+          span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            padding: 30px;
+          }
+          img {
+            position: relative;
+            width: 100%;
+            height: auto;
+            z-index: 10;
+          }
+        }
+      }
+      
+    }
+    
     &:after {
       border-bottom: 30vh solid #e1e3e6;
       border-right: 100vw solid transparent;
@@ -409,46 +438,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
         }
       }
     }
-    //ol {
-    //  //counter-reset: li;
-    //  list-style: none;
-    //  list-style-type: none;
-    //  padding: 0;
-    //
-    //  &.first-list {
-    //    counter-reset: step-counter;
-    //
-    //  }
-    //  &.second-list {
-    //    counter-reset: step-counter 5;
-    //  }
-    //  &.first-list,
-    //  &.second-list {
-    //    li:before {
-    //      content: counter(step-counter);
-    //      counter-increment: step-counter;
-    //    }
-    //  }
-    //  li {
-    //    font-weight: 700;
-    //    margin-bottom: 15px;
-    //    &:before {
-    //      //content: counter(step-counter);
-    //      //counter-increment: step-counter;
-    //      margin-right: 10px;
-    //      font-size: 80%;
-    //      background-color: @artattend-red;
-    //      color: white;
-    //      font-weight: bold;
-    //      padding: 4px 8px;
-    //      border-radius: 20px;
-    //    }
-    //    div {
-    //      font-weight: 400;
-    //      margin-left: 33px;
-    //    }
-    //  }
-    //}
+
   }
   
   .section5.testimonial {

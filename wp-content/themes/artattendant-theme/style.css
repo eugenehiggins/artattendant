@@ -11221,6 +11221,36 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     padding-bottom: 120px;
   }
 }
+.page-id-102 .section3 .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 8vw;
+}
+.page-id-102 .section3 .row .box {
+  width: 50%;
+  min-height: 420px;
+}
+.page-id-102 .section3 .row .box > div {
+  position: relative;
+  max-height: 100%;
+  background-color: #b9e2dd;
+}
+.page-id-102 .section3 .row .box > div span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  padding: 30px;
+}
+.page-id-102 .section3 .row .box > div img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  z-index: 10;
+}
 .page-id-102 .section3:after {
   border-bottom: 30vh solid #e1e3e6;
   border-right: 100vw solid transparent;
