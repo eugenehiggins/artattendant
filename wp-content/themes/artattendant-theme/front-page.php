@@ -168,9 +168,13 @@ get_header('pre'); ?>
 
 <section class="container-fluid section3">
     <div class="container">
+        <header>
+            <h2>Serving the Arts Community</h2>
+            <strong>We believe in connecting the vibrant and diverse worldwide arts community.</strong>
+        </header>
         <div class="row">
             <div class="box box1">
-                <h3>Serving the Arts Community</h3>
+                <h3>Artists</h3>
                 <div>
 					<span>
                         Upload, organize, promote and sell your artwork on artAttendant. Get organized

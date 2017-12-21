@@ -3,13 +3,13 @@ jQuery(document).ready(function ($) {
     // AOS.init();
 
     $('.section3 .box').hover(function (e) {
-            $(this).find('img').hide("slide", {direction: "up"}, 500)
+            $(this).find('img').hide("slide", {direction: "up"}, 700)
             //e.stopPropagation();
 
             console.log('mouse enter')
         },
         function () {
-            $(this).find('img').show("slide", {direction: "up"}, 500);
+            $(this).find('img').show("slide", {direction: "up"}, 700);
             console.log('mouse leave')
 
         }

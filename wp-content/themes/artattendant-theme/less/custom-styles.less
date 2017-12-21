@@ -174,7 +174,6 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
         font-family: 'Muli';
         padding-top: 25px;
         font-weight: 400;
-        
       }
       strong {
         font-size: 14px;
@@ -182,7 +181,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       @media screen and (min-width: @screen-sm-min) {
         margin: 60px auto;
         h1 {
-          padding-top: 60px;
+          padding-top: 30px;
         }
       }
     }
@@ -273,11 +272,23 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     @media screen and (min-width: @screen-md) {
       padding-bottom: 120px;
     }
-    
+    header {
+      //{
+      text-align: center;
+      margin: 50px 0 40px;
+      h2 {
+        text-align: center;
+        font-size: 40px;
+        font-family: 'Muli';
+        font-weight: 600;
+        margin: 0 0 30px;
+      }
+    //}
+    }
     .row {
       display: flex;
       flex-wrap: wrap;
-      margin-bottom: 8vw;
+      margin-bottom: 5vw;
       .box {
         width: 50%;
         min-height: 420px;
@@ -299,6 +310,9 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
             z-index: 10;
           }
         }
+        &.box2, &.box4 {
+          margin-top: 80px;
+        }
       }
       
     }
@@ -315,13 +329,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     * {
       color: @artattend-dark-gray;
     }
-    h2 {
-      text-align: center;
-      font-size: 40px;
-      font-family: 'Muli';
-      font-weight: 600;
-      margin: 44px 0;
-    }
+    
     h3 {
       font-size: 24px;
       margin-bottom: 0;
@@ -376,6 +384,9 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       font-weight: 700;
       font-size: 22px;
       width: 30%;
+      &:hover {
+      
+      }
     }
     ol {
       counter-reset: li; /* Initiate a counter */

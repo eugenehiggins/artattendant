@@ -11125,7 +11125,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     margin: 60px auto;
   }
   .page-id-102 .landing-intro-text div.text h1 {
-    padding-top: 60px;
+    padding-top: 30px;
   }
 }
 .page-id-102 .section2 {
@@ -11221,13 +11221,24 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     padding-bottom: 120px;
   }
 }
+.page-id-102 .section3 header {
+  text-align: center;
+  margin: 50px 0 40px;
+}
+.page-id-102 .section3 header h2 {
+  text-align: center;
+  font-size: 40px;
+  font-family: 'Muli';
+  font-weight: 600;
+  margin: 0 0 30px;
+}
 .page-id-102 .section3 .row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-bottom: 8vw;
+  margin-bottom: 5vw;
 }
 .page-id-102 .section3 .row .box {
   width: 50%;
@@ -11251,6 +11262,10 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   height: auto;
   z-index: 10;
 }
+.page-id-102 .section3 .row .box.box2,
+.page-id-102 .section3 .row .box.box4 {
+  margin-top: 80px;
+}
 .page-id-102 .section3:after {
   border-bottom: 30vh solid #e1e3e6;
   border-right: 100vw solid transparent;
@@ -11261,13 +11276,6 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 }
 .page-id-102 .section3 * {
   color: #414042;
-}
-.page-id-102 .section3 h2 {
-  text-align: center;
-  font-size: 40px;
-  font-family: 'Muli';
-  font-weight: 600;
-  margin: 44px 0;
 }
 .page-id-102 .section3 h3 {
   font-size: 24px;
