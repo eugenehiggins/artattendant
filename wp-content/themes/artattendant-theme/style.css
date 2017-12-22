@@ -11118,7 +11118,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   font-weight: 400;
 }
 .page-id-102 .landing-intro-text div.text strong {
-  font-size: 14px;
+  font-size: 16px;
 }
 @media screen and (min-width: 768px) {
   .page-id-102 .landing-intro-text div.text {
@@ -11241,8 +11241,13 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   margin-bottom: 5vw;
 }
 .page-id-102 .section3 .row .box {
-  width: 50%;
+  width: 90%;
   min-height: 420px;
+}
+@media screen and (min-width: 768px) {
+  .page-id-102 .section3 .row .box {
+    width: 50%;
+  }
 }
 .page-id-102 .section3 .row .box > div {
   position: relative;
@@ -11330,6 +11335,16 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   font-weight: 700;
   font-size: 22px;
   width: 30%;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  -webkit-transition: -webkit-box-shadow 0.3s ease-in-out;
+  transition: -webkit-box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
+}
+.page-id-102 .section4 .btn-aqua:hover {
+  color: white;
+  background-color: #c90e17;
 }
 .page-id-102 .section4 ol {
   counter-reset: li;
@@ -12007,6 +12022,9 @@ ul.links li {
   font-weight: 700;
   font-size: 18px;
   color: white;
+}
+#footer #menu-footer.nav > li > a:hover {
+  color: #b9e2dd;
 }
 #footer .wrapper {
   display: -webkit-box;

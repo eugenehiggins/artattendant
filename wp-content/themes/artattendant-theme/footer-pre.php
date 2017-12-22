@@ -46,11 +46,11 @@
                 </div>
                 <div class="social">
 
-                    <a href="https://www.facebook.com/artAttendant/"><span class="fa-stack fa-lg">
+                    <a href="https://www.facebook.com/artAttendant/" target="_blank"><span class="fa-stack fa-lg">
                       <i class="fa fa-circle fa-stack-2x"></i>
                       <i class="fa fa-facebook fa-stack-1x fa-inverse" aria-hidden="true"></i>
                     </span></a>
-                    <a href="https://www.instagram.com/artattendant/"><span class="fa-stack fa-lg">
+                    <a href="https://www.instagram.com/artattendant/" target="_blank"><span class="fa-stack fa-lg">
                       <i class="fa fa-circle fa-stack-2x"></i>
                       <i class="fa fa-instagram fa-stack-1x fa-inverse" aria-hidden="true"></i>
                     </span></a>
