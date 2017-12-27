@@ -9,11 +9,11 @@ get_header('pre'); ?>
                 <div class="button-block text-center">
                     <a href="/discover" class="btn btn-default btn-aqua btn-lg">Discover Art</a>
                     <a href="/collection" class="btn btn-default btn-aqua btn-lg">Organize Art</a>
-                    <a href="#" class="btn btn-default btn-aqua btn-lg">Archive Services</a>
+                    <a href="/archive-services" class="btn btn-default btn-aqua btn-lg">Archive Services</a>
                 </div>
                 <div class="text">
                     <h1>Free Unlimited Art Archive</h1>
-                    <strong>We believe in connecting the vibrant and diverse worldwide arts community.</strong>
+                    <strong>Connect with us at the <a href="https://www.laartshow.com/" target="_blank">LA Art Show</a>: Modern & Contemporary  • January 11 - 14 • Los Angeles Convention Center</strong>
                 </div>
             </div><!-- .entry-content -->
         </header><!-- close .*-inner (main-content or sidebar, depending if sidebar is used) -->
@@ -159,7 +159,7 @@ get_header('pre'); ?>
             </h3>
             <span>
             Archived art collections have greater value than undocumented collections. Art Attendant was developed by professional art dealer and archivist with over 25 years of experience. If your collection needs help and more personalized service, our <a
-                        href="#">art archive services</a> start as low as $30/hour. Contact us to discuss your collection and develop a customized affordable solution.
+                        href="/archive-services" target="_blank">art archive services</a> start as low as $30/hour. Contact us to discuss your collection and develop a customized affordable solution.
         </span>
         </div>
     </div>

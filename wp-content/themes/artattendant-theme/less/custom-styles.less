@@ -112,7 +112,15 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
 }
 
+article#post-74 {
+  #wrapper {
+    height: 100vh;
+  }
+}
+
+// frontpage styles
 .page-id-102 {
+  font-size: 16px;
   
   .aos-animate {
     //transform: translate(120px, 50%);
@@ -256,7 +264,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
         }
         > span {
           font-weight: 400;
-          font-size: 14px;
+          //font-size: 14px;
           a {
             color: @artattend-red;
           }
@@ -298,13 +306,15 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
         > div {
           position: relative;
           max-height: 100%;
-          background-color: @artattend-aqua;
+          //background-color: @artattend-aqua;
           span {
             position: absolute;
             top: 0;
             left: 0;
             z-index: 0;
             padding: 30px;
+            min-height: 369px;
+            background-color: @artattend-aqua;
           }
           img {
             position: relative;
@@ -398,7 +408,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
       counter-reset: li; /* Initiate a counter */
       list-style: none; /* Remove default numbering */
       *list-style: decimal; /* Keep using default numbering for IE6/7 */
-      font: 14px 'Muli';
+      font-family: 'Muli';
       padding: 0 35px 0 0;
       margin-bottom: 4em;
       text-shadow: 0 1px 0 rgba(255,255,255,.5);
@@ -551,7 +561,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
     background-color: @artattend-aqua;
     transform: rotateY(180deg);
     padding: 30px;
-    font-size: 14px;
+    //font-size: 14px;
     font-weight: 700;
   }
 }
@@ -2005,7 +2015,7 @@ body {
     padding-bottom: 12px;
   }
 }
-
+*/
 #menu-toggle {
   z-index: 200;
   width: 30px;

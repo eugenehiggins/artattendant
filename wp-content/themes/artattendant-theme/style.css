@@ -11025,7 +11025,11 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
           box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
 }
+article#post-74 #wrapper {
+  height: 100vh;
+}
 .page-id-102 {
+  font-size: 16px;
   /* entire container, keeps perspective */
   /* flip the pane when hovered */
   /* flip speed goes here */
@@ -11206,7 +11210,6 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 }
 .page-id-102 .section2 .row .item > span {
   font-weight: 400;
-  font-size: 14px;
 }
 .page-id-102 .section2 .row .item > span a {
   color: #c90e17;
@@ -11252,7 +11255,6 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
 .page-id-102 .section3 .row .box > div {
   position: relative;
   max-height: 100%;
-  background-color: #b9e2dd;
 }
 .page-id-102 .section3 .row .box > div span {
   position: absolute;
@@ -11260,6 +11262,8 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   left: 0;
   z-index: 0;
   padding: 30px;
+  min-height: 369px;
+  background-color: #b9e2dd;
 }
 .page-id-102 .section3 .row .box > div img {
   position: relative;
@@ -11353,7 +11357,7 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   /* Remove default numbering */
   *list-style: decimal;
   /* Keep using default numbering for IE6/7 */
-  font: 14px 'Muli';
+  font-family: 'Muli';
   padding: 0 35px 0 0;
   margin-bottom: 4em;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -11491,7 +11495,6 @@ table#edd_purchase_receipt_products .edd_purchase_receipt_product_name {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
   padding: 30px;
-  font-size: 14px;
   font-weight: 700;
 }
 .btn-aqua.btn:hover {
@@ -12702,11 +12705,12 @@ body {
     padding-bottom: 12px;
   }
 }
-
+*/
 #menu-toggle {
   z-index: 200;
   width: 30px;
-  touch-action: manipulation;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
   cursor: pointer;
   border: 1px solid transparent;
   padding: 6px;
@@ -12727,72 +12731,58 @@ body {
   top: 4px;
   position: relative;
 }
-
 @media (min-width: 768px) {
   #wrapper {
     padding-left: 300px;
   }
-  
   .page-messages #menu-footer,
   .page-collection #menu-footer {
     margin-left: 300px;
   }
-  
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
   }
-  
   #wrapper.toggled {
     padding-left: 0;
   }
-  
   #sidebar-wrapper {
     width: 300px;
   }
-  
   #wrapper.toggled #sidebar-wrapper {
     width: 0;
   }
-  
   #fes-vendor-dashboard {
     padding: 20px;
     position: relative;
   }
-  
   #menu-toggle {
     display: none;
   }
-  
   #wrapper.toggled #fes-vendor-dashboard {
     position: relative;
     margin-right: 0;
   }
 }
-
 .jssocials-shares {
   border-top: 1px solid #e5e5e5;
   padding: 0 10px 4px;
 }
-
 .jssocials-shares * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
-
 .jssocials-share {
   display: inline-block;
   vertical-align: top;
   margin: 0.3em;
 }
-
 .jssocials-share:first-child {
   margin-left: 0;
 }
-
 .jssocials-share:last-child {
   margin-right: 0;
 }
-
 /*
 	.jssocials-share-logo {
   width: 1em;

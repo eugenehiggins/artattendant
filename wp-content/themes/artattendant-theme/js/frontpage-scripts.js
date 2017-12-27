@@ -3,7 +3,8 @@ jQuery(document).ready(function ($) {
     // AOS.init();
 
     $('.section3 .box').hover(function (e) {
-            $(this).find('img').hide("slide", {direction: "up"}, 700)
+            $(this).find('img').hide("slide", {direction: "up"}, 700);
+            // $(this).find('div').css("background-color", "#b9e2dd;")
             //e.stopPropagation();
 
             console.log('mouse enter')
