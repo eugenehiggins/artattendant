@@ -4,14 +4,12 @@ jQuery(document).ready(function ($) {
 
     $('.section3 .box').hover(function (e) {
             $(this).find('img').hide("slide", {direction: "up"}, 700);
-            // $(this).find('div').css("background-color", "#b9e2dd;")
-            //e.stopPropagation();
 
-            console.log('mouse enter')
+            // console.log('mouse enter')
         },
         function () {
             $(this).find('img').show("slide", {direction: "up"}, 700);
-            console.log('mouse leave')
+            // console.log('mouse leave')
 
         }
     )

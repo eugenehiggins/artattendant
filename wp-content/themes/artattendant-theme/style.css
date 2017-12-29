@@ -11245,18 +11245,43 @@ article#post-74 #wrapper {
 }
 .page-id-102 .section3 .row .box {
   width: 90%;
-  min-height: 420px;
+  min-height: 383px;
+  position: relative;
 }
 @media screen and (min-width: 768px) {
   .page-id-102 .section3 .row .box {
     width: 50%;
   }
 }
-.page-id-102 .section3 .row .box > div {
+.page-id-102 .section3 .row .box .svg-container {
+  width: 55px;
+  position: absolute;
+  right: 14px;
+  top: 20px;
+  z-index: 20;
+}
+.page-id-102 .section3 .row .box .svg-container svg {
+  position: absolute;
+  -webkit-transition: opacity 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
+}
+.page-id-102 .section3 .row .box .svg-container svg .cls-2 {
+  stroke-width: 0px;
+}
+.page-id-102 .section3 .row .box .svg-container svg.bottom circle.cls-1 {
+  fill: #88B0AB;
+  stroke-width: 0;
+}
+.page-id-102 .section3 .row .box s div.content {
   position: relative;
   max-height: 100%;
+  min-height: 368px;
+  overflow: hidden;
 }
-.page-id-102 .section3 .row .box > div span {
+.page-id-102 .section3 .row .box s div.content:hover + .svg-container .top {
+  opacity: 0;
+}
+.page-id-102 .section3 .row .box s div.content span.text {
   position: absolute;
   top: 0;
   left: 0;
@@ -11265,7 +11290,7 @@ article#post-74 #wrapper {
   min-height: 369px;
   background-color: #b9e2dd;
 }
-.page-id-102 .section3 .row .box > div img {
+.page-id-102 .section3 .row .box s div.content img {
   position: relative;
   width: 100%;
   height: auto;

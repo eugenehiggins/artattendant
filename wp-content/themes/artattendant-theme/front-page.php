@@ -13,7 +13,8 @@ get_header('pre'); ?>
                 </div>
                 <div class="text">
                     <h1>Free Unlimited Art Archive</h1>
-                    <strong>Connect with us at the <a href="https://www.laartshow.com/" target="_blank">LA Art Show</a>: Modern & Contemporary  • January 11 - 14 • Los Angeles Convention Center</strong>
+                    <strong>Connect with us at the <a href="https://www.laartshow.com/" target="_blank">LA Art Show</a>:
+                        Modern & Contemporary • January 11 - 14 • Los Angeles Convention Center</strong>
                 </div>
             </div><!-- .entry-content -->
         </header><!-- close .*-inner (main-content or sidebar, depending if sidebar is used) -->
@@ -175,8 +176,9 @@ get_header('pre'); ?>
         <div class="row">
             <div class="box box1">
                 <h3>Artists</h3>
-                <div>
-					<span>
+                <div class="content">
+
+                    <span class="text">
                         Upload, organize, promote and sell your artwork on artAttendant. Get organized
                         today
                         and be rewarded with a free home for your digital archive. We only charge 10%
@@ -185,13 +187,44 @@ get_header('pre'); ?>
                         monthly subscription costs. Our site is intuitive and does not have complicated
                         features or cumbersome interfaces.
                     </span>
-                    <img class="serving" src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg" alt="Artists">
+                    <img class="serving" src="<?php bloginfo('template_url'); ?>/img/frontpage/artists.jpg"
+                         alt="Artists">
+                </div>
+                <div class="cf svg-container">
+                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
+                    <svg class="top" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
+                        <defs>
+                            <style>.cls-1 {
+                                    fill: #d22329;
+                                }
+                                .cls-2 {
+                                    font-size: 48px;
+                                    fill: #fafafa;
+                                    font-family: Muli-Light, Muli;
+                                }</style>
+                        </defs>
+                        <title>Asset 1</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="ServingBoxes">
+                                <g id="BoxHead1">
+                                    <g id="Circle_" data-name="Circle+">
+                                        <g id="Shape_3" data-name="Shape 3">
+                                            <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                        </g>
+                                        <g id="_" data-name="+">
+                                            <text class="cls-2" transform="translate(11.83 41.09)">+</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                 </div>
             </div>
             <div class="box box2">
                 <h3>Art Collectors</h3>
                 <div>
-					<span>
+					<span class="text">
 						Upload and manage multiple artists and collections in our intuitive online
                         database.
                         List artwork for sale, rent or loan and connect with a wider community through
@@ -208,7 +241,7 @@ get_header('pre'); ?>
             <div class="box box3">
                 <h3>Galleries & Artists</h3>
                 <div>
-					<span>
+					<span class="text">
 						Organize, archive and manage your collection in our secure and private online
                                         database. Collectors can opt to make your collection visible to the public in or
                                         simply kept private in our cloud-based personal database. artAttendant is the
@@ -223,7 +256,7 @@ get_header('pre'); ?>
             <div class="box box4">
                 <h3>Institutions & Organizations</h3>
                 <div>
-					<span>
+					<span class="text">
 						Manage all of your artwork collection and assets on our free online portal. Our
                                         site was designed to incorporate all of the features you need and is simple and
                                         easy to use for efficient artwork collection management for professional

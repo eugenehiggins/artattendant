@@ -3,6 +3,7 @@
 @artattend-gray: #757777;
 @artattend-red: #c90e17;
 @artattend-aqua: #b9e2dd;
+@artattend-dk-aqua: #88B0AB;
 
 
 .aspect-ratio(@width, @height) {
@@ -299,15 +300,43 @@ article#post-74 {
       margin-bottom: 5vw;
       .box {
         width: 90%;
-        min-height: 420px;
+        min-height: 383px;
+        position: relative;
         @media screen and (min-width: @screen-sm-min) {
           width: 50%;
         }
-        > div {
+        .svg-container {
+          width: 55px;
+          position: absolute;
+          right: 14px;
+          top: 20px;
+          z-index: 20;
+          svg {
+            position: absolute;
+            transition: opacity 150ms ease-in-out;
+
+            .cls-2 {
+              stroke-width: 0px;
+            }
+            &.bottom {
+              circle.cls-1 {
+                fill: @artattend-dk-aqua;
+                stroke-width: 0;
+              }
+            }
+          }
+        }
+s
+        div.content {
           position: relative;
           max-height: 100%;
-          //background-color: @artattend-aqua;
-          span {
+          min-height: 368px;
+          overflow: hidden;
+          &:hover + .svg-container .top {
+            opacity: 0;
+          }
+
+          span.text {
             position: absolute;
             top: 0;
             left: 0;
@@ -323,6 +352,9 @@ article#post-74 {
             z-index: 10;
           }
         }
+        //div.content:hover ~ .svg-container {
+        //  display: none;
+        //}
         &.box2, &.box4 {
           margin-top: 80px;
         }
