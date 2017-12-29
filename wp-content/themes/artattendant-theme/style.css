@@ -11210,6 +11210,7 @@ article#post-74 #wrapper {
 }
 .page-id-102 .section2 .row .item > span {
   font-weight: 400;
+  line-height: 28px;
 }
 .page-id-102 .section2 .row .item > span a {
   color: #c90e17;
@@ -11289,6 +11290,7 @@ article#post-74 #wrapper {
   padding: 30px;
   min-height: 369px;
   background-color: #b9e2dd;
+  line-height: 28px;
 }
 .page-id-102 .section3 .row .box div.content img {
   position: relative;
@@ -11426,7 +11428,8 @@ article#post-74 #wrapper {
 }
 .page-id-102 .section4 ol li div {
   font-weight: 100;
-  margin-top: 15px;
+  margin-top: 5px;
+  line-height: 28px;
 }
 .page-id-102 .section5.testimonial {
   background-color: #b9e2dd;
