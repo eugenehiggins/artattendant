@@ -223,7 +223,7 @@ get_header('pre'); ?>
             </div>
             <div class="box box2">
                 <h3>Art Collectors</h3>
-                <div>
+                <div class="content">
 					<span class="text">
 						Upload and manage multiple artists and collections in our intuitive online
                         database.
@@ -237,10 +237,40 @@ get_header('pre'); ?>
 					</span>
                     <img src="<?php bloginfo('template_url'); ?>/img/frontpage/galleries.jpg" alt="Art Collectors">
                 </div>
+                <div class="cf svg-container">
+                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
+                    <svg class="top" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
+                        <defs>
+                            <style>.cls-1 {
+                                    fill: #d22329;
+                                }
+                                .cls-2 {
+                                    font-size: 48px;
+                                    fill: #fafafa;
+                                    font-family: Muli-Light, Muli;
+                                }</style>
+                        </defs>
+                        <title>Asset 1</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="ServingBoxes">
+                                <g id="BoxHead1">
+                                    <g id="Circle_" data-name="Circle+">
+                                        <g id="Shape_3" data-name="Shape 3">
+                                            <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                        </g>
+                                        <g id="_" data-name="+">
+                                            <text class="cls-2" transform="translate(11.83 41.09)">+</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
             </div>
             <div class="box box3">
                 <h3>Galleries & Artists</h3>
-                <div>
+                <div class="content">
 					<span class="text">
 						Organize, archive and manage your collection in our secure and private online
                                         database. Collectors can opt to make your collection visible to the public in or
@@ -252,10 +282,40 @@ get_header('pre'); ?>
 					</span>
                     <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg" alt="Art Collectors">
                 </div>
+                <div class="cf svg-container">
+                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
+                    <svg class="top" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
+                        <defs>
+                            <style>.cls-1 {
+                                    fill: #d22329;
+                                }
+                                .cls-2 {
+                                    font-size: 48px;
+                                    fill: #fafafa;
+                                    font-family: Muli-Light, Muli;
+                                }</style>
+                        </defs>
+                        <title>Asset 1</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="ServingBoxes">
+                                <g id="BoxHead1">
+                                    <g id="Circle_" data-name="Circle+">
+                                        <g id="Shape_3" data-name="Shape 3">
+                                            <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                        </g>
+                                        <g id="_" data-name="+">
+                                            <text class="cls-2" transform="translate(11.83 41.09)">+</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
             </div>
             <div class="box box4">
                 <h3>Institutions & Organizations</h3>
-                <div>
+                <div class="content">
 					<span class="text">
 						Manage all of your artwork collection and assets on our free online portal. Our
                                         site was designed to incorporate all of the features you need and is simple and
@@ -266,6 +326,36 @@ get_header('pre'); ?>
                                         discover art marketplace.
 					</span>
                     <img src="<?php bloginfo('template_url'); ?>/img/frontpage/institutions.jpg" alt="Art Collectors">
+                </div>
+                <div class="cf svg-container">
+                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
+                    <svg class="top" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
+                        <defs>
+                            <style>.cls-1 {
+                                    fill: #d22329;
+                                }
+                                .cls-2 {
+                                    font-size: 48px;
+                                    fill: #fafafa;
+                                    font-family: Muli-Light, Muli;
+                                }</style>
+                        </defs>
+                        <title>Asset 1</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="ServingBoxes">
+                                <g id="BoxHead1">
+                                    <g id="Circle_" data-name="Circle+">
+                                        <g id="Shape_3" data-name="Shape 3">
+                                            <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                        </g>
+                                        <g id="_" data-name="+">
+                                            <text class="cls-2" transform="translate(11.83 41.09)">+</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                 </div>
             </div>
         </div>

@@ -3,17 +3,18 @@ jQuery(document).ready(function ($) {
     // AOS.init();
 
     $('.section3 .box').hover(function (e) {
-            $(this).find('img').hide("slide", {direction: "up"}, 700);
-
-            // console.log('mouse enter')
+            var $img = $(this).find('img');
+            if(!$img.is(':animated')) {
+                $img.stop().hide("slide", {direction: "up"}, 700);
+            }
         },
         function () {
-            $(this).find('img').show("slide", {direction: "up"}, 700);
-            // console.log('mouse leave')
-
+            var $img = $(this).find('img');
+            if(!$img.is(':animated')) {
+                $(this).find('img').stop().show("slide", {direction: "up"}, 700);
+            }
         }
     )
-
 
     $(window).scroll(function () {
         var windowH = $(window).height();

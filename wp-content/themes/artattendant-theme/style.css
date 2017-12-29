@@ -11272,16 +11272,16 @@ article#post-74 #wrapper {
   fill: #88B0AB;
   stroke-width: 0;
 }
-.page-id-102 .section3 .row .box s div.content {
+.page-id-102 .section3 .row .box div.content {
   position: relative;
   max-height: 100%;
   min-height: 368px;
   overflow: hidden;
 }
-.page-id-102 .section3 .row .box s div.content:hover + .svg-container .top {
+.page-id-102 .section3 .row .box div.content:hover + .svg-container .top {
   opacity: 0;
 }
-.page-id-102 .section3 .row .box s div.content span.text {
+.page-id-102 .section3 .row .box div.content span.text {
   position: absolute;
   top: 0;
   left: 0;
@@ -11290,7 +11290,7 @@ article#post-74 #wrapper {
   min-height: 369px;
   background-color: #b9e2dd;
 }
-.page-id-102 .section3 .row .box s div.content img {
+.page-id-102 .section3 .row .box div.content img {
   position: relative;
   width: 100%;
   height: auto;
