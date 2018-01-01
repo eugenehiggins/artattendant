@@ -1,20 +1,33 @@
 jQuery(document).ready(function ($) {
 
-    // AOS.init();
+    function slideOnHover(){
+        $('.section3 .box').hover(function (e) {
+                var $img = $(this).find('img');
+                if (!$img.is(':animated')) {
+                    $img.stop().hide("slide", {direction: "up"}, 700);
+                }
+            },
+            function () {
+                var $img = $(this).find('img');
+                if (!$img.is(':animated')) {
+                    $(this).find('img').stop().show("slide", {direction: "up"}, 700);
+                }
+            }
+        )
 
-    $('.section3 .box').hover(function (e) {
-            var $img = $(this).find('img');
-            if(!$img.is(':animated')) {
-                $img.stop().hide("slide", {direction: "up"}, 700);
-            }
-        },
-        function () {
-            var $img = $(this).find('img');
-            if(!$img.is(':animated')) {
-                $(this).find('img').stop().show("slide", {direction: "up"}, 700);
-            }
+    }
+
+    if ($( window ).width() >= 1200) {
+        slideOnHover();
+    }
+
+    $( window ).resize(function (){
+        if ($( window ).width() >= 1200) {
+            slideOnHover();
         }
-    )
+    })
+
+
 
     $(window).scroll(function () {
         var windowH = $(window).height();
