@@ -11260,7 +11260,9 @@ article#post-74 #wrapper {
 }
 @media screen and (min-width: 1200px) {
   .page-id-102 .section3 .row .box {
-    width: 50%;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 48%;
+            flex: 1 0 48%;
   }
 }
 .page-id-102 .section3 .row .box .svg-container {
