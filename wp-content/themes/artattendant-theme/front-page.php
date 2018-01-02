@@ -113,47 +113,47 @@ get_header('pre'); ?>
         </div>
         <div class="item text-center">
             <div class="scaling-svg-container">
+                <a href="archive-services">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg low-cost">
+                        <defs>
+                            <style>.cls-1, .cls-3 {
+                                    fill: #fff;
+                                }
 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.29 197.29" class="scaling-svg low-cost">
-                    <defs>
-                        <style>.cls-1, .cls-3 {
-                                fill: #fff;
-                            }
+                                .cls-1 {
+                                    stroke: #d81f2c;
+                                    stroke-miterlimit: 10;
+                                }
 
-                            .cls-1 {
-                                stroke: #d81f2c;
-                                stroke-miterlimit: 10;
-                            }
+                                .cls-1, .cls-2, .cls-3 {
+                                    stroke-width: 3px;
+                                }
 
-                            .cls-1, .cls-2, .cls-3 {
-                                stroke-width: 3px;
-                            }
+                                .cls-2 {
+                                    fill: #d81f2c;
+                                }
 
-                            .cls-2 {
-                                fill: #d81f2c;
-                            }
+                                .cls-2, .cls-3 {
+                                    stroke: #fff;
+                                    stroke-linecap: round;
+                                    stroke-linejoin: round;
+                                }
 
-                            .cls-2, .cls-3 {
-                                stroke: #fff;
-                                stroke-linecap: round;
-                                stroke-linejoin: round;
-                            }
-
-                        </style>
-                    </defs>
-                    <title>Asset 3</title>
-                    <g id="Layer_2" data-name="Layer 2">
-                        <g id="Layer_1-2" data-name="Layer 1">
-                            <path class="cls-1"
-                                  d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/>
-                            <rect class="cls-2" x="29.7" y="80.15" width="136.8" height="67.83"/>
-                            <path class="cls-3"
-                                  d="M85.84,101.81a6.13,6.13,0,0,1,0-12.25h24.51a6.13,6.13,0,0,1,0,12.25Z"/>
-                            <rect class="cls-2" x="25.24" y="58.33" width="145.71" height="21.82"/>
+                            </style>
+                        </defs>
+                        <title>Asset 3</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                                <path class="cls-1"
+                                      d="M1.5,98.65a97.15,97.15,0,1,1,97.15,97.15A97.15,97.15,0,0,1,1.5,98.65"/>
+                                <rect class="cls-2" x="29.7" y="80.15" width="136.8" height="67.83"/>
+                                <path class="cls-3"
+                                      d="M85.84,101.81a6.13,6.13,0,0,1,0-12.25h24.51a6.13,6.13,0,0,1,0,12.25Z"/>
+                                <rect class="cls-2" x="25.24" y="58.33" width="145.71" height="21.82"/>
+                            </g>
                         </g>
-                    </g>
-                </svg>
-
+                    </svg>
+                </a>
             </div>
             <h3>
                 Low-cost professional art archive services
@@ -191,12 +191,40 @@ get_header('pre'); ?>
                          alt="Artists">
                 </div>
                 <div class="cf svg-container">
-                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
+                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
+                        <defs>
+                            <style>.cls-1 {
+                                    fill: #88b0ab;
+                                }
+
+                                .cls-2 {
+                                    font-size: 48px;
+                                    fill: #fff;
+                                    font-family: Muli-Light, Muli;
+                                }</style>
+                        </defs>
+                        <title>Asset 2</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="ServingBoxes">
+                                <g id="BoxHead1">
+                                    <g id="MouseoverBox">
+                                        <g id="CircleMouseove">
+                                            <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                        </g>
+                                        <g id="_-" data-name="-">
+                                            <text class="cls-2" transform="translate(16.06 41.09)">-</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                     <svg class="top" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
                         <defs>
                             <style>.cls-1 {
                                     fill: #d22329;
                                 }
+
                                 .cls-2 {
                                     font-size: 48px;
                                     fill: #fafafa;
@@ -239,12 +267,40 @@ get_header('pre'); ?>
 
                 </div>
                 <div class="cf svg-container">
-                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
+                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
+                        <defs>
+                            <style>.cls-1 {
+                                    fill: #88b0ab;
+                                }
+
+                                .cls-2 {
+                                    font-size: 48px;
+                                    fill: #fff;
+                                    font-family: Muli-Light, Muli;
+                                }</style>
+                        </defs>
+                        <title>Asset 2</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="ServingBoxes">
+                                <g id="BoxHead1">
+                                    <g id="MouseoverBox">
+                                        <g id="CircleMouseove">
+                                            <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                        </g>
+                                        <g id="_-" data-name="-">
+                                            <text class="cls-2" transform="translate(16.06 41.09)">-</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                     <svg class="top" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
                         <defs>
                             <style>.cls-1 {
                                     fill: #d22329;
                                 }
+
                                 .cls-2 {
                                     font-size: 48px;
                                     fill: #fafafa;
@@ -271,8 +327,8 @@ get_header('pre'); ?>
             </div>
             <div class="box box3">
                 <h3>Galleries & Art Dealers</h3>
-                <div class="content">
-					<span class="text">
+                <div class="content">x
+                    <span class="text">
 						Organize, archive and manage your collection in our secure and private online
                                         database. Collectors can opt to make your collection visible to the public in or
                                         simply kept private in our cloud-based personal database. artAttendant is the
@@ -285,12 +341,40 @@ get_header('pre'); ?>
 
                 </div>
                 <div class="cf svg-container">
-                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
+                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
+                        <defs>
+                            <style>.cls-1 {
+                                    fill: #88b0ab;
+                                }
+
+                                .cls-2 {
+                                    font-size: 48px;
+                                    fill: #fff;
+                                    font-family: Muli-Light, Muli;
+                                }</style>
+                        </defs>
+                        <title>Asset 2</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="ServingBoxes">
+                                <g id="BoxHead1">
+                                    <g id="MouseoverBox">
+                                        <g id="CircleMouseove">
+                                            <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                        </g>
+                                        <g id="_-" data-name="-">
+                                            <text class="cls-2" transform="translate(16.06 41.09)">-</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                     <svg class="top" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
                         <defs>
                             <style>.cls-1 {
                                     fill: #d22329;
                                 }
+
                                 .cls-2 {
                                     font-size: 48px;
                                     fill: #fafafa;
@@ -330,12 +414,40 @@ get_header('pre'); ?>
                     <img src="<?php bloginfo('template_url'); ?>/img/frontpage/institutions.jpg" alt="Art Collectors">
                 </div>
                 <div class="cf svg-container">
-                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
+                    <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
+                        <defs>
+                            <style>.cls-1 {
+                                    fill: #88b0ab;
+                                }
+
+                                .cls-2 {
+                                    font-size: 48px;
+                                    fill: #fff;
+                                    font-family: Muli-Light, Muli;
+                                }</style>
+                        </defs>
+                        <title>Asset 2</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="ServingBoxes">
+                                <g id="BoxHead1">
+                                    <g id="MouseoverBox">
+                                        <g id="CircleMouseove">
+                                            <circle class="cls-1" cx="26.23" cy="27" r="26.23"/>
+                                        </g>
+                                        <g id="_-" data-name="-">
+                                            <text class="cls-2" transform="translate(16.06 41.09)">-</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                     <svg class="top" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58">
                         <defs>
                             <style>.cls-1 {
                                     fill: #d22329;
                                 }
+
                                 .cls-2 {
                                     font-size: 48px;
                                     fill: #fafafa;
