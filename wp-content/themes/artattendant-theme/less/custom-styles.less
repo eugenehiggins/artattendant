@@ -401,12 +401,16 @@ article#post-74 {
     }
     
     &:after {
-      border-bottom: 30vh solid #e1e3e6;
-      border-right: 100vw solid transparent;
-      position: absolute;
-      left: 0;
-      bottom: 0px;
-      z-index: -10;
+      display: none;
+      @media screen and (min-width: @screen-lg-min) {
+        display: table;
+        border-bottom: 30vh solid #e1e3e6;
+        border-right: 100vw solid transparent;
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        z-index: -10;
+      }
     }
     
     * {
@@ -437,6 +441,14 @@ article#post-74 {
     @media screen and (min-width: @screen-sm-min) {
       .container {
         margin-top: -75px;
+      }
+    }
+    
+    .row {
+      margin-left: 31px;
+      margin-top: 35px;
+      @media screen and (min-width: @screen-sm-min) {
+        margin-left: -15px;
       }
     }
 
