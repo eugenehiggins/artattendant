@@ -45,6 +45,6 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container-fluid main-content">
+<div class="container-fluid main-content"> <!-- removed `col-sm-12` because it floats and was causing the footer background column to rise up to top of page -->
 	<div class="row">
-		<div id="content" class="main-content-inner col-sm-12">
+		<div id="content" class="main-content-inner ">
