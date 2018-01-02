@@ -23,18 +23,23 @@ class Fep_Menu
 
 	function menu(){
 		$menu = '';
-		
-		  foreach( $this->get_menu() as $menu_array ) {
-			$class = esc_attr( $menu_array['class'] );
-			 if ( isset($_GET['fepaction']) && $_GET['fepaction'] == $menu_array['action'])
-			 $class = esc_attr( $menu_array['active-class'] );
-			 
-			 $menu .= "<a class='$class' href='".fep_query_url( $menu_array['action'] )."'>".strip_tags( $menu_array['title'], '<span>' )."</a>";
-		  }
-		  echo $menu;
+
+		foreach( $this->get_menu() as $menu_array ) {
+			$class = $menu_array['class'];
+			if ( isset($_GET['fepaction']) && $_GET['fepaction'] == $menu_array['action'])
+			$class = $menu_array['active-class'];
+
+			$menu .= sprintf('<a id="%1$s" class="%2$s" href="%3$s">%4$s</a>',
+				$menu_array['id'],
+				fep_sanitize_html_class( $class ),
+				fep_query_url( $menu_array['action'] ),
+				strip_tags( $menu_array['title'], '<span>' )
+			);
+		}
+		echo $menu;
 	 }
 	
-	private function get_menu()
+	public function get_menu()
 	{
 		$menu = array(
 				'newmessage'	=> array(
@@ -52,11 +57,6 @@ class Fep_Menu
 					'action'			=> 'settings',
 					'priority'			=> 15
 					),
-				'announcements'	=> array(
-					'title'			=> sprintf(__('Announcement%s', 'front-end-pm'), fep_get_new_announcement_button() ),
-					'action'			=> 'announcements',
-					'priority'			=> 20
-					)
 							
 				);
 		if( ! fep_current_user_can( 'send_new_message' ) ) {
@@ -71,11 +71,12 @@ class Fep_Menu
 						$defaults = array(
 								'title'			=> '',
 								'action'		=> $key,
+								'id'			=> 'fep-menu-' . $key,
 								'class'			=> 'fep-button',
 								'active-class'	=> 'fep-button-active',
 								'priority'		=> 20
 							);
-					$menu[$key] = wp_parse_args( $menu[$key], $defaults);
+					$menu[$key] = wp_parse_args( $tab, $defaults);
 			
 				}
 			uasort( $menu, 'fep_sort_by_priority' );
@@ -85,5 +86,5 @@ class Fep_Menu
 	
  } //END CLASS
 
-add_action('wp_loaded', array(Fep_Menu::init(), 'actions_filters'));
+add_action('init', array(Fep_Menu::init(), 'actions_filters'));
 

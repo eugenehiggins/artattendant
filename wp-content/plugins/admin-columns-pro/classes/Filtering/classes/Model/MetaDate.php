@@ -90,7 +90,7 @@ class ACP_Filtering_Model_MetaDate extends ACP_Filtering_Model_Meta {
 				if ( $date = $this->get_date_time_object( $value . '01' ) ) {
 
 					$args['min'] = $date->format( $this->get_date_format() );
-					$args['max'] = $date->modify( '+1 month' )->format( $this->get_date_format() );
+					$args['max'] = $date->modify( '+1 month' )->modify( '-1 day' )->format( $this->get_date_format() );
 
 					return $this->get_filtering_vars_ranged( $vars, $args );
 				}
@@ -100,7 +100,7 @@ class ACP_Filtering_Model_MetaDate extends ACP_Filtering_Model_Meta {
 				if ( $date = $this->get_date_time_object( $value ) ) {
 
 					$args['min'] = $date->format( $this->get_date_format() );
-					$args['max'] = $date->modify( '+1 day' )->format( $this->get_date_format() );
+					$args['max'] = $date->format( $this->get_date_format() );
 
 					return $this->get_filtering_vars_ranged( $vars, $args );
 				}

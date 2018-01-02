@@ -23,10 +23,11 @@ class Fep_Attachment
 	add_action ('fep_display_after_announcement', array($this, 'display_attachment'));
 	add_action('template_redirect', array($this, 'download_file' ) );
 	
-	add_action ('before_delete_post', array($this, 'delete_attachment') );
+	add_action ('before_delete_post', array($this, 'delete_attachments') );
 	
 	if ( '1' == fep_get_option('allow_attachment', 1)) {
 		add_action ('fep_action_message_after_send', array($this, 'upload_attachment'), 10, 3 );
+		add_action ('fep_action_announcement_after_added', array($this, 'upload_attachment'), 10, 3 );
 		}
     }
 	
@@ -35,7 +36,7 @@ function upload_attachment( $message_id, $message, $inserted_message ) {
     if ( !isset( $_FILES['fep_upload'] ) ) {
         return false;
     }
-	add_filter('upload_dir', array($this, 'upload_dir'));
+	add_filter('upload_dir', array($this, 'upload_dir'), 99 );
 	
     $fields = (int) fep_get_option('attachment_no', 4);
 
@@ -55,7 +56,7 @@ function upload_attachment( $message_id, $message, $inserted_message ) {
             }//file exists
         }// end for
 		
-	remove_filter('upload_dir', array($this, 'upload_dir'));
+	remove_filter('upload_dir', array($this, 'upload_dir'), 99 );
 }
 
 	function upload_dir($upload) {
@@ -113,16 +114,15 @@ function upload_file( $upload_data, $message_id, $inserted_message ) {
 
 	function display_attachment() {
 	
-	$attachments = fep_get_attachments();
+	$attachment_ids = fep_get_attachments( get_the_ID(), 'ids');
 	
-	if ($attachments) {
+	if ( $attachment_ids ) {
 		  echo "<hr /><strong>" . __("Attachments", 'front-end-pm') . ":</strong><br />";
-		  foreach ($attachments as $attachment){
+		  foreach ( $attachment_ids as $attachment_id ){
 		  
-			$attachment_id = $attachment->ID;
 			$name = esc_html( basename(wp_get_attachment_url( $attachment_id )) );
 		
-			echo "<a href='".fep_query_url('download', array( 'id' => $attachment_id, 'token' => fep_create_nonce('download' . $attachment_id ) ))."' title='Download {$name}'>{$name}</a><br />";
+			echo "<a href='".fep_query_url('download', array( 'fep_id' => $attachment_id, 'token' => wp_create_nonce('download_' . $attachment_id ) ))."' title='". sprintf(__( 'Download %s', 'front-end-pm'), $name ) . "'>{$name}</a><br />";
 				} 
 			}
 		}
@@ -131,11 +131,16 @@ function upload_file( $upload_data, $message_id, $inserted_message ) {
 	
 		if ( empty($_GET['fepaction']) || $_GET['fepaction'] != 'download' )
 			return;
-			
-		$id = ! empty( $_GET['id'] ) ? absint($_GET['id']) : 0;
+		
+		if( isset( $_GET['fep_id'] ) ){
+			$id = absint( $_GET['fep_id'] );
+		} else {
+			$id = !empty($_GET['id']) ? absint($_GET['id']) : 0;
+		}
+
 		$token = ! empty( $_GET['token'] ) ? $_GET['token'] : '';
 	
-		if ( ! $id || !fep_verify_nonce( $token, 'download' . $id ) )
+		if ( ! $id || ! wp_verify_nonce( $token, 'download_' . $id ) )
 		wp_die(__('Invalid token', 'front-end-pm'));
 		
 		if ( !fep_current_user_can( 'access_message' ) )
@@ -144,7 +149,11 @@ function upload_file( $upload_data, $message_id, $inserted_message ) {
 		if ( 'attachment' != get_post_type( $id ) || 'publish' != get_post_status ( $id ) )
 		wp_die(__('No attachments found', 'front-end-pm'));
 	
-		$message_id = fep_get_parent_id($id);
+		if( 'threaded' == fep_get_message_view() ) {
+			$message_id = fep_get_parent_id($id);
+		} else {
+			$message_id = wp_get_post_parent_id($id);
+		}
 		$post_type = get_post_type($message_id);
 		
 		if( ! in_array( $post_type, array( 'fep_message', 'fep_announcement' ) ) ) {
@@ -185,16 +194,16 @@ function upload_file( $upload_data, $message_id, $inserted_message ) {
 		}
 		
 	
-	function delete_attachment( $message_id ) {
+	function delete_attachments( $message_id ) {
 
 		if( ! in_array( get_post_type( $message_id ), array( 'fep_message', 'fep_announcement' ) ) )
 			return false;
 		
-		$attachments = fep_get_attachments( $message_id );
+		$attachment_ids = fep_get_attachments( $message_id, 'ids' );
 			
-		if ($attachments) {
-		  foreach ($attachments as $attachment){
-			wp_delete_attachment($attachment->ID); 
+		if ( $attachment_ids ) {
+		  foreach ( $attachment_ids as $attachment_id ){
+			wp_delete_attachment( $attachment_id ); 
 		
 			} 
 		}
@@ -206,4 +215,3 @@ function upload_file( $upload_data, $message_id, $inserted_message ) {
   } //END CLASS
 
 add_action('wp_loaded', array(Fep_Attachment::init(), 'actions_filters'));
-

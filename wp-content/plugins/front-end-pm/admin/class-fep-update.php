@@ -27,6 +27,8 @@ class Fep_Update
 		add_action('admin_init', array( $this, 'install'), 20 );
 		add_action('admin_init', array( $this, 'message_view_changed'), 25 );
 		add_action('admin_init', array( $this, 'auto_update'), 30 );
+		
+		add_action('fep_plugin_update', array( $this, 'update') );
     }
 	
 	function install(){
@@ -48,6 +50,22 @@ class Fep_Update
 		
 		fep_update_option( $options );
 		fep_add_caps_to_roles();
+		$this->create_htaccess();
+	}
+	
+	function update( $prev_ver ){
+		if( version_compare( $prev_ver, '5.3', '<' ) ){
+			$this->create_htaccess();
+		}
+		if( version_compare( $prev_ver, '6.1', '<' ) ){
+			$options = array();
+			$options['show_directory'] = fep_get_option('hide_directory',0) ? 0 : 1;
+			$options['show_notification'] = fep_get_option('hide_notification',0) ? 0 : 1;
+			$options['show_branding'] = fep_get_option('hide_branding',0) ? 0 : 1;
+			$options['show_autosuggest'] = fep_get_option('hide_autosuggest',0) ? 0 : 1;
+			
+			fep_update_option( $options );
+		}
 	}
 	
 	function sections( $tabs)
@@ -396,9 +414,12 @@ class Fep_Update
 		$deleted = maybe_unserialize( $deleted );
 		
 		if( $deleted && is_array($deleted) ) {
-			foreach( $deleted as $del ) {
-				add_post_meta( $ann_id, '_fep_delete_by_'. $del, time(), true );
+			$deleted = array_flip( $deleted );
+			
+			foreach( $deleted as $del_user_id => $v ) {
+				$deleted[ $del_user_id ] = time();
 			}
+			add_post_meta( $ann_id, '_fep_deleted_by', $deleted, true );
 		}
 		$this->insert_attachment( $ann_id, $announcement->id, $announcement->from_user );
 		$this->delete_message( $announcement->id );
@@ -533,6 +554,24 @@ class Fep_Update
  
 	 return $wpdb->get_var($wpdb->prepare("SELECT field_value FROM ".FEP_META_TABLE." WHERE message_id = %d AND field_name = %s LIMIT 1", $id, $meta ));
 
+    }
+    
+    function create_htaccess(){
+    	
+		$wp_upload_dir = wp_upload_dir();
+		$upload_path = $wp_upload_dir['basedir'] . '/front-end-pm';
+		$htaccess_path = $upload_path . '/.htaccess';
+    	
+		// Make sure the /front-end-pm folder is created
+		wp_mkdir_p( $upload_path );
+
+		//.htaccess file content
+		$htaccess = "Options -Indexes\ndeny from all\n";
+		
+		if( ! file_exists( $htaccess_path ) && wp_is_writable( $upload_path ) ) {
+			// Create the file if it doesn't exist
+			@file_put_contents( $htaccess_path, $htaccess );
+		}
     }
 	
 	

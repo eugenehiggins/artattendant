@@ -153,7 +153,7 @@ class ACP_Editing_Model_Post_Taxonomy extends ACP_Editing_Model {
 			wp_set_object_terms( $post->ID, $term_ids, $taxonomy );
 		}
 
-		acp_editing_helper()->update_post_last_modified( $id );
+		acp_editing_helper()->update_post_last_modified( $post->ID );
 	}
 
 }

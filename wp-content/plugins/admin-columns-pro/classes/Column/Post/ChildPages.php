@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class ACP_Column_Post_ChildPages extends AC_Column
-	implements ACP_Column_FilteringInterface {
+	implements ACP_Column_FilteringInterface, ACP_Export_Column {
 
 	public function __construct() {
 		$this->set_type( 'column-child-pages' );
@@ -46,6 +46,10 @@ class ACP_Column_Post_ChildPages extends AC_Column
 
 	public function filtering() {
 		return new ACP_Filtering_Model_Post_ChildPages( $this );
+	}
+
+	public function export() {
+		return new ACP_Export_Model_Post_ChildPages( $this );
 	}
 
 }

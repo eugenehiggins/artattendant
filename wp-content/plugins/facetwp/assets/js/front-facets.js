@@ -259,8 +259,7 @@
         $('.facetwp-type-fselect select:not(.ready)').each(function() {
             var facet_name = $(this).closest('.facetwp-facet').attr('data-name');
             var settings = FWP.settings[facet_name];
-
-            $(this).fSelect({
+            var opts = wp.hooks.applyFilters('facetwp/set_options/fselect', {
                 placeholder: settings.placeholder,
                 overflowText: settings.overflowText,
                 searchText: settings.searchText,
@@ -269,7 +268,9 @@
                     row = row.replace(/}}/g, '<span>');
                     return row;
                 }
-            });
+            }, { 'facet_name': facet_name });
+
+            $(this).fSelect(opts);
             $(this).addClass('ready');
         });
     });

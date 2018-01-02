@@ -7,6 +7,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ACP_Editing_Strategy_Taxonomy extends ACP_Editing_Strategy {
 
 	public function get_rows() {
+		return $this->get_editable_rows( $this->get_term_ids_from_dom() );
+	}
+
+	/**
+	 * @return int[]|false
+	 */
+	private function get_term_ids_from_dom() {
+		if ( ! class_exists( 'DOMDocument' ) ) {
+			return array();
+		}
+
 		global $wp_list_table;
 
 		/* @var WP_Terms_List_Table $wp_list_table */
@@ -39,7 +50,7 @@ class ACP_Editing_Strategy_Taxonomy extends ACP_Editing_Strategy {
 			}
 		}
 
-		return $this->get_editable_rows( $term_ids );
+		return $term_ids;
 	}
 
 	/**

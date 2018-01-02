@@ -1,0 +1,4096 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wpdatatables\n"
+"POT-Creation-Date: 2017-07-10 16:54+0200\n"
+"PO-Revision-Date: 2017-07-10 16:54+0200\n"
+"Last-Translator: \n"
+"Language-Team: wpdatatables <cjbug@yandex.ru>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets/js/tagsinput/jquery.tagsinput.js\n"
+
+#: assets/js/handsontable/handsontable.full.min.js:31
+msgid "autocomplete"
+msgstr ""
+
+#: assets/js/wpdatatables/wdt.chartJS.js:239
+#: assets/js/wpdatatables/wdt.chartJS.min.js:1
+#: assets/js/wpdatatables/wdt.googleCharts.js:316
+#: assets/js/wpdatatables/wdt.googleCharts.min.js:1
+#: assets/js/wpdatatables/wdt.highcharts.js:459
+#: assets/js/wpdatatables/wdt.highcharts.min.js:1
+msgid "tr"
+msgstr ""
+
+#: controllers/wdt_admin.php:8 controllers/wdt_admin.php:9
+msgid "wpDataTables"
+msgstr ""
+
+#: controllers/wdt_admin.php:17 controllers/wdt_admin.php:18
+#: templates/admin/constructor/constructor.inc.php:22
+msgid "Create a Table"
+msgstr ""
+
+#: controllers/wdt_admin.php:25 controllers/wdt_admin.php:26
+msgid "wpDataCharts"
+msgstr ""
+
+#: controllers/wdt_admin.php:33 controllers/wdt_admin.php:34
+#: templates/admin/chart_wizard/chart_wizard.inc.php:34
+msgid "Create a Chart"
+msgstr ""
+
+#: controllers/wdt_admin.php:41 controllers/wdt_admin.php:42
+msgid "Settings"
+msgstr ""
+
+#: controllers/wdt_admin.php:49
+msgid "Add-ons"
+msgstr ""
+
+#: controllers/wdt_admin.php:50
+msgid "Addons"
+msgstr ""
+
+#: controllers/wdt_admin.php:287 controllers/wdt_admin.php:336
+#: controllers/wdt_admin.php:362 controllers/wdt_admin.php:383
+#: controllers/wdt_admin.php:430 controllers/wdt_admin.php:456
+#: controllers/wdt_admin.php:475
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: controllers/wdt_admin_ajax_actions.php:21
+msgid "Successfully connected to the MySQL server."
+msgstr ""
+
+#: controllers/wdt_admin_ajax_actions.php:23
+msgid "wpDataTables could not connect to MySQL server."
+msgstr ""
+
+#: controllers/wdt_admin_ajax_actions.php:26
+msgid "wpDataTables could not connect to MySQL server. MySQL said: "
+msgstr ""
+
+#: controllers/wdt_admin_ajax_actions.php:382
+msgid "There was an error while trying to import table"
+msgstr ""
+
+#: controllers/wdt_admin_ajax_actions.php:386
+msgid "There was an error while trying to import table. Exception: "
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:345 controllers/wdt_ajax_actions.php:386
+#: controllers/wdt_ajax_actions.php:568
+msgid "There was an error trying to update the row! Error: "
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:357 controllers/wdt_ajax_actions.php:411
+#: controllers/wdt_ajax_actions.php:538
+msgid "There was an error trying to insert a new row! Error: "
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:481
+msgid "Bad column names supplied: "
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:483
+msgid "ID column not supplied"
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:488
+msgid "ID column not supplied for a cell"
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:694 controllers/wdt_ajax_actions.php:708
+msgid "Nothing to delete."
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:698 controllers/wdt_ajax_actions.php:712
+msgid "Bad request format."
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:722
+msgid "You don't have permission to change this table."
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:730
+msgid "Supplied id column not exist."
+msgstr ""
+
+#: controllers/wdt_ajax_actions.php:755 controllers/wdt_ajax_actions.php:771
+msgid "There was an error trying to delete row! Error: "
+msgstr ""
+
+#: controllers/wdt_functions.php:350
+msgid "wpDataChart with provided ID not found!"
+msgstr ""
+
+#: controllers/wdt_functions.php:386 controllers/wdt_functions.php:453
+msgid "wpDataTable with provided ID not found!"
+msgstr ""
+
+#: controllers/wdt_functions.php:463
+msgid "Provided column is not Integer or Float column type"
+msgstr ""
+
+#: controllers/wdt_functions.php:690
+msgid "Choose a table"
+msgstr ""
+
+#: controllers/wdt_functions.php:722
+msgid "Interactive Responsive Table"
+msgstr ""
+
+#: controllers/wdt_functions.php:723 controllers/wdt_functions.php:782
+msgid "Content"
+msgstr ""
+
+#: controllers/wdt_functions.php:729
+msgid "wpDataTable"
+msgstr ""
+
+#: controllers/wdt_functions.php:733
+msgid "Choose the wpDataTable from a dropdown"
+msgstr ""
+
+#: controllers/wdt_functions.php:738
+msgid "Table view"
+msgstr ""
+
+#: controllers/wdt_functions.php:742
+msgid "Regular wpDataTable"
+msgstr ""
+
+#: controllers/wdt_functions.php:743
+msgid "Excel-like table"
+msgstr ""
+
+#: controllers/wdt_functions.php:748
+msgid "Variable placeholder #1"
+msgstr ""
+
+#: controllers/wdt_functions.php:751 controllers/wdt_functions.php:759
+#: controllers/wdt_functions.php:767
+msgid "Variables"
+msgstr ""
+
+#: controllers/wdt_functions.php:752
+msgid "If you used the VAR1 placeholder you can assign a value to it here"
+msgstr ""
+
+#: controllers/wdt_functions.php:756
+msgid "Variable placeholder #2"
+msgstr ""
+
+#: controllers/wdt_functions.php:760
+msgid "If you used the VAR2 placeholder you can assign a value to it here"
+msgstr ""
+
+#: controllers/wdt_functions.php:764
+msgid "Variable placeholder #3"
+msgstr ""
+
+#: controllers/wdt_functions.php:768
+msgid "If you used the VAR3 placeholder you can assign a value to it here"
+msgstr ""
+
+#: controllers/wdt_functions.php:781
+msgid "Google or Highcharts chart based on a wpDataTable"
+msgstr ""
+
+#: controllers/wdt_functions.php:788
+msgid "wpDataChart"
+msgstr ""
+
+#: controllers/wdt_functions.php:792
+msgid "Choose one of wpDataCharts from the list"
+msgstr ""
+
+#: source/class.constructor.php:376 source/class.constructor.php:383
+msgid "There was an error when trying to create the table on MySQL side"
+msgstr ""
+
+#: source/class.constructor.php:1249
+msgid ""
+"<div class=\"alert alert-danger m-15\">No results found. Please check if "
+"this query is correct! Table Constructor needs a query that returns data to "
+"build a wpDataTable."
+msgstr ""
+
+#: source/class.constructor.php:1403 source/class.constructor.php:1496
+msgid "Empty file"
+msgstr ""
+
+#: source/class.constructor.php:1416
+msgid ""
+"Could not read Google spreadsheet, please check if the URL is correct and "
+"the spreadsheet is published to everyone"
+msgstr ""
+
+#: source/class.constructor.php:1433
+msgid "Could not read input file!"
+msgstr ""
+
+#: source/class.constructor.php:1527
+msgid "File format not supported!"
+msgstr ""
+
+#: source/class.filterwidget.php:19
+msgid "Filter"
+msgstr ""
+
+#: source/class.filterwidget.php:45
+msgid "New title"
+msgstr ""
+
+#: source/class.filterwidget.php:49
+msgid "Title:"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:135
+#: source/class.wdtbrowsechartstable.php:149
+#: source/class.wdtbrowsetable.php:155 source/class.wdtbrowsetable.php:175
+msgid "Configure"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:136
+#: source/class.wdtbrowsechartstable.php:150
+#: source/class.wdtbrowsetable.php:157 source/class.wdtbrowsetable.php:176
+#: source/class.wpdatatable.php:2813 templates/common/delete_modal.inc.php:34
+msgid "Delete"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:186
+#: source/class.wdtbrowsechartstable.php:273
+msgid "Column Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:189
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:58
+msgid "Histogram"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:192
+msgid "Bar Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:195
+#: source/class.wdtbrowsechartstable.php:267
+msgid "Area Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:198
+msgid "Stepped Area Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:201
+#: source/class.wdtbrowsechartstable.php:219
+#: source/class.wdtbrowsechartstable.php:264
+msgid "Line Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:204
+#: source/class.wdtbrowsechartstable.php:243
+#: source/class.wdtbrowsechartstable.php:282
+msgid "Pie Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:207
+#: source/class.wdtbrowsechartstable.php:288
+msgid "Bubble Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:210
+#: source/class.wdtbrowsechartstable.php:249
+msgid "Donut Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:213
+msgid "Gauge Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:216
+msgid "Scatter Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:222
+msgid "Spline Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:225
+msgid "Basic Area Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:228
+#: source/class.wdtbrowsechartstable.php:270
+msgid "Stacked Area Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:231
+msgid "Basic Bar Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:234
+msgid "Stacked Bar Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:237
+msgid "Basic Column Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:240
+msgid "Stacked Column Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:246
+msgid "Pie With Gradient Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:252
+msgid "Scatter Plot"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:255
+msgid "3D Column Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:258
+msgid "3D Pie Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:261
+msgid "3D Donut Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:276
+msgid "Radar Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:279
+msgid "Polar Area Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:285
+msgid "Doughnut Chart"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:300
+msgid "Google"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:303
+msgid "Highcharts"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:306
+msgid "Chart.js"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:370
+#: source/class.wdtbrowsetable.php:249
+#: templates/admin/chart_wizard/steps/step3.inc.php:7
+#: templates/admin/chart_wizard/steps/step3.inc.php:25
+msgid "Select All"
+msgstr ""
+
+#: source/class.wdtbrowsechartstable.php:422
+msgid "No wpDataCharts in the system yet."
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:148
+#: templates/admin/browse/table/duplicate_modal.inc.php:53
+msgid "Duplicate"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:150
+msgid "Edit data"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:152
+msgid "Edit in Excel-like editor"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:190
+msgid "MySQL"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:193
+msgid "Manual"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:196 source/class.wpdatatable.php:2762
+#: templates/admin/table-settings/table_settings_block.inc.php:943
+msgid "Excel"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:199 source/class.wpdatatable.php:2772
+#: templates/admin/table-settings/table_settings_block.inc.php:944
+msgid "CSV"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:202
+msgid "XML"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:205
+msgid "JSON"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:208
+#: templates/admin/table-settings/table_settings_block.inc.php:106
+msgid "Serialized PHP array"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:211
+msgid "Google spreadsheet"
+msgstr ""
+
+#: source/class.wdtbrowsetable.php:324
+msgid "No wpDataTables in the system yet."
+msgstr ""
+
+#: source/class.wdtconfigcontroller.php:134
+msgid "There was an error trying to fetch the table data: "
+msgstr ""
+
+#: source/class.wdttools.php:14
+#: templates/admin/constructor/constructor_column_block.inc.php:35
+msgid "One line string"
+msgstr ""
+
+#: source/class.wdttools.php:15
+#: templates/admin/constructor/constructor_column_block.inc.php:36
+msgid "Multi-line string"
+msgstr ""
+
+#: source/class.wdttools.php:16
+#: templates/admin/constructor/constructor_column_block.inc.php:37
+msgid "One-line selectbox"
+msgstr ""
+
+#: source/class.wdttools.php:17
+#: templates/admin/constructor/constructor_column_block.inc.php:38
+msgid "Multi-line selectbox"
+msgstr ""
+
+#: source/class.wdttools.php:18
+#: templates/admin/constructor/constructor_column_block.inc.php:39
+#: templates/admin/table-settings/column_settings_panel.inc.php:358
+msgid "Integer"
+msgstr ""
+
+#: source/class.wdttools.php:19
+#: templates/admin/constructor/constructor_column_block.inc.php:40
+#: templates/admin/table-settings/column_settings_panel.inc.php:359
+msgid "Float"
+msgstr ""
+
+#: source/class.wdttools.php:20
+#: templates/admin/constructor/constructor_column_block.inc.php:41
+#: templates/admin/table-settings/column_settings_panel.inc.php:360
+#: templates/admin/table-settings/column_settings_panel.inc.php:876
+msgid "Date"
+msgstr ""
+
+#: source/class.wdttools.php:21
+#: templates/admin/constructor/constructor_column_block.inc.php:42
+#: templates/admin/table-settings/column_settings_panel.inc.php:877
+msgid "Datetime"
+msgstr ""
+
+#: source/class.wdttools.php:22
+#: templates/admin/constructor/constructor_column_block.inc.php:43
+#: templates/admin/table-settings/column_settings_panel.inc.php:362
+#: templates/admin/table-settings/column_settings_panel.inc.php:878
+msgid "Time"
+msgstr ""
+
+#: source/class.wdttools.php:23
+#: templates/admin/constructor/constructor_column_block.inc.php:44
+msgid "URL Link"
+msgstr ""
+
+#: source/class.wdttools.php:24
+#: templates/admin/constructor/constructor_column_block.inc.php:45
+msgid "E-mail"
+msgstr ""
+
+#: source/class.wdttools.php:25
+#: templates/admin/constructor/constructor_column_block.inc.php:46
+#: templates/admin/table-settings/column_settings_panel.inc.php:365
+msgid "Image"
+msgstr ""
+
+#: source/class.wdttools.php:26
+#: templates/admin/constructor/constructor_column_block.inc.php:47
+#: templates/admin/table-settings/column_settings_panel.inc.php:881
+msgid "Attachment"
+msgstr ""
+
+#: source/class.wdttools.php:153
+msgid ""
+"wpDataTables was unable to read your Google Spreadsheet, probably it is not "
+"published correctly. <br/> You can publish it by going to <b>File -> Publish "
+"to the web</b> "
+msgstr ""
+
+#: source/class.wdttools.php:229
+msgid "Back to date"
+msgstr ""
+
+#: source/class.wdttools.php:230
+msgid "Browse"
+msgstr ""
+
+#: source/class.wdttools.php:231
+#: templates/admin/browse/table/duplicate_modal.inc.php:52
+#: templates/admin/chart_wizard/range_picker_modal.inc.php:27
+#: templates/admin/common/close_modal.inc.php:31
+#: templates/admin/constructor/constructor.inc.php:28
+#: templates/admin/settings/settings.inc.php:26
+#: templates/admin/table-settings/add_column_modal.inc.php:118
+#: templates/admin/table-settings/column_settings_panel.inc.php:24
+#: templates/admin/table-settings/column_settings_panel.inc.php:979
+#: templates/admin/table-settings/formula_editor_modal.inc.php:69
+#: templates/admin/table-settings/possible_values_merge_list_modal.inc.php:17
+#: templates/admin/table-settings/remove_column_modal.inc.php:71
+#: templates/admin/table-settings/table_preview_block.inc.php:70
+#: templates/admin/table-settings/table_settings_block.inc.php:38
+#: templates/admin/table-settings/table_settings_block.inc.php:1112
+#: templates/common/delete_modal.inc.php:33
+#: templates/frontend/edit_dialog.inc.php:147
+msgid "Cancel"
+msgstr ""
+
+#: source/class.wdttools.php:232
+msgid " field cannot be empty!"
+msgstr ""
+
+#: source/class.wdttools.php:233
+msgid "Use selected file"
+msgstr ""
+
+#: source/class.wdttools.php:234
+msgid "Choose file"
+msgstr ""
+
+#: source/class.wdttools.php:235 templates/admin/common/error_modal.inc.php:21
+#: templates/admin/table-settings/columns_list_modal.inc.php:23
+#: templates/admin/table-settings/foreign_key_config.inc.php:92
+msgid "Close"
+msgstr ""
+
+#: source/class.wdttools.php:236
+msgid "Column has been added!"
+msgstr ""
+
+#: source/class.wdttools.php:237
+msgid "Column header cannot be empty!"
+msgstr ""
+
+#: source/class.wdttools.php:238
+msgid "Please confirm column deletion!"
+msgstr ""
+
+#: source/class.wdttools.php:239
+msgid "Column has been removed!"
+msgstr ""
+
+#: source/class.wdttools.php:240
+msgid "Please select columns that you want to use in table"
+msgstr ""
+
+#: source/class.wdttools.php:241 source/class.wpdatatable.php:2782
+#: templates/admin/table-settings/table_settings_block.inc.php:945
+msgid "Copy"
+msgstr ""
+
+#: source/class.wdttools.php:242
+msgid "There was an error trying to insert a new row!"
+msgstr ""
+
+#: source/class.wdttools.php:243
+msgid "Data has been saved!"
+msgstr ""
+
+#: source/class.wdttools.php:244
+msgid "detach"
+msgstr ""
+
+#: source/class.wdttools.php:245
+msgid "Error!"
+msgstr ""
+
+#: source/class.wdttools.php:246
+msgid "Please upload or choose a file from Media Library!"
+msgstr ""
+
+#: source/class.wdttools.php:247
+msgid "From"
+msgstr ""
+
+#: source/class.wdttools.php:248
+msgid "Please provide a valid e-mail address for field"
+msgstr ""
+
+#: source/class.wdttools.php:249
+msgid "Please provide a valid URL link for field"
+msgstr ""
+
+#: source/class.wdttools.php:250
+msgid "You have entered invalid value. Press ESC to cancel."
+msgstr ""
+
+#: source/class.wdttools.php:251 source/class.wdttools.php:277
+msgid "Show _MENU_ entries"
+msgstr ""
+
+#: source/class.wdttools.php:252
+#: templates/admin/table-settings/possible_values_merge_list_modal.inc.php:21
+msgid "Merge"
+msgstr ""
+
+#: source/class.wdttools.php:253
+msgid "New column"
+msgstr ""
+
+#: source/class.wdttools.php:255
+msgid ": activate to sort column ascending"
+msgstr ""
+
+#: source/class.wdttools.php:256
+msgid ": activate to sort column descending"
+msgstr ""
+
+#: source/class.wdttools.php:258
+msgid "Ok"
+msgstr ""
+
+#: source/class.wdttools.php:260
+msgid "First"
+msgstr ""
+
+#: source/class.wdttools.php:261
+msgid "Last"
+msgstr ""
+
+#: source/class.wdttools.php:262 templates/frontend/edit_dialog.inc.php:154
+msgid "Next"
+msgstr ""
+
+#: source/class.wdttools.php:263
+msgid "Previous"
+msgstr ""
+
+#: source/class.wdttools.php:265
+#: templates/admin/table-settings/possible_values_merge_list_modal.inc.php:25
+msgid "Replace"
+msgstr ""
+
+#: source/class.wdttools.php:266
+msgid "Row has been deleted!"
+msgstr ""
+
+#: source/class.wdttools.php:267
+msgid "Select a file to use in table"
+msgstr ""
+
+#: source/class.wdttools.php:268
+msgid "Select an Excel or CSV file"
+msgstr ""
+
+#: source/class.wdttools.php:269
+msgid "No data available in table"
+msgstr ""
+
+#: source/class.wdttools.php:270
+msgid "Plugin settings saved successfully"
+msgstr ""
+
+#: source/class.wdttools.php:271
+msgid "Shortcode has been copied to the clipboard."
+msgstr ""
+
+#: source/class.wdttools.php:272
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr ""
+
+#: source/class.wdttools.php:273
+msgid "Showing 0 to 0 of 0 entries"
+msgstr ""
+
+#: source/class.wdttools.php:274
+msgid "(filtered from _MAX_ total entries)"
+msgstr ""
+
+#: source/class.wdttools.php:276
+msgid ","
+msgstr ""
+
+#: source/class.wdttools.php:278
+msgid "Loading..."
+msgstr ""
+
+#: source/class.wdttools.php:279
+msgid "Processing..."
+msgstr ""
+
+#: source/class.wdttools.php:280
+msgid "SQL error"
+msgstr ""
+
+#: source/class.wdttools.php:281
+msgid "Search: "
+msgstr ""
+
+#: source/class.wdttools.php:282
+msgid "Success!"
+msgstr ""
+
+#: source/class.wdttools.php:283
+msgid "No matching records found"
+msgstr ""
+
+#: source/class.wdttools.php:284
+msgid "Table saved successfully!"
+msgstr ""
+
+#: source/class.wdttools.php:285
+msgid "To"
+msgstr ""
+
+#: source/class.wpdatachart.php:1442
+msgid "Only one column can be of type String"
+msgstr ""
+
+#: source/class.wpdatachart.php:1445
+msgid "You are mixing data types (several date axes and several number)"
+msgstr ""
+
+#: source/class.wpdatatable.php:1852
+msgid ""
+"No data fetched!  <br/> If you are trying to save table for the first time, "
+"please enter some date before saving so table could be set accurately. <br/> "
+"You can remove it later if you need empty table to start with."
+msgstr ""
+
+#: source/class.wpdatatable.php:1854
+msgid "Rendered query: "
+msgstr ""
+
+#: source/class.wpdatatable.php:1856
+msgid " MySQL said: "
+msgstr ""
+
+#: source/class.wpdatatable.php:2237
+msgid "Unable to calculate"
+msgstr ""
+
+#: source/class.wpdatatable.php:2244
+msgid "Result for first 5 rows: "
+msgstr ""
+
+#: source/class.wpdatatable.php:2246
+msgid "Unable to calculate, error message: "
+msgstr ""
+
+#: source/class.wpdatatable.php:2725
+#: templates/admin/table-settings/table_settings_block.inc.php:639
+msgid "Clear filters"
+msgstr ""
+
+#: source/class.wpdatatable.php:2743
+#: templates/admin/table-settings/columns_list_modal.inc.php:7
+msgid "Columns"
+msgstr ""
+
+#: source/class.wpdatatable.php:2752
+#: templates/admin/table-settings/table_settings_block.inc.php:942
+msgid "Print"
+msgstr ""
+
+#: source/class.wpdatatable.php:2793
+#: templates/admin/table-settings/table_settings_block.inc.php:946
+msgid "PDF"
+msgstr ""
+
+#: source/class.wpdatatable.php:2804
+msgid "New"
+msgstr ""
+
+#: source/class.wpdatatable.php:2808
+msgid "Edit"
+msgstr ""
+
+#: templates/admin/addons/addons.inc.php:20
+msgid "Addons for the plugin"
+msgstr ""
+
+#: templates/admin/addons/addons.inc.php:22
+msgid "Unique extensions for wpDataTables"
+msgstr ""
+
+#: templates/admin/addons/addons.inc.php:30
+msgid "About Addons"
+msgstr ""
+
+#: templates/admin/addons/addons.inc.php:31
+msgid ""
+"While wpDataTables itself provides quite a large amount of features and "
+"unlimited customisation flexibility, you can achieve even more with our "
+"premium addons. Each addon brings you some unique extension to the core "
+"functionality. There will be more addons developed over time by wpDataTables "
+"creators and 3rd party developers, so stay tuned."
+msgstr ""
+
+#: templates/admin/addons/addons.inc.php:41
+msgid "Report Builder"
+msgstr ""
+
+#: templates/admin/addons/addons.inc.php:42
+msgid ""
+"A unique tool that allows you to generate almost any Word DOCX and Excel "
+"XLSX documents filled in with actual data from your database."
+msgstr ""
+
+#: templates/admin/addons/addons.inc.php:44
+msgid "Find out more "
+msgstr ""
+
+#: templates/admin/browse/bulk_actions.inc.php:3
+msgid "Bulk Actions"
+msgstr ""
+
+#: templates/admin/browse/bulk_actions.inc.php:13
+msgid "APPLY"
+msgstr ""
+
+#: templates/admin/browse/chart/browse.inc.php:22
+msgid "wpDataCharts browse"
+msgstr ""
+
+#: templates/admin/browse/chart/browse.inc.php:28
+#: templates/admin/browse/table/browse.inc.php:30
+msgid "Add New"
+msgstr ""
+
+#: templates/admin/browse/table/browse.inc.php:23
+msgid "wpDataTables browse"
+msgstr ""
+
+#: templates/admin/browse/table/duplicate_modal.inc.php:14
+msgid "Duplicate table"
+msgstr ""
+
+#: templates/admin/browse/table/duplicate_modal.inc.php:23
+msgid "New table title"
+msgstr ""
+
+#: templates/admin/browse/table/duplicate_modal.inc.php:35
+msgid "Duplicate database table"
+msgstr ""
+
+#: templates/admin/browse/table/duplicate_modal.inc.php:37
+msgid "Unchecked"
+msgstr ""
+
+#: templates/admin/browse/table/duplicate_modal.inc.php:37
+msgid ""
+"will create exact copy of this table which means that all changes made in "
+"one table will be reflected in all copies."
+msgstr ""
+
+#: templates/admin/browse/table/duplicate_modal.inc.php:37
+msgid "Checked"
+msgstr ""
+
+#: templates/admin/browse/table/duplicate_modal.inc.php:37
+msgid ""
+"will create separate database table so changing one table won't affect other "
+"copies."
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:35
+msgid "Chart Creation Wizard"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:54
+msgid "Chart title & type"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:55
+#: templates/admin/table-settings/table_settings_block.inc.php:57
+msgid "Data source"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:56
+msgid "Data range"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:57
+msgid "Formatting and preview"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:58
+msgid "Save and get shortcode"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:98
+msgid "Finish"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:101
+#: templates/admin/constructor/constructor.inc.php:67
+msgid "Next "
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:103
+#: templates/admin/constructor/constructor.inc.php:69
+msgid " Previous"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:131
+msgid "Label"
+msgstr ""
+
+#: templates/admin/chart_wizard/chart_wizard.inc.php:145
+msgid "Color"
+msgstr ""
+
+#: templates/admin/chart_wizard/range_picker_modal.inc.php:13
+msgid "Pick Range"
+msgstr ""
+
+#: templates/admin/chart_wizard/range_picker_modal.inc.php:31
+#: templates/admin/table-settings/add_column_modal.inc.php:122
+#: templates/admin/table-settings/remove_column_modal.inc.php:75
+#: templates/frontend/edit_dialog.inc.php:163
+msgid "OK"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:10
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:10
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:10
+msgid "Line chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:22
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:22
+msgid "Area chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:34
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:46
+msgid "Stacked area chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:46
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:46
+msgid "Column chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:58
+msgid "Radar chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:70
+msgid "Polar area chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:86
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:86
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:110
+msgid "Pie chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:98
+msgid "Doughnut chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/chartjs.inc.php:110
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:98
+msgid "Bubble chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:34
+msgid "Stepped area chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:70
+msgid "Bar chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:110
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:134
+msgid "Donut chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:122
+msgid "Gauge chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/google_charts.inc.php:134
+msgid "Scatter chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:22
+msgid "Spline chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:34
+msgid "Basic area chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:58
+msgid "Basic bar chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:70
+msgid "Stacked bar chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:86
+msgid "Basic column chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:98
+msgid "Stacked column chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:122
+msgid "Pie with gradient chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:146
+msgid "Scatter plot"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:162
+msgid "3D column chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:174
+msgid "3D pie chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/charts_pick/highcharts.inc.php:186
+msgid "3D donut chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step1.inc.php:6
+msgid "Chart name"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step1.inc.php:7
+msgid "Please define the title of the chart that you will use to identify it"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step1.inc.php:13
+msgid "New wpDataTable Chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step1.inc.php:24
+msgid "Chart render engine"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step1.inc.php:26
+msgid "Please choose the render engine."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step1.inc.php:26
+msgid ""
+"Please note that HighCharts license is NOT included with wpDataTables and "
+"you must purchase the license separately on"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step1.inc.php:32
+msgid "Pick the render engine"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step2.inc.php:4
+msgid "wpDataTable Data Source"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step2.inc.php:5
+msgid ""
+"Please pick a wpDataTable which will be used as a data source for this chart."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step2.inc.php:11
+msgid "Pick a wpDataTable"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:5
+msgid "Columns in the data source"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:6
+msgid ""
+"Choose table columns that you would like to use in the chart. You can either "
+"drag the column blocks, or click to select them and use controls in the "
+"middle to add or remove from the chart."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:16
+msgid "Add all"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:17
+msgid "Add"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:18
+msgid "Remove"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:19
+msgid "Remove all"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:24
+msgid "Columns used in the chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:29
+msgid ""
+"Please do not add more then one string-type (date/time, image, email, URL) "
+"column since only one can be used as a label"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:30
+msgid "Minimum count of columns for this chart type is "
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:31
+msgid "Maximum count of columns for this chart type is "
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:41
+msgid "Charts data filtering"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:42
+msgid ""
+"If you enable this, chart will automatically re-render with actual data "
+"every time you sort, filter, or switch pages in the table (chart must be in "
+"the same page with the table)."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:45
+msgid "Follow table filtering"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:53
+msgid "Row range"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:54
+msgid "Please choose the row range."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:54
+msgid ""
+"If you do not want data from all the table rows to be in the chart, you can "
+"pick the row range manually. Please note that if the data set is large the "
+"range picker can load slowly or even cause an out of memory error."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:60
+msgid "All rows (default)"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:61
+msgid "Pick range (slow on large datasets)"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:66
+msgid "Rows picked"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:66
+#: templates/admin/table-settings/table_settings_block.inc.php:308
+msgid "All"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step3.inc.php:67
+msgid "Range picker..."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:8
+msgid "Chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:9
+msgid "Series"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:10
+msgid "Axes"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:11
+#: templates/admin/chart_wizard/steps/step4.inc.php:817
+msgid "Title"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:12
+#: templates/admin/chart_wizard/steps/step4.inc.php:653
+msgid "Tooltip"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:13
+#: templates/admin/chart_wizard/steps/step4.inc.php:771
+msgid "Legend"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:14
+#: templates/admin/chart_wizard/steps/step4.inc.php:950
+msgid "Exporting"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:15
+#: templates/admin/chart_wizard/steps/step4.inc.php:1071
+msgid "Credits"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:23
+msgid "Series settings"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:24
+msgid ""
+"If you want to redefine the series labels and colors you can do it here."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:34
+msgid "Curve type"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:35
+#: templates/admin/chart_wizard/steps/step4.inc.php:347
+msgid "Controls the curve of the lines"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:38
+msgid "Check for smoothed lines"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:47
+msgid "Chart width"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:48
+msgid "The width of the chart."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:62
+msgid "Responsive width"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:63
+msgid ""
+"If you tick this chart width will always adjust to 100% width of the "
+"container"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:66
+msgid "Responsive chart width"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:73
+msgid "Chart height"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:74
+msgid "The height of the chart."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:88
+msgid "Group chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:89
+msgid ""
+"If you tick this checkbox, the values of the rows with same label will be "
+"summed up and rendered as a single series. If you leave it unticked all rows "
+"will be rendered as separate series."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:92
+msgid "Enable grouping"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:99
+#: templates/admin/chart_wizard/steps/step4.inc.php:664
+#: templates/admin/chart_wizard/steps/step4.inc.php:801
+#: templates/admin/settings/tabs/color_and_font_settings.php:86
+#: templates/admin/settings/tabs/color_and_font_settings.php:338
+msgid "Background color"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:100
+msgid "The background color for the outer chart area."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:115
+#: templates/admin/chart_wizard/steps/step4.inc.php:680
+#: templates/admin/chart_wizard/steps/step4.inc.php:882
+msgid "Border width"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:116
+msgid "The pixel width of the outer chart border."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:130
+#: templates/admin/chart_wizard/steps/step4.inc.php:695
+#: templates/admin/chart_wizard/steps/step4.inc.php:897
+#: templates/admin/settings/tabs/color_and_font_settings.php:102
+#: templates/admin/settings/tabs/color_and_font_settings.php:354
+msgid "Border color"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:131
+msgid "The color of the outer chart border."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:147
+#: templates/admin/chart_wizard/steps/step4.inc.php:711
+#: templates/admin/chart_wizard/steps/step4.inc.php:913
+msgid "Border radius"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:148
+#: templates/admin/chart_wizard/steps/step4.inc.php:239
+msgid "The corner radius of the outer chart border."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:162
+msgid "Zoom type"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:163
+msgid "Decides in what dimensions the user can zoom by dragging the mouse"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:180
+#: templates/admin/chart_wizard/steps/step4.inc.php:184
+msgid "Panning"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:181
+msgid ""
+"Allow panning in a chart. Best used with panKey to combine zooming and "
+"panning"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:191
+msgid "Pan key"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:192
+msgid "Allows setting a key to switch between zooming and panning"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:207
+msgid "Plot background color"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:208
+msgid "The background color or gradient for the plot area."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:223
+msgid "Plot background image"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:224
+msgid "The URL for an image to use as the plot background."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:238
+msgid "Plot border width"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:253
+msgid "Plot border color"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:254
+msgid "The color of the inner chart or plot area border."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:269
+#: templates/admin/settings/tabs/color_and_font_settings.php:40
+msgid "Font size"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:270
+msgid "The default font size, in pixels, of all text in the chart."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:284
+msgid "Font name"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:285
+msgid "The default font face for all text in the chart."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:299
+msgid "Font style"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:300
+msgid "The default font style for all text in the chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:316
+#: templates/admin/settings/tabs/color_and_font_settings.php:55
+#: templates/admin/settings/tabs/color_and_font_settings.php:118
+#: templates/admin/settings/tabs/color_and_font_settings.php:370
+msgid "Font color"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:317
+msgid "The default font color for all text in the chart."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:332
+#: templates/admin/chart_wizard/steps/step4.inc.php:336
+msgid "3D"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:333
+msgid "Check for 3D pie chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:346
+msgid "Grid"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:350
+#: templates/admin/chart_wizard/steps/step4.inc.php:443
+msgid "Do you want to show grid on the chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:357
+msgid "Grid line style"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:358
+msgid "The dash or dot style of the grid lines"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:382
+msgid "Horizontal axis label"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:383
+msgid "Name of the horizontal axis."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:397
+msgid "Horizontal crosshair"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:398
+msgid ""
+"Configure a horizontal crosshair that follows either the mouse pointer or "
+"the hovered point lines"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:401
+msgid "Show x-Axis crosshair"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:408
+msgid "Horizontal axis direction"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:409
+msgid ""
+"The direction in which the values along the horizontal axis grow. Specify -1 "
+"to reverse the order of the values"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:424
+msgid "Vertical axis label"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:425
+msgid "Name of the vertical axis."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:439
+msgid "Vertical crosshair"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:440
+msgid ""
+"Configure a vertical crosshair that follows either the mouse pointer or the "
+"hovered point lines"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:450
+msgid "Vertical axis direction"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:451
+msgid ""
+"The direction in which the values along the vertical axis grow. Specify -1 "
+"to reverse the order of the values"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:466
+msgid "Vertical axis min value"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:467
+msgid "The minimum value of the axis."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:481
+msgid "Vertical axis max value"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:482
+msgid "The maximum value of the axis."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:496
+msgid "Invert"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:497
+msgid ""
+"Whether to invert the axes so that the x axis is vertical and y axis is "
+"horizontal"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:500
+msgid "Invert chart axes"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:511
+msgid "Chart title"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:512
+msgid "Do you want to show the chart title on the page"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:515
+msgid "Show title"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:522
+msgid "Title floating"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:523
+msgid ""
+"When the title is floating, the plot area will not move to make space for it"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:526
+msgid "Enable floating"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:533
+msgid "Title align"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:534
+msgid "The horizontal alignment of the title"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:550
+msgid "Title position"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:551
+msgid ""
+"Position of the title. Possible values are 'top', 'left', 'bottom' and "
+"'right'"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:568
+msgid "Title font name"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:569
+msgid "The default font face for text in the title."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:583
+msgid "Title font style"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:584
+msgid "The default font style for text in the title"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:601
+msgid "Title font color"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:602
+msgid "The default font color for text in the title."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:617
+msgid "Subtitle"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:618
+msgid "The chart's subtitle."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:632
+msgid "Subtitle align"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:633
+msgid "The horizontal alignment of the subtitle"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:654
+msgid "Enable or disable the tooltip"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:657
+msgid "Show tooltip"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:665
+msgid "The background color for the tooltip."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:681
+msgid "The pixel width of the tooltip border."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:696
+msgid "The color of the tooltip border."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:712
+msgid "The radius of the rounded border corners."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:726
+msgid "Shared tooltip"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:727
+msgid ""
+"When the tooltip is shared, the entire plot area will capture mouse movement "
+"or touch events"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:730
+msgid "Share tooltip"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:737
+msgid "Value prefix"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:738
+msgid "A string to prepend to each series' y value"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:752
+msgid "Value suffix"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:753
+msgid "A string to append to each series' y value"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:772
+msgid "Enable or disable the legend"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:775
+msgid "Show legend"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:782
+msgid "Position"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:783
+msgid "Position of the legend"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:802
+msgid "The background color of the legend."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:818
+msgid "A title to be added on top of the legend"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:832
+msgid "Layout"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:833
+msgid "The layout of the legend items"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:848
+msgid "Align"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:849
+msgid "The horizontal alignment of the legend box within the chart area"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:865
+msgid "Vertical align"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:866
+msgid "The vertical alignment of the legend box"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:883
+msgid "The width of the drawn border around the legend."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:898
+msgid "The color of the drawn border around the legend."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:914
+msgid "The border corner radius of the legend."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:928
+msgid "Legend position"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:929
+msgid ""
+"Position of the legend. Possible values are 'top', 'left', 'bottom' and "
+"'right'"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:951
+msgid "Whether to enable the exporting module"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:954
+msgid "Export chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:961
+msgid "Data labels"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:962
+msgid "Add data labels to improve readability of the exported chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:965
+msgid "Show data labels"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:972
+msgid "File name"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:973
+msgid "The filename, without extension, to use for the exported chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:987
+msgid "Width"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:988
+msgid "The width of the original chart when exported."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1002
+msgid "Button align"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1003
+msgid "Alignment for the export button"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1019
+msgid "Button vertical align"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1020
+msgid "The vertical alignment of the export button"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1036
+msgid "Button color"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1037
+msgid "The color of the symbol's stroke or line."
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1052
+msgid "Button text"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1053
+msgid "A text string to add to the individual button"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1072
+msgid "Whether to show the credits text"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1075
+msgid "Show credits"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1082
+msgid "Credits href"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1083
+msgid "The URL for the credits label"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1097
+msgid "Credits text"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step4.inc.php:1098
+msgid "The text for the credits label"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step5.inc.php:2
+msgid "Paste this shortcode to render this chart"
+msgstr ""
+
+#: templates/admin/chart_wizard/steps/step5.inc.php:4
+#: templates/admin/table-settings/table_settings_block.inc.php:27
+msgid "Click to copy shortcode"
+msgstr ""
+
+#: templates/admin/common/close_modal.inc.php:13
+#: templates/common/delete_modal.inc.php:15
+msgid "Are you sure?"
+msgstr ""
+
+#: templates/admin/common/close_modal.inc.php:22
+msgid "There is no undo! You will be redirected to wpDataTables page."
+msgstr ""
+
+#: templates/admin/common/close_modal.inc.php:32
+msgid "Yes"
+msgstr ""
+
+#: templates/admin/common/error_modal.inc.php:14
+msgid "Error"
+msgstr ""
+
+#: templates/admin/constructor/constructor.inc.php:23
+msgid "Table Creation Wizard"
+msgstr ""
+
+#: templates/admin/constructor/constructor.inc.php:62
+msgid "Open in standard editor"
+msgstr ""
+
+#: templates/admin/constructor/constructor.inc.php:63
+msgid "Open in Excel-like editor"
+msgstr ""
+
+#: templates/admin/constructor/constructor.inc.php:71
+#: templates/admin/table-settings/column_settings_panel.inc.php:17
+#: templates/admin/table-settings/column_settings_panel.inc.php:974
+#: templates/admin/table-settings/table_preview_block.inc.php:65
+#: templates/admin/table-settings/table_settings_block.inc.php:1107
+msgid "Documentation"
+msgstr ""
+
+#: templates/admin/constructor/constructor_column_block.inc.php:29
+#: templates/admin/constructor/constructor_file_preview.inc.php:31
+#: templates/admin/table-settings/add_column_modal.inc.php:42
+msgid "Type"
+msgstr ""
+
+#: templates/admin/constructor/constructor_column_block.inc.php:56
+#: templates/admin/constructor/constructor_file_preview.inc.php:72
+#: templates/admin/table-settings/add_column_modal.inc.php:78
+msgid "Possible values"
+msgstr ""
+
+#: templates/admin/constructor/constructor_column_block.inc.php:67
+#: templates/admin/constructor/constructor_file_preview.inc.php:83
+#: templates/admin/table-settings/add_column_modal.inc.php:89
+msgid "Editor predefined value"
+msgstr ""
+
+#: templates/admin/constructor/constructor_file_preview.inc.php:49
+#: templates/admin/table-settings/column_settings_panel.inc.php:440
+msgid "Date input format"
+msgstr ""
+
+#: templates/admin/constructor/constructor_file_preview.inc.php:94
+msgid "Data preview"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:3
+msgid "Choose what kind of table would you like to construct"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:15
+msgid "Create a table linked to an existing data source"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:16
+msgid ""
+"(Excel, CSV, Google Spreadsheet, MySQL query, XML, JSON, serialized PHP "
+"array). Data will be read from the source every time on page load. Only "
+"MySQL-based tables can be made editable."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:28
+msgid "Create a table manually"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:29
+msgid ""
+"Define the number and type of columns, and fill in the data manually in WP "
+"admin. Table will be stored in MySQL and can be edited from WP admin, or "
+"made front-end editable."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:41
+msgid "Create a table by importing data from data source"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:42
+msgid ""
+"(Excel, CSV, Google Spreadsheet). Data will be imported to MySQL, the table "
+"can be edited in WP admin, or made front-end editable."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:54
+msgid "Generate a query to WordPress database"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:55
+msgid ""
+"Create a MySQL-query-based table by generating a query to WordPress database "
+"(posts, taxonomies, postmeta) with a GUI tool."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:67
+msgid "Generate a query to MySQL database"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1.inc.php:68
+msgid ""
+"Create a MySQL-query-based table by generating a query to any custom MySQL "
+"database with a GUI tool."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:5
+msgid ""
+"Please provide some initial structure metadata before the table will be "
+"created."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:6
+msgid ""
+"This constructor will help you to create a table from scratch. You will be "
+"able to edit the table content and metadata later manually at any time."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:13
+#: templates/admin/constructor/steps/constructor_2_2.inc.php:13
+msgid "Table name"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:15
+#: templates/admin/constructor/steps/constructor_2_2.inc.php:15
+msgid ""
+"What is the header of the table that will be visible to the site visitors"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:27
+msgid "Number of columns"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:29
+msgid ""
+"How many columns table will it have? You can also modify it below with + and "
+"x buttons"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:45
+#: templates/admin/constructor/steps/constructor_2_2.inc.php:31
+msgid "Column names and types"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:46
+#: templates/admin/constructor/steps/constructor_2_2.inc.php:32
+msgid "Drag and drop to reorder columns"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:51
+#: templates/admin/constructor/steps/constructor_1_1.inc.php:64
+#: templates/admin/constructor/steps/constructor_2_2.inc.php:37
+#: templates/admin/constructor/steps/constructor_2_2.inc.php:50
+#: templates/admin/table-settings/table_preview_block.inc.php:31
+msgid "Add column"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_2.inc.php:6
+#: templates/admin/table-settings/table_settings_block.inc.php:117
+msgid "Input file path or URL"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_2.inc.php:8
+msgid ""
+"Upload your file or provide the full URL here. For CSV or Excel input "
+"sources only URLs or paths from same servers are supported. For Google "
+"Spreadsheets: please do not forget to publish the spreadsheet before pasting "
+"the URL."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_2.inc.php:17
+#: templates/admin/table-settings/table_settings_block.inc.php:129
+msgid "Browse..."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:6
+msgid "Please choose the WP data which will be used to create a table."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:7
+msgid ""
+"This constructor type will create a query to WordPress database and create a "
+"wpDataTable based on this query. This table content cannot be edited "
+"manually afterwards, but will always contain actual data from your WordPress "
+"database."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:17
+msgid "All post types"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:19
+msgid "Add or drag post types."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:27
+msgid "all"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:54
+msgid "Selected post types"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:73
+msgid "All post properties"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:75
+msgid "Add or drag post properties."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:103
+msgid "Selected post properties"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:123
+msgid "Post types relationship"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:125
+msgid ""
+"When it is enabled, relations will be defined (joining rules) between post "
+"types, otherwise relations between post types will not be defined (do a full "
+"outer join)."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:131
+msgid "Define relations (joining rules) between post types"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:147
+msgid "Define post types relations"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:149
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:122
+msgid "Check to have an inner join, uncheck to have left join."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:164
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:137
+msgid "Add conditions"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:166
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:139
+msgid "Add conditions that you would like to have in the table."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:171
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:144
+msgid "Add condition"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:192
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:164
+msgid "Add grouping rules"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:194
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:166
+msgid "Add grouping rules that you would like to have in the table."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:199
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:171
+msgid "Add grouping"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_3.inc.php:308
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:275
+msgid "Group by "
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:6
+msgid "Please choose the MySQL data which will be used to create a table."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:7
+msgid ""
+"This constructor type will create a query to any MySQL database database and "
+"create a wpDataTable based on this query. This table content cannot be "
+"edited manually afterwards, but will always contain actual data from your "
+"MySQL database."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:17
+msgid "All MySQL tables"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:19
+msgid "Add or drag MySQL tables."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:51
+msgid "Selected MySQL tables"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:70
+msgid "All MySQL columns"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:72
+msgid "Add or drag MySQL columns."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:100
+msgid "Selected MySQL columns"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_1_4.inc.php:120
+msgid "Define MySQL tables relations"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_2_2.inc.php:6
+msgid ""
+"Please check which columns would you like to import and make sure that the "
+"column types were imported correctly."
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_2_3.inc.php:6
+msgid "Preview the query that has been generated for you"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_2_3.inc.php:10
+msgid "Click to refresh the table"
+msgstr ""
+
+#: templates/admin/constructor/steps/constructor_2_3.inc.php:26
+msgid "Preview the 5 first result rows"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:20
+#: templates/admin/settings/settings.inc.php:21
+msgid "Settings for the plugin"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:32
+#: templates/admin/table-settings/column_settings_panel.inc.php:30
+#: templates/admin/table-settings/columns_list_modal.inc.php:27
+#: templates/admin/table-settings/foreign_key_config.inc.php:96
+#: templates/admin/table-settings/formula_editor_modal.inc.php:73
+#: templates/admin/table-settings/table_settings_block.inc.php:45
+msgid "Save"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:44
+msgid "Main settings"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:49
+#: templates/admin/settings/tabs/separate_mysql_connection.php:13
+msgid "Separate MySQL connection"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:54
+msgid "Color and font settings"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:58
+msgid "Custom JS and CSS"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:62
+msgid "Info"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:91
+msgid "Reset colors and fonts to default"
+msgstr ""
+
+#: templates/admin/settings/settings.inc.php:94
+#: templates/admin/table-settings/column_settings_panel.inc.php:982
+#: templates/admin/table-settings/table_preview_block.inc.php:73
+#: templates/admin/table-settings/table_settings_block.inc.php:1115
+msgid "Apply"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:22
+msgid "Font"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:23
+msgid ""
+"This font will be used in rendered tables. Leave blank not to override "
+"default theme settings"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:41
+msgid "Define the font size"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:56
+msgid "This color is used for the main font in table cells."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:87
+msgid "The color is used for background of the table header."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:103
+msgid "This color is used for the border in the table header."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:119
+msgid "This color is used for the font in the table header."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:134
+msgid "Active and hover color\t"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:135
+msgid ""
+"This color is used when you hover the mouse above the table header, or when "
+"you choose a column."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:165
+msgid "Inner border"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:166
+msgid "This color is used for the inner border in the table between cells."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:181
+msgid "Outer border"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:182
+msgid "This color is used for the outer border of the whole table body."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:212
+msgid "Even row background"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:213
+msgid "This color is used for for background in even rows."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:228
+msgid "Odd row background"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:229
+msgid "This color is used for for background in odd rows."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:244
+msgid "Hover row"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:245
+msgid ""
+"This color is used for to highlight the row when you hover your mouse above "
+"it."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:260
+msgid "Background for selected rows"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:261
+msgid "This color is used for background in selected rows."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:291
+msgid "Sorted columns, even rows"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:292
+msgid ""
+"This color is used for background in cells which are in the active columns "
+"(columns used for sorting) in even rows."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:307
+msgid "Sorted columns, odd rows"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:308
+msgid ""
+"This color is used for background in cells which are in the active columns "
+"(columns used for sorting) in odd rows."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:339
+msgid "This color is used for background in buttons."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:355
+msgid "This color is used for border in buttons."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:371
+msgid "This color is used for font in buttons."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:386
+msgid "Background hover color"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:387
+msgid ""
+"This color will be used for button backgrounds when you hover above them."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:402
+msgid "Hover font color"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:403
+msgid "This color will be used for buttons font when you hover above them."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:418
+msgid "Buttons hover border color"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:419
+msgid "This color will be used for button borders when you hover above them."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:434
+msgid "Buttons and inputs border radius (in px)"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:435
+msgid "This is a border radius for inputs in buttons. Default is 3px."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:464
+msgid "Modals font color"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:465
+msgid ""
+"This color will be used for wpDataTable popup (filter, datepicker) fonts."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:481
+msgid "Modals background"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:482
+msgid ""
+"This color will be used for wpDataTable popup (filter, datepicker) "
+"background."
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:498
+msgid "Overlay background"
+msgstr ""
+
+#: templates/admin/settings/tabs/color_and_font_settings.php:499
+msgid ""
+"This color will be used for overlay which appears below the plugin popups."
+msgstr ""
+
+#: templates/admin/settings/tabs/custom_js_and_css.php:13
+msgid "Custom wpDataTables JS"
+msgstr ""
+
+#: templates/admin/settings/tabs/custom_js_and_css.php:15
+msgid ""
+"This JS will be inserted as an inline script block on every page that has a "
+"wpDataTable."
+msgstr ""
+
+#: templates/admin/settings/tabs/custom_js_and_css.php:28
+msgid "Custom wpDataTables CSS"
+msgstr ""
+
+#: templates/admin/settings/tabs/custom_js_and_css.php:30
+msgid ""
+"This CSS will be inserted as an inline style block on every page that has a "
+"wpDataTable."
+msgstr ""
+
+#: templates/admin/settings/tabs/custom_js_and_css.php:43
+msgid "Use minified wpDataTables Javascript "
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:13
+msgid "Interface language"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:15
+msgid "Pick the language which will be used in tables interface."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:21
+msgid "English (default)"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:34
+msgid "Date format"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:36
+msgid "Pick the date format to use in date column type."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:62
+msgid "Time format"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:64
+msgid "Pick the time format to use in datetime and time column type."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:79
+msgid "Parse shortcodes"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:81
+msgid "Parse shortcodes in strings"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:93
+msgid "Base skin"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:95
+msgid "Choose the base skin for the plugin."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:101
+msgid "Material"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:102
+msgid "Light"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:103
+msgid "Graphite"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:111
+msgid "Number format"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:113
+msgid "Pick the number format (thousands and decimals separator)"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:130
+msgid "Render advanced filter"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:132
+msgid ""
+"Choose where you would like to render the advanced filter for tables where "
+"enabled."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:138
+msgid "In the header"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:139
+msgid "In the footer"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:147
+#: templates/admin/table-settings/column_settings_panel.inc.php:390
+msgid "Decimal places"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:149
+msgid "Define the amount of decimal places for the float numbers."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:166
+msgid "Tablet width"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:168
+msgid ""
+"Here you can specify width of the screen (in pixels) that will be treated as "
+"a tablet. You can set it wider if you want responsive effect on desktops."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:183
+msgid "Mobile width"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:185
+msgid "Here you can specify width (in pixels) will be treated as a mobile.."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:202
+msgid "Tables per admin page"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:204
+msgid "How many tables to show in the browse page."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:220
+msgid "Align numbers"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:222
+#: templates/admin/settings/tabs/main_plugin_settings.php:322
+msgid ""
+"Please enter your Envato purchase code to enable plugin auto-updates. Leave "
+"blank if you do not want the plugin to auto-update."
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:236
+msgid "Sum functions label"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:238
+msgid ""
+"Enter a label that will be used for Sum functions. If you leave it blank "
+"default label will be Σ ="
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:255
+msgid "Average functions label"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:257
+msgid ""
+"Enter a label that will be used for Average functions. If you leave it blank "
+"default label will be Avg ="
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:279
+msgid "Minimum functions label"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:281
+msgid ""
+"Enter a label that will be used for Minimum functions. If you leave it blank "
+"default label will be Min ="
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:298
+msgid "Maximum functions label"
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:300
+msgid ""
+"Enter a label that will be used for Maximum functions. If you leave it blank "
+"default label will be Max ="
+msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php:320
+msgid "Purchase code"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:15
+msgid ""
+"If this checkbox is checked, wpDataTables will use its own connection to "
+"MySQL bases. In other case it will use the main WordPress MySQL connection."
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:19
+msgid "Use separate MySQL connection"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:27
+msgid "Test connection"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:29
+msgid ""
+"Click this button to test if wpDataTables is able to connect to the MySQL "
+"server with the details you provided."
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:40
+msgid "MySQL host"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:42
+msgid "MySQL host address."
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:46
+msgid "MySQL host address"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:51
+msgid "MySQL database"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:53
+msgid "MySQL database name."
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:57
+msgid "MySQL database name"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:65
+#: templates/admin/settings/tabs/separate_mysql_connection.php:72
+msgid "MySQL user"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:67
+msgid "MySQL username for the connection."
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:77
+#: templates/admin/settings/tabs/separate_mysql_connection.php:82
+msgid "MySQL password"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:79
+msgid "MySQL password for the provided user."
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:91
+#: templates/admin/settings/tabs/separate_mysql_connection.php:97
+msgid "MySQL port"
+msgstr ""
+
+#: templates/admin/settings/tabs/separate_mysql_connection.php:93
+msgid "MySQL port for the connection (default: 3306)."
+msgstr ""
+
+#: templates/admin/table-settings/add_column_modal.inc.php:17
+msgid "Add Column"
+msgstr ""
+
+#: templates/admin/table-settings/add_column_modal.inc.php:31
+msgid "Column header"
+msgstr ""
+
+#: templates/admin/table-settings/add_column_modal.inc.php:59
+msgid "Insert after"
+msgstr ""
+
+#: templates/admin/table-settings/add_column_modal.inc.php:65
+msgid "Beginning of table"
+msgstr ""
+
+#: templates/admin/table-settings/add_column_modal.inc.php:66
+msgid "End of table"
+msgstr ""
+
+#: templates/admin/table-settings/add_column_modal.inc.php:101
+msgid "Fill with default value"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:12
+msgid "Column settings"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:45
+#: templates/admin/table-settings/table_settings_block.inc.php:61
+msgid "Display"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:49
+msgid "Data"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:53
+#: templates/admin/table-settings/table_settings_block.inc.php:530
+#: templates/admin/table-settings/table_settings_block.inc.php:538
+msgid "Sorting"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:57
+msgid "Filtering"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:61
+#: templates/admin/table-settings/table_settings_block.inc.php:69
+msgid "Editing"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:66
+msgid "Conditional formatting"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:78
+msgid "Displayed header"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:92
+msgid "Column position"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:111
+#: templates/admin/table-settings/column_settings_panel.inc.php:119
+msgid "Cell content prefix"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:126
+msgid ""
+"Any text or symbol entered here will be shown before the value in every cell "
+"inside of this column. E.g.: $, €. Does not influence filtering and sorting. "
+"Convenient for prices, percentages, etc."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:141
+#: templates/admin/table-settings/column_settings_panel.inc.php:149
+msgid "Cell content suffix"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:156
+msgid ""
+"Any text or symbol entered here will be shown after the value in every cell "
+"inside of this column. E.g.: %, pcs. Does not influence filtering and "
+"sorting. Convenient for prices, percentages, etc."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:177
+msgid "Hide on mobiles"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:185
+msgid "Collapse column on mobile devices"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:194
+msgid "Hide on tablets"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:202
+msgid "Collapse column on tablet devices"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:217
+msgid "CSS class(es)"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:231
+msgid "Visible on front-end"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:239
+msgid "Show column in front-end"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:255
+msgid "Column width"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:268
+#: templates/admin/table-settings/column_settings_panel.inc.php:276
+msgid "Column color"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:283
+msgid "Here you can override the default color for the complete column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:304
+#: templates/admin/table-settings/column_settings_panel.inc.php:312
+msgid "Group column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:319
+msgid ""
+"If one column of your table contains similar values for many rows, maybe it "
+"makes sense to use it as a “group column”: it means that it will not be "
+"rendered as a column, but its values will be used to group the rows. Each "
+"group will be marked with one row with joined cells above, containing the "
+"group value."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:320
+msgid ""
+"Group column will not work with MySQL tables with server-side processing "
+"enabled and with manual tables!"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:328
+msgid "Toggle column grouping"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:348
+msgid "Column type"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:350
+msgid ""
+"You can redefine the column data type here. Affects sorting, filtering and "
+"display logic. For manually created tables this will change the column type "
+"in database as well, which may result in data loss."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:357
+msgid "String"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:361
+msgid "DateTime"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:363
+#: templates/admin/table-settings/column_settings_panel.inc.php:879
+msgid "URL link"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:364
+#: templates/admin/table-settings/column_settings_panel.inc.php:880
+msgid "E-mail link"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:367
+#: templates/admin/table-settings/formula_editor_modal.inc.php:33
+msgid "Formula"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:377
+msgid "Formula for calculation"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:379
+msgid ""
+"You can create a formula (calculated column) based on other numeric columns "
+"(Integer and Float)"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:383
+msgid "Open formula editor"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:392
+msgid ""
+"You can redefine the visible decimal places for a float and formula columns "
+"here. If you leave this field empty amount of decimal places will be loaded "
+"from the settings page. 0 is available just for formula columns "
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:404
+#: templates/admin/table-settings/column_settings_panel.inc.php:411
+msgid "Skip thousands separator"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:406
+msgid ""
+"Do not show thousands separator for this column (e.g. when showing years, "
+"IDs)."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:420
+msgid "Possible values for column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:422
+msgid ""
+"Define the logic for fetching the possible values for this column for "
+"filtering, and for editing: read from table itself on page load (will always "
+"contain only the values that already exist in the table), hard-code the "
+"list, or configure a relation with a different wpDataTable (use values in "
+"this column as foreign key)."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:429
+msgid "Read from table on page load"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:430
+msgid "Define values list"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:431
+msgid "Use values from another wpDataTable (foreign key)"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:442
+msgid ""
+"Define date format which is used in the provided data source. Necessary for "
+"smooth reading of your dates."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:471
+msgid "Values list"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:473
+msgid "Read from table"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:475
+msgid "Reset"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:477
+msgid ""
+"Enter the possible values for this column in this list, separate by pressing "
+"ENTER or comma. Click \"Read from table\" to fetch the list from existing "
+"column values. Values will be used in selectbox and checkbox filters and "
+"editors for the column."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:490
+#: templates/admin/table-settings/foreign_key_config.inc.php:10
+msgid "Use values from another wpDataTable"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:492
+msgid ""
+"Configure a relation with a separate wpDataTable: values in this column will "
+"be used as a foreign key, and replaced with values of a remote table column "
+"(e.g.: user name instead of user ID)."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:496
+msgid "Configure relation..."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:516
+msgid "Allow empty value"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:518
+msgid ""
+"Add an empty value to the possible values list, to allow empty editing and "
+"filtering inputs."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:523
+msgid "Add an empty value to the list"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:537
+msgid "Calculate total"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:539
+msgid ""
+"Enable this to show a total (sum) for all cells in this column in table "
+"footer. You can also show it somewhere outside of the table by pasting the "
+"shortcode below the switch."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:544
+msgid "Calculate a total for this column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:550
+msgid ""
+"Click to copy this shortcode. By placing this shortcode anywhere in your "
+"posts or pages you can see the total for this column."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:559
+msgid "Calculate average"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:561
+msgid ""
+"Enable this to show an average value for all cells in this column in table "
+"footer. You can also show it somewhere outside of the table by pasting the "
+"shortcode below the switch."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:566
+msgid "Calculate average for this column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:572
+msgid ""
+"Click to copy this shortcode. By placing this shortcode anywhere in your "
+"posts or pages you can see the average for this column."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:581
+msgid "Calculate MIN value"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:583
+msgid ""
+"Enable this to show a minimum value within all cells in this column in table "
+"footer. You can also show it somewhere outside of the table by pasting the "
+"shortcode below the switch."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:588
+msgid "Find a minimum value for this column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:594
+msgid ""
+"Click to copy this shortcode. By placing this shortcode anywhere in your "
+"posts or pages you can see the minimum for this column."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:603
+msgid "Calculate MAX value"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:605
+msgid ""
+"Enable this to show a maximum value within all cells in this column in table "
+"footer. You can also show it somewhere outside of the table by pasting the "
+"shortcode below the switch."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:610
+msgid "Find a maximum value for this column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:616
+msgid ""
+"Click to copy this shortcode. By placing this shortcode anywhere in your "
+"posts or pages you can see the maximum for this column."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:635
+msgid "Allow sorting"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:637
+msgid "Disable this to disallow sorting for this column."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:642
+msgid "Allow sorting for this column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:651
+msgid "Use as default sorting column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:653
+#: templates/admin/table-settings/column_settings_panel.inc.php:658
+msgid "Sort table by this column on load"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:671
+msgid "Default sorting direction"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:673
+msgid "Choose whether to sort ascending or descending by default."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:680
+msgid "Ascending"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:681
+msgid "Descending"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:699
+msgid "Add a filter for this column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:707
+msgid "Enable filtering for column"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:714
+msgid ""
+"Enabling this switch will add a filter for this column. Disable to remove "
+"the filter for this column."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:722
+msgid "Allow filtering"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:731
+msgid "Filter type"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:733
+msgid ""
+"You can redefine the filter type here, it will affect the filtering logic."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:740
+msgid "Text"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:741
+msgid "Number"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:742
+msgid "Number range"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:743
+msgid "Date range"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:744
+msgid "DateTime range"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:745
+msgid "Time range"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:746
+msgid "Selectbox"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:747
+msgid "Checkbox"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:763
+msgid "Filter label"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:771
+msgid "Custom filter label"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:778
+msgid ""
+"You can change the filter label (placeholder) for this column here, if you "
+"would like to show some custom text instead of default."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:793
+msgid "Exact filtering"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:795
+msgid ""
+"Enable exact search to use exact match logic for filtering, disable to allow "
+"partial match."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:800
+msgid "Enable exact filtering"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:814
+#: templates/admin/table-settings/column_settings_panel.inc.php:912
+msgid "Predefined value(s)"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:816
+msgid ""
+"Define value(s) that will be set as default pre-defined filter value(s) on "
+"page load."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:862
+msgid "Editor input type"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:864
+msgid "Choose which kind of editor input to use for this column."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:870
+msgid "None"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:871
+msgid "One-line edit"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:872
+msgid "Multi-line edit"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:873
+msgid "HTML editor"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:874
+msgid "Single-value selectbox"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:875
+msgid "Multi-value selectbox"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:891
+msgid "Column cannot be empty"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:893
+msgid ""
+"Enable to make this column mandatory. Users will see a warning when trying "
+"to save with empty input."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:898
+msgid "Cannot be empty"
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:914
+msgid ""
+"If you would like to have some values pre-defined in editors (i.e. default "
+"editor values) please enter these here."
+msgstr ""
+
+#: templates/admin/table-settings/column_settings_panel.inc.php:953
+msgid "Add rule"
+msgstr ""
+
+#: templates/admin/table-settings/column_small_block.inc.php:11
+msgid "Show/hide the column"
+msgstr ""
+
+#: templates/admin/table-settings/column_small_block.inc.php:13
+msgid "Show/hide on mobile"
+msgstr ""
+
+#: templates/admin/table-settings/column_small_block.inc.php:15
+msgid "Show/hide on tablet"
+msgstr ""
+
+#: templates/admin/table-settings/column_small_block.inc.php:17
+msgid "Open column settings"
+msgstr ""
+
+#: templates/admin/table-settings/columns_list_modal.inc.php:12
+msgid "List of the columns in the data source with quickaccess tools."
+msgstr ""
+
+#: templates/admin/table-settings/columns_list_modal.inc.php:13
+msgid ""
+"Click column header to rename it, toggle column visibility by clicking on "
+"the eye icon, open column settings by clicking on the wrench icon, drag and "
+"drop blocks to reorder columns."
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:5
+msgid "If cell value"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:16
+msgid "contains"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:17
+msgid "does not contain"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:30
+msgid "Set cell color"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:31
+msgid "Reset cell color to default"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:32
+msgid "Set cell content"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:33
+msgid "Set cell CSS class"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:34
+msgid "Remove cell CSS class"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:35
+msgid "Set row color"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:36
+msgid "Reset row color to default"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:37
+msgid "Set row CSS class"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:38
+msgid "Remove row CSS class"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:39
+msgid "Set column color"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:40
+msgid "Add column CSS class"
+msgstr ""
+
+#: templates/admin/table-settings/conditional_formatting_block.inc.php:51
+msgid "Remove rule"
+msgstr ""
+
+#: templates/admin/table-settings/foreign_key_config.inc.php:16
+msgid "Choose a source wpDataTable"
+msgstr ""
+
+#: templates/admin/table-settings/foreign_key_config.inc.php:18
+msgid ""
+"Please choose a remote wpDataTable which will be used as the data source."
+msgstr ""
+
+#: templates/admin/table-settings/foreign_key_config.inc.php:25
+msgid "Pick a table..."
+msgstr ""
+
+#: templates/admin/table-settings/foreign_key_config.inc.php:45
+msgid "Display value"
+msgstr ""
+
+#: templates/admin/table-settings/foreign_key_config.inc.php:47
+msgid ""
+"Please choose which column values will be shown to the front-end user (e.g. "
+"Name)."
+msgstr ""
+
+#: templates/admin/table-settings/foreign_key_config.inc.php:69
+msgid "Store value"
+msgstr ""
+
+#: templates/admin/table-settings/foreign_key_config.inc.php:71
+msgid ""
+"Please choose which column values will be stored in the table for reference "
+"- by default wdt_ID, or ID"
+msgstr ""
+
+#: templates/admin/table-settings/formula_editor_modal.inc.php:17
+msgid "Formula Editor"
+msgstr ""
+
+#: templates/admin/table-settings/formula_editor_modal.inc.php:22
+msgid "Use this dialog to construct formulas and see a preview of the result."
+msgstr ""
+
+#: templates/admin/table-settings/formula_editor_modal.inc.php:23
+msgid ""
+"You can use columns (values for each cell will be inserted), or number "
+"values. Only numeric columns allowed (non-numeric will be parsed as 0). "
+"Basic math operations and brackets are supported. Example: col1*((col2+2)-"
+"col3*sin(col4-3))."
+msgstr ""
+
+#: templates/admin/table-settings/formula_editor_modal.inc.php:27
+msgid "Columns to use"
+msgstr ""
+
+#: templates/admin/table-settings/formula_editor_modal.inc.php:36
+msgid "Type your formula here..."
+msgstr ""
+
+#: templates/admin/table-settings/formula_editor_modal.inc.php:65
+msgid "Preview"
+msgstr ""
+
+#: templates/admin/table-settings/possible_values_merge_list_modal.inc.php:7
+msgid "Merge values?"
+msgstr ""
+
+#: templates/admin/table-settings/possible_values_merge_list_modal.inc.php:11
+msgid ""
+"There are already defined possible values. Do you want to merge or to "
+"replace new values with the existing?"
+msgstr ""
+
+#: templates/admin/table-settings/remove_column_modal.inc.php:17
+#: templates/admin/table-settings/remove_column_modal.inc.php:30
+msgid "Remove Column"
+msgstr ""
+
+#: templates/admin/table-settings/remove_column_modal.inc.php:48
+msgid "Confirm"
+msgstr ""
+
+#: templates/admin/table-settings/remove_column_modal.inc.php:54
+msgid "Are you sure? There is no undo!"
+msgstr ""
+
+#: templates/admin/table-settings/table_preview_block.inc.php:17
+msgid "Table preview and columns setup"
+msgstr ""
+
+#: templates/admin/table-settings/table_preview_block.inc.php:21
+msgid "Add a formula (calculated) column"
+msgstr ""
+
+#: templates/admin/table-settings/table_preview_block.inc.php:22
+msgid "Add a formula column"
+msgstr ""
+
+#: templates/admin/table-settings/table_preview_block.inc.php:25
+msgid "Complete column list"
+msgstr ""
+
+#: templates/admin/table-settings/table_preview_block.inc.php:33
+msgid "Remove column"
+msgstr ""
+
+#: templates/admin/table-settings/table_preview_block.inc.php:42
+msgid "Switch View:"
+msgstr ""
+
+#: templates/admin/table-settings/table_preview_block.inc.php:44
+#: templates/admin/table-settings/table_preview_block.inc.php:47
+msgid "STANDARD"
+msgstr ""
+
+#: templates/admin/table-settings/table_preview_block.inc.php:45
+#: templates/admin/table-settings/table_preview_block.inc.php:48
+msgid "EXCEL-LIKE"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:24
+msgid "wpDataTable name, click to edit"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:32
+msgid "Collapse and expand widget"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:65
+msgid "Sorting and filtering"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:73
+#: templates/admin/table-settings/table_settings_block.inc.php:901
+msgid "Table Tools"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:77
+msgid "Placeholders"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:89
+msgid "Input data source type"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:91
+msgid ""
+"Please choose a type of the input data source - it can be a MySQL query, a "
+"file, or an URL. Only MySQL query-based tables can use server-side processing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:99
+msgid "Select a data source type"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:100
+msgid "MySQL query"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:101
+msgid "CSV file"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:102
+msgid "Excel file"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:103
+msgid "Google Spreadsheet"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:104
+msgid "XML file"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:105
+msgid "JSON file"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:119
+msgid ""
+"Upload your file or provide the full URL here. For CSV or Excel input "
+"sources only URLs or paths from same domain are supported. For Google "
+"Spreadsheets: please do not forget to publish the spreadsheet before pasting "
+"the URL."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:125
+msgid "Paste URL or path, or click Browse to choose"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:139
+msgid "Server-side processing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:141
+msgid ""
+"If it is turned on, all sorting, filtering, pagination and other data "
+"interaction will be done by MySQL server. This feature is recommended if you "
+"have more than 2000-3000 rows. Mandatory for editable tables."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:146
+msgid "Enable server-side processing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:160
+msgid "MySQL Query"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:162
+msgid ""
+"Enter the text of your MySQL query here - please make sure it returns actual "
+"data first. You can use a number of placeholders to make the dataset in the "
+"table flexible and be able to return different sets of data by calling it "
+"with different shortcodes."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:169
+msgid "Auto-refresh"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:171
+msgid ""
+"If you enter a non-zero value, table will auto-refresh to show actual data "
+"with a given interval of seconds. Leave zero or empty not to use auto-"
+"refresh."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:176
+msgid "Auto-refresh interval in seconds (zero or blank to disable)"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:194
+msgid "Table title"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:202
+msgid "Show table title"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:209
+msgid ""
+"Enable this to show the table title in a h3 block above the table, disable "
+"to hide."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:216
+msgid "Show table title on the page"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:226
+msgid "Responsiveness"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:234
+msgid "Responsive design"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:241
+msgid "Enable this to allow responsiveness in the table."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:242
+msgid ""
+"Please do not forget to define which columns will be hidden on mobiles and "
+"tablets in the column settings!"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:249
+msgid "Allow collapsing on mobiles and tablets"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:259
+msgid "Hide until loaded"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:261
+msgid ""
+"Enable to make whole table hidden until it is initialized to prevent "
+"unformatted data flashing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:265
+msgid "Hide the table before it is fully loaded"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:279
+msgid "Default rows per page"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:287
+#: templates/admin/table-settings/table_settings_block.inc.php:320
+msgid "Rows per page"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:294
+msgid "How many rows to show per page by default."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:328
+msgid "Show X entries"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:335
+msgid ""
+"Enable/disable this to show/hide \"Show X entries\" per page dropdown on the "
+"frontend."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:342
+msgid "Show \"Show X entries\" dropdown"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:360
+msgid "Scrollable table"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:367
+msgid "Enable this to enable a horizontal scrollbar below the table."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:368
+msgid "This should be turned off if you want to set columns width manually."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:375
+msgid "Show a horizontal scrollbar"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:390
+#: templates/admin/table-settings/table_settings_block.inc.php:398
+msgid "Info block"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:405
+msgid ""
+"Enable to show a block of information about the number of records below the "
+"table."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:412
+msgid "Show information block below the table"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:422
+#: templates/admin/table-settings/table_settings_block.inc.php:430
+msgid "Limit table width"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:437
+msgid "Enable this to restrict table width to page width."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:438
+msgid ""
+"This should be turned on if you want to set columns width manually. Should "
+"be on to use word wrapping."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:445
+msgid "Limit table width to page width"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:455
+#: templates/admin/table-settings/table_settings_block.inc.php:463
+msgid "Word wrap"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:470
+msgid ""
+"Enable this to wrap long strings into multiple lines and stretch the cells "
+"height."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:477
+msgid "Wrap words to newlines"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:498
+msgid "Advanced column filters"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:506
+msgid "Advanced filter"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:513
+msgid ""
+"Enable to show an advanced filter for each of the columns, filters can be "
+"shown in table footer, header or in a separate form."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:520
+msgid "Enable advanced column filters"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:545
+msgid ""
+"If this is enabled, each column header will be clickable; clicking will sort "
+"the whole table by the content of this column cells ascending or descending."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:552
+msgid "Allow sorting for the table"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:562
+msgid "Main search block"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:570
+msgid ""
+"Global sear\n"
+"                                                ch"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:578
+msgid ""
+"If this is enabled, a search block will be displayed on the top right of the "
+"table, allowing to search through whole table with a single input."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:585
+msgid "Enable search block"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:601
+msgid "Filters in a form"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:608
+msgid "Filter in form"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:615
+msgid ""
+"Enable to show the advanced column filter in a form above the table, instead "
+"of showing in the table footer/header."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:622
+msgid "Show filters in a form above the table"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:632
+msgid "Clear filters button"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:643
+msgid "Enable to show the clear filters button."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:644
+msgid ""
+"If filter in form is enabled, clear button will be rendered after the last "
+"filter."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:648
+msgid ""
+"Otherwise, clear filter button will be rendered above the table next to "
+"\"Table Tools\" buttons."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:658
+msgid "Show clear filters button"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:680
+msgid "Allow editing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:688
+msgid "Front-end editing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:695
+msgid "Allow editing the table from the front-end."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:702
+msgid "Allow front-end editing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:712
+msgid "Popover edit block"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:720
+msgid "Popover tools"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:727
+msgid ""
+"If this is enabled, the New, Edit and Delete buttons will appear in a "
+"popover when you click on any row, instead of Table Tools block above the "
+"table."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:734
+msgid "Editing buttons in a popover"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:744
+#: templates/admin/table-settings/table_settings_block.inc.php:752
+msgid "In-line editing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:759
+msgid ""
+"If this is enabled, front-end users will be able to edit cells by double-"
+"clicking them, not only with the editor dialog."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:766
+msgid "Allow in-line editing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:783
+msgid "MySQL table name for editing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:785
+msgid ""
+"Name of the MySQL table which will be updated when edited from front-end."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:790
+msgid "MySQL table name"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:799
+msgid "ID column for editing"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:801
+msgid ""
+"Choose the column values from which will be used as row identifiers. MUST be "
+"a unique auto-increment integer on MySQL side so insert/edit/delete would "
+"work correctly! wpDataTables will guess the correct column if it is called "
+"\"id\" or \"ID\" on MySQL side."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:815
+msgid "Editor roles"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:817
+msgid ""
+"If you want only specific user roles to be able to edit the table, choose in "
+"this dropdown. Leave unchecked to allow editing for everyone."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:822
+msgid "Everyone"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:823
+msgid "Administrators"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:824
+msgid "Editors"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:825
+msgid "Authors"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:826
+msgid "Contributors"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:827
+msgid "Subscribers"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:842
+msgid "Users see and edit only own data"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:850
+msgid "Users see and edit only their own data"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:857
+msgid ""
+"If this is enabled, users will see and edit only the rows that are related "
+"to them or were created by them (associated using the User ID column)."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:864
+msgid "Limit editing to own data only"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:874
+msgid "User ID column"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:876
+msgid ""
+"Choose the column values from which will be used as User identifiers. "
+"References the ID from WordPress Users table (wp_users), MUST be defined as "
+"an integer on MySQL side."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:909
+msgid "Table tools"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:916
+msgid ""
+"If this is enabled, a toolbar with useful tools will be shown above the table"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:923
+msgid "Enable Table Tools"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:933
+msgid "Buttons"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:935
+msgid "Choose which buttons to show in the Table Tools block."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:941
+msgid "Columns visibility"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:964
+msgid ""
+"Placeholders can be understood as predefined ‘search and replace‘ templates; "
+"that will be replaced with some actual values at the execution time; usually "
+"this is used for MySQL queries."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:976
+#: templates/admin/table-settings/table_settings_block.inc.php:991
+#: templates/admin/table-settings/table_settings_block.inc.php:1006
+msgid ""
+"This placeholder will be replaced with any value that you will provide in a "
+"shortcode. Provide a default value here that will be used for table "
+"generation and when a different one is not defined in the shortcode."
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:981
+#: templates/admin/table-settings/table_settings_block.inc.php:996
+#: templates/admin/table-settings/table_settings_block.inc.php:1011
+#: templates/admin/table-settings/table_settings_block.inc.php:1033
+#: templates/admin/table-settings/table_settings_block.inc.php:1051
+#: templates/admin/table-settings/table_settings_block.inc.php:1068
+#: templates/admin/table-settings/table_settings_block.inc.php:1089
+msgid "Default for table generation"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:1027
+msgid ""
+"This placeholder will be replaced with the ID of currently logged in user. "
+"Provide a value here to be used for table generation"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:1043
+msgid ""
+"This placeholder will be replaced with the login of currently logged in "
+"user. Provide a value here to be used for table generation"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:1061
+msgid ""
+"This placeholder will be replaced with the current prefix of WordPress "
+"database. Provide a value here to be used for table generation"
+msgstr ""
+
+#: templates/admin/table-settings/table_settings_block.inc.php:1084
+msgid ""
+"This placeholder will be replaced with the ID of current post. Provide a "
+"value here to be used for table generation"
+msgstr ""
+
+#: templates/common/delete_modal.inc.php:24
+msgid "Please confirm deletion. There is no undo!"
+msgstr ""
+
+#: templates/frontend/edit_dialog.inc.php:8
+msgid "Please choose input type for columns that you want to edit"
+msgstr ""
+
+#: templates/frontend/edit_dialog.inc.php:151
+msgid "Prev"
+msgstr ""
+
+#: templates/frontend/edit_dialog.inc.php:159
+msgid "Apply and add new"
+msgstr ""
+
+#: templates/frontend/excel_table_main.inc.php:25
+msgid "Search"
+msgstr ""
+
+#: templates/frontend/filter_form.inc.php:27
+#: templates/frontend/filter_widget.inc.php:3
+msgid " Clear filters"
+msgstr ""

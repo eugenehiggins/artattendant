@@ -35,8 +35,9 @@ class Fep_Pro_Features {
 			require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-email-beautify.php' );
 			require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-email-piping.php' );
 			require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-read-receipt.php' );
+			require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-role-to-role-block.php' );
 			
-			if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 				require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-pro-ajax.php' );
 			}
     	}
@@ -71,27 +72,29 @@ class Fep_Pro_Features {
 	
 	function enqueue_scripts()
     {
+		//Next version tokeninput will be removed from here. It is already included into free version
+		//Please use wp_enqueue_script( 'fep-tokeninput-script'); and wp_enqueue_style( 'fep-tokeninput-style'); respectively
 		wp_register_script( 'fep-mr-script', plugins_url( '/assets/js/jquery.tokeninput.js', __FILE__ ), array( 'jquery' ), '1.1', true );
 	
 		if( isset( $_GET['fepaction'] ) && 'newmessage' == $_GET['fepaction'] ) {
-			wp_enqueue_style( 'fep-mr-style', plugins_url( '/assets/css/token-input-facebook.css', __FILE__ ) );
+			wp_register_style( 'fep-mr-style', plugins_url( '/assets/css/token-input-facebook.css', __FILE__ ) );
 		}
     }
 	
 	function admin_enqueue_scripts()
     {
-		wp_register_script( 'fep-oa-script', plugins_url( '/assets/js/oa-script.js', __FILE__ ), array( 'jquery' ), '1.1', true );
+		wp_register_script( 'fep-oa-script', plugins_url( '/assets/js/oa-script.js', __FILE__ ), array( 'jquery' ), '5.2', true );
     }
 	
 	function update(){
 	
-		$prev_ver = fep_get_option( 'plugin_pro_version', '4.7' );
+		$prev_ver = fep_get_option( 'plugin_pro_version', '4.4' );
 		
-		if( version_compare( $prev_ver, FEP_PLUGIN_VERSION, '!=' ) ) {
+		if( version_compare( $prev_ver, FEP_PLUGIN_VERSION, '<' ) ) {
 			
 			do_action( 'fep_pro_plugin_update', $prev_ver );
 			
-			update_option( 'FEP_admin_options', wp_parse_args( array( 'plugin_pro_version' => FEP_PLUGIN_VERSION ), get_option('FEP_admin_options') ) );
+			fep_update_option( 'plugin_pro_version', FEP_PLUGIN_VERSION );
 		}
 	
 	}

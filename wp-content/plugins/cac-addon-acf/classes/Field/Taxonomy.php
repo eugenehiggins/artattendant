@@ -43,4 +43,8 @@ class ACA_ACF_Field_Taxonomy extends ACA_ACF_Field {
 		return new ACA_ACF_Sorting( $this->column );
 	}
 
+	public function export() {
+		return new ACP_Export_Model_StrippedValue( $this->column );
+	}
+
 }

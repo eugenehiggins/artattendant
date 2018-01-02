@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FacetWP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-26 15:17-0400\n"
-"PO-Revision-Date: 2017-09-26 15:17-0400\n"
+"POT-Creation-Date: 2017-11-16 14:59-0500\n"
+"PO-Revision-Date: 2017-11-16 14:59-0500\n"
 "Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
 "Language-Team: Rasmus Grønbech <r@pilotcph.dk>\n"
 "Language: da\n"
@@ -17,70 +17,70 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/class-ajax.php:203
+#: includes/class-ajax.php:215
 #, fuzzy
 msgid "FacetWP was unable to auto-detect the post listing"
 msgstr "FacetWP var ikke i stand til auto-detect post notering"
 
-#: includes/class-ajax.php:231
+#: includes/class-ajax.php:243
 msgid "Settings saved"
 msgstr "Indstillingerne er gemt"
 
-#: includes/class-ajax.php:234
+#: includes/class-ajax.php:246
 msgid "Error: invalid JSON"
 msgstr "Fejl: ugyldig JSON"
 
-#: includes/class-ajax.php:353
+#: includes/class-ajax.php:365
 msgid "Nothing to import"
 msgstr "Der er intet at importerer"
 
-#: includes/class-ajax.php:389
+#: includes/class-ajax.php:401
 msgid "Imported"
 msgstr "Importeret"
 
-#: includes/class-ajax.php:392
+#: includes/class-ajax.php:404
 msgid "Skipped"
 msgstr "Sprunget over"
 
-#: includes/class-ajax.php:423
+#: includes/class-ajax.php:435
 msgid "Error"
 msgstr "Fejl"
 
-#: includes/class-display.php:130
+#: includes/class-display.php:138
 #, fuzzy
 #| msgid "No results"
 msgid "No results found"
 msgstr "Intet resultat"
 
-#: includes/class-helper.php:384
+#: includes/class-helper.php:430
 msgid "Posts"
 msgstr "Indlæg"
 
-#: includes/class-helper.php:386
+#: includes/class-helper.php:432
 msgid "Post Type"
 msgstr "Indlægstype"
 
-#: includes/class-helper.php:387
+#: includes/class-helper.php:433
 msgid "Post Date"
 msgstr "Dato"
 
-#: includes/class-helper.php:388
+#: includes/class-helper.php:434
 msgid "Post Modified"
 msgstr "Indlæg ændret"
 
-#: includes/class-helper.php:389
+#: includes/class-helper.php:435
 msgid "Post Title"
 msgstr "Titel"
 
-#: includes/class-helper.php:390
+#: includes/class-helper.php:436
 msgid "Post Author"
 msgstr "Forfatter"
 
-#: includes/class-helper.php:395
+#: includes/class-helper.php:441
 msgid "Taxonomies"
 msgstr "Taksonomier"
 
-#: includes/class-helper.php:400
+#: includes/class-helper.php:446
 msgid "Custom Fields"
 msgstr "Brugerdefinerede felter"
 
@@ -98,37 +98,37 @@ msgstr "integration tilføjelse"
 msgid "To use FacetWP with %s, please install the %s, then re-index."
 msgstr "For at bruge FacetWP med %s, skal du installere %s, så re-indeks."
 
-#: includes/class-renderer.php:461 includes/class-renderer.php:578
+#: includes/class-renderer.php:496 includes/class-renderer.php:613
 msgid "of"
 msgstr "af"
 
-#: includes/class-renderer.php:495 includes/facets/checkboxes.php:324
+#: includes/class-renderer.php:530 includes/facets/checkboxes.php:324
 #: includes/facets/dropdown.php:191 includes/facets/fselect.php:263
 #: includes/facets/hierarchy.php:212 includes/facets/radio.php:206
 msgid "Sort by"
 msgstr "Sortering"
 
-#: includes/class-renderer.php:499
+#: includes/class-renderer.php:534
 msgid "Title (A-Z)"
 msgstr "Titel (A-Å)"
 
-#: includes/class-renderer.php:506
+#: includes/class-renderer.php:541
 msgid "Title (Z-A)"
 msgstr "Titel (Å-A)"
 
-#: includes/class-renderer.php:513
+#: includes/class-renderer.php:548
 msgid "Date (Newest)"
 msgstr "Dato (Nyeste)"
 
-#: includes/class-renderer.php:520
+#: includes/class-renderer.php:555
 msgid "Date (Oldest)"
 msgstr "Dato (Ældste)"
 
-#: includes/class-renderer.php:577
+#: includes/class-renderer.php:612
 msgid "Page"
 msgstr "Side"
 
-#: includes/class-renderer.php:628
+#: includes/class-renderer.php:663
 msgid "Per page"
 msgstr "Per side"
 
@@ -165,7 +165,7 @@ msgstr "Falme"
 
 #: includes/class-settings-admin.php:31 includes/facets/date_range.php:181
 #: includes/facets/number_range.php:116 includes/facets/proximity.php:196
-#: includes/facets/slider.php:174
+#: includes/facets/slider.php:176
 msgid "None"
 msgstr "Ingen"
 
@@ -208,7 +208,7 @@ msgstr ""
 #: includes/facets/checkboxes.php:389 includes/facets/checkboxes.php:404
 #: includes/facets/dropdown.php:211 includes/facets/fselect.php:236
 #: includes/facets/fselect.php:283 includes/facets/radio.php:226
-#: includes/facets/radio.php:241 includes/integrations/acf/acf.php:204
+#: includes/facets/radio.php:241 includes/integrations/acf/acf.php:247
 msgid "No"
 msgstr "Nej"
 
@@ -217,7 +217,7 @@ msgstr "Nej"
 #: includes/facets/checkboxes.php:390 includes/facets/checkboxes.php:405
 #: includes/facets/dropdown.php:212 includes/facets/fselect.php:237
 #: includes/facets/fselect.php:284 includes/facets/radio.php:227
-#: includes/facets/radio.php:242 includes/integrations/acf/acf.php:204
+#: includes/facets/radio.php:242 includes/integrations/acf/acf.php:247
 msgid "Yes"
 msgstr "Ja"
 
@@ -427,22 +427,22 @@ msgid "Clear"
 msgstr "Ryd"
 
 #: includes/facets/date_range.php:173 includes/facets/number_range.php:108
-#: includes/facets/proximity.php:188 includes/facets/slider.php:166
+#: includes/facets/proximity.php:188 includes/facets/slider.php:168
 msgid "Other data source"
 msgstr "Andre datakilder"
 
 #: includes/facets/date_range.php:176 includes/facets/number_range.php:111
-#: includes/facets/slider.php:169
+#: includes/facets/slider.php:171
 msgid "Use a separate value for the upper limit?"
 msgstr "Benyt en separat værdi for den øvre grænse?"
 
 #: includes/facets/date_range.php:193 includes/facets/number_range.php:128
-#: includes/facets/slider.php:186
+#: includes/facets/slider.php:188
 msgid "Compare type"
 msgstr "Sammenlign type"
 
 #: includes/facets/date_range.php:196 includes/facets/number_range.php:131
-#: includes/facets/slider.php:189
+#: includes/facets/slider.php:191
 msgid "Basic"
 msgstr "Grundlæggende"
 
@@ -452,7 +452,7 @@ msgid "Enclose"
 msgstr "Vedlægge"
 
 #: includes/facets/date_range.php:198 includes/facets/number_range.php:132
-#: includes/facets/slider.php:190
+#: includes/facets/slider.php:192
 msgid "Intersect"
 msgstr "Krydsning"
 
@@ -587,35 +587,35 @@ msgstr "Slider"
 msgid "Reset"
 msgstr "Nulstil"
 
-#: includes/facets/slider.php:196
+#: includes/facets/slider.php:198
 msgid "Prefix"
 msgstr "Præfiks"
 
-#: includes/facets/slider.php:199
+#: includes/facets/slider.php:201
 msgid "Text that appears before each slider value"
 msgstr "Tekst der vises før hver slider værdi"
 
-#: includes/facets/slider.php:206
+#: includes/facets/slider.php:208
 msgid "Suffix"
 msgstr "Endelse"
 
-#: includes/facets/slider.php:209
+#: includes/facets/slider.php:211
 msgid "Text that appears after each slider value"
 msgstr "Tekst der vises efter hver slider værdi"
 
-#: includes/facets/slider.php:216
+#: includes/facets/slider.php:218
 msgid "Format"
 msgstr "Format"
 
-#: includes/facets/slider.php:219
+#: includes/facets/slider.php:221
 msgid "The number format"
 msgstr "Antal format"
 
-#: includes/facets/slider.php:240
+#: includes/facets/slider.php:242
 msgid "Step"
 msgstr "Trin"
 
-#: includes/facets/slider.php:243
+#: includes/facets/slider.php:245
 msgid "The amount of increase between intervals"
 msgstr "Stigning mellem intervaler"
 
@@ -644,15 +644,21 @@ msgid "Stock Status"
 msgstr "Lager status"
 
 #: includes/integrations/woocommerce/woocommerce.php:55
-#: includes/integrations/woocommerce/woocommerce.php:416
+#: includes/integrations/woocommerce/woocommerce.php:417
 msgid "On Sale"
 msgstr "På tilbud"
 
-#: includes/integrations/woocommerce/woocommerce.php:408
+#: includes/integrations/woocommerce/woocommerce.php:56
+#, fuzzy
+#| msgid "Post Type"
+msgid "Product Type"
+msgstr "Indlægstype"
+
+#: includes/integrations/woocommerce/woocommerce.php:409
 msgid "In Stock"
 msgstr "På lager"
 
-#: includes/integrations/woocommerce/woocommerce.php:408
+#: includes/integrations/woocommerce/woocommerce.php:409
 msgid "Out of Stock"
 msgstr "Ikke på lager"
 

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class ACP_ThirdParty_YoastSeo_Column_MetaDesc extends ACP_ThirdParty_YoastSeo_Column
-	implements ACP_Column_EditingInterface {
+	implements ACP_Column_EditingInterface, ACP_Export_Column {
 
 	public function __construct() {
 		parent::__construct();
@@ -17,4 +17,7 @@ class ACP_ThirdParty_YoastSeo_Column_MetaDesc extends ACP_ThirdParty_YoastSeo_Co
 		return new ACP_ThirdParty_YoastSeo_Editing_MetaDesc( $this );
 	}
 
+	public function export() {
+		return new ACP_ThirdParty_YoastSeo_Export_MetaDesc( $this );
+	}
 }

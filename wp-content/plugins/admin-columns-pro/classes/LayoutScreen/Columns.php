@@ -6,11 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ACP_LayoutScreen_Columns {
 
-	const PREFERENCE_KEY = 'cpac_layout_columns';
-
 	public function __construct() {
 
-	    // Init
+		// Init
 		add_action( 'ac/settings/list_screen', array( $this, 'set_layout_on_settings_screen' ) );
 
 		// Requests
@@ -50,9 +48,8 @@ class ACP_LayoutScreen_Columns {
 	 * @param AC_ListScreen $list_screen
 	 */
 	public function set_layout_on_settings_screen( $list_screen ) {
-
 		// Preference
-		$layout_id = $this->get_layout_preference( $list_screen->get_key() );
+		$layout_id = $this->preferences()->get( $list_screen->get_key() );
 
 		// User selected. Do not use filter_input, because an empty layout can also be valid.
 		if ( isset( $_GET['layout_id'] ) ) {
@@ -66,7 +63,7 @@ class ACP_LayoutScreen_Columns {
 			$layout_id = $layouts->get_first_layout_id();
 		}
 
-		$this->set_layout_preference( $list_screen->get_key(), $layout_id );
+		$this->preferences()->set( $list_screen->get_key(), $layout_id );
 
 		$list_screen->set_layout_id( $layout_id );
 	}
@@ -117,7 +114,7 @@ class ACP_LayoutScreen_Columns {
 					$list_screen->set_layout_id( $layout->get_id() )->store( $original_settings );
 				}
 
-				$this->set_layout_preference( $list_screen->get_key(), $layout->get_id() );
+				$this->preferences()->set( $list_screen->get_key(), $layout->get_id() );
 
 				$list_screen->set_layout_id( $layout->get_id() );
 				$list_screen->set_read_only( false );
@@ -136,9 +133,12 @@ class ACP_LayoutScreen_Columns {
 					return;
 				}
 
-				$layouts = ACP()->layouts( $list_screen );
+				// Remove preferences
+				$this->preferences()->delete( $list_screen->get_key() );
 
-				$layout = $layouts->get_layout_by_id( filter_input( INPUT_POST, 'layout_id' ) );
+				// Delete layout
+				$layouts = ACP()->layouts( $list_screen );
+				$layout = $layouts->delete( filter_input( INPUT_POST, 'layout_id' ) );
 
 				if ( ! $layout ) {
 					AC()->admin()->get_page( 'columns' )->notice( __( "Screen does not exist.", 'codepress-admin-columns' ), 'error' );
@@ -146,45 +146,17 @@ class ACP_LayoutScreen_Columns {
 					return;
 				}
 
-				$layouts->delete( $layout->get_id() );
-				$this->delete_layout_preference( $list_screen->get_key() );
-
-				// Re populate
-				$layouts->reset();
-
-				$list_screen->set_layout_id( $layouts->get_first_layout_id() );
-
 				$screen->notice( sprintf( __( 'Column set %s succesfully deleted.', 'codepress-admin-columns' ), "<strong>\"" . esc_html( $layout->get_name() ) . "\"</strong>" ), 'updated' );
 				break;
 		}
 	}
 
 	/**
-	 * @param string $list_screen
-	 * @param string $layout
-	 */
-	public function set_layout_preference( $list_screen_key, $layout ) {
-		if ( is_string( $layout ) ) {
-			ac_helper()->user->update_meta_site( self::PREFERENCE_KEY . $list_screen_key, $layout );
-		}
-	}
-
-	/**
-	 * @param string $list_screen
+	 * @since 4.0.12
 	 *
-	 * @return string Layout ID
 	 */
-	public function get_layout_preference( $list_screen_key ) {
-		return ac_helper()->user->get_meta_site( self::PREFERENCE_KEY . $list_screen_key, true );
-	}
-
-	/**
-	 * @param string $list_screen
-	 *
-	 * @return string Layout
-	 */
-	public function delete_layout_preference( $list_screen_key ) {
-		return ac_helper()->user->delete_meta_site( self::PREFERENCE_KEY . $list_screen_key );
+	public function preferences() {
+		return new AC_Preferences( 'layout_columns' );
 	}
 
 	/**
@@ -236,113 +208,113 @@ class ACP_LayoutScreen_Columns {
 	 * @param AC_ListScreen $list_screen
 	 */
 	public function settings( AC_ListScreen $list_screen ) { ?>
-        <div class="sidebox layouts" data-type="<?php echo $list_screen->get_key(); ?>">
+		<div class="sidebox layouts" data-type="<?php echo $list_screen->get_key(); ?>">
 
-            <div class="header">
-                <h3>
-                    <span class="header-content"><?php _e( 'Column Sets', 'codepress-admin-columns' ); ?></span>
-                    <a class="button add-new">
-                        <span class="add"><?php echo esc_html( $this->get_add_button_test() ); ?></span>
-                        <span class="close"><?php echo esc_html( __( 'Cancel', 'codepress-admin-columns' ) ); ?></span>
-                    </a>
-                </h3>
-            </div>
-            <div class="item new">
-                <form method="post" action="<?php echo esc_attr( add_query_arg( array( 'list_screen' => $list_screen->get_key() ), AC()->admin()->get_link( 'columns' ) ) ); // without layout id  ?>">
+			<div class="header">
+				<h3>
+					<span class="header-content"><?php _e( 'Column Sets', 'codepress-admin-columns' ); ?></span>
+					<a class="button add-new">
+						<span class="add"><?php echo esc_html( $this->get_add_button_test() ); ?></span>
+						<span class="close"><?php echo esc_html( __( 'Cancel', 'codepress-admin-columns' ) ); ?></span>
+					</a>
+				</h3>
+			</div>
+			<div class="item new">
+				<form method="post" action="<?php echo esc_attr( add_query_arg( array( 'list_screen' => $list_screen->get_key() ), AC()->admin()->get_link( 'columns' ) ) ); // without layout id  ?>">
 
 					<?php $this->nonce_field( 'create-layout' ); ?>
 
-                    <input type="hidden" name="acp_action" value="create_layout">
-                    <input type="hidden" name="list_screen" value="<?php echo esc_attr( $list_screen->get_key() ); ?>">
-                    <input type="hidden" name="layout" value="<?php echo esc_attr( $list_screen->get_layout_id() ); ?>">
+					<input type="hidden" name="acp_action" value="create_layout">
+					<input type="hidden" name="list_screen" value="<?php echo esc_attr( $list_screen->get_key() ); ?>">
+					<input type="hidden" name="layout" value="<?php echo esc_attr( $list_screen->get_layout_id() ); ?>">
 
-                    <div class="body">
-                        <div class="row info">
-                            <p><?php printf( __( "Create new sets to switch between different column views on the %s screen.", 'codepress-admin-columns' ), $list_screen->get_label() ); ?></p>
-                        </div>
+					<div class="body">
+						<div class="row info">
+							<p><?php printf( __( "Create new sets to switch between different column views on the %s screen.", 'codepress-admin-columns' ), $list_screen->get_label() ); ?></p>
+						</div>
 
 						<?php $this->input_rows( $list_screen->get_key() ); ?>
 
-                        <div class="row actions">
+						<div class="row actions">
 
 							<?php $this->instructions(); ?>
 
-                            <input class="save button-primary" type="submit" value="<?php _e( 'Add', 'codepress-admin-columns' ); ?>">
-                        </div>
-                    </div>
+							<input class="save button-primary" type="submit" value="<?php _e( 'Add', 'codepress-admin-columns' ); ?>">
+						</div>
+					</div>
 
-                </form>
-            </div>
+				</form>
+			</div>
 
 			<?php if ( $layouts = ACP()->layouts( $list_screen )->get_layouts() ) : ?>
 				<?php foreach ( $layouts as $i => $layout ) : ?>
 					<?php $onclick = AC()->use_delete_confirmation() ? ' onclick="return confirm(\'' . esc_attr( addslashes( sprintf( __( "Warning! The %s columns data will be deleted. This cannot be undone. 'OK' to delete, 'Cancel' to stop", 'codepress-admin-columns' ), "'" . $layout->get_name() . "'" ) ) ) . '\');"' : ''; ?>
 					<?php $is_current = $list_screen->get_layout_id() == $layout->get_id(); ?>
-                    <div class="item layout<?php echo $is_current ? ' current' : ''; ?><?php echo $i === ( count( $layouts ) - 1 ) ? ' last' : ''; ?><?php echo $layout->is_read_only() ? ' read_only' : ''; ?>" data-screen="<?php echo esc_attr( $layout->get_id() ); ?>">
-                        <div class="head">
-                            <div class="left">
-                                <div class="title-div">
-                                    <span class="title"><?php echo esc_html( $layout->get_name() ); ?></span>
-                                    <span class="description"><?php echo esc_html( $layout->get_title_description() ); ?></span>
-                                </div>
-                                <div class="actions">
-                                    <form method="post" class="delete">
+					<div class="item layout<?php echo $is_current ? ' current' : ''; ?><?php echo $i === ( count( $layouts ) - 1 ) ? ' last' : ''; ?><?php echo $layout->is_read_only() ? ' read_only' : ''; ?>" data-screen="<?php echo esc_attr( $layout->get_id() ); ?>">
+						<div class="head">
+							<div class="left">
+								<div class="title-div">
+									<span class="title"><?php echo esc_html( $layout->get_name() ); ?></span>
+									<span class="description"><?php echo esc_html( $layout->get_title_description() ); ?></span>
+								</div>
+								<div class="actions">
+									<form method="post" class="delete">
 
 										<?php $this->nonce_field( 'delete-layout' ); ?>
 
-                                        <input type="hidden" name="acp_action" value="delete_layout">
-                                        <input type="hidden" name="layout_id" value="<?php echo esc_attr( $layout->get_id() ); ?>">
-                                        <input type="hidden" name="list_screen" value="<?php echo esc_attr( $list_screen->get_key() ); ?>">
-                                        <input type="submit" class="delete" value="<?php echo esc_attr( __( 'Delete', 'codepress-admin-columns' ) ); ?>"<?php echo $onclick; ?>/>
-                                    </form>
+										<input type="hidden" name="acp_action" value="delete_layout">
+										<input type="hidden" name="layout_id" value="<?php echo esc_attr( $layout->get_id() ); ?>">
+										<input type="hidden" name="list_screen" value="<?php echo esc_attr( $list_screen->get_key() ); ?>">
+										<input type="submit" class="delete" value="<?php echo esc_attr( __( 'Delete', 'codepress-admin-columns' ) ); ?>"<?php echo $onclick; ?>/>
+									</form>
 
 									<?php if ( ! $is_current ) : ?>
-                                        <span class="pipe">|</span>
-                                        <a class="select" href="<?php echo $this->get_edit_link( $list_screen, $layout->get_id() ); ?>">
+										<span class="pipe">|</span>
+										<a class="select" href="<?php echo $this->get_edit_link( $list_screen, $layout->get_id() ); ?>">
 											<?php _e( 'Select', 'codepress-admin-columns' ); ?>
-                                        </a>
+										</a>
 									<?php endif; ?>
-                                </div>
-                            </div>
-                            <div class="right">
-                                <span class="toggle"></span>
-                            </div>
-                        </div>
+								</div>
+							</div>
+							<div class="right">
+								<span class="toggle"></span>
+							</div>
+						</div>
 
-                        <div class="body">
+						<div class="body">
 
-                            <div class="save-message">
+							<div class="save-message">
 								<?php _e( 'Saved', 'codepress-admin-columns' ); ?>
-                            </div>
+							</div>
 
 							<?php if ( $layout->is_read_only() ) : ?>
-                                <div class="error-notice">
+								<div class="error-notice">
 									<?php _e( 'This set is loaded via PHP and can therefore not be edited', 'codepress-admin-columns' ); ?>
-                                </div>
+								</div>
 							<?php endif; ?>
 
-                            <form method="post">
-                                <input type="hidden" name="layout_id" value="<?php echo esc_attr( $layout->get_id() ); ?>">
+							<form method="post">
+								<input type="hidden" name="layout_id" value="<?php echo esc_attr( $layout->get_id() ); ?>">
 
 								<?php $this->input_rows( $list_screen->get_key() . '-' . $layout->get_id(), $layout, $layout->is_read_only() ); ?>
 
-                            </form>
-                            <div class="row actions">
+							</form>
+							<div class="row actions">
 
 								<?php $this->instructions(); ?>
 
 								<?php if ( ! $layout->is_read_only() ) : ?>
-                                    <input class="save button-primary" type="submit" value="<?php _e( 'Update', 'codepress-admin-columns' ); ?>">
+									<input class="save button-primary" type="submit" value="<?php _e( 'Update', 'codepress-admin-columns' ); ?>">
 								<?php endif; ?>
-                                <span class="spinner"></span>
-                            </div>
+								<span class="spinner"></span>
+							</div>
 
-                        </div>
+						</div>
 
-                    </div>
+					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>
-        </div>
+		</div>
 		<?php
 	}
 
@@ -352,22 +324,22 @@ class ACP_LayoutScreen_Columns {
 
 	public function layout_help() {
 		?>
-        <div id="layout-help" class="hidden">
-            <h3><?php _e( 'Sets', 'codepress-admin-columns' ); ?></h3>
+		<div id="layout-help" class="hidden">
+			<h3><?php _e( 'Sets', 'codepress-admin-columns' ); ?></h3>
 
-            <p>
+			<p>
 				<?php _e( "Sets allow users to switch between different column views.", 'codepress-admin-columns' ); ?>
-            </p>
-            <p>
+			</p>
+			<p>
 				<?php _e( "Available sets are selectable from the overview screen. Users can have their own column view preference.", 'codepress-admin-columns' ); ?>
-            <p>
-            <p>
-                <img src="<?php echo esc_url( $this->get_assets_url() ); ?>images/layout-selector.png"/>
-            </p>
-            <p>
-                <a href="<?php echo esc_url( ac_get_site_utm_url( 'documentation/how-to/make-multiple-column-sets', 'column-sets' ) ); ?>" target="_blank"><?php _e( 'Online documentation', 'codepress-admin-columns' ); ?></a>
-            </p>
-        </div>
+			<p>
+			<p>
+				<img src="<?php echo esc_url( $this->get_assets_url() ); ?>images/layout-selector.png"/>
+			</p>
+			<p>
+				<a href="<?php echo esc_url( ac_get_site_utm_url( 'documentation/how-to/make-multiple-column-sets', 'column-sets' ) ); ?>" target="_blank"><?php _e( 'Online documentation', 'codepress-admin-columns' ); ?></a>
+			</p>
+		</div>
 		<?php
 	}
 
@@ -491,10 +463,10 @@ class ACP_LayoutScreen_Columns {
 		ob_start();
 		$count = 0;
 		foreach ( ACP()->layouts( $list_screen )->get_layouts() as $layout ) : ?>
-            <li<?php echo $layout->is_read_only() ? ' class="read-only"' : ''; ?> data-screen="<?php echo esc_attr( $layout->get_id() ); ?>">
+			<li<?php echo $layout->is_read_only() ? ' class="read-only"' : ''; ?> data-screen="<?php echo esc_attr( $layout->get_id() ); ?>">
 				<?php echo ( $count++ ) != 0 ? ' | ' : ''; ?>
-                <a class="<?php echo $layout->get_id() === $list_screen->get_layout_id() ? 'current' : ''; ?>" href="<?php echo $this->get_edit_link( $list_screen, $layout->get_id() ); ?>"><?php echo esc_html( $layout->get_name() ); ?></a>
-            </li>
+				<a class="<?php echo $layout->get_id() === $list_screen->get_layout_id() ? 'current' : ''; ?>" href="<?php echo $this->get_edit_link( $list_screen, $layout->get_id() ); ?>"><?php echo esc_html( $layout->get_name() ); ?></a>
+			</li>
 		<?php endforeach;
 
 		return ob_get_clean();
@@ -510,12 +482,12 @@ class ACP_LayoutScreen_Columns {
 			return;
 		}
 		?>
-        <div class="layout-selector">
-            <ul class="subsubsub">
-                <li class="first"><?php _e( 'Column Sets', 'codepress-admin-columns' ); ?>:</li>
+		<div class="layout-selector">
+			<ul class="subsubsub">
+				<li class="first"><?php _e( 'Column Sets', 'codepress-admin-columns' ); ?>:</li>
 				<?php echo $list; ?>
-            </ul>
-        </div>
+			</ul>
+		</div>
 		<?php
 	}
 
@@ -526,40 +498,40 @@ class ACP_LayoutScreen_Columns {
 	 */
 	public function input_rows( $attr_id, $layout = false, $is_disabled = false ) {
 		?>
-        <div class="row name">
-            <label for="layout-name-<?php echo $attr_id; ?>">
+		<div class="row name">
+			<label for="layout-name-<?php echo $attr_id; ?>">
 				<?php _e( 'Name', 'codepress-admin-columns' ); ?>
-            </label>
-            <div class="input">
-                <div class="ac-error-message">
-                    <p>
+			</label>
+			<div class="input">
+				<div class="ac-error-message">
+					<p>
 						<?php _e( 'Please enter a name.', 'codepress-admin-columns' ); ?>
-                    <p>
-                </div>
-                <input class="name" id="layout-name-<?php echo $attr_id; ?>" name="layout_name" value="<?php echo $layout ? esc_attr( $layout->get_name() ) : ''; ?>" data-value="<?php echo $layout ? esc_attr( $layout->get_name() ) : ''; ?>" placeholder="<?php _e( 'Enter name', 'codepress-admin-coliumns' ); ?>" <?php echo $is_disabled ? ' disabled="disabled"' : ''; ?>/>
-            </div>
-        </div>
-        <div class="row info">
-            <em><?php _e( 'Make this set available only for specific users or roles (optional)', 'codepress-admin-columns' ); ?></em>
-        </div>
-        <div class="row roles">
-            <label for="layout-roles-<?php echo $attr_id; ?>">
+					<p>
+				</div>
+				<input class="name" id="layout-name-<?php echo $attr_id; ?>" name="layout_name" value="<?php echo $layout ? esc_attr( $layout->get_name() ) : ''; ?>" data-value="<?php echo $layout ? esc_attr( $layout->get_name() ) : ''; ?>" placeholder="<?php _e( 'Enter name', 'codepress-admin-coliumns' ); ?>" <?php echo $is_disabled ? ' disabled="disabled"' : ''; ?>/>
+			</div>
+		</div>
+		<div class="row info">
+			<em><?php _e( 'Make this set available only for specific users or roles (optional)', 'codepress-admin-columns' ); ?></em>
+		</div>
+		<div class="row roles">
+			<label for="layout-roles-<?php echo $attr_id; ?>">
 				<?php _e( 'Roles', 'codepress-admin-columns' ); ?>
-                <span>(<?php _e( 'optional', 'codepress-admin-columns' ); ?>)</span>
-            </label>
-            <div class="input">
+				<span>(<?php _e( 'optional', 'codepress-admin-columns' ); ?>)</span>
+			</label>
+			<div class="input">
 				<?php $this->display_select_roles( $attr_id, $layout ? $layout->get_roles() : false, $is_disabled ); ?>
-            </div>
-        </div>
-        <div class="row users">
-            <label for="layout-users-<?php echo $attr_id; ?>">
+			</div>
+		</div>
+		<div class="row users">
+			<label for="layout-users-<?php echo $attr_id; ?>">
 				<?php _e( 'Users' ); ?>
-                <span>(<?php _e( 'optional', 'codepress-admin-columns' ); ?>)</span>
-            </label>
-            <div class="input">
+				<span>(<?php _e( 'optional', 'codepress-admin-columns' ); ?>)</span>
+			</label>
+			<div class="input">
 				<?php $this->display_select_users( $attr_id, $layout ? $layout->get_users() : false, $is_disabled ); ?>
-            </div>
-        </div>
+			</div>
+		</div>
 		<?php
 	}
 
@@ -571,35 +543,35 @@ class ACP_LayoutScreen_Columns {
 	private function display_select_roles( $attr_id, $current_roles = array(), $is_disabled = false ) {
 		$grouped_roles = $this->get_grouped_role_names();
 		?>
-        <select class="roles" name="layout_roles[]" multiple="multiple" id="layout-roles-<?php echo $attr_id; ?>" style="width: 100%;"<?php echo $is_disabled ? ' disabled="disabled"' : ''; ?>>
+		<select class="roles" name="layout_roles[]" multiple="multiple" id="layout-roles-<?php echo $attr_id; ?>" style="width: 100%;"<?php echo $is_disabled ? ' disabled="disabled"' : ''; ?>>
 			<?php foreach ( $grouped_roles as $group => $roles ) : ?>
-                <optgroup label="<?php echo esc_attr( $group ); ?>">
+				<optgroup label="<?php echo esc_attr( $group ); ?>">
 					<?php foreach ( $roles as $name => $label ) : ?>
-                        <option value="<?php echo esc_attr( $name ); ?>"<?php echo in_array( $name, (array) $current_roles ) ? ' selected="selected"' : ''; ?>><?php echo esc_html( $label ); ?></option>
+						<option value="<?php echo esc_attr( $name ); ?>"<?php echo in_array( $name, (array) $current_roles ) ? ' selected="selected"' : ''; ?>><?php echo esc_html( $label ); ?></option>
 					<?php endforeach; ?>
-                </optgroup>
+				</optgroup>
 			<?php endforeach; ?>
-        </select>
+		</select>
 		<?php
 	}
 
 	private function display_select_users( $attr_id, $current_users = array(), $is_disabled = false ) {
 		?>
-        <select class="users" name="layout_users[]" multiple="multiple" id="layout-users-<?php echo $attr_id; ?>" style="width: 100%;"<?php echo $is_disabled ? ' disabled="disabled"' : ''; ?>>
+		<select class="users" name="layout_users[]" multiple="multiple" id="layout-users-<?php echo $attr_id; ?>" style="width: 100%;"<?php echo $is_disabled ? ' disabled="disabled"' : ''; ?>>
 			<?php if ( $current_users ) : ?>
 				<?php foreach ( $current_users as $user_id ) : $user = get_userdata( $user_id ); ?>
-                    <option value="<?php echo $user->ID; ?>" selected="selected"><?php echo esc_html( ac_helper()->user->get_display_name( $user ) ); ?></option>
+					<option value="<?php echo $user->ID; ?>" selected="selected"><?php echo esc_html( ac_helper()->user->get_display_name( $user ) ); ?></option>
 				<?php endforeach; ?>
 			<?php endif; ?>
-        </select>
+		</select>
 		<?php
 	}
 
 	private function instructions() {
 		?>
-        <a class="instructions ac-pointer" rel="layout-help" data-pos="left" data-width="305" data-noclick="1">
+		<a class="instructions ac-pointer" rel="layout-help" data-pos="left" data-width="305" data-noclick="1">
 			<?php _e( 'Instructions', 'codepress-admin-columns' ); ?>
-        </a>
+		</a>
 		<?php
 	}
 

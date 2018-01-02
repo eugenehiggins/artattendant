@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class ACP_Column_User_Roles extends AC_Column_Meta
-	implements ACP_Column_EditingInterface, ACP_Column_FilteringInterface, ACP_Column_SortingInterface {
+	implements ACP_Column_EditingInterface, ACP_Column_FilteringInterface, ACP_Column_SortingInterface, ACP_Export_Column {
 
 	public function __construct() {
 		$this->set_type( 'column-roles' );
@@ -21,16 +21,18 @@ class ACP_Column_User_Roles extends AC_Column_Meta
 	// Display
 
 	public function get_value( $user_id ) {
-		global $wp_roles;
-
 		$user = new WP_User( $user_id );
 
-		$roles_labels = array();
-		foreach ( $user->roles as $role ) {
-			$roles_labels[] = ac_helper()->html->tooltip( translate_user_role( $wp_roles->roles[ $role ]['name'] ), $role );
+		$roles = array();
+		foreach ( ac_helper()->user->translate_roles( $user->roles ) as $role => $label ) {
+			$roles[] = ac_helper()->html->tooltip( $label, $role );
 		}
 
-		return implode( __( ', ' ), $roles_labels );
+		if ( empty( $roles ) ) {
+			return $this->get_empty_char();
+		}
+
+		return implode( $this->get_separator(), $roles );
 	}
 
 	public function editing() {
@@ -43,6 +45,10 @@ class ACP_Column_User_Roles extends AC_Column_Meta
 
 	public function filtering() {
 		return new ACP_Filtering_Model_User_Role( $this );
+	}
+
+	public function export() {
+		return new ACP_Export_Model_User_Role( $this );
 	}
 
 }

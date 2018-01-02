@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FacetWP\n"
-"POT-Creation-Date: 2017-09-26 15:17-0400\n"
-"PO-Revision-Date: 2017-09-26 15:17-0400\n"
+"POT-Creation-Date: 2017-11-16 14:59-0500\n"
+"PO-Revision-Date: 2017-11-16 14:59-0500\n"
 "Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
 "Language-Team: webees.cz s.r.o. <webees@webees.cz>\n"
 "Language: cs_CZ\n"
@@ -16,70 +16,70 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/class-ajax.php:203
+#: includes/class-ajax.php:215
 #, fuzzy
 msgid "FacetWP was unable to auto-detect the post listing"
 msgstr "FacetWP se nepodařilo detekovat post výpis"
 
-#: includes/class-ajax.php:231
+#: includes/class-ajax.php:243
 msgid "Settings saved"
 msgstr "Nastavení uloženo"
 
-#: includes/class-ajax.php:234
+#: includes/class-ajax.php:246
 msgid "Error: invalid JSON"
 msgstr "Chyba: Neplatný JSON"
 
-#: includes/class-ajax.php:353
+#: includes/class-ajax.php:365
 msgid "Nothing to import"
 msgstr "Nic k importu"
 
-#: includes/class-ajax.php:389
+#: includes/class-ajax.php:401
 msgid "Imported"
 msgstr "Importováno"
 
-#: includes/class-ajax.php:392
+#: includes/class-ajax.php:404
 msgid "Skipped"
 msgstr "Přeskočeno"
 
-#: includes/class-ajax.php:423
+#: includes/class-ajax.php:435
 msgid "Error"
 msgstr "Chyba"
 
-#: includes/class-display.php:130
+#: includes/class-display.php:138
 #, fuzzy
 #| msgid "No results"
 msgid "No results found"
 msgstr "Žádné výsledky"
 
-#: includes/class-helper.php:384
+#: includes/class-helper.php:430
 msgid "Posts"
 msgstr "Příspěvky"
 
-#: includes/class-helper.php:386
+#: includes/class-helper.php:432
 msgid "Post Type"
 msgstr "Typ příspěvku"
 
-#: includes/class-helper.php:387
+#: includes/class-helper.php:433
 msgid "Post Date"
 msgstr "Datum příspěvku"
 
-#: includes/class-helper.php:388
+#: includes/class-helper.php:434
 msgid "Post Modified"
 msgstr "Úprava příspěvku"
 
-#: includes/class-helper.php:389
+#: includes/class-helper.php:435
 msgid "Post Title"
 msgstr "Název příspěvku"
 
-#: includes/class-helper.php:390
+#: includes/class-helper.php:436
 msgid "Post Author"
 msgstr "Autor příspěvku"
 
-#: includes/class-helper.php:395
+#: includes/class-helper.php:441
 msgid "Taxonomies"
 msgstr "Taxonomie"
 
-#: includes/class-helper.php:400
+#: includes/class-helper.php:446
 msgid "Custom Fields"
 msgstr "Vlastní pole"
 
@@ -97,37 +97,37 @@ msgstr "doplněk integrace"
 msgid "To use FacetWP with %s, please install the %s, then re-index."
 msgstr "Chcete-li použít FacetWP s %s, nainstalovat %s, pak index znovu."
 
-#: includes/class-renderer.php:461 includes/class-renderer.php:578
+#: includes/class-renderer.php:496 includes/class-renderer.php:613
 msgid "of"
 msgstr "z"
 
-#: includes/class-renderer.php:495 includes/facets/checkboxes.php:324
+#: includes/class-renderer.php:530 includes/facets/checkboxes.php:324
 #: includes/facets/dropdown.php:191 includes/facets/fselect.php:263
 #: includes/facets/hierarchy.php:212 includes/facets/radio.php:206
 msgid "Sort by"
 msgstr "Seřadit podle"
 
-#: includes/class-renderer.php:499
+#: includes/class-renderer.php:534
 msgid "Title (A-Z)"
 msgstr "Název (A-Z)"
 
-#: includes/class-renderer.php:506
+#: includes/class-renderer.php:541
 msgid "Title (Z-A)"
 msgstr "Název (Z-A)"
 
-#: includes/class-renderer.php:513
+#: includes/class-renderer.php:548
 msgid "Date (Newest)"
 msgstr "Datum (Nejnovější)"
 
-#: includes/class-renderer.php:520
+#: includes/class-renderer.php:555
 msgid "Date (Oldest)"
 msgstr "Datum (Nejstarší)"
 
-#: includes/class-renderer.php:577
+#: includes/class-renderer.php:612
 msgid "Page"
 msgstr "Stránka"
 
-#: includes/class-renderer.php:628
+#: includes/class-renderer.php:663
 msgid "Per page"
 msgstr "Na stránku"
 
@@ -165,7 +165,7 @@ msgstr "Slábnutí"
 
 #: includes/class-settings-admin.php:31 includes/facets/date_range.php:181
 #: includes/facets/number_range.php:116 includes/facets/proximity.php:196
-#: includes/facets/slider.php:174
+#: includes/facets/slider.php:176
 msgid "None"
 msgstr "Žádný"
 
@@ -209,7 +209,7 @@ msgstr ""
 #: includes/facets/checkboxes.php:389 includes/facets/checkboxes.php:404
 #: includes/facets/dropdown.php:211 includes/facets/fselect.php:236
 #: includes/facets/fselect.php:283 includes/facets/radio.php:226
-#: includes/facets/radio.php:241 includes/integrations/acf/acf.php:204
+#: includes/facets/radio.php:241 includes/integrations/acf/acf.php:247
 msgid "No"
 msgstr "Ne"
 
@@ -218,7 +218,7 @@ msgstr "Ne"
 #: includes/facets/checkboxes.php:390 includes/facets/checkboxes.php:405
 #: includes/facets/dropdown.php:212 includes/facets/fselect.php:237
 #: includes/facets/fselect.php:284 includes/facets/radio.php:227
-#: includes/facets/radio.php:242 includes/integrations/acf/acf.php:204
+#: includes/facets/radio.php:242 includes/integrations/acf/acf.php:247
 msgid "Yes"
 msgstr "Ano"
 
@@ -427,22 +427,22 @@ msgid "Clear"
 msgstr "Vyčistit"
 
 #: includes/facets/date_range.php:173 includes/facets/number_range.php:108
-#: includes/facets/proximity.php:188 includes/facets/slider.php:166
+#: includes/facets/proximity.php:188 includes/facets/slider.php:168
 msgid "Other data source"
 msgstr "Další zdroj dat"
 
 #: includes/facets/date_range.php:176 includes/facets/number_range.php:111
-#: includes/facets/slider.php:169
+#: includes/facets/slider.php:171
 msgid "Use a separate value for the upper limit?"
 msgstr "Použít oddělenou hodnotu pro horní limit?"
 
 #: includes/facets/date_range.php:193 includes/facets/number_range.php:128
-#: includes/facets/slider.php:186
+#: includes/facets/slider.php:188
 msgid "Compare type"
 msgstr "Typ porovnání"
 
 #: includes/facets/date_range.php:196 includes/facets/number_range.php:131
-#: includes/facets/slider.php:189
+#: includes/facets/slider.php:191
 msgid "Basic"
 msgstr "Základní"
 
@@ -452,7 +452,7 @@ msgid "Enclose"
 msgstr "Uzavřete"
 
 #: includes/facets/date_range.php:198 includes/facets/number_range.php:132
-#: includes/facets/slider.php:190
+#: includes/facets/slider.php:192
 msgid "Intersect"
 msgstr "Průnik"
 
@@ -587,35 +587,35 @@ msgstr "Posuvník"
 msgid "Reset"
 msgstr "Obnovit"
 
-#: includes/facets/slider.php:196
+#: includes/facets/slider.php:198
 msgid "Prefix"
 msgstr "Předpona"
 
-#: includes/facets/slider.php:199
+#: includes/facets/slider.php:201
 msgid "Text that appears before each slider value"
 msgstr "Text zobrazený před každou hodnotou posuvníku"
 
-#: includes/facets/slider.php:206
+#: includes/facets/slider.php:208
 msgid "Suffix"
 msgstr "Přípona"
 
-#: includes/facets/slider.php:209
+#: includes/facets/slider.php:211
 msgid "Text that appears after each slider value"
 msgstr "Text zobrazený za každou hodnotou posuvníku"
 
-#: includes/facets/slider.php:216
+#: includes/facets/slider.php:218
 msgid "Format"
 msgstr "Formát"
 
-#: includes/facets/slider.php:219
+#: includes/facets/slider.php:221
 msgid "The number format"
 msgstr "Číselný formát"
 
-#: includes/facets/slider.php:240
+#: includes/facets/slider.php:242
 msgid "Step"
 msgstr "Krok"
 
-#: includes/facets/slider.php:243
+#: includes/facets/slider.php:245
 msgid "The amount of increase between intervals"
 msgstr "Množství zvýšení mezi intervaly"
 
@@ -644,15 +644,21 @@ msgid "Stock Status"
 msgstr "Stav skladu"
 
 #: includes/integrations/woocommerce/woocommerce.php:55
-#: includes/integrations/woocommerce/woocommerce.php:416
+#: includes/integrations/woocommerce/woocommerce.php:417
 msgid "On Sale"
 msgstr "Výprodej"
 
-#: includes/integrations/woocommerce/woocommerce.php:408
+#: includes/integrations/woocommerce/woocommerce.php:56
+#, fuzzy
+#| msgid "Post Type"
+msgid "Product Type"
+msgstr "Typ příspěvku"
+
+#: includes/integrations/woocommerce/woocommerce.php:409
 msgid "In Stock"
 msgstr "Skladem"
 
-#: includes/integrations/woocommerce/woocommerce.php:408
+#: includes/integrations/woocommerce/woocommerce.php:409
 msgid "Out of Stock"
 msgstr "Není skladem"
 

@@ -89,7 +89,7 @@ function edd_stripe_new_card_form() {
 			<span class="card-type"></span>
 		</label>
 		<span class="edd-description"><?php _e( 'The (typically) 16 digits on the front of your credit card.', 'edds' ); ?></span>
-		<input type="tel" pattern="^[0-9\s*\w]{13,16}$" id="card_number" class="card-number edd-input required" placeholder="<?php _e( 'Card number', 'edds' ); ?>" autocomplete="cc-number" />
+		<input type="tel" pattern="^[0-9!@#$%^&* ]*$" id="card_number" class="card-number edd-input required" placeholder="<?php _e( 'Card number', 'edds' ); ?>" autocomplete="cc-number" />
 	</p>
 	<p id="edd-card-cvc-wrap">
 		<label for="card_cvc" class="edd-label">

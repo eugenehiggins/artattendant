@@ -6,10 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ACP_Editing_Settings_Taxonomy extends ACP_Editing_Settings {
 
+	/**
+	 * @var string
+	 */
 	private $enable_term_creation;
 
 	protected function define_options() {
 		$managed_options = parent::define_options();
+
 		$managed_options['enable_term_creation'] = 'off';
 
 		return $managed_options;

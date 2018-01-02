@@ -52,6 +52,7 @@ if (!class_exists("fep_main_class"))
 
         //Add Menu
         $out .= $this->Menu();
+		$menu = Fep_Menu::init()->get_menu();
 		
         //Start the guts of the display
 		$switch = ( isset($_GET['fepaction'] ) && $_GET['fepaction'] ) ? $_GET['fepaction'] : 'messagebox';
@@ -64,21 +65,30 @@ if (!class_exists("fep_main_class"))
 			$out .= ob_get_contents();
 			ob_end_clean();
 			break;
-         case 'newmessage':
+		case has_filter("fep_filter_switch_{$switch}"):
+			$out .= apply_filters( "fep_filter_switch_{$switch}", '');
+			break;
+         case ( 'newmessage' == $switch && ! empty( $menu['newmessage'] ) ):
             $out .= $this->new_message();
             break;
           case 'viewmessage':
             $out .= $this->view_message();
             break;
-          case 'settings':
+			/*
+			// See Fep_User_Settings Class
+          case ( 'settings' == $switch && ! empty( $menu['settings'] ) ):
             $out .= $this->user_settings();
             break;
+			*/
+			/*
+			// See Fep_Announcement Class
 		case 'announcements':
             $out .= Fep_Announcement::init()->announcement_box();
             break;
 		case 'view_announcement':
             $out .= Fep_Announcement::init()->view_announcement();
             break;
+			*/
 		//case 'directory': // See Fep_Directory Class
             //$out .= $this->directory();
            // break;

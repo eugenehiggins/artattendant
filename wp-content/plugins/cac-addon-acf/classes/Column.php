@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @abstract
  */
 class ACA_ACF_Column extends AC_Column_Meta
-	implements ACP_Column_EditingInterface, ACP_Column_FilteringInterface, ACP_Column_SortingInterface {
+	implements ACP_Column_EditingInterface, ACP_Column_FilteringInterface, ACP_Column_SortingInterface, ACP_Export_Column {
 
 	public function __construct() {
 		$this
@@ -99,6 +99,10 @@ class ACA_ACF_Column extends AC_Column_Meta
 
 	public function sorting() {
 		return $this->get_field()->sorting();
+	}
+
+	public function export() {
+		return $this->get_field()->export();
 	}
 
 	// Field

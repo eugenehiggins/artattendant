@@ -4,12 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once 'api.php';
+
 /**
  * The Admin Columns Pro plugin class
  *
  * @since 1.0
  */
-final class ACP {
+final class ACP extends AC_Plugin {
 
 	const CLASS_PREFIX = 'ACP_';
 
@@ -51,25 +53,25 @@ final class ACP {
 	private $network_admin;
 
 	/**
-	 * @var null|string
+	 * @var ACP_Table_ScreenOptions
 	 */
-	private $version = null;
+	private $screen_options;
 
 	/**
 	 * @since 3.8
 	 */
-	private static $_instance = null;
+	private static $instance = null;
 
 	/**
 	 * @since 3.8
 	 * @return ACP
 	 */
 	public static function instance() {
-		if ( null === self::$_instance ) {
-			self::$_instance = new self();
+		if ( null === self::$instance ) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**
@@ -78,20 +80,20 @@ final class ACP {
 	private function __construct() {
 		AC()->autoloader()->register_prefix( self::CLASS_PREFIX, $this->get_plugin_dir() . 'classes/' );
 
-		// api functions
-		include_once $this->get_plugin_dir() . 'api.php';
-
 		$this->editing = new ACP_Editing_Addon();
 		$this->sorting = new ACP_Sorting_Addon();
 		$this->filtering = new ACP_Filtering_Addon();
 		$this->network_admin = new ACP_NetworkAdmin();
+		$this->screen_options = new ACP_Table_ScreenOptions();
+
+		ACP_Export_Addon::instance();
 
 		new ACP_ThirdParty_Addon();
 		new ACP_LayoutScreen_Columns();
 		new ACP_LayoutScreen_Table();
-		new ACP_Table_ScreenOptions();
 
 		add_action( 'init', array( $this, 'localize' ) );
+		add_action( 'init', array( $this, 'install' ) );
 
 		add_filter( 'plugin_action_links', array( $this, 'add_settings_link' ), 1, 2 );
 		add_filter( 'network_admin_plugin_action_links', array( $this, 'add_settings_link' ), 1, 2 );
@@ -106,41 +108,22 @@ final class ACP {
 		add_action( 'ac/column_types', array( $this, 'register_columns' ) );
 
 		add_action( 'ac/admin_pages', array( $this, 'register_pages' ) );
+
+		add_action( 'ac/table_scripts', array( $this, 'table_scripts' ), 10, 1 );
 	}
 
 	/**
-	 * @since 4.0
+	 * @return string
 	 */
-	public function get_plugin_dir() {
-		return plugin_dir_path( __FILE__ );
+	protected function get_file() {
+		return ACP_FILE;
 	}
 
 	/**
-	 * @since 4.0
+	 * @return string
 	 */
-	public function get_plugin_url() {
-		return plugin_dir_url( __FILE__ );
-	}
-
-	/**
-	 * Basename of the plugin, retrieved through plugin_basename function
-	 *
-	 * @since 1.0
-	 * @var string
-	 */
-	public function get_basename() {
-		return plugin_basename( ACP_FILE );
-	}
-
-	/**
-	 * @since 4.0
-	 */
-	public function get_version() {
-		if ( null === $this->version ) {
-			$this->version = AC()->get_plugin_version( ACP_FILE );
-		}
-
-		return $this->version;
+	protected function get_version_key() {
+		return 'acp_version';
 	}
 
 	/**
@@ -163,10 +146,28 @@ final class ACP {
 	}
 
 	/**
+	 * Handle installation and updates
+	 */
+	public function install() {
+		if ( 0 === version_compare( $this->get_version(), $this->get_stored_version() ) ) {
+			return;
+		}
+
+		$classes = AC()->autoloader()->get_class_names_from_dir( $this->get_plugin_dir() . 'classes/Plugin/Update', self::CLASS_PREFIX );
+		$updater = new AC_Plugin_Updater( $this );
+
+		foreach ( $classes as $class ) {
+			$updater->add_update( new $class( $this->get_stored_version() ) );
+		}
+
+		$updater->parse_updates();
+	}
+
+	/**
 	 * @param AC_Admin_Pages $pages
 	 */
 	public function register_pages( $pages ) {
-    	$pages->register_page( new ACP_Admin_Page_ExportImport() );
+		$pages->register_page( new ACP_Admin_Page_ExportImport() );
 	}
 
 	/**
@@ -209,10 +210,17 @@ final class ACP {
 	}
 
 	/**
+	 * @since 4.1
+	 */
+	public function export() {
+		return $this->export;
+	}
+
+	/**
 	 * @since 4.0
 	 */
-	public function layouts( AC_ListScreen $listScreen ) {
-		return new ACP_Layouts( $listScreen );
+	public function layouts( AC_ListScreen $list_screen ) {
+		return new ACP_Layouts( $list_screen );
 	}
 
 	/**
@@ -220,6 +228,13 @@ final class ACP {
 	 */
 	public function network_admin() {
 		return $this->network_admin;
+	}
+
+	/**
+	 * @since 4.0.12
+	 */
+	public function screen_options() {
+		return $this->screen_options;
 	}
 
 	/**
@@ -269,6 +284,7 @@ final class ACP {
 		// Applies to ALL list screens
 		$list_screen->register_column_type( new ACP_Column_CustomField );
 		$list_screen->register_column_type( new ACP_Column_Menu );
+		$list_screen->register_column_type( new ACP_Column_Actions );
 
 		// Native Taxonomy columns
 		$this->register_native_taxonomy_columns( $list_screen );
@@ -284,7 +300,7 @@ final class ACP {
 	/**
 	 * Register Taxonomy columns that are set by WordPress. These native columns are registered
 	 * by setting 'show_admin_column' to 'true' as an argument in register_taxonomy();
-     * Only supports Post Types.
+	 * Only supports Post Types.
 	 *
 	 * @see register_taxonomy
 	 *
@@ -306,8 +322,8 @@ final class ACP {
 
 		foreach ( $taxonomies as $taxonomy ) {
 			if ( in_array( $list_screen->get_post_type(), $taxonomy->object_type ) ) {
-			    $column = new ACP_Column_NativeTaxonomy();
-			    $column->set_type( 'taxonomy-' . $taxonomy->name );
+				$column = new ACP_Column_NativeTaxonomy();
+				$column->set_type( 'taxonomy-' . $taxonomy->name );
 
 				$list_screen->register_column_type( $column );
 			}
@@ -396,14 +412,21 @@ final class ACP {
 			return;
 		}
 		if ( ACP()->is_beta() ) : ?>
-            <div class="notice notice-warning">
-                <p>
+			<div class="notice notice-warning">
+				<p>
 					<?php printf( __( "You are using a beta version of %s.", 'codepress-admin-columns' ), 'Admin Columns Pro' ); ?>
 					<?php printf( __( "Please provide us with any feedback (bugs, UI or improvements) on the beta by creating a new topic on %s.", 'codepress-admin-columns' ), ac_helper()->html->link( ac_get_site_utm_url( 'forums/forum/beta-feedback/', 'beta-notice' ), __( 'our forum', 'codepress-admin-columns' ), array( 'target' => '_blank' ) ) ); ?>
-                </p>
-            </div>
+				</p>
+			</div>
 			<?php
 		endif;
+	}
+
+	/**
+	 * @param AC_ListScreen $list_screen
+	 */
+	public function table_scripts() {
+		wp_enqueue_style( 'acp-table', ACP()->get_plugin_url() . "assets/css/table" . AC()->minified() . ".css", array(), AC()->get_version() );
 	}
 
 }

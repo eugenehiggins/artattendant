@@ -25,11 +25,15 @@ class ACA_ACF_Field
 	// Display
 
 	public function get_value( $id ) {
-		return $this->column->get_formatted_value( $this->get_raw_value( $id ) );
+		return $this->column->get_formatted_value( $this->get_raw_value( $id ), $id );
 	}
 
 	public function get_raw_value( $id ) {
 		return get_field( $this->column->get_meta_key(), $this->column->get_formatted_id( $id ), false );
+	}
+
+	public function get_separator() {
+		return $this->column->get_separator();
 	}
 
 	// Pro
@@ -44,6 +48,10 @@ class ACA_ACF_Field
 
 	public function sorting() {
 		return new ACP_Sorting_Model_Disabled( $this->column );
+	}
+
+	public function export() {
+		return new ACP_Export_Model_RawValue( $this->column );
 	}
 
 	// Settings

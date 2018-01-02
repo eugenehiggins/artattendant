@@ -112,7 +112,9 @@ class FacetWP_Ajax
         }
 
         $is_main_query = ( $query->is_archive || $query->is_search || ( $query->is_main_query() && ! $query->is_singular ) );
-        $is_main_query = ( wp_doing_ajax() && ! $this->is_refresh ) ? false : $is_main_query;
+        $is_main_query = ( true === $query->get( 'suppress_filters', false ) ) ? false : $is_main_query; // skip get_posts()
+        $is_main_query = ( wp_doing_ajax() && ! $this->is_refresh ) ? false : $is_main_query; // skip other ajax
+        $is_main_query = ( $query->is_feed ) ? false : $is_main_query; // skip feeds
         $is_main_query = apply_filters( 'facetwp_is_main_query', $is_main_query, $query );
 
         if ( $is_main_query ) {

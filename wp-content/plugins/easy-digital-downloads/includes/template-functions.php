@@ -51,9 +51,20 @@ function edd_get_purchase_link( $args = array() ) {
 
 	$purchase_page = edd_get_option( 'purchase_page', false );
 	if ( ! $purchase_page || $purchase_page == 0 ) {
+
+		global $no_checkout_error_displayed;
+		if ( ! is_null( $no_checkout_error_displayed ) ) {
+			return false;
+		}
+
+
 		edd_set_error( 'set_checkout', sprintf( __( 'No checkout page has been configured. Visit <a href="%s">Settings</a> to set one.', 'easy-digital-downloads' ), admin_url( 'edit.php?post_type=download&page=edd-settings' ) ) );
 		edd_print_errors();
+
+		$no_checkout_error_displayed = true;
+
 		return false;
+
 	}
 
 	$post_id = is_object( $post ) ? $post->ID : 0;
@@ -121,8 +132,6 @@ function edd_get_purchase_link( $args = array() ) {
 		}
 
 	}
-
-	$args['display_price'] = $data_price_value;
 
 	$data_price  = 'data-price="' . $data_price_value . '"';
 
@@ -822,7 +831,7 @@ function edd_microdata_wrapper_open( $query ) {
 
 	if ( $query && ! empty( $query->query['post_type'] ) && $query->query['post_type'] == 'download' && is_singular( 'download' ) && $query->is_main_query() ) {
 		$microdata_open = true;
-		echo '<span itemscope itemtype="http://schema.org/Product">';
+		echo '<div itemscope itemtype="http://schema.org/Product">';
 	}
 
 }
@@ -847,7 +856,7 @@ function edd_microdata_wrapper_close() {
 
 	if ( $post && $post->post_type == 'download' && is_singular( 'download' ) && is_main_query() ) {
 		$microdata_close = true;
-		echo '</span>';
+		echo '</div>';
 	}
 }
 add_action( 'loop_end', 'edd_microdata_wrapper_close', 10 );

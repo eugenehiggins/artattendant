@@ -23,6 +23,10 @@ class ACA_ACF_Field_DatePicker extends ACA_ACF_Field {
 		return new ACA_ACF_Filtering_DatePicker( $this->column );
 	}
 
+	public function export() {
+		return new ACA_ACF_Export_Date( $this->column );
+	}
+
 	// Settings
 
 	public function get_dependent_settings() {

@@ -372,6 +372,24 @@ fieldset[disabled]
   top: 0;
   right: 15px; }
 
+.editable-container .acf-editable-date-time {
+  width: 255px; }
+  .editable-container .acf-editable-date-time label {
+    width: 80px; }
+  .editable-container .acf-editable-date-time__date {
+    margin-bottom: 3px; }
+  .editable-container .acf-editable-date-time .form-control {
+    height: 30px;
+    width: 168px; }
+  .editable-container .acf-editable-date-time select {
+    height: 30px; }
+  .editable-container .acf-editable-date-time #frm_time_hours {
+    width: 66px;
+    margin-right: 2px; }
+  .editable-container .acf-editable-date-time #frm_time_minutes, .editable-container .acf-editable-date-time #frm_time_seconds {
+    width: 44px;
+    margin-left: 2px; }
+
 .btn {
   display: inline-block;
   margin-bottom: 0;
@@ -1807,6 +1825,14 @@ table.wp-list-table tbody .cac-subfield {
 
 .editable-input .small-text {
   width: 65px; }
+
+.editable-input .inline-checkbox {
+  display: block;
+  width: 100%;
+  font-weight: normal; }
+  .editable-input .inline-checkbox input {
+    margin-right: 10px;
+    margin-top: -2px; }
 
 .select2-drop {
   z-index: 9999; }

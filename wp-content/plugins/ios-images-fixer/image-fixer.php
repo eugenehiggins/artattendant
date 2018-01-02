@@ -3,7 +3,7 @@
  * Plugin Name: iOS Images Fixer
  * Plugin URI: http://bishoy.me/wp-plugins/ios-images-fixer/
  * Description: This plugin fixes iOS-taken images' orientation upon uploading using ImageMagic Library if available or PHP GD as a fallback. No settings editing required, just activate the plugin and try uploading an image from your idevice! If you like this free plugin, please <a href="http://bishoy.me/donate" target="_blank">consider a donation</a>.
- * Version: 1.2.3
+ * Version: 1.2.4
  * Author: Bishoy A.
  * Author URI: http://bishoy.me
  * License: GPL2
@@ -177,8 +177,8 @@ class BAImageFixer {
 	 * @return boolean|string
 	 */
 	public static function something_is_wrong() {
-		if ( ! function_exists( 'read_exif_data' ) ) {
-			return __( 'The function <strong>read_exif_data()</strong> is currently disabled in your PHP configuration. This is a required function for the plugin to work. Please enable this function or contact your hosting provider to do so for you.' );
+		if ( ! function_exists( 'exif_read_data' ) ) {
+			return __( 'The function <strong>exif_read_data()</strong> is currently disabled in your PHP configuration. This is a required function for the plugin to work. Please enable this function or contact your hosting provider to do so for you.' );
 		} elseif ( ! class_exists( 'Imagick' ) ) {
 			if ( ! function_exists( 'imagecreatefromjpeg' ) ) {
 				return __( 'PHP GD and Imagick extensions are currently disabled in your PHP configuration. At least one of these extensions should be enabled. Please enable one of them or contact your hosting provider to do so for you.' );
@@ -239,7 +239,7 @@ class BAImageFixer {
 	 * @return boolean 
 	 */
 	public static function is_image_broken( $path_to_image ) {
-		$exif = @read_exif_data( $path_to_image );
+		$exif = @exif_read_data( $path_to_image );
 		$exif_orient = isset($exif['Orientation'])?$exif['Orientation']:0;
 		$rotateImage = 0;
 

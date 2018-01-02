@@ -393,6 +393,16 @@ table.wp-list-table tbody {
 	.small-text {
 		width: 65px;
 	}
+	.inline-checkbox {
+		display: block;
+		width: 100%;
+		font-weight: normal;
+
+		input {
+			margin-right: 10px;
+			margin-top: -2px;
+		}
+	}
 }
 
 .select2-drop {

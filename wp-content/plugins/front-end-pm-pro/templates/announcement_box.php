@@ -32,7 +32,6 @@ do_action('fep_display_before_announcementbox');
 				</div>
 				<div class="fep-filter">
 					<select onchange="if (this.value) window.location.href=this.value">
-						<option value="<?php echo esc_url( remove_query_arg( array( 'feppage', 'fep-filter') ) ); ?>"><?php _e('Show all', 'front-end-pm'); ?></option>
 						<?php foreach( Fep_Announcement::init()->get_table_filters() as $filter => $filter_display ) { ?>
 						<option value="<?php echo esc_url( add_query_arg( array('fep-filter' => $filter, 'feppage' => false ) ) ); ?>" <?php selected($g_filter, $filter);?>><?php echo $filter_display; ?></option>
 						<?php } ?>

@@ -105,11 +105,15 @@ jQuery( document ).ready( function( $ ) {
 
 						if ( $select.length > 0 ) {
 
-							$el.html( '' ).html( $select.html() );
+							$el.replaceWith( $select );
+
+							if ( $el.hasClass( 'active' ) ) {
+								$select.addClass( 'active' );
+							}
 
 							var current = $el.data( 'current' );
 							if ( '' !== current ) {
-								$el.find( 'option[value="' + current + '"]' ).attr( 'selected', 'selected' );
+								$select.find( 'option[value="' + current + '"]' ).attr( 'selected', 'selected' );
 							}
 						}
 

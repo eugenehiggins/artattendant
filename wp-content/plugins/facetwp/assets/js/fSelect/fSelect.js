@@ -2,7 +2,7 @@
 
     $.fn.fSelect = function(options) {
 
-        if (typeof options == 'string' ) {
+        if ('string' === typeof options) {
             var settings = options;
         }
         else {
@@ -134,7 +134,7 @@
                 $(this).data('fSelect', data);
             }
 
-            if (typeof settings == 'string') {
+            if ('string' === typeof settings) {
                 data[settings]();
             }
         });

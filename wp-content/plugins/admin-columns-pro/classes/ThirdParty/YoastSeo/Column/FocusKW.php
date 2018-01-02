@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class ACP_ThirdParty_YoastSeo_Column_FocusKW extends ACP_ThirdParty_YoastSeo_Column
-	implements ACP_Column_EditingInterface {
+	implements ACP_Column_EditingInterface, ACP_Export_Column {
 
 	public function __construct() {
 		parent::__construct();
@@ -15,6 +15,10 @@ class ACP_ThirdParty_YoastSeo_Column_FocusKW extends ACP_ThirdParty_YoastSeo_Col
 
 	public function editing() {
 		return new ACP_ThirdParty_YoastSeo_Editing_FocusKW( $this );
+	}
+
+	public function export() {
+		return new ACP_ThirdParty_YoastSeo_Export_FocusKW( $this );
 	}
 
 }

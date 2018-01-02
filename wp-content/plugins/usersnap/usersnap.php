@@ -3,7 +3,7 @@
 Plugin Name: Usersnap
 Plugin URI: http://www.usersnap.com
 Description: Usersnap helps website owners to get feedback in form of screenshots from their customers, readers or users.
-Version: 4.5
+Version: 4.6
 Author: Usersnap
 Author URI: http://usersnap.com
 License: GPL v2
@@ -202,13 +202,15 @@ function usersnap_input_text() {
 	?>
 	<input id="us-api-key" style="width:300px;" name="usersnap_options[api-key]" size="40" type="text" value="<?php echo $key; ?>" /><?php
 	if (strlen($key) > 0) {
-		?>&nbsp;<a href="https://usersnap.com/configurator?key=<?php echo $key; ?>" target="_blank" class="button">Configure Widget</a>
+		?>&nbsp;<a href="<?php echo usersnap_project_url($key); ?>" target="_blank" class="button">Configure Widget</a>
 		<p><i>If you got the error message "Referer not valid for this API-key". Please visit your<br/>
 			<a href="https://usersnap.com/a/#/company/p/<?php echo $key; ?>/edit" target="_blank">Account</a> and add the blog URL to your project settings.</i></p><?php
 	}
 }
 
-
+function usersnap_project_url($apikey) {
+	return "https://usersnap.com/a/index.html#/company/p/" . $apikey . "/edit?tab=widget";
+}
 
 function usersnap_options_validate($input) {
 	if (!isset($input["usersnap-api-requ"])) {
@@ -261,7 +263,7 @@ function usersnap_options_validate($input) {
 		$error = false;
 		$msg = "";
 
-		$fp = @fopen('https://d.usersnap.com/angular/signup', 'r', false, $context);
+		$fp = @fopen('https://ec2.usersnap.com/angular/signup', 'r', false, $context);
 		if (!$fp) {
 			$msg = "HTTP Error";
 			$error = true;

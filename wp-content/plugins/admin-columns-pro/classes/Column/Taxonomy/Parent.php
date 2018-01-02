@@ -15,7 +15,11 @@ class ACP_Column_Taxonomy_Parent extends AC_Column
 	public function get_raw_value( $term_id ) {
 		$term = get_term( $term_id, $this->get_taxonomy() );
 
-		return $term->parent;
+		if ( ! $term || is_wp_error( $term ) ) {
+			return false;
+		}
+
+		return absint( $term->parent );
 	}
 
 	public function editing() {

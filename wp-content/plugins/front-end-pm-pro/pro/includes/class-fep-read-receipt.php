@@ -49,7 +49,7 @@ class Fep_Read_Receipt
 		$read_by = get_post_meta( get_the_ID(), '_fep_read_by', true );
 		
 		if( ! is_array( $read_by ) )
-			return;
+			return '';
 		
 		$receipt = array();
 		  foreach( $read_by as $time => $user_id ) {
@@ -59,7 +59,7 @@ class Fep_Read_Receipt
 			//date_i18 creates problem converting form gmt
 			//$receipt[] = sprintf(__('Read by %s &#x40; %s', 'front-end-pm' ), fep_get_userdata( $user_id, 'display_name', 'id' ), date_i18n( get_option( 'date_format' ). ' '.get_option( 'time_format' ), $time, true ));
 			
-			$receipt[] = sprintf(__('Read by %s &#x40; %s', 'front-end-pm' ), fep_get_userdata( $user_id, 'display_name', 'id' ), get_date_from_gmt ( date( 'Y-m-d H:i:s', $time ), get_option('date_format') . ' - '. get_option('time_format') ));
+			$receipt[] = sprintf(__('Read by %s &#x40; %s', 'front-end-pm' ), fep_get_userdata( $user_id, 'display_name', 'id' ), get_date_from_gmt( date( 'Y-m-d H:i:s', $time ), get_option('date_format') . ' '. get_option('time_format') ));
 		  }
 		if( $receipt ) {
 			echo '<hr />' . implode( '<br />', $receipt );

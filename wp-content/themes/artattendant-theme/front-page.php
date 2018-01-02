@@ -235,7 +235,8 @@ get_header('pre'); ?>
                         art
                         attendant.
 					</span>
-                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/galleries.jpg" alt="Art Collectors">
+                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg" alt="Art Collectors">
+
                 </div>
                 <div class="cf svg-container">
                     <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>
@@ -269,7 +270,7 @@ get_header('pre'); ?>
                 </div>
             </div>
             <div class="box box3">
-                <h3>Galleries & Artists</h3>
+                <h3>Galleries & Art Dealers</h3>
                 <div class="content">
 					<span class="text">
 						Organize, archive and manage your collection in our secure and private online
@@ -280,7 +281,8 @@ get_header('pre'); ?>
                                         and
                                         publishing archive records.
 					</span>
-                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/collectors.jpg" alt="Art Collectors">
+                    <img src="<?php bloginfo('template_url'); ?>/img/frontpage/galleries.jpg" alt="Art Collectors">
+
                 </div>
                 <div class="cf svg-container">
                     <svg class="bottom" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 58 58"><defs><style>.cls-1{fill:#88b0ab;}.cls-2{font-size:48px;fill:#fff;font-family:Muli-Light, Muli;}</style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="ServingBoxes"><g id="BoxHead1"><g id="MouseoverBox"><g id="CircleMouseove"><circle class="cls-1" cx="26.23" cy="27" r="26.23"/></g><g id="_-" data-name="-"><text class="cls-2" transform="translate(16.06 41.09)">-</text></g></g></g></g></g></svg>

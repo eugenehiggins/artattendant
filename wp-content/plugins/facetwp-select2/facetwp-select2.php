@@ -48,8 +48,8 @@ class FWP_Select2
         wp_deregister_style( 'select2' );
 
         // Register
-        wp_register_script( 'select2', $plugins_url . '/select2/select2.min.js', array( 'jquery' ), '4.0.2' );
-        wp_register_style( 'select2', $plugins_url . '/select2/select2.min.css', array(), '4.2.6' );
+        wp_register_script( 'select2', $plugins_url . '/select2/select2.min.js', array( 'jquery' ), '4.0.3' );
+        wp_register_style( 'select2', $plugins_url . '/select2/select2.min.css', array(), '4.2.7' );
 
         // Enqueue
         wp_enqueue_script( 'select2' );

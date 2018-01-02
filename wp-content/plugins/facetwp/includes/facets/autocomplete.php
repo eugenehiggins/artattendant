@@ -94,8 +94,8 @@ class FacetWP_Facet_Autocomplete extends FacetWP_Facet
     function ajax_load() {
         global $wpdb;
 
-        $query = esc_sql( $wpdb->esc_like( $_POST['query'] ) );
-        $facet_name = esc_sql( $_POST['facet_name'] );
+        $query = FWP()->helper->sanitize( $wpdb->esc_like( $_POST['query'] ) );
+        $facet_name = FWP()->helper->sanitize( $_POST['facet_name'] );
         $output = array();
 
         if ( ! empty( $query ) && ! empty( $facet_name ) ) {

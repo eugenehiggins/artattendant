@@ -41,25 +41,22 @@ class Fep_Pro_Ajax
 			'order' => 'ASC',
 			'fields' => array( 'ID', 'display_name' )
 		);
-			
-		$args = apply_filters ('fep_autosuggestion_arguments', $args );
-		
-		// The Query
-		$user_query = new WP_User_Query( $args );
 		
 		$ret = array();
 			
 		if(strlen($searchq)>0)
 		{
-			if (! empty( $user_query->results ))
+			$args = apply_filters ('fep_autosuggestion_arguments', $args );
+		
+			// The Query
+			$users = get_users( $args );
+		
+			foreach( $users as $user)
 			{
-				foreach($user_query->results as $user)
-				{
-					$ret[] = array(
-							'id' => $user->ID,
-							'name' => $user->display_name
-						);
-				}
+				$ret[] = array(
+						'id' => $user->ID,
+						'name' => apply_filters( 'fep_autosuggestion_user_name', $user->display_name, $user->ID )
+					);
 			}
 		}
 		

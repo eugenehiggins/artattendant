@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 4.0
  */
 class ACP_Column_CustomField extends AC_Column_CustomField
-	implements ACP_Column_SortingInterface, ACP_Column_EditingInterface, ACP_Column_FilteringInterface {
+	implements ACP_Column_SortingInterface, ACP_Column_EditingInterface, ACP_Column_FilteringInterface, ACP_Export_Column {
 
 	/**
 	 * @return ACP_Sorting_Model_Meta
@@ -38,6 +38,13 @@ class ACP_Column_CustomField extends AC_Column_CustomField
 	}
 
 	/**
+	 * @return ACP_Export_Model_CustomField
+	 */
+	public function export() {
+		return $this->get_field_object( 'ACP_Export_Model_CustomField' );
+	}
+
+	/**
 	 * Settings
 	 */
 	public function register_settings() {
@@ -50,7 +57,7 @@ class ACP_Column_CustomField extends AC_Column_CustomField
 	 *
 	 * @param string $class
 	 *
-	 * @return ACP_Sorting_Model_Meta|ACP_Editing_Model_Meta|ACP_Filtering_Model_Meta
+	 * @return ACP_Sorting_Model_Meta|ACP_Editing_Model_Meta|ACP_Filtering_Model_Meta|ACP_Export_Model_CustomField
 	 */
 	private function get_field_object( $class ) {
 		if ( $field_class = $this->get_field_class_name( $class ) ) {

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: 		Admin Columns Pro - Advanced Custom Fields (ACF)
-Version: 			2.0.6
+Version: 			2.1.1
 Description: 		Supercharges Admin Columns Pro with very cool ACF columns.
 Author: 			Admin Columns
 Author URI: 		https://www.admincolumns.com
@@ -68,6 +68,9 @@ final class ACA_ACF {
 
 		add_action( 'ac/column_groups', array( $this, 'register_column_groups' ) );
 		add_action( 'acp/column_types', array( $this, 'add_columns' ) );
+
+		// Editing
+		add_action( 'ac/table_scripts/editing', array( $this, 'table_scripts_editing' ) );
 	}
 
 	/**
@@ -85,7 +88,7 @@ final class ACA_ACF {
 
 		$dependencies = new ACA_ACF_Dependencies( __FILE__ );
 
-		$dependencies->is_acp_active( '4.0.3' );
+		$dependencies->is_acp_active( '4.1' );
 
 		if ( ! $this->is_acf_active() ) {
 			$dependencies->add_missing( $dependencies->get_search_link( 'Advanced Custom Fields', 'Advanced Custom Fields' ) );
@@ -276,6 +279,12 @@ final class ACA_ACF {
 
 		return $field;
 	}
+
+	public function table_scripts_editing() {
+		wp_enqueue_script( 'ac-acf-table', $this->get_plugin_url() . 'assets/js/table.js', array( 'jquery' ), $this->get_version() );
+		wp_enqueue_style( 'ac-acf-table', $this->get_plugin_url() . 'assets/css/table.css' );
+	}
+
 }
 
 function ac_addon_acf() {

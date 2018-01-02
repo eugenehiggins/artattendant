@@ -126,15 +126,21 @@ function edd_get_users_purchased_products( $user = 0, $status = 'complete' ) {
 	}
 
 	// Get all the items purchased
+	$limit_payments = apply_filters( 'edd_users_purchased_products_payments', 9999 );
 	$payment_ids    = array_reverse( explode( ',', $customer->payment_ids ) );
-	$limit_payments = apply_filters( 'edd_users_purchased_products_payments', 50 );
-	if ( ! empty( $limit_payments ) ) {
-		$payment_ids = array_slice( $payment_ids, 0, $limit_payments );
-	}
+	$payment_args   = array(
+		'output'   => 'payments',
+		'post__in' => $payment_ids,
+		'status'   => $status,
+		'number'   => $limit_payments,
+	);
+	$payments_query = new EDD_Payments_Query( $payment_args );
+	$payments       = $payments_query->get_payments();
+
 	$purchase_data  = array();
 
-	foreach ( $payment_ids as $payment_id ) {
-		$purchase_data[] = edd_get_payment_meta_downloads( $payment_id );
+	foreach ( $payments as $payment ) {
+		$purchase_data[] = $payment->downloads;
 	}
 
 	if ( empty( $purchase_data ) ) {
@@ -467,7 +473,7 @@ function edd_add_past_purchases_to_new_user( $user_id ) {
 
 	$email    = get_the_author_meta( 'user_email', $user_id );
 
-	$payments = edd_get_payments( array( 's' => $email ) );
+	$payments = edd_get_payments( array( 's' => $email, 'output' => 'payments' ) );
 
 	if( $payments ) {
 
@@ -477,12 +483,14 @@ function edd_add_past_purchases_to_new_user( $user_id ) {
 		edd_send_user_verification_email( $user_id );
 
 		foreach( $payments as $payment ) {
-			if( intval( edd_get_payment_user_id( $payment->ID ) ) > 0 ) {
-				continue; // This payment already associated with an account
-			}
+			if ( is_object( $payment ) && $payment instanceof EDD_Payment ) {
+				if ( intval( $payment->user_id ) > 0 ) {
+					continue; // This payment already associated with an account
+				}
 
-			$payment->user_id = $user_id;
-			$payment->save();
+				$payment->user_id = $user_id;
+				$payment->save();
+			}
 		}
 	}
 
@@ -646,9 +654,9 @@ function edd_set_user_to_verified( $user_id = 0 ) {
  * @since   2.4.4
  * @return  bool
  */
-function edd_user_pending_verification( $user_id = 0 ) {
+function edd_user_pending_verification( $user_id = null ) {
 
-	if( empty( $user_id ) ) {
+	if( is_null( $user_id ) ) {
 		$user_id = get_current_user_id();
 	}
 

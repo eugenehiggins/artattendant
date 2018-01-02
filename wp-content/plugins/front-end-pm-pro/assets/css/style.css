@@ -28,37 +28,6 @@
 	vertical-align: top;
 }
 
-/*Notify Styling*/
-.fep-error, .fep-success, .fep-wp-error
-{
-	color: black;
-	background-color: #FFEBE8;
-	border-color: #C00;
-	width: 100%;
-	text-align: center;
-	font-size: 12px;
-	font-weight: bold;
-	border-width: 1px;
-	border-style: solid;
-	padding: 0.6em;
-	margin: 15px 0;
-	-moz-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.fep-success
-{
-	background-color: #66FF99;
-	border-color: #00FF00;
-}
-.fep-wp-error
-{
-	text-align:left;
-}
 /*Content styling*/
 #fep-content
 {
@@ -229,10 +198,9 @@
 	padding-right:16px;
 }
 
-.fep-message .fep-message-title-heading {
+.fep-message .fep-message-title-heading, .fep-per-message .fep-message-title {
 	border: 1px solid #E7E7E7;
 	width: 100%;
-	font-size: 20px;
 	font-weight:bold;
 	background-color:#F2F7FC;
 	border-radius: 10px;
@@ -243,25 +211,21 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+.fep-message .fep-message-title-heading {
+	font-size: 20px;
+}
+.fep-message .fep-message-title-heading .fep_block_unblock_user {
+	font-size: 16px;
+	font-weight: normal;
+}
+.fep-per-message .fep-message-title {
+	font-size: 16px;
+	cursor:pointer;
+}
 .fep-per-message {
 	margin: 5px;
 	padding:5px;
 	border: 1px solid #E7E7E7;
-}
-.fep-per-message .fep-message-title
-{
-	border: 1px solid #E7E7E7;
-	width: 100%;
-	font-size: 16px;
-	font-weight:bold;
-	cursor:pointer;
-	background-color:#F2F7FC;
-	border-radius: 10px;
-	padding-left:10px;
-	padding-right:10px;
-	-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
 }
 .fep-per-message .fep-message-title .date
 {
@@ -272,6 +236,34 @@
 	font-weight: normal;
 	font-size:12px
 }
+.fep-avatar-p {
+    position: relative;
+    height: 60px;
+}
+.fep-avatar-p-120 {
+	min-width: 120px;
+}
+.fep-avatar-p-90 {
+	min-width: 90px;
+}
+.fep-avatar-p .fep-avatar-1, .fep-avatar-p .fep-avatar-2, .fep-avatar-more-60 {
+    width: 60px;
+    height: 60px;
+}
+.fep-avatar-p .fep-avatar-2{
+    position: absolute;
+	left: 30px;
+	top: 0px;
+}
+.fep-avatar-more-60 {
+    background:url('../images/avatar-more-60.png') no-repeat 0 0;
+}
+.fep-avatar-p .fep-avatar-more-60 {
+    position: absolute;
+	left: 60px;
+	top: 0px;
+}
+
 @media screen and (max-width: 480px) {
 .fep-table .fep-column-avatar { display:none;}
 .fep-action-table, .fep-action-table > div,.fep-action-table > div > div {display:block;}

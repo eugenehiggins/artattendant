@@ -50,7 +50,7 @@ function acp_is_version_gte( $version ) {
 }
 
 /**
- * @see ac_register_columns
+ * @see        ac_register_columns
  * @deprecated 4.0
  */
 function cpac_set_storage_model_columns( $list_screen_key, $column_data ) {

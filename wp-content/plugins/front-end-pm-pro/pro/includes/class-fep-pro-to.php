@@ -25,11 +25,14 @@ class Fep_Pro_To
 			add_action('fep_admin_settings_field_output_oa_admins', array($this, 'field_output' ) );
 			add_filter('fep_settings_field_sanitize_filter_oa_admins', array($this, 'settings_field_sanitize_filter' ), 10, 2 );
 			add_action( 'fep_form_field_output_fep_pro_to', array($this, 'form_field_output' ), 10, 2 );
+			add_action( 'fep_form_field_validate_fep_pro_to', array($this, 'set_post_message_to_id' ), 5, 2 );
 			add_action( 'fep_form_field_validate_fep_pro_to', array($this, 'form_field_validate_admin' ), 10, 2 );
 			add_action( 'fep_form_field_validate_fep_pro_to', array($this, 'form_field_validate_users' ), 12, 2 );
 			add_action( 'fep_action_validate_form', array($this, 'fep_action_validate_form' ), 10, 3 );
+			add_filter( 'fep_directory_table_bulk_actions', array($this, 'fep_directory_table_bulk_actions' ) );
+			add_action( 'fep_directory_posted_bulk_action_send_message_bulk', array($this, 'send_message_bulk' ) );
 			
-			if( 'separate-message' == fep_get_option('mr-message', 'same-message' ) && empty( $_POST['fep_send_to_admin'] ) ) {
+			if( 'separate-message' == fep_get_option('mr-message', 'same-message' ) && empty( $_POST['fep_send_to_admin'] ) && fep_current_user_can( 'mr_newmessage_to_users') ) {
 				add_action( 'fep_posted_action_newmessage', array($this, 'fep_posted_action' ) );
 			}
     	}
@@ -54,24 +57,7 @@ class Fep_Pro_To
 	
 	function settings_fields( $fields)
 		{
-			$fields['mr-can-send-to-users'] =   array(
-				'type'	=>	'checkbox',
-				'class'	=> '',
-				'section'	=> 'mr_multiple_recipients',
-				'value' => fep_get_option('mr-can-send-to-users', 1 ),
-				//'description' => __( 'Can users send message to other users.', 'front-end-pm' ),
-				'label' => __( 'Can send to users', 'front-end-pm' ),
-				'cb_label' => __( 'Can users send message to other users.', 'front-end-pm' )
-				);
-			$fields['mr-can-admin-send-to-users'] =   array(
-				'type'	=>	'checkbox',
-				'class'	=> '',
-				'section'	=> 'mr_multiple_recipients',
-				'value' => fep_get_option('mr-can-admin-send-to-users', 1 ),
-				//'description' => __( 'Can users send message to other users.', 'front-end-pm' ),
-				'label' => __( 'Can admin send to users', 'front-end-pm' ),
-				'cb_label' => __( 'Can admin send new message to other users.', 'front-end-pm' )
-				);
+
 			$fields['mr-max-recipients'] =   array(
 				'type'	=>	'number',
 				'section'	=> 'mr_multiple_recipients',
@@ -95,7 +81,7 @@ class Fep_Pro_To
 				'class'	=> '',
 				'section'	=> 'oa_admins',
 				'value' => fep_get_option('oa-can-send-to-admin', 1 ),
-				'description' => __( 'Can users send message to admin.', 'front-end-pm' ),
+				'cb_label' => __( 'Can users send message to admin.', 'front-end-pm' ),
 				'label' => __( 'Can send to admin', 'front-end-pm' )
 				);
 			$fields['oa_admins'] =   array(
@@ -103,20 +89,20 @@ class Fep_Pro_To
 				'section'	=> 'oa_admins',
 				'value' => fep_get_option('oa_admins', array()),
 				'description' => __( 'Do not forget to save.', 'front-end-pm' ),
-				'label' => 'Admins'
+				'label' => __( 'Admins', 'front-end-pm' )
 				);
 			$fields['oa_admins_frontend'] =   array(
 				'type'	=>	'select',
 				'section'	=> 'oa_admins',
-				'value' => fep_get_option('oa_admins_frontend', 'select' ),
+				'value' => fep_get_option('oa_admins_frontend', 'dropdown' ),
 				'description' => __( 'Select how you want to see in frontend.', 'front-end-pm' ),
 				'label' => __( 'Show in front end as', 'front-end-pm' ),
 				'options'	=> array(
-					'select'	=> __( 'Select', 'front-end-pm' ),
-					'radio'	=> __( 'Radio', 'front-end-pm' )
+					'dropdown'	=> __( 'Dropdown', 'front-end-pm' ),
+					'radio'	=> __( 'Radio Button', 'front-end-pm' )
 					)
 				);
-			unset($fields['hide_autosuggest']);
+			unset($fields['show_autosuggest']);
 								
 			return $fields;
 			
@@ -130,21 +116,11 @@ class Fep_Pro_To
 			<div>
 				<span><input type="text" required name="oa_admins[oa_<?php echo $count; ?>][name]" value="<?php esc_attr_e( $v['name'] ); ?>"/></span>
 				<span><input type="text" required name="oa_admins[oa_<?php echo $count; ?>][username]" value="<?php esc_attr_e( $v['username'] ); ?>"/></span>
-				<span><input type="button" class="button button-small fep_oa_remove" value="<?php esc_attr_e( 'Remove' ); ?>" /></span>
+				<span><input type="button" class="button button-small fep_oa_remove" value="<?php esc_attr_e( 'Remove', 'front-end-pm' ); ?>" /></span>
 			</div>
 		<?php
 		$count++;
-		 } } else { ?>
-		
-			<div>
-				<span><input type="text"  placeholder="<?php esc_attr_e( 'Display as', 'front-end-pm' ); ?>" required name="oa_admins[oa_<?php echo $count; ?>][name]" value=""/></span>
-				<span><input type="text"  placeholder="<?php esc_attr_e( 'Username', 'front-end-pm' ); ?>" required name="oa_admins[oa_<?php echo $count; ?>][username]" value=""/></span>
-				<span><input type="button" class="button button-small fep_oa_remove" value="<?php esc_attr_e( 'Remove', 'front-end-pm' ); ?>" /></span>
-			</div>
-		
-		<?php 
-		$count++;
-		} ?>
+		 } } ?>
 		<div id="fep_oa_add_more_here"></div>
 		<div><input type="button" class="button fep_oa_add" value="<?php esc_attr_e( 'Add More', 'front-end-pm' ); ?>" /></div>
 		
@@ -184,7 +160,7 @@ class Fep_Pro_To
 		{
 				
 			unset($fields['message_to']);
-			$can_send_to_user = fep_get_option('mr-can-send-to-users', 1 ) || ( fep_get_option('mr-can-admin-send-to-users', 1 ) && fep_is_user_admin() );
+			$can_send_to_user = fep_current_user_can( 'mr_newmessage_to_users');
 			$admins = fep_get_option('oa_admins', array());
 			
 				$fields['fep_pro_to'] = array(
@@ -200,10 +176,14 @@ class Fep_Pro_To
 
 	function form_field_output( $field, $errors )
 		{
+
+			if( isset( $_REQUEST['fep_to'] ) ) {
+				$to = $_REQUEST['fep_to'];
+			} else {
+				$to = (isset($_REQUEST['to']))? $_REQUEST['to']:'';
+			}
 			
-			$to = (isset($_REQUEST['to']))? $_REQUEST['to']:'';
-			
-			$can_send_to_user = fep_get_option('mr-can-send-to-users', 1 ) || ( fep_get_option('mr-can-admin-send-to-users', 1 ) && fep_is_user_admin() );
+			$can_send_to_user = fep_current_user_can( 'mr_newmessage_to_users');
 			$can_send_to_admin = fep_get_option('oa-can-send-to-admin', 1 );
 			$admins = fep_get_option('oa_admins', array());
 			
@@ -219,7 +199,10 @@ class Fep_Pro_To
 			return; 
 								
 			if( $can_send_to_user ) {
-			
+				
+				if( isset( $_REQUEST['fep_mr_to'] ) ){
+					$mr_to = esc_attr( $_REQUEST['fep_mr_to'] );
+				} else {
 					$support = array(
 						'nicename' 	=> true,
 						'id' 		=> true,
@@ -229,36 +212,38 @@ class Fep_Pro_To
 					
 					$support = apply_filters( 'fep_message_to_support', $support );
 						
-					if ( !empty( $support['nicename'] ) && $id = fep_get_userdata( $to ) ) {
-					} elseif( is_numeric( $to ) && !empty( $support['id'] ) && $id = fep_get_userdata( $to, 'ID', 'id' ) ) {
-					} elseif ( is_email( $to ) && !empty( $support['email'] ) && $id = fep_get_userdata( $to, 'ID', 'email' ) ) {
-					} elseif ( !empty( $support['login'] ) && $id = fep_get_userdata( $to, 'ID', 'login' ) ) {
+					if ( !empty( $support['nicename'] ) && $mr_to = fep_get_userdata( $to ) ) {
+					} elseif( !empty( $support['id'] ) && is_numeric( $to ) && $mr_to = fep_get_userdata( $to, 'ID', 'id' ) ) {
+					} elseif ( !empty( $support['email'] ) && is_email( $to ) && $mr_to = fep_get_userdata( $to, 'ID', 'email' ) ) {
+					} elseif ( !empty( $support['login'] ) && $mr_to = fep_get_userdata( $to, 'ID', 'login' ) ) {
 					} else {
-						$id = '';
+						$mr_to = '';
 					}
-					
-					$mr_to = ( isset( $_POST['fep_mr_to'] ) ) ? esc_attr( $_POST['fep_mr_to'] ): $id;
+				}
 
-
-					$mr_to = explode( ',', $mr_to );
-					$ret = array();
-				foreach( $mr_to as $v) {
-					$display_name = fep_get_userdata( $v, 'display_name', 'id' );
+				$mr_to = explode( ',', $mr_to );
+				$pre_populate = array();
+				foreach( $mr_to as $id ) {
+					$display_name = fep_get_userdata( $id, 'display_name', 'id' );
 					
 					if( $display_name ) {
-						$ret[] = array(
-							'id' => $v,
-							'name' => $display_name
+						$pre_populate[] = array(
+							'id' => $id,
+							'name' => apply_filters( 'fep_autosuggestion_user_name', $display_name, $id ),
+							//'readonly'	=> true
 							);
 						}
 				}
+				$pre_populate = apply_filters( 'fep_pro_filter_pre_populate', $pre_populate);
 
-				wp_enqueue_script( 'fep-mr-script');
-								
+				wp_enqueue_script( 'fep-tokeninput-script');
+				wp_enqueue_style( 'fep-tokeninput-style');				
 								
 			?><div id="fep_mr_to_div"><input id="fep_mr_to" type="text" name="fep_mr_to" value=""/></div>
 <script type="text/javascript">
-	jQuery(document).ready(function(){	
+	jQuery(document).ready(function(){
+	//comment previous line and uncomment next line if you have any issue with multiple receipant field ( eg. for CloudFlare rocketscript tech )
+	//jQuery(window).load(function(){	
 		jQuery("#fep_mr_to").tokenInput( "<?php echo admin_url( 'admin-ajax.php' ); ?>?action=fep_mr_ajax&token=<?php echo wp_create_nonce('fep-mr-script'); ?>", {
 						method: "POST",
 						theme: "facebook",
@@ -267,9 +252,10 @@ class Fep_Pro_To
 						hintText: "<?php _e("Type user name", 'front-end-pm'); ?>",
 						noResultsText: "<?php _e("No matches found", 'front-end-pm'); ?>",
 						searchingText: "<?php _e("Searching...", 'front-end-pm'); ?>",
-						prePopulate: <?php echo wp_json_encode($ret); ?>,
+						prePopulate: <?php echo wp_json_encode($pre_populate); ?>,
 						width: '250px',
 						preventDuplicates: true,
+						zindex: 99999,
 						resultsLimit: 5
 		});
 	
@@ -281,9 +267,11 @@ if( $can_send_to_user && $can_send_to_admin ){
 
 wp_enqueue_script( 'jquery');
 
-?><div class="fep_send_to_admin_div"><label><input type="checkbox" id="fep_send_to_admin" name="fep_send_to_admin" value="1" <?php checked( isset($_POST['fep_send_to_admin']) ? $_POST['fep_send_to_admin']: 0, '1'); ?> /> <?php _e( 'Send Message to admin', 'front-end-pm'); ?></label></div>
+?><div class="fep_send_to_admin_div"><label><input type="checkbox" id="fep_send_to_admin" name="fep_send_to_admin" value="1" <?php checked( isset($_REQUEST['fep_send_to_admin']) ? $_REQUEST['fep_send_to_admin']: 0, '1'); ?> /> <?php _e( 'Send Message to admin', 'front-end-pm'); ?></label></div>
 <script type="text/javascript">
-jQuery(document).ready(function(){
+	jQuery(document).ready(function(){
+	//comment previous line and uncomment next line if you have any issue with send to admin field ( eg. for CloudFlare rocketscript tech )
+	//jQuery(window).load(function(){
 
 	if(jQuery("#fep_send_to_admin").prop("checked")) {
 		jQuery("#fep_mr_to_div").hide('slow');
@@ -308,11 +296,11 @@ jQuery(document).ready(function(){
 <?php }
 
 if( $can_send_to_admin ){
-	$fep_oa_to = isset($_POST['fep_oa_to']) ? $_POST['fep_oa_to'] : '';
+	$fep_oa_to = isset($_REQUEST['fep_oa_to']) ? $_REQUEST['fep_oa_to'] : '';
 	
 	if( count($admins) > 1 ) { ?>
 	<div id="fep_oa_admins_div"><?php
-		if( 'radio' == fep_get_option('oa_admins_frontend', 'select' ) ) {
+		if( 'radio' == fep_get_option('oa_admins_frontend', 'dropdown' ) ) {
 			foreach( $admins as $k => $v ) {
 				?><label><input type="radio" name="fep_oa_to" value="<?php esc_attr_e( $k ); ?>" <?php checked( $fep_oa_to, $k ); ?> /> <?php esc_attr_e( $v['name'] ); ?></label>															<?php		}
 		} else {
@@ -326,12 +314,14 @@ if( $can_send_to_admin ){
 	}
 }		
 }
+
+	function set_post_message_to_id( $field, $errors ){
+		$_POST['message_to_id'] = array();
+	}
 	
 	function form_field_validate_admin( $field, $errors ){
 		
-		$_POST['message_to_id'] = array();
-		
-		$can_send_to_user = fep_get_option('mr-can-send-to-users', 1 ) || ( fep_get_option('mr-can-admin-send-to-users', 1 ) && fep_is_user_admin() );
+		$can_send_to_user = fep_current_user_can( 'mr_newmessage_to_users');
 			
 		if( $can_send_to_user && empty( $_POST['fep_send_to_admin'] ) ) 
 			return;
@@ -341,15 +331,18 @@ if( $can_send_to_admin ){
 			return;
 		}
 		
+		if( empty( $_POST['fep_send_to_admin'] ) )
+			$_POST['fep_send_to_admin'] = '1';
+		
 		$admins = fep_get_option('oa_admins', array());
 			
 		if( ! $admins ) {
-			$errors->add( 'pro_to' , __('Please add admins in back-end settings page of Front End PM (Pro tab)', 'front-end-pm'));
+			$errors->add( 'pro_to' , __('Please add admins in back-end settings page of Front End PM', 'front-end-pm'));
 		} elseif( count($admins) == 1 ) {
 			$admin = array_pop($admins);
 			$id = fep_get_userdata( ! empty($admin['username']) ? $admin['username']: '', 'ID', 'login' );
 			if( ! $id ) {
-				$errors->add( 'pro_to' , __('Please add valid admins in back-end settings page of Front End PM (Pro tab)', 'front-end-pm'));
+				$errors->add( 'pro_to' , __('Please add valid admins in back-end settings page of Front End PM', 'front-end-pm'));
 			} else {
 				$_POST['message_to_id'] = $id;
 			}
@@ -376,7 +369,7 @@ if( $can_send_to_admin ){
 		if( ! empty( $_POST['fep_send_to_admin'] ) ) 
 			return;
 		
-		$can_send_to_user = fep_get_option('mr-can-send-to-users', 1 ) || ( fep_get_option('mr-can-admin-send-to-users', 1 ) && fep_is_user_admin() );
+		$can_send_to_user = fep_current_user_can( 'mr_newmessage_to_users');
 		
 		if( ! $can_send_to_user ) {
 			return;
@@ -399,7 +392,7 @@ if( $can_send_to_admin ){
 				$errors->add( 'pro_to' , __('You can not message yourself.', "front-end-pm") );
 				continue;
 			}
-			if ( fep_get_user_option( 'allow_messages', 1, $to ) != '1') {
+			if ( ! fep_current_user_can('send_new_message_to', $to ) ) {
 				$errors->add( 'pro_to' , sprintf(__("%s does not want to receive messages!", 'front-end-pm'), fep_get_userdata( $to, 'display_name', 'id')));
 				continue;
 			}
@@ -460,6 +453,17 @@ if( $can_send_to_admin ){
 				}
 			}
 		}
+		
+	function fep_directory_table_bulk_actions( $actions  ){
+		$actions['send_message_bulk'] = __('Send Message', 'front-end-pm');
+		return $actions;
+	}
+	
+	function send_message_bulk( $ids ){
+		$url = add_query_arg( 'fep_mr_to', implode(',', $ids), fep_query_url( 'newmessage' ) );
+		wp_safe_redirect( $url );
+		exit;
+	}
   } //END CLASS
 
 add_action('init', array(Fep_Pro_To::init(), 'actions_filters'));

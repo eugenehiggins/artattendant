@@ -17,12 +17,85 @@ class Fep_Announcement
             return self::$instance;
         }
 	
-    function actions_filters()
-    	{
+    function actions_filters(){
+		
 		add_action( 'transition_post_status', array($this, 'recalculate_user_stats'), 10, 3 );
-    	}
+		add_action( 'set_user_role', array($this, 'set_user_role'), 10, 3 );
+		
+		add_filter('fep_menu_buttons', array($this, 'menu'));
+		if( fep_current_user_can( 'add_announcement' ) && fep_get_option( 'add_ann_frontend', 0 ) ){
+			add_filter('fep_menu_buttons', array($this, 'menu_new_announcement'));
+			add_filter('fep_filter_switch_new_announcement', array($this, 'new_announcement'));
+			add_action( 'fep_posted_action_new_announcement', array($this, 'fep_posted_action_new_announcement') );
+		}
+		
+		$menu = Fep_Menu::init()->get_menu();
+		if( ! empty( $menu['announcements'] ) ){
+			add_filter( 'posts_where' , array( $this, 'posts_where' ), 99, 2 );
+			add_filter('fep_filter_switch_announcements', array($this, 'announcement_box'));
+			add_filter('fep_filter_switch_view_announcement', array($this, 'view_announcement'));
+			add_action( 'fep_posted_bulk_announcement_bulk_action', array($this, 'bulk_action') );
+		}		
+	}
 	
+	function menu( $menu ){
+	 
+	 	$menu['announcements']	= array(
+			'title'			=> sprintf(__('Announcement%s', 'front-end-pm'), fep_get_new_announcement_button() ),
+			'action'			=> 'announcements',
+			'priority'			=> 20
+			);
+		
+		return $menu;
+	  }
+	  
+	  function menu_new_announcement( $menu ){
+		 
+		 	$menu['new_announcement']	= array(
+				'title'			=> __('New Announcement', 'front-end-pm' ),
+				'action'			=> 'new_announcement',
+				'priority'			=> 22
+				);
+			
+			return $menu;
+		  }
+		 
+		function new_announcement(){
 
+			$template = fep_locate_template( 'new_announcement_form.php');
+
+			ob_start();
+			include( $template );
+			return ob_get_clean();
+		}
+		
+		function fep_posted_action_new_announcement(){
+			if ( ! fep_current_user_can( 'add_announcement') ){
+				fep_errors()->add( 'permission', __("You do not have permission to create announcement!", 'front-end-pm') );
+				return;
+			}
+			
+			Fep_Form::init()->validate_form_field( 'new_announcement' );
+			if( count( fep_errors()->get_error_messages()) == 0 ){
+				if( fep_add_announcement() ) {
+					fep_success()->add( 'publish', __("Announcement successfully added.", 'front-end-pm') );
+				} else {
+					fep_errors()->add( 'undefined', __("Something wrong. Please try again.", 'front-end-pm') );
+				}
+			}
+		}
+		
+		function posts_where( $where, $q ) {
+
+			global $wpdb;
+			
+			if ( true === $q->get( 'fep_announcement_include_own' ) && apply_filters( 'fep_filter_announcement_include_own', true ) ){
+		        $where .= $wpdb->prepare( " OR ( $wpdb->posts.post_author = %d AND $wpdb->posts.post_status = %s AND $wpdb->posts.post_type = %s )", get_current_user_id(), $q->get( 'post_status' ), $q->get( 'post_type' ) );
+			}
+			
+			return $where;
+		}
+	
 function recalculate_user_stats( $new_status, $old_status, $post ){
 	
 	if ( 'fep_announcement' != $post->post_type || $old_status === $new_status ) {
@@ -32,6 +105,11 @@ function recalculate_user_stats( $new_status, $old_status, $post ){
 	if( 'publish' == $new_status || 'publish' == $old_status ){
 		delete_metadata( 'user', 0, '_fep_user_announcement_count', '', true );
 	}
+}
+
+function set_user_role( $user_id, $role, $old_roles ){
+	
+	delete_user_meta( $user_id, '_fep_user_announcement_count' );
 }
 
 function get_announcement( $id )
@@ -62,18 +140,31 @@ function get_user_announcements()
 					'key' => '_fep_participant_roles',
 					'value' => wp_get_current_user()->roles,
 					'compare' => 'IN'
-				),
-				array(
-					'key' => '_fep_delete_by_'. $user_id,
-					//'value' => $id,
-					'compare' => 'NOT EXISTS'
 				)
 				
 			)
 		 );
+		$args['meta_query'][] = array(
+			'relation' => 'OR',
+				array(
+					'key' => '_fep_deleted_by',
+					//'value' => serialize($user_id),
+					'compare' => 'NOT EXISTS'
+				),
+				array(
+					'key' => '_fep_deleted_by',
+					'value' => serialize($user_id),
+					'compare' => 'NOT LIKE'
+				),
+		);
+				
 		 
 		 if( ! $user_id )
 			$args['post__in'] = array(0);
+			
+		if( $user_id && apply_filters( 'fep_filter_announcement_include_own', true ) ){
+			$args['fep_announcement_include_own'] = true;
+		}
 		 
 		 switch( $filter ) {
 		 	case 'after-i-registered' :
@@ -142,15 +233,29 @@ function get_user_announcement_count( $value = 'all', $force = false, $user_id =
 					'key' => '_fep_participant_roles',
 					'value' => get_userdata( $user_id )->roles,
 					'compare' => 'IN'
-				),
-				array(
-					'key' => '_fep_delete_by_'. $user_id,
-					//'value' => $id,
-					'compare' => 'NOT EXISTS'
 				)
 				
 			)
 		 );
+		 $args['meta_query'][] = array(
+			'relation' => 'OR',
+				array(
+					'key' => '_fep_deleted_by',
+					//'value' => serialize($user_id),
+					'compare' => 'NOT EXISTS'
+				),
+				array(
+					'key' => '_fep_deleted_by',
+					'value' => serialize($user_id),
+					'compare' => 'NOT LIKE'
+				),
+		);
+		if( apply_filters( 'fep_filter_announcement_include_own', true ) ){
+			$args['fep_announcement_include_own'] = true;
+			$args['suppress_filters'] = false;
+		}
+		$args = apply_filters( 'fep_announcement_count_query_args', $args);
+		
 		 $announcements = get_posts( $args );
 		 
 		 $total_count 		= 0;
@@ -226,7 +331,11 @@ function bulk_action( $action, $ids = null ) {
 		} 
 		//$message = '<div class="fep-success">'.$message.'</div>';
 	}
-	return apply_filters( 'fep_bulk_action_message', $message, $count);
+	$message = apply_filters( 'fep_bulk_action_message', $message, $count);
+	
+	if( $message ){
+		fep_success()->add( 'success', $message );
+	}
 }
 
 function bulk_individual_action( $action, $id ) {
@@ -235,7 +344,14 @@ function bulk_individual_action( $action, $id ) {
 	switch( $action ) {
 		case 'delete':
 			if( fep_current_user_can( 'view_announcement', $id ) ) {
-				$return = add_post_meta( $id, '_fep_delete_by_'. get_current_user_id(), time(), true );
+				$deleted = get_post_meta( $id, '_fep_deleted_by', true );
+				if( ! is_array( $deleted ) )
+					$deleted = array();
+				
+				if( empty( $deleted[ get_current_user_id() ] ) ) {
+					$deleted[ get_current_user_id() ] = time();
+					$return = update_post_meta( $id, '_fep_deleted_by', $deleted );
+				}
 			}
 
 		break;

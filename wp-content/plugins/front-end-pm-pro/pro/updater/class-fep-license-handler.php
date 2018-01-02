@@ -24,7 +24,7 @@ class Fep_License_Handler {
 	private $item_shortname;
 	private $version;
 	private $author = 'Shamim Hasan';
-	private $api_url = 'https://www.shamimsplugins.com/wordpress/';
+	private $api_url = 'https://www.shamimsplugins.com/';
 
 	/**
 	 * Class constructor
@@ -193,7 +193,7 @@ class Fep_License_Handler {
 		
 				$license_data = wp_remote_retrieve_body( $response );
 		
-				$this->set_transient( $this->item_shortname . '_license_data', $license_data );
+				$this->set_transient( $license_data );
 			}
 			
 			$license_data = json_decode( $license_data );
@@ -232,7 +232,7 @@ class Fep_License_Handler {
 						$messages = '<div style="background-color:red;color:White"><p>'. sprintf(
 							__( 'Your license key expired on %s. Please <a href="%s" target="_blank">renew your license key</a>.', 'front-end-pm' ),
 							date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) ),
-							'https://www.shamimsplugins.com/wordpress/checkout/?edd_license_key=' . $this->license .'&utm_campaign=admin&utm_source=licenses&utm_medium=expired'
+							'https://www.shamimsplugins.com/checkout/?edd_license_key=' . $this->license .'&utm_campaign=admin&utm_source=licenses&utm_medium=expired'
 						). '</p></div>';
 
 						break;
@@ -242,7 +242,7 @@ class Fep_License_Handler {
 
 						$messages = sprintf(
 							__( 'Your license key has been disabled. Please <a href="%s" target="_blank">contact support</a> for more information.', 'front-end-pm' ),
-							'https://www.shamimsplugins.com/wordpress/support/?utm_campaign=admin&utm_source=licenses&utm_medium=revoked'
+							'https://www.shamimsplugins.com/support/?utm_campaign=admin&utm_source=licenses&utm_medium=revoked'
 						);
 
 						break;
@@ -250,7 +250,7 @@ class Fep_License_Handler {
 					case 'missing' :
 						$messages = '<div style="background-color:Red;color:White"><p>'. sprintf(
 							__( 'Invalid license. Please <a href="%s" target="_blank">visit your account page</a> and verify it.', 'front-end-pm' ),
-							'https://www.shamimsplugins.com/wordpress/checkout/purchase-history/?utm_campaign=admin&utm_source=licenses&utm_medium=missing'
+							'https://www.shamimsplugins.com/checkout/purchase-history/?utm_campaign=admin&utm_source=licenses&utm_medium=missing'
 						). '</p></div>';
 
 						break;
@@ -263,7 +263,7 @@ class Fep_License_Handler {
 						$messages = '<div style="background-color:red;color:White"><p>'. sprintf(
 							__( 'Your %s is not active for this URL. Please <a href="%s" target="_blank">visit your account page</a> to manage your license key URLs.', 'front-end-pm' ),
 							$this->item_name,
-							'https://www.shamimsplugins.com/wordpress/checkout/purchase-history/?utm_campaign=admin&utm_source=licenses&utm_medium=invalid'
+							'https://www.shamimsplugins.com/checkout/purchase-history/?utm_campaign=admin&utm_source=licenses&utm_medium=invalid'
 						). '</p></div>';
 
 						break;
@@ -272,7 +272,7 @@ class Fep_License_Handler {
 						$messages = sprintf(
 							__( 'Your %s deactivation failed. Please <a href="%s" target="_blank">visit your account page</a> to manage your license key URLs.', 'front-end-pm' ),
 							$this->item_name,
-							'https://www.shamimsplugins.com/wordpress/checkout/purchase-history/?utm_campaign=admin&utm_source=licenses&utm_medium=deactivation_failed'
+							'https://www.shamimsplugins.com/checkout/purchase-history/?utm_campaign=admin&utm_source=licenses&utm_medium=deactivation_failed'
 						);
 
 						break;
@@ -283,7 +283,7 @@ class Fep_License_Handler {
 						break;
 
 					case 'no_activations_left':
-						$messages = '<div style="background-color:red;color:White"><p>'. sprintf( __( 'Your license key has reached its activation limit. <a href="%s">View possible upgrades</a> now.', 'front-end-pm' ), 'https://www.shamimsplugins.com/wordpress/checkout/purchase-history/?utm_campaign=admin&utm_source=licenses&utm_medium=no_activations_left' ). '</p></div>';
+						$messages = '<div style="background-color:red;color:White"><p>'. sprintf( __( 'Your license key has reached its activation limit. <a href="%s">View possible upgrades</a> now.', 'front-end-pm' ), 'https://www.shamimsplugins.com/checkout/purchase-history/?utm_campaign=admin&utm_source=licenses&utm_medium=no_activations_left' ). '</p></div>';
 
 						break;
 						
@@ -301,7 +301,7 @@ class Fep_License_Handler {
 							$messages = '<div style="background-color:OrangeRed;color:White"><p>'. sprintf(
 								__( 'Your license key expires soon! It expires on %s. <a href="%s" target="_blank">Renew your license key</a>.', 'front-end-pm' ),
 								date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) ),
-								'https://www.shamimsplugins.com/wordpress/checkout/?edd_license_key=' . $this->license .'&utm_campaign=admin&utm_source=licenses&utm_medium=expires_soon'
+								'https://www.shamimsplugins.com/checkout/?edd_license_key=' . $this->license .'&utm_campaign=admin&utm_source=licenses&utm_medium=expires_soon'
 							). '</p></div>';
 
 						} else {
@@ -377,7 +377,7 @@ class Fep_License_Handler {
 
 		$license_data = wp_remote_retrieve_body( $response );
 
-		$this->set_transient( $this->item_shortname . '_license_data', $license_data );
+		$this->set_transient( $license_data );
 
 	}
 
@@ -419,7 +419,7 @@ class Fep_License_Handler {
 
 			$license_data = wp_remote_retrieve_body( $response );
 
-			$this->set_transient( $this->item_shortname . '_license_data', $license_data );
+			$this->set_transient( $license_data );
 
 	}
 
@@ -443,13 +443,27 @@ class Fep_License_Handler {
 			if( empty( $_GET['tab'] ) || 'licenses' !== $_GET['tab'] ) {
 
 				echo '<div class="error"><p>'. sprintf(
-					__( 'You have invalid or expired license key for %s. Please go to the <a href="%s">Licenses page</a> to correct this issue.', 'front-end-pm' ),
+					__( 'You have invalid or expired license key for %1$s. Please go to <a href="%2$s">Licenses page</a> to correct this issue.', 'front-end-pm' ),
 					$this->item_name,
 					admin_url( 'edit.php?post_type=fep_message&page=fep_settings&tab=licenses' )
 				). '</p></div>';
 
 			}
 
+		} elseif( 'lifetime' !== $license_data->expires ) {
+			$now        = current_time( 'timestamp' );
+			$expiration = strtotime( $license_data->expires, current_time( 'timestamp' ) );
+
+			if( $expiration > $now && $expiration - $now < MONTH_IN_SECONDS ) {
+
+				echo '<div class="error"><p>'. sprintf(
+					__( 'Your license key expires soon for %1$s! Please <a href="%2$s" target="_blank">Renew your license key</a> by %3$s.', 'front-end-pm' ),
+					$this->item_name,
+					'https://www.shamimsplugins.com/checkout/?edd_license_key=' . $this->license .'&utm_campaign=admin&utm_source=licenses&utm_medium=expires_soon',
+					date_i18n( get_option( 'date_format' ), $expiration )
+				). '</p></div>';
+
+			}
 		}
 
 	}
@@ -491,7 +505,7 @@ class Fep_License_Handler {
 
 	}
 
-	public function set_transient( $cache_key, $value, $expiry = WEEK_IN_SECONDS ) {
+	public function set_transient( $value, $cache_key = '', $expiry = WEEK_IN_SECONDS ) {
 
 		if( empty( $cache_key ) ) {
 			$cache_key = $this->item_shortname . '_license_data';

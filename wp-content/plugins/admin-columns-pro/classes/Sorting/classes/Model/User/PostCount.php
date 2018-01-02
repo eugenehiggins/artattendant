@@ -30,11 +30,11 @@ class ACP_Sorting_Model_User_PostCount extends ACP_Sorting_Model {
 		$post_type = $post_type_setting ? $post_type_setting->get_value() : 'post';
 
 		$query->query_fields .= ", COUNT( p.post_author ) AS n";
-		$query->query_from .= " $join_type JOIN {$wpdb->posts} AS p ON p.post_author = wp_users.ID";
+		$query->query_from .= " $join_type JOIN {$wpdb->posts} AS p ON p.post_author = {$wpdb->users}.ID";
 		$query->query_where .= $wpdb->prepare( $where, $post_type );
 		$query->query_orderby = "
-			GROUP BY wp_users.ID
-			ORDER BY n $order, wp_users.ID $order
+			GROUP BY {$wpdb->users}.ID
+			ORDER BY n $order, {$wpdb->users}.ID $order
 		";
 
 		remove_action( 'pre_user_query', array( $this, __FUNCTION__ ) );

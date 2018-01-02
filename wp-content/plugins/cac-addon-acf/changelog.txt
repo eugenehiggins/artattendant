@@ -1,5 +1,26 @@
 == Changelog ==
 
+= 2.1.1 =
+Release Date: December 12th, 2017
+
+* [Added] Support for the ACF Button Group Field added
+* [Improved] Date field now exports as ISO-8601 format
+
+
+= 2.1 =
+Release Date: November 22nd, 2017
+
+* [Added] Added Exporting
+* [Added] Inline edit for Date Time field added
+* [Important] Only compatible with Admin Columns Pro 4.0.10 and higher
+
+= 2.0.7 =
+Release Date: October 3rd, 2017
+
+* [Added] ACF Link field added
+* [Added] ACF Range field added
+* [Improved] Select number of items for Gallery column
+
 = 2.0.6 =
 Release Date: July 26th, 2017
 

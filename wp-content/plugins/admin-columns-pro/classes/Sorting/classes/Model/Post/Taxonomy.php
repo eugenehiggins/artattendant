@@ -11,7 +11,6 @@ class ACP_Sorting_Model_Post_Taxonomy extends ACP_Sorting_Model {
 
 		return array(
 			'suppress_filters' => false,
-			'_acp_taxonomy'    => $this->column->get_taxonomy(),
 		);
 	}
 
@@ -28,18 +27,18 @@ class ACP_Sorting_Model_Post_Taxonomy extends ACP_Sorting_Model {
 	public function sorting_clauses_callback( $clauses, $query ) {
 		global $wpdb;
 
-		$conditions[] = $wpdb->prepare( 'taxonomy = %s', $query->get( '_acp_taxonomy' ) );
+		$conditions[] = $wpdb->prepare( 'taxonomy = %s', $this->column->get_taxonomy() );
 		$conditions[] = ACP()->sorting()->show_all_results() ? ' OR taxonomy IS NULL' : '';
 
 		$clauses['where'] .= vsprintf( ' AND (%s%s)', $conditions );
-		$clauses['orderby'] = "{$wpdb->terms}.name " . $query->query_vars['order'];
+		$clauses['orderby'] = "acp_sorting_t.name " . $query->query_vars['order'];
 		$clauses['join'] .= "
-            LEFT OUTER JOIN {$wpdb->term_relationships}
-                ON {$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id
-            LEFT OUTER JOIN {$wpdb->term_taxonomy}
-                USING (term_taxonomy_id)
-            LEFT OUTER JOIN {$wpdb->terms}
-                USING (term_id)
+            LEFT OUTER JOIN {$wpdb->term_relationships} AS acp_sorting_tr
+                ON {$wpdb->posts}.ID = acp_sorting_tr.object_id
+            LEFT OUTER JOIN {$wpdb->term_taxonomy} AS acp_sorting_tt
+                ON acp_sorting_tr.term_taxonomy_id = acp_sorting_tt.term_taxonomy_id
+            LEFT OUTER JOIN {$wpdb->terms} AS acp_sorting_t
+                ON acp_sorting_tt.term_id = acp_sorting_t.term_id
         ";
 
 		// remove this filter

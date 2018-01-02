@@ -3,7 +3,7 @@
 Plugin Name: ManageWP - Worker
 Plugin URI: https://managewp.com
 Description: We help you efficiently manage all your WordPress websites. <strong>Updates, backups, 1-click login, migrations, security</strong> and more, on one dashboard. This service comes in two versions: standalone <a href="https://managewp.com">ManageWP</a> service that focuses on website management, and <a href="https://godaddy.com/pro">GoDaddy Pro</a> that includes additional tools for hosting, client management, lead generation, and more.
-Version: 4.2.24
+Version: 4.2.27
 Author: ManageWP
 Author URI: https://managewp.com
 License: GPL2
@@ -472,6 +472,10 @@ if (!class_exists('MwpRecoveryKit', false)):
 
         public function selfDeactivate($reason)
         {
+            if (isset($_SERVER['MWP2_VERSION_ID'])) {
+                return;
+            }
+
             $activePlugins = get_option('active_plugins');
             $workerIndex   = array_search(plugin_basename(__FILE__), $activePlugins);
             if ($workerIndex === false) {
@@ -554,6 +558,15 @@ if (!function_exists('mwp_try_recovery')):
     }
 endif;
 
+if (!function_exists('hide_worker_update')):
+    function hide_worker_update($value) {
+        if (isset($value->response['worker/init.php'])) {
+            unset($value->response['worker/init.php']);
+        }
+        return $value;
+    }
+endif;
+
 if (!function_exists('mwp_init')):
     function mwp_init()
     {
@@ -563,8 +576,8 @@ if (!function_exists('mwp_init')):
         // reason (eg. the site can't ping itself). Handle that case early.
         register_activation_hook(__FILE__, 'mwp_activation_hook');
 
-        $GLOBALS['MMB_WORKER_VERSION']  = '4.2.24';
-        $GLOBALS['MMB_WORKER_REVISION'] = '2017-09-13 00:00:00';
+        $GLOBALS['MMB_WORKER_VERSION']  = '4.2.27';
+        $GLOBALS['MMB_WORKER_REVISION'] = '2017-11-11 00:00:00';
 
         // Ensure PHP version compatibility.
         if (version_compare(PHP_VERSION, '5.2', '<')) {
@@ -700,6 +713,9 @@ if (!function_exists('mwp_init')):
         add_filter('install_plugin_complete_actions', 'mmb_iframe_plugins_fix');
         add_filter('comment_edit_redirect', 'mwb_edit_redirect_override');
         add_action('mwp_auto_update', 'MwpRecoveryKit::selfUpdate');
+        if (!get_option('mwp_show_plugin_update')) {
+            add_filter('site_transient_update_plugins', 'hide_worker_update');
+        }
 
         // Datasend cron.
         if (!wp_next_scheduled('mwp_datasend')) {

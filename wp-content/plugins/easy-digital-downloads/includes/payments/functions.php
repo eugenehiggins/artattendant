@@ -877,8 +877,8 @@ function edd_get_total_earnings() {
  * @return float $total Total earnings
  */
 function edd_increase_total_earnings( $amount = 0 ) {
-	$total = edd_get_total_earnings();
-	$total += $amount;
+	$total = floatval( edd_get_total_earnings() );
+	$total += floatval( $amount );
 	update_option( 'edd_earnings_total', $total );
 	return $total;
 }
@@ -980,7 +980,9 @@ function edd_get_payment_meta_cart_details( $payment_id, $include_bundle_files =
 				if( 'bundle' != edd_get_download_type( $cart_item['id'] ) )
 					continue;
 
-				$products = edd_get_bundled_products( $cart_item['id'] );
+				$price_id = edd_get_cart_item_price_id( $cart_item );
+				$products = edd_get_bundled_products( $cart_item['id'], $price_id );
+
 				if ( empty( $products ) )
 					continue;
 

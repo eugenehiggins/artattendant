@@ -1,10 +1,11 @@
 === Front End PM ===
 Contributors: shamim51
-Tags: front end pm,front-end-pm,pm,private message,personal message,front end,frontend pm,frontend,message,widget,plugin,sidebar,shortcode,page,email,mail,contact form, secure contact form, simple contact form,akismet check,akismet
+Tags: front end pm,front-end-pm,pm,private message,personal message,front end,frontend pm,frontend,message,widget,plugin,sidebar,shortcode,page,email,mail,contact form, secure contact form, simple contact form
 Donate link: https://www.paypal.me/hasanshamim
 Requires at least: 4.4
-Tested up to: 4.8
-Stable tag: trunk
+Tested up to: 4.9
+Requires PHP: 5.3
+Stable tag: 6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,19 +21,19 @@ Front End PM is a Private Messaging system to your WordPress site.This is full f
 > * Email Piping
 > * Read Receipt
 > * Email template
-> * Email template tag
 > * Announcement Email queue
+> * Role to Role Block
 >
-> [View Details](https://www.shamimsplugins.com/wordpress/products/front-end-pm-pro/?utm_campaign=wordpress&utm_source=readme_pro&utm_medium=description)
+> [View Details](https://www.shamimsplugins.com/products/front-end-pm-pro/?utm_campaign=wordpress&utm_source=readme_pro&utm_medium=description)
 
 **Some Useful Link**
 
-* [Basic Admin Settings](https://www.shamimsplugins.com/wordpress/docs/front-end-pm/getting-started/basic-admin-settings/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
-* [Basic Walkthrough](https://www.shamimsplugins.com/wordpress/docs/front-end-pm/getting-started/basic-front-end-walkthrough/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
-* [Remove minlength](https://www.shamimsplugins.com/wordpress/docs/front-end-pm/customization/remove-minlength-message-title/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
-* [Remove menu button](https://www.shamimsplugins.com/wordpress/docs/front-end-pm/customization/remove-settings-menu-button/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
+* [Basic Admin Settings](https://www.shamimsplugins.com/docs/front-end-pm/getting-started/basic-admin-settings/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
+* [Basic Walkthrough](https://www.shamimsplugins.com/docs/front-end-pm/getting-started/basic-front-end-walkthrough/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
+* [Remove minlength](https://www.shamimsplugins.com/docs/front-end-pm/customization/remove-minlength-message-title/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
+* [Remove menu button](https://www.shamimsplugins.com/docs/front-end-pm/customization/remove-settings-menu-button/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
 
-* If you want paid support you can contact with me through [Front End PM paid support](https://www.shamimsplugins.com/wordpress/contact-us/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
+* If you want paid support you can contact with me through [Front End PM paid support](https://www.shamimsplugins.com/contact-us/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
 
 [youtube http://www.youtube.com/watch?v=SHKHTIlzr3w]
 
@@ -58,6 +59,7 @@ Front End PM is a Private Messaging system to your WordPress site.This is full f
 * Users can select whether or not they want to receive messages
 * Users can select whether or not they want to be notified by email when they receive a new message.
 * Users can select whether or not they want to be notified by email when a new announcement is published.
+* Users can block other users.
 
 **Translation**
 
@@ -67,8 +69,6 @@ Front End PM is a Private Messaging system to your WordPress site.This is full f
 
 [https://github.com/shamim2883/front-end-pm/](https://github.com/shamim2883/front-end-pm/)
 
-You can visit [Front End PM](https://www.shamimsplugins.com/wordpress/contact-us/?utm_campaign=wordpress&utm_source=readme&utm_medium=translation) and contact with me for paid support.
-
 == Installation ==
 1. Upload "front-end-pm" to the "/wp-content/plugins/" directory.
 1. Activate the plugin through the "Plugins" menu in WordPress.
@@ -76,7 +76,7 @@ You can visit [Front End PM](https://www.shamimsplugins.com/wordpress/contact-us
 1. Paste code `[front-end-pm]` for Front End pm under the HTML tab of the page editor.
 1. Publish the page add select this page as "Front End PM Page" in settings page of this plugin.
 
-Need more instruction? you can visit [Front End PM](https://www.shamimsplugins.com/wordpress/contact-us/?utm_campaign=wordpress&utm_source=readme&utm_medium=installation) and contact with me for paid support.
+Need more instruction? you can visit [Front End PM](https://www.shamimsplugins.com/contact-us/?utm_campaign=wordpress&utm_source=readme&utm_medium=installation) and contact with me for paid support.
 
 == Frequently Asked Questions ==
 = How to update? =
@@ -93,22 +93,60 @@ Yes. this plugin is translate ready. But If your language is not available you c
 I am very busy with my job. In my leisure i code for plugins. If you want to help to add comments to the code or indentation you are welcome. [https://github.com/shamim2883/front-end-pm/](https://github.com/shamim2883/front-end-pm/).
 
 = Where to contact for paid support? =
-You can visit [Front End PM](https://www.shamimsplugins.com/wordpress/contact-us/?utm_campaign=wordpress&utm_source=readme&utm_medium=faq) and contact with me for paid support.
+You can visit [Front End PM](https://www.shamimsplugins.com/contact-us/?utm_campaign=wordpress&utm_source=readme&utm_medium=faq) and contact with me for paid support.
 
 == Screenshots ==
 
 1. Responsive
 2. Messagebox.
-3. Front End Directory.
-4. Admin settings page.
-5. Messagebox settings.
-6. Security settings.
+3. Unread message count in website title
+4. Front End Directory.
+5. Admin settings page.
+6. Messagebox settings.
+7. Security settings.
 
 == Changelog ==
 
+= 6.2 =
+
+* New: Shortcode attr.
+* New: Max file size allowed shows when size error.
+* New: fep_remove_own_avatar_from_messagebox filter.
+* Pass user data in directory hook.
+* Increase z-index for header notification
+* Fix: Title was filtered wrongly.
+
+= 6.1 =
+
+* New: Users can block other users.
+* New: Can add announcement from front end.
+* New: Unread message notification in website title.
+* New: Show multiple users avatar in messagebox.
+* New: shortcode fep_shortcode_new_announcement_count added
+* New: All counts in widgets, shortcodes, notifications etc update by ajax.
+* New: Classes added to capture ajax response.
+* New: Notification ajax call delayed if browser tab not opened, reduce call to server.
+* New: More classes added in messages for better styling.
+* New: Select multiple users from directory.
+* Fix: Admin could not send reply if not participant.
+* Some templates changes
+* Performance improved
+
+= 5.3 =
+
+* Security update for all previous versions
+
+= 5.2 =
+
+* New feature: search messages in Message Box
+* new filter hook fep_filter_hide_message_initially_if_read added.
+* new filter hook fep_eb_announcement_email_return_check_bypass added.
+* Fix: announcement count wrong when user role changed.
+* Fix: One character cut from From Email Name
+* New feature: Role to Role Block (PRO)
+
 = 5.1 =
 
-**DO NOT UPDATE IN PRODUCTION SITE BEFORE TEST IN STAGING SITE.**
 **If YOU HAVE CUSTOM CODE FOR THIS PLUGIN MAKE SURE THEY ARE UP TO DATE BEFORE UPDATE THIS PLUGIN.**
 
 * id -> fep_id, to -> fep_to, search -> fep_search, _participants -> _fep_participants, _message_key -> _fep_message_key, _participant_roles -> _fep_participant_roles changes due to compitablity
@@ -126,7 +164,7 @@ You can visit [Front End PM](https://www.shamimsplugins.com/wordpress/contact-us
 * New functions - fep_update_option, fep_form_posted, fep_get_participants, fep_get_participant_roles, fep_get_message_view
 * New action hooks - fep_action_before_announcement_email_send
 * New filter hooks - fep_template_locations, fep_get_message_view, fep_autosuggestion_user_name, fep_no_role_access
-* New template - shortcode_newmessage_form.php, 
+* New template - shortcode_newmessage_form.php,
 * Plugin update process improved.
 * Minor performance improved.
 
@@ -308,6 +346,58 @@ You can visit [Front End PM](https://www.shamimsplugins.com/wordpress/contact-us
 * Initial release.
 
 == Upgrade Notice ==
+
+= 6.1 =
+
+* New: Users can block other users.
+* New: Can add announcement from front end.
+* New: Unread message notification in website title.
+* New: Show multiple users avatar in messagebox.
+* New: shortcode fep_shortcode_new_announcement_count added
+* New: All counts in widgets, shortcodes, notifications etc update by ajax.
+* New: Classes added to capture ajax response.
+* New: Notification ajax call delayed if browser tab not opened, reduce call to server.
+* New: More classes added in messages for better styling.
+* New: Select multiple users from directory.
+* Fix: Admin could not send reply if not participant.
+* Some templates changes
+* Performance improved
+
+= 5.3 =
+
+* Security update for all previous versions
+
+= 5.2 =
+
+* New feature: search messages in Message Box
+* new filter hook fep_filter_hide_message_initially_if_read added.
+* new filter hook fep_eb_announcement_email_return_check_bypass added.
+* Fix: announcement count wrong when user role changed.
+* Fix: One character cut from From Email Name
+* New feature: Role to Role Block (PRO)
+
+= 5.1 =
+
+**If YOU HAVE CUSTOM CODE FOR THIS PLUGIN MAKE SURE THEY ARE UP TO DATE BEFORE UPDATE THIS PLUGIN.**
+
+* id -> fep_id, to -> fep_to, search -> fep_search, _participants -> _fep_participants, _message_key -> _fep_message_key, _participant_roles -> _fep_participant_roles changes due to compitablity
+* fep_no_role_access filter to grand access to message system for users who do not have any role for the site.
+* Message box thread now show last message of the thread instead of first message
+* Inbox/ Sent box now determine by last message of the thread instead of first message
+* Show reply form after sent reply message.
+* New shortcodes - fep_shortcode_new_message_count, fep_shortcode_message_to, fep_shortcode_new_message_form
+* front-end-pm shortcode now support fepaction and fep-filter args
+* Pre-populate "To" and "Subject" now by shortcode.
+* Show link to send message to author by shortcode
+* Ability to send message directly to post author from post page ( Ajax/ non-Ajax )
+* Email From and From Email now pass through headers so that other can easily change that easily.
+* New classes - Fep_Ajax, Fep_Shortcodes
+* New functions - fep_update_option, fep_form_posted, fep_get_participants, fep_get_participant_roles, fep_get_message_view
+* New action hooks - fep_action_before_announcement_email_send
+* New filter hooks - fep_template_locations, fep_get_message_view, fep_autosuggestion_user_name, fep_no_role_access
+* New template - shortcode_newmessage_form.php,
+* Plugin update process improved.
+* Minor performance improved.
 
 = 4.8 =
 

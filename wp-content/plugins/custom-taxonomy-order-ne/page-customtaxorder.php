@@ -162,6 +162,7 @@ function customtaxorder() {
 							<img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" id="custom-loading" style="display:none" alt="" />
 							<input type="submit" name="order-submit" id="order-submit" class="button-primary" value="<?php _e('Update Order', 'custom-taxonomy-order-ne') ?>" />
 							<input type="submit" name="order-alpha" id="order-alpha" class="button" value="<?php _e('Sort Alphabetical', 'custom-taxonomy-order-ne') ?>" />
+							<?php do_action('custom_taxonomy_order_ne_settings_buttons'); ?>
 						</div>
 						<div class="clear"></div>
 					</div>

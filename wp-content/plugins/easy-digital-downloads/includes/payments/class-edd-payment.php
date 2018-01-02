@@ -98,6 +98,14 @@ class EDD_Payment {
 	protected $tax = 0;
 
 	/**
+	 * The amount the payment has been discounted through discount codes
+	 *
+	 * @since 2.8.7
+	 * @var int
+	 */
+	protected $discounted_amount = 0;
+
+	/**
 	 * The tax rate charged on this payment
 	 *
 	 * @since 2.7
@@ -2318,7 +2326,7 @@ class EDD_Payment {
 		$user_id  = $this->get_meta( '_edd_payment_user_id', true );
 		$customer = new EDD_Customer( $this->customer_id );
 
-		// Make sure it exists, and that it matches that of the associted customer record
+		// Make sure it exists, and that it matches that of the associated customer record
 		if( empty( $user_id ) || ( ! empty( $customer->user_id ) && (int) $user_id !== (int) $customer->user_id ) ) {
 
 			$user_id = $customer->user_id;
@@ -2567,6 +2575,20 @@ class EDD_Payment {
 	}
 
 	/**
+	 * Return the discounted amount of the payment.
+	 *
+	 * @since 2.8.7
+	 * @return float
+	 */
+	private function get_discounted_amount() {
+		$total = $this->total;
+		$fees  = $this->fees_total;
+		$tax   = $this->tax;
+
+		return floatval( apply_filters( 'edd_payment_discounted_amount', $total - ( $fees + $tax ), $this ) );
+	}
+
+	/**
 	 * Retrieve payment currency
 	 *
 	 * @since  2.5.1
@@ -2734,7 +2756,15 @@ class EDD_Payment {
 
 		if ( empty( $customer->id ) ) {
 
-			$name = ( ! empty( $this->first_name ) && ! empty( $this->last_name ) ) ? $this->first_name . ' ' . $this->last_name : $this->email;
+			if( empty( $this->first_name ) && empty( $this->last_name ) ) {
+
+				$name = $this->email;
+
+			} else {
+
+				$name = $this->first_name . ' ' . $this->last_name;
+
+			}
 
 			$customer_data = array(
 				'name'        => $name,

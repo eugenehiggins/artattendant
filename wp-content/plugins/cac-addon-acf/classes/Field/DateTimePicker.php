@@ -19,6 +19,10 @@ class ACA_ACF_Field_DateTimePicker extends ACA_ACF_Field {
 		return new ACA_ACF_Filtering_DateTimePicker( $this->column );
 	}
 
+	public function editing() {
+		return new ACA_ACF_Editing_DateTimePicker( $this->column );
+	}
+
 	// Settings
 
 	public function get_dependent_settings() {

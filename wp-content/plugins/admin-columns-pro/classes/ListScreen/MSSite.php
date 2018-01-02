@@ -54,7 +54,7 @@ class ACP_ListScreen_MSSite extends AC_ListScreen {
 	 * Register custom columns
 	 */
 	protected function register_column_types() {
-		$this->register_column_type( new AC_Column_Actions() );
+		$this->register_column_type( new ACP_Column_Actions() );
 
 		$this->register_column_types_from_dir( ACP()->get_plugin_dir() . 'classes/Column/NetworkSite', ACP::CLASS_PREFIX );
 	}

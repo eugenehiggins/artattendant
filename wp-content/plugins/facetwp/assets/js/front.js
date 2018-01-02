@@ -13,6 +13,7 @@ var FWP = FWP || {};
         'soft_refresh': false,
         'static_facet': null,
         'used_facets': {},
+        'facet_type': {},
         'loaded': false,
         'jqXHR': false,
         'extras': {},
@@ -131,7 +132,7 @@ var FWP = FWP || {};
         }
 
         // Preload?
-        if (! FWP.loaded && 'undefined' !== typeof FWP_JSON.preload_data) {
+        if (! FWP.loaded && ! FWP.is_bfcache && 'undefined' !== typeof FWP_JSON.preload_data) {
             FWP.render(FWP_JSON.preload_data);
         }
         else {
@@ -154,6 +155,9 @@ var FWP = FWP || {};
             var $this = $(this);
             var facet_name = $this.attr('data-name');
             var facet_type = $this.attr('data-type');
+
+            // Store the facet type
+            FWP.facet_type[facet_name] = facet_type;
 
             // Plugin hook
             wp.hooks.doAction('facetwp/refresh/' + facet_type, $this, facet_name);
@@ -284,20 +288,27 @@ var FWP = FWP || {};
 
         if ('' !== hash) {
             hash = hash.split('&');
-            $.each(hash, function(idx, val) {
-                var pieces = val.split('=');
+            $.each(hash, function(idx, chunk) {
+                var obj = chunk.split('=')[0];
+                var val = chunk.split('=')[1];
 
-                if ('paged' === pieces[0]) {
-                    FWP.paged = pieces[1];
+                if ('paged' === obj) {
+                    FWP.paged = val;
                 }
-                else if ('per_page' === pieces[0]) {
-                    FWP.extras.per_page = pieces[1];
+                else if ('per_page' === obj) {
+                    FWP.extras.per_page = val;
                 }
-                else if ('sort' === pieces[0]) {
-                    FWP.extras.sort = pieces[1];
+                else if ('sort' === obj) {
+                    FWP.extras.sort = val;
                 }
-                else if ('' !== pieces[1]) {
-                    FWP.facets[pieces[0]] = decodeURIComponent(pieces[1]).split(',');
+                else if ('' !== val) {
+                    var type = ('undefined' !== typeof FWP.facet_type[obj]) ? FWP.facet_type[obj] : '';
+                    if ('search' === type || 'autocomplete' === type) {
+                        FWP.facets[obj] = decodeURIComponent(val);
+                    }
+                    else {
+                        FWP.facets[obj] = decodeURIComponent(val).split(',');
+                    }
                 }
             });
         }

@@ -13,12 +13,6 @@ class FEP_Email_Parser {
     private $subject;
     private $body;
 
-
-    /**
-     * @param $save_directory (required) A path to a directory where files will be saved
-     * @param $allowed_senders (required) An array of email addresses allowed to send through this script
-     * @param $pdo (optional) A PDO connection to a database for saving emails 
-     */
     public function __construct( $src = 'php://stdin' ){
 		$this->readEmail( $src );
 
@@ -161,10 +155,10 @@ class FEP_Email_Parser {
      */
     private function saveFile($filename,$content,$mimeType = 'unknown'){
         //$filename = preg_replace('/[^a-zA-Z0-9_.-]/','_',$filename);
-		$filename = preg_replace('/[^\w.-]/','_',$filename);
+		//$filename = preg_replace('/[^\w.-]/','_',$filename);
 
         // This is for readability for the return e-mail and in the DB
-        $this->saved_files[$filename] = array( 'mime' => $mimeType, 'content' => $content );
+        $this->saved_files[] = array( 'name' => $filename, 'mime' => $mimeType, 'content' => $content );
     }
 	
 	public function sender_email(){

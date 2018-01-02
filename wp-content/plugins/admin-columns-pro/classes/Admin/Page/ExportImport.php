@@ -497,9 +497,9 @@ class ACP_Admin_Page_ExportImport extends AC_Admin_Page {
 	 * @since 1.0
 	 */
 	public function admin_scripts() {
-	    if ( ! $this->is_current_screen() ) {
-	        return;
-        }
+		if ( ! $this->is_current_screen() ) {
+			return;
+		}
 
 		wp_enqueue_style( 'acp-export-import', $this->get_assets_url() . 'css/export-import' . AC()->minified() . '.css', array(), ACP()->get_version() );
 		wp_enqueue_script( 'acp-export-import', $this->get_assets_url() . 'js/export-import' . AC()->minified() . '.js', array( 'jquery' ), ACP()->get_version() );
@@ -635,138 +635,138 @@ class ACP_Admin_Page_ExportImport extends AC_Admin_Page {
 	 */
 	public function display() {
 		?>
-        <table class="form-table ac-form-table">
-            <tbody>
+		<table class="form-table ac-form-table">
+			<tbody>
 			<?php if ( $this->php_export_string ) : ?>
-                <tr>
-                    <th scope="row">
-                        <h2><?php _e( 'Results', 'codepress-admin-columns' ); ?></h2>
-                        <p>
-                            <a href="#" class="ac-pointer" rel="ac-php-export-instructions-html" data-pos="right"><?php _e( 'Instructions', 'codepress-admin-columns' ); ?></a>
-                        </p>
-                        <div id="ac-php-export-instructions-html" style="display:none;">
-                            <h3><?php _e( 'Using the PHP export', 'codepress-admin-columns' ); ?></h3>
-                            <ol>
-                                <li><?php _e( 'Copy the generated PHP code in the right column', 'codepress-admin-columns' ); ?></li>
-                                <li><?php _e( 'Insert the code in your themes functions.php or in your plugin (on the init action)', 'codepress-admin-columns' ); ?></li>
-                                <li><?php _e( 'Your columns settings are now loaded from your PHP code instead of from your stored settings!', 'codepress-admin-columns' ); ?></li>
-                            </ol>
-                        </div>
-                    </th>
-                    <td>
-                        <form action="" method="post" id="php-export-results">
-                            <textarea title="Exported code" class="widefat" rows="20"><?php echo $this->php_export_string; ?></textarea>
-                        </form>
-                    </td>
-                </tr>
+				<tr>
+					<th scope="row">
+						<h2><?php _e( 'Results', 'codepress-admin-columns' ); ?></h2>
+						<p>
+							<a href="#" class="ac-pointer" rel="ac-php-export-instructions-html" data-pos="right"><?php _e( 'Instructions', 'codepress-admin-columns' ); ?></a>
+						</p>
+						<div id="ac-php-export-instructions-html" style="display:none;">
+							<h3><?php _e( 'Using the PHP export', 'codepress-admin-columns' ); ?></h3>
+							<ol>
+								<li><?php _e( 'Copy the generated PHP code in the right column', 'codepress-admin-columns' ); ?></li>
+								<li><?php _e( 'Insert the code in your themes functions.php or in your plugin (on the init action)', 'codepress-admin-columns' ); ?></li>
+								<li><?php _e( 'Your columns settings are now loaded from your PHP code instead of from your stored settings!', 'codepress-admin-columns' ); ?></li>
+							</ol>
+						</div>
+					</th>
+					<td>
+						<form action="" method="post" id="php-export-results">
+							<textarea title="Exported code" class="widefat" rows="20"><?php echo $this->php_export_string; ?></textarea>
+						</form>
+					</td>
+				</tr>
 			<?php endif; ?>
-            <tr>
-                <th scope="row">
-                    <h2><?php _e( 'Columns', 'codepress-admin-columns' ); ?></h2>
-                    <p><?php _e( 'Select the columns to be exported.', 'codepress-admin-columns' ); ?></p>
-                </th>
-                <td>
-                    <div class="ac-export">
+			<tr>
+				<th scope="row">
+					<h2><?php _e( 'Columns', 'codepress-admin-columns' ); ?></h2>
+					<p><?php _e( 'Select the columns to be exported.', 'codepress-admin-columns' ); ?></p>
+				</th>
+				<td>
+					<div class="ac-export">
 
 						<?php if ( $groups = $this->get_export_multiselect_options() ) : ?>
-                            <form method="post" class="<?php echo $this->export_single_layouts() ? 'large' : ''; ?>">
+							<form method="post" class="<?php echo $this->export_single_layouts() ? 'large' : ''; ?>">
 
 								<?php $this->nonce_field( 'export' ); ?>
 
-                                <select title="Exported types" name="export_types[]" multiple="multiple" class="select ac-export-multiselect" id="export_types">
+								<select title="Exported types" name="export_types[]" multiple="multiple" class="select ac-export-multiselect" id="export_types">
 									<?php foreach ( $groups as $group_key => $group ) : ?>
-                                        <optgroup label="<?php echo esc_attr( $group_key ); ?>">
+										<optgroup label="<?php echo esc_attr( $group_key ); ?>">
 											<?php foreach ( $group as $key => $label ) : ?>
-                                                <option value="<?php echo esc_attr( $key ); ?>"<?php selected( false !== array_search( $key, $this->get_exported_types() ) ); ?>>
+												<option value="<?php echo esc_attr( $key ); ?>"<?php selected( false !== array_search( $key, $this->get_exported_types() ) ); ?>>
 													<?php echo esc_html( $label ); ?>
-                                                </option>
+												</option>
 											<?php endforeach; ?>
-                                        </optgroup>
+										</optgroup>
 									<?php endforeach; ?>
-                                </select>
-                                <div class="actions">
-                                    <div class="actions-left">
-                                        <a class="export-select-all" href="#"><?php _e( 'select all', 'codepress-admin-columns' ); ?></a>
-                                    </div>
-                                    <div class="actions-right">
-                                        <a class="export-deselect-all" href="#"><?php _e( 'deselect all', 'codepress-admin-columns' ); ?></a>
-                                    </div>
-                                </div>
-                                <div class="submit">
-                                    <input type="submit" class="button button-primary" name="ac-export-php" value="<?php _e( 'Export PHP', 'codepress-admin-columns' ); ?>">
-                                    <input type="submit" class="button button-primary" name="ac-export-json" value="<?php _e( 'Download export file', 'codepress-admin-columns' ); ?>">
-                                </div>
-                            </form>
+								</select>
+								<div class="actions">
+									<div class="actions-left">
+										<a class="export-select-all" href="#"><?php _e( 'select all', 'codepress-admin-columns' ); ?></a>
+									</div>
+									<div class="actions-right">
+										<a class="export-deselect-all" href="#"><?php _e( 'deselect all', 'codepress-admin-columns' ); ?></a>
+									</div>
+								</div>
+								<div class="submit">
+									<input type="submit" class="button button-primary" name="ac-export-php" value="<?php _e( 'Export PHP', 'codepress-admin-columns' ); ?>">
+									<input type="submit" class="button button-primary" name="ac-export-json" value="<?php _e( 'Download export file', 'codepress-admin-columns' ); ?>">
+								</div>
+							</form>
 						<?php else : ?>
-                            <p><?php _e( 'No stored column settings are found.', 'codepress-admin-columns' ); ?></p>
+							<p><?php _e( 'No stored column settings are found.', 'codepress-admin-columns' ); ?></p>
 						<?php endif; ?>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <table class="form-table ac-form-table">
-            <tbody>
-            <tr>
-                <td>
-                    <h2><?php _e( 'Download export file', 'codepress-admin-columns' ); ?></h2>
-                    <p><?php _e( 'Admin Columns will export to a format compatible with the Admin Columns import functionality.', 'codepress-admin-columns' ); ?></p>
-                    <ol>
-                        <li><?php _e( 'Select the columns you which to export from the list in the left column', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Click the &quot;Download export file&quot; button', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Save the .json-file when prompted', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Go to the Admin Columns import/export page in your other installation', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Select the export .json-file', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Click the &quot;Start import&quot; button', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( "That's it!", 'codepress-admin-columns' ); ?></li>
-                    </ol>
-                </td>
-                <td>
-                    <h2><?php _e( 'Export to PHP', 'codepress-admin-columns' ); ?></h2>
-                    <p><?php _e( 'Admin Columns will export PHP code you can directly insert in your plugin or theme.', 'codepress-admin-columns' ); ?></p>
-                    <ol>
-                        <li><?php _e( 'Select the columns you which to export from the list in the left column', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Click the &quot;Export to PHP&quot; button', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Copy the generated PHP code in the right column', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Insert the code in your themes functions.php or in your plugin (on the init action)', 'codepress-admin-columns' ); ?></li>
-                        <li><?php _e( 'Your columns settings are now loaded from your PHP code instead of from your stored settings!', 'codepress-admin-columns' ); ?></li>
-                    </ol>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <table class="form-table">
-            <tbody>
-            <tr>
-                <th scope="row">
-                    <h2><?php _e( 'Import', 'codepress-admin-columns' ); ?></h2>
-                    <p><?php _e( 'Import your Admin Column settings here.', 'codepress-admin-columns' ); ?></p>
-                    <p>
-                        <a href="#" class="ac-pointer" rel="ac-import-instructions-html" data-pos="right"><?php _e( 'Instructions', 'codepress-admin-columns' ); ?></a>
-                    </p>
-                    <div id="ac-import-instructions-html" style="display:none;">
-                        <h3><?php _e( 'Import Columns Types', 'codepress-admin-columns' ); ?></h3>
-                        <ol>
-                            <li><?php _e( 'Choose a Admin Columns Export file to upload.', 'codepress-admin-columns' ); ?></li>
-                            <li><?php _e( 'Click upload file and import.', 'codepress-admin-columns' ); ?></li>
-                            <li><?php _e( "That's it! You imported settings are now active.", 'codepress-admin-columns' ); ?></li>
-                        </ol>
-                    </div>
-                </th>
-                <td>
-                    <div id="ac-import-input">
-                        <form method="post" action="" enctype="multipart/form-data">
-                            <input type="file" size="25" name="import" id="upload">
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<table class="form-table ac-form-table">
+			<tbody>
+			<tr>
+				<td>
+					<h2><?php _e( 'Download export file', 'codepress-admin-columns' ); ?></h2>
+					<p><?php _e( 'Admin Columns will export to a format compatible with the Admin Columns import functionality.', 'codepress-admin-columns' ); ?></p>
+					<ol>
+						<li><?php _e( 'Select the columns you like to export from the list in the left column', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Click the &quot;Download export file&quot; button', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Save the .json-file when prompted', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Go to the Admin Columns import/export page in your other installation', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Select the export .json-file', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Click the &quot;Start import&quot; button', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( "That's it!", 'codepress-admin-columns' ); ?></li>
+					</ol>
+				</td>
+				<td>
+					<h2><?php _e( 'Export to PHP', 'codepress-admin-columns' ); ?></h2>
+					<p><?php _e( 'Admin Columns will export PHP code you can directly insert in your plugin or theme.', 'codepress-admin-columns' ); ?></p>
+					<ol>
+						<li><?php _e( 'Select the columns you like to export from the list in the left column', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Click the &quot;Export to PHP&quot; button', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Copy the generated PHP code in the right column', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Insert the code in your themes functions.php or in your plugin (on the init action)', 'codepress-admin-columns' ); ?></li>
+						<li><?php _e( 'Your columns settings are now loaded from your PHP code instead of from your stored settings!', 'codepress-admin-columns' ); ?></li>
+					</ol>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<table class="form-table">
+			<tbody>
+			<tr>
+				<th scope="row">
+					<h2><?php _e( 'Import', 'codepress-admin-columns' ); ?></h2>
+					<p><?php _e( 'Import your Admin Column settings here.', 'codepress-admin-columns' ); ?></p>
+					<p>
+						<a href="#" class="ac-pointer" rel="ac-import-instructions-html" data-pos="right"><?php _e( 'Instructions', 'codepress-admin-columns' ); ?></a>
+					</p>
+					<div id="ac-import-instructions-html" style="display:none;">
+						<h3><?php _e( 'Import Columns Types', 'codepress-admin-columns' ); ?></h3>
+						<ol>
+							<li><?php _e( 'Choose a Admin Columns Export file to upload.', 'codepress-admin-columns' ); ?></li>
+							<li><?php _e( 'Click upload file and import.', 'codepress-admin-columns' ); ?></li>
+							<li><?php _e( "That's it! You imported settings are now active.", 'codepress-admin-columns' ); ?></li>
+						</ol>
+					</div>
+				</th>
+				<td>
+					<div id="ac-import-input">
+						<form method="post" action="" enctype="multipart/form-data">
+							<input type="file" size="25" name="import" id="upload">
 
 							<?php $this->nonce_field( 'file-import' ); ?>
 
-                            <input type="submit" value="<?php _e( 'Upload file and import', 'codepress-admin-columns' ); ?>" class="button" id="import-submit" name="file-submit">
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+							<input type="submit" value="<?php _e( 'Upload file and import', 'codepress-admin-columns' ); ?>" class="button" id="import-submit" name="file-submit">
+						</form>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
 		<?php
 	}
 

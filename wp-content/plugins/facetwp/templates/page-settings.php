@@ -235,7 +235,7 @@ FWP.builder = <?php echo json_encode( $builder ); ?>;
             </div>
             <div class="media-frame-content">
                 <div class="modal-content-wrap">
-                    <div class="flexbox">
+                    <div class="facetwp-modal-grid">
                         <div class="qb-area"></div>
                         <div class="qb-area-results">
                             <textarea class="qb-results" readonly></textarea>

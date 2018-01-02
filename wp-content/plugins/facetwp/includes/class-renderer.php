@@ -21,11 +21,17 @@ class FacetWP_Renderer
     /* (array) HTTP parameters from the original page (URI, GET) */
     public $http_params;
 
-    /* (boolean) Whether search is active */
+    /* (boolean) Is search active? */
     public $is_search = false;
+
+    /* (boolean) Are we preloading? */
+    public $is_preload = false;
 
     /* (array) Data for the sort box dropdown */
     public $sort_options;
+
+    /* (array) Cache preloaded facet values */
+    public $preloaded_values;
 
     /* (array) The final WP_Query object */
     public $query;
@@ -76,7 +82,12 @@ class FacetWP_Renderer
                     $f['selected_values'] = $this->http_params['url_vars'][ $name ];
                 }
 
-                $facet['selected_values'] = esc_sql( $f['selected_values'] );
+                // Support commas within search / autocomplete facets
+                if ( 'search' == $facet['type'] || 'autocomplete' == $facet['type'] ) {
+                    $f['selected_values'] = implode( ',', (array) $f['selected_values'] );
+                }
+
+                $facet['selected_values'] = FWP()->helper->sanitize( $f['selected_values'] );
                 $this->facets[ $name ] = $facet;
             }
         }
@@ -146,16 +157,16 @@ class FacetWP_Renderer
 
             // Run the WP_Query
             $this->query = new WP_Query( $this->query_args );
+        }
 
-            // Debug
-            if ( 'on' == FWP()->helper->get_setting( 'debug_mode', 'off' ) ) {
-                $output['settings']['debug'] = array(
-                    'query_args'    => $this->query_args,
-                    'sql'           => $this->query->request,
-                    'facets'        => $this->facets,
-                    'template'      => $this->template,
-                );
-            }
+        // Debug
+        if ( 'on' == FWP()->helper->get_setting( 'debug_mode', 'off' ) ) {
+            $output['settings']['debug'] = array(
+                'query_args'    => $this->query_args,
+                'sql'           => $this->query->request,
+                'facets'        => $this->facets,
+                'template'      => $this->template,
+            );
         }
 
         // Generate the template HTML
@@ -242,7 +253,18 @@ class FacetWP_Renderer
 
             // Load facet values if needed
             if ( method_exists( $this->facet_types[ $facet_type ], 'load_values' ) ) {
-                $args['values'] = $this->facet_types[ $facet_type ]->load_values( $args );
+
+                // Grab preloaded values if available
+                if ( isset( $this->preloaded_values[ $facet_name ] ) ) {
+                    $args['values'] = $this->preloaded_values[ $facet_name ];
+                }
+                else {
+                    $args['values'] = $this->facet_types[ $facet_type ]->load_values( $args );
+
+                    if ( $this->is_preload ) {
+                        $this->preloaded_values[ $facet_name ] = $args['values'];
+                    }
+                }
             }
 
             // Filter the render args
@@ -331,10 +353,13 @@ class FacetWP_Renderer
 
         // Only get relevant post IDs
         $args = array_merge( $this->query_args, array(
-            'fields'            => 'ids',
-            'posts_per_page'    => -1,
-            'paged'             => 1,
-            'cache_results'     => false,
+            'paged' => 1,
+            'posts_per_page' => -1,
+            'update_post_meta_cache' => false,
+            'update_post_term_cache' => false,
+            'cache_results' => false,
+            'no_found_rows' => true,
+            'fields' => 'ids',
         ) );
 
         $query = new WP_Query( $args );
@@ -392,7 +417,7 @@ class FacetWP_Renderer
 
             // Store post IDs per facet
             // Required for dropdowns and checkboxes in "or" mode
-            if ( $store_ids ) {
+            if ( $store_ids || $this->is_preload ) {
                 FWP()->or_values[ $facet_name ] = $matches;
             }
 

@@ -74,7 +74,7 @@ class ExportController extends BaseController
 
         $default = PMXE_Plugin::get_default_import_options();
 
-        if(!$extraData['save_template_as']) {
+        if(!isset($extraData['save_template_as'])) {
             $extraData['save_template_as'] = '';
             $extraData['name'] = '';
         }

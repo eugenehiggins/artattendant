@@ -147,6 +147,7 @@ class MMB_User extends MMB_Core
 
         extract($args);
         //$args: $users, $new_role, $new_password, $user_edit_action
+        // if action is edit-user $args are: $users, $new_role, $new_password, $user_edit_action, $new_first_name, $new_last_name, $new_user_email, $new_description, $new_user_url
 
         $return = array();
         if (count($users)) {
@@ -209,6 +210,42 @@ class MMB_User extends MMB_Core
                                 $result = array('error' => 'Cannot delete user assigned for ManageWP.');
                             }
 
+                            break;
+                        case 'edit-user':
+                            if (!$new_user_email) {
+                                $result = array('error' => 'No email provided.');
+                                break;
+                            }
+
+                            if (!$new_role) {
+                                $result = array('error' => 'No role provided.');
+                                break;
+                            }
+
+                            if ($user == $username) {
+                                $result = array('error' => 'Cannot change role to user assigned for ManageWP.');
+                                break;
+                            }
+
+                            if ($this->last_admin($user_obj) && $new_role != 'administrator') {
+                                $result = array('error' => 'Cannot change role to the only one left admin user.');
+                                break;
+                            }
+
+                            $userdata       = array();
+                            $userdata['ID'] = $user_obj->ID;
+
+                            if ($new_password) {
+                                $userdata['user_pass'] = $new_password;
+                            }
+
+                            $userdata['first_name']  = $new_first_name;
+                            $userdata['last_name']   = $new_last_name;
+                            $userdata['user_email']  = $new_user_email;
+                            $userdata['role']        = strtolower($new_role);
+                            $userdata['description'] = trim($new_description);
+                            $userdata['user_url']    = $new_user_url;
+                            $result                  = wp_update_user($userdata);
                             break;
                         default:
                             $result = array('error' => 'Wrong action provided. Please try again.');

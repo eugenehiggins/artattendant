@@ -162,7 +162,7 @@ abstract class ACP_Filtering_Model extends ACP_Model {
 	 *
 	 * @param array       $dates
 	 * @param string      $display How to display the date
-	 * @param string      $format Format of the date
+	 * @param string      $format  Format of the date
 	 * @param string|null $key
 	 *
 	 * @return array
@@ -207,6 +207,8 @@ abstract class ACP_Filtering_Model extends ACP_Model {
 		}
 
 		ksort( $options, SORT_NUMERIC );
+
+		$options = array_reverse( $options, true );
 
 		return $options;
 	}

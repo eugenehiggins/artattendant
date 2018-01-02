@@ -14,10 +14,10 @@ class URE_Protect_Admin {
     private $lib = null;
     private $user_to_check = null;  // cached list of user IDs, who has Administrator role     	 
     
-    public function __construct($lib) {
+    public function __construct() {
         global $pagenow;
         
-        $this->lib = $lib;
+        $this->lib = URE_Lib::get_instance();
         $this->user_to_check = array();
         
         // Exclude administrator role from edit list.
@@ -80,11 +80,12 @@ class URE_Protect_Admin {
             return false;
         }
 
-        $table_name = $this->lib->get_usermeta_table_name();
-        $meta_key = $wpdb->prefix . 'capabilities';
-        $query = "SELECT count(*)
-                FROM $table_name
-                WHERE user_id=$user_id AND meta_key='$meta_key' AND meta_value like '%administrator%'";
+        $meta_key = $wpdb->prefix .'capabilities';
+        $query = $wpdb->prepare(
+                "SELECT count(*)
+                    FROM {$wpdb->usermeta}
+                    WHERE user_id=%d AND meta_key=%s AND meta_value like %s", 
+                array($user_id, $meta_key, '%administrator%'));
         $has_admin_role = $wpdb->get_var($query);
         if ($has_admin_role > 0) {
             $result = true;
@@ -124,7 +125,7 @@ class URE_Protect_Admin {
         $user_keys = array('user_id', 'user');
         foreach ($user_keys as $user_key) {
             $access_deny = false;
-            $user_id = $this->lib->get_request_var($user_key, 'get');
+            $user_id = (int) $this->lib->get_request_var($user_key, 'get', 'int');
             if (empty($user_id)) {  // check the next key
                 continue;
             }
@@ -158,20 +159,20 @@ class URE_Protect_Admin {
      * @param  type $user_query
      */
     public function exclude_administrators($user_query) {
-
-        global $wpdb, $current_user;
+        global $wpdb;
         
         if (!$this->is_protection_applicable()) { // block the user edit stuff only
             return;
         }
 
         // get user_id of users with 'Administrator' role  
-        $tableName = $this->lib->get_usermeta_table_name();
+        $current_user_id = get_current_user_id();
         $meta_key = $wpdb->prefix . 'capabilities';
-        $admin_role_key = '%"administrator"%';
-        $query = "SELECT user_id
-              FROM $tableName
-              WHERE user_id!={$current_user->ID} AND meta_key='{$meta_key}' AND meta_value like '{$admin_role_key}'";
+        $query = $wpdb->prepare(
+                    "SELECT user_id
+                        FROM {$wpdb->usermeta}
+                        WHERE user_id!=%d AND meta_key=%s AND meta_value like %s",
+                      array($current_user_id, $meta_key, '%administrator%'));
         $ids_arr = $wpdb->get_col($query);
         if (is_array($ids_arr) && count($ids_arr) > 0) {
             $ids = implode(',', $ids_arr);
@@ -181,12 +182,41 @@ class URE_Protect_Admin {
     // end of exclude_administrators()
 
     
+    
+    private function extract_view_quantity($text) {
+        $match = array();
+        $result = preg_match('#\((.*?)\)#', $text, $match);
+        if ($result) {
+            $quantity = $match[1];
+        } else {
+            $quantity = 0;
+        }
+        
+        return $quantity;
+    }
+    // end of extract_view_quantity()
+    
+    
     /*
      * Exclude view of users with Administrator role
      * 
      */
     public function exclude_admins_view($views) {
 
+        if (!isset($views['administrator'])) {
+            return $views;
+        }
+        
+        if (isset($views['all'])) {        
+            // Decrease quant of all users to the quant of hidden admins
+            $admins_orig = $this->extract_view_quantity($views['administrator']);
+            $admins_int = str_replace(',', '', $admins_orig);
+            $all_orig = $this->extract_view_quantity($views['all']);
+            $all_orig_int = str_replace(',', '', $all_orig);
+            $all_new = $all_orig_int - $admins_int;
+            $views['all'] = str_replace($all_orig, $all_new, $views['all']);
+        }
+        
         unset($views['administrator']);
 
         return $views;

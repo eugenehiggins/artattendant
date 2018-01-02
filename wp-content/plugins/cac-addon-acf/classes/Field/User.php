@@ -36,4 +36,8 @@ class ACA_ACF_Field_User extends ACA_ACF_Field {
 		return new ACA_ACF_Filtering_User( $this->column );
 	}
 
+	public function export() {
+		return new ACP_Export_Model_StrippedValue( $this->column );
+	}
+
 }

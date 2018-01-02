@@ -22,7 +22,7 @@ class ACP_Editing_TableScreen {
 	 *
 	 * @param AC_ListScreen $list_screen
 	 */
-	public function scripts( $list_screen ) {
+	public function scripts( AC_ListScreen $list_screen ) {
 
 		$columns = $list_screen->get_columns();
 		if ( ! $columns ) {
@@ -40,7 +40,7 @@ class ACP_Editing_TableScreen {
 		}
 
 		$minified = AC()->minified();
-		$plugin_url = ACP()->editing()->get_url();
+		$plugin_url = ACP()->editing()->get_plugin_url();
 		$version = ACP()->editing()->get_version();
 
 		// Libraries
@@ -60,7 +60,7 @@ class ACP_Editing_TableScreen {
 		wp_localize_script( 'acp-editing-table', 'ACP_Editing_Items', $column_items );
 		wp_localize_script( 'acp-editing-table', 'ACP_Editing', array(
 			'inline_edit' => array(
-				'active' => $this->preferences()->set_key( $list_screen->get_key() )->get(),
+				'active' => '1' === $this->preferences()->get( $list_screen->get_key() ),
 			),
 			// Translations
 			'i18n'        => array(
@@ -68,6 +68,7 @@ class ACP_Editing_TableScreen {
 				'edit'          => __( 'Edit' ),
 				'redo'          => __( 'Redo', 'codepress-admin-columns' ),
 				'undo'          => __( 'Undo', 'codepress-admin-columns' ),
+				'date'          => __( 'Date' ),
 				'delete'        => __( 'Delete', 'codepress-admin-columns' ),
 				'download'      => __( 'Download', 'codepress-admin-columns' ),
 				'errors'        => array(
@@ -79,6 +80,7 @@ class ACP_Editing_TableScreen {
 				'media'         => __( 'Media', 'codepress-admin-columns' ),
 				'image'         => __( 'Image', 'codepress-admin-columns' ),
 				'audio'         => __( 'Audio', 'codepress-admin-columns' ),
+				'time'          => __( 'Time', 'codepress-admin-columns' ),
 			),
 		) );
 
@@ -106,7 +108,7 @@ class ACP_Editing_TableScreen {
 		$locale = substr( get_locale(), 0, 2 );
 
 		// Select 2 translations
-		if ( file_exists( $this->get_dir() . 'library/select2/select2_locale_' . $locale . '.js' ) ) {
+		if ( file_exists( ACP()->editing()->get_plugin_dir() . 'library/select2/select2_locale_' . $locale . '.js' ) ) {
 			wp_register_script( 'select2-locale', $plugin_url . 'library/select2/select2_locale_' . $locale . '.js', array( 'jquery' ), $version );
 			wp_enqueue_script( 'select2-locale' );
 		}
@@ -219,6 +221,15 @@ class ACP_Editing_TableScreen {
 			'row_html'  => $list_screen->get_single_row( $id ) // Mostly for Default columns
 		);
 
+		/**
+		 * @since 4.0.11
+		 *
+		 * @param array     $data
+		 * @param int       $id
+		 * @param AC_Column $column
+		 */
+		$data = apply_filters( 'acp/editing/result', $data, $id, $column );
+
 		wp_send_json_success( $data );
 	}
 
@@ -230,8 +241,10 @@ class ACP_Editing_TableScreen {
 	public function ajax_editability_state_save() {
 		check_ajax_referer( 'ac-ajax' );
 
-		$preferences = $this->preferences();
-		$preferences->set_key( filter_input( INPUT_POST, 'list_screen' ) )->update( filter_input( INPUT_POST, 'value' ) );
+		$key = filter_input( INPUT_POST, 'list_screen' );
+		$value = filter_input( INPUT_POST, 'value' ) ? '1' : '0';
+
+		$this->preferences()->set( $key, $value );
 		exit;
 	}
 
@@ -414,13 +427,6 @@ class ACP_Editing_TableScreen {
 	}
 
 	/**
-	 * @since 4.0
-	 */
-	private function get_dir() {
-		return ACP()->editing()->get_dir();
-	}
-
-	/**
 	 * @param string $message
 	 */
 	private function ajax_error( $message ) {
@@ -444,7 +450,7 @@ class ACP_Editing_TableScreen {
 				if ( is_array( $option ) && isset( $option['options'] ) ) {
 					$option['options'] = $this->format_js( $option['options'] );
 					$options[] = $option;
-				} else {
+				} else if ( is_scalar( $option ) ) {
 					$options[] = array(
 						'value' => $index,
 						'label' => html_entity_decode( $option ),
@@ -459,10 +465,10 @@ class ACP_Editing_TableScreen {
 	/**
 	 * Get an instance of preferences for the current user
 	 *
-	 * @return ACP_Editing_Preferences
+	 * @return AC_Preferences
 	 */
-	private function preferences() {
-		return new ACP_Editing_Preferences();
+	public function preferences() {
+		return new AC_Preferences( 'editability_state' );
 	}
 
 }

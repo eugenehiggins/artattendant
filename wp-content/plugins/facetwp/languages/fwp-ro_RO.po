@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FacetWP\n"
-"POT-Creation-Date: 2017-09-26 15:17-0400\n"
-"PO-Revision-Date: 2017-09-26 15:17-0400\n"
+"POT-Creation-Date: 2017-11-16 14:59-0500\n"
+"PO-Revision-Date: 2017-11-16 14:59-0500\n"
 "Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
 "Language-Team: Ciprian <ciprian@brainie.ro>\n"
 "Language: ro_RO\n"
@@ -17,70 +17,70 @@ msgstr ""
 "2:1));\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/class-ajax.php:203
+#: includes/class-ajax.php:215
 #, fuzzy
 msgid "FacetWP was unable to auto-detect the post listing"
 msgstr "FacetWP a fost în imposibilitatea de a auto-detecteze cota de post"
 
-#: includes/class-ajax.php:231
+#: includes/class-ajax.php:243
 msgid "Settings saved"
 msgstr "Setările au fost salvate"
 
-#: includes/class-ajax.php:234
+#: includes/class-ajax.php:246
 msgid "Error: invalid JSON"
 msgstr "Eroare: JSON nevalid"
 
-#: includes/class-ajax.php:353
+#: includes/class-ajax.php:365
 msgid "Nothing to import"
 msgstr "Nimic de importat"
 
-#: includes/class-ajax.php:389
+#: includes/class-ajax.php:401
 msgid "Imported"
 msgstr "Importat"
 
-#: includes/class-ajax.php:392
+#: includes/class-ajax.php:404
 msgid "Skipped"
 msgstr "Ignorat"
 
-#: includes/class-ajax.php:423
+#: includes/class-ajax.php:435
 msgid "Error"
 msgstr "Eroare"
 
-#: includes/class-display.php:130
+#: includes/class-display.php:138
 #, fuzzy
 #| msgid "No results"
 msgid "No results found"
-msgstr "Niciun rezultat gasit"
+msgstr "Niciun rezultat găsit"
 
-#: includes/class-helper.php:384
+#: includes/class-helper.php:430
 msgid "Posts"
 msgstr "Articole"
 
-#: includes/class-helper.php:386
+#: includes/class-helper.php:432
 msgid "Post Type"
 msgstr "Tip articol"
 
-#: includes/class-helper.php:387
+#: includes/class-helper.php:433
 msgid "Post Date"
 msgstr "Data articol"
 
-#: includes/class-helper.php:388
+#: includes/class-helper.php:434
 msgid "Post Modified"
 msgstr "Ultima modificare"
 
-#: includes/class-helper.php:389
+#: includes/class-helper.php:435
 msgid "Post Title"
 msgstr "Titlu articol"
 
-#: includes/class-helper.php:390
+#: includes/class-helper.php:436
 msgid "Post Author"
 msgstr "Autor articol"
 
-#: includes/class-helper.php:395
+#: includes/class-helper.php:441
 msgid "Taxonomies"
 msgstr "Taxonomie"
 
-#: includes/class-helper.php:400
+#: includes/class-helper.php:446
 msgid "Custom Fields"
 msgstr "Câmpuri personalizate"
 
@@ -99,43 +99,44 @@ msgid "To use FacetWP with %s, please install the %s, then re-index."
 msgstr ""
 "Pentru a utiliza FacetWP cu %s, vă rugăm să instalaţi %s, apoi re-indexa."
 
-#: includes/class-renderer.php:461 includes/class-renderer.php:578
+#: includes/class-renderer.php:496 includes/class-renderer.php:613
 msgid "of"
 msgstr "din"
 
-#: includes/class-renderer.php:495 includes/facets/checkboxes.php:324
+#: includes/class-renderer.php:530 includes/facets/checkboxes.php:324
 #: includes/facets/dropdown.php:191 includes/facets/fselect.php:263
 #: includes/facets/hierarchy.php:212 includes/facets/radio.php:206
 msgid "Sort by"
 msgstr "Sortează după"
 
-#: includes/class-renderer.php:499
+#: includes/class-renderer.php:534
 msgid "Title (A-Z)"
 msgstr "Titlu (A-Z)"
 
-#: includes/class-renderer.php:506
+#: includes/class-renderer.php:541
 msgid "Title (Z-A)"
 msgstr "Titlu (Z-A)"
 
-#: includes/class-renderer.php:513
+#: includes/class-renderer.php:548
 msgid "Date (Newest)"
 msgstr "Data (cel mai recent)"
 
-#: includes/class-renderer.php:520
+#: includes/class-renderer.php:555
 msgid "Date (Oldest)"
 msgstr "Data (cel mai vechi)"
 
-#: includes/class-renderer.php:577
+#: includes/class-renderer.php:612
 msgid "Page"
 msgstr "Pagina"
 
-#: includes/class-renderer.php:628
+#: includes/class-renderer.php:663
 msgid "Per page"
 msgstr "Per pagină"
 
 #: includes/class-settings-admin.php:14
+#, fuzzy
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: includes/class-settings-admin.php:17
 msgid "License Key"
@@ -153,7 +154,7 @@ msgstr "Separatori"
 #: includes/class-settings-admin.php:29
 #, fuzzy
 msgid "Loading Animation"
-msgstr "Animaţie de încărcare"
+msgstr "Animația de încărcare"
 
 #: includes/class-settings-admin.php:31
 #, fuzzy
@@ -167,7 +168,7 @@ msgstr "Fade"
 
 #: includes/class-settings-admin.php:31 includes/facets/date_range.php:181
 #: includes/facets/number_range.php:116 includes/facets/proximity.php:196
-#: includes/facets/slider.php:174
+#: includes/facets/slider.php:176
 msgid "None"
 msgstr "Nici una"
 
@@ -180,17 +181,17 @@ msgstr "Prefix"
 #: includes/class-settings-admin.php:41
 #, fuzzy
 msgid "Debug Mode"
-msgstr "WP mod  depanare"
+msgstr "Modul de Depanare "
 
 #: includes/class-settings-admin.php:43
 #, fuzzy
 msgid "Off"
-msgstr "Oprit"
+msgstr "Off"
 
 #: includes/class-settings-admin.php:43
 #, fuzzy
 msgid "On"
-msgstr "Pornit"
+msgstr "On"
 
 #: includes/class-settings-admin.php:49
 #: includes/integrations/woocommerce/woocommerce.php:48
@@ -211,7 +212,7 @@ msgstr ""
 #: includes/facets/checkboxes.php:389 includes/facets/checkboxes.php:404
 #: includes/facets/dropdown.php:211 includes/facets/fselect.php:236
 #: includes/facets/fselect.php:283 includes/facets/radio.php:226
-#: includes/facets/radio.php:241 includes/integrations/acf/acf.php:204
+#: includes/facets/radio.php:241 includes/integrations/acf/acf.php:247
 msgid "No"
 msgstr "Nu"
 
@@ -220,7 +221,7 @@ msgstr "Nu"
 #: includes/facets/checkboxes.php:390 includes/facets/checkboxes.php:405
 #: includes/facets/dropdown.php:212 includes/facets/fselect.php:237
 #: includes/facets/fselect.php:284 includes/facets/radio.php:227
-#: includes/facets/radio.php:242 includes/integrations/acf/acf.php:204
+#: includes/facets/radio.php:242 includes/integrations/acf/acf.php:247
 msgid "Yes"
 msgstr "Da"
 
@@ -237,7 +238,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Back"
 msgid "Backup"
-msgstr "Înapoi"
+msgstr "Copie de siguranţă"
 
 #: includes/class-settings-admin.php:71 includes/class-settings-admin.php:123
 msgid "Export"
@@ -430,22 +431,22 @@ msgid "Clear"
 msgstr "Șterge"
 
 #: includes/facets/date_range.php:173 includes/facets/number_range.php:108
-#: includes/facets/proximity.php:188 includes/facets/slider.php:166
+#: includes/facets/proximity.php:188 includes/facets/slider.php:168
 msgid "Other data source"
 msgstr "Altă sursă de date:"
 
 #: includes/facets/date_range.php:176 includes/facets/number_range.php:111
-#: includes/facets/slider.php:169
+#: includes/facets/slider.php:171
 msgid "Use a separate value for the upper limit?"
 msgstr "Folosește o valoare separată pentru limita superioră?"
 
 #: includes/facets/date_range.php:193 includes/facets/number_range.php:128
-#: includes/facets/slider.php:186
+#: includes/facets/slider.php:188
 msgid "Compare type"
 msgstr "Tipul de comparare"
 
 #: includes/facets/date_range.php:196 includes/facets/number_range.php:131
-#: includes/facets/slider.php:189
+#: includes/facets/slider.php:191
 msgid "Basic"
 msgstr "De bază"
 
@@ -455,7 +456,7 @@ msgid "Enclose"
 msgstr "Atasez"
 
 #: includes/facets/date_range.php:198 includes/facets/number_range.php:132
-#: includes/facets/slider.php:190
+#: includes/facets/slider.php:192
 msgid "Intersect"
 msgstr "Intersectare"
 
@@ -542,7 +543,7 @@ msgstr "Introdu locația"
 #, fuzzy
 #| msgid "Enter location"
 msgid "Clear location"
-msgstr "Introdu locația"
+msgstr "Șterge locația"
 
 #: includes/facets/proximity.php:191
 #, fuzzy
@@ -590,35 +591,35 @@ msgstr "Slider"
 msgid "Reset"
 msgstr "Resetare"
 
-#: includes/facets/slider.php:196
+#: includes/facets/slider.php:198
 msgid "Prefix"
 msgstr "Prefix"
 
-#: includes/facets/slider.php:199
+#: includes/facets/slider.php:201
 msgid "Text that appears before each slider value"
 msgstr "Textul care apare inainte de fiecare valoare a slider-ului"
 
-#: includes/facets/slider.php:206
+#: includes/facets/slider.php:208
 msgid "Suffix"
 msgstr "Sufix"
 
-#: includes/facets/slider.php:209
+#: includes/facets/slider.php:211
 msgid "Text that appears after each slider value"
 msgstr "Textul care apare după fiecare valoare a slider-ului"
 
-#: includes/facets/slider.php:216
+#: includes/facets/slider.php:218
 msgid "Format"
 msgstr "Format"
 
-#: includes/facets/slider.php:219
+#: includes/facets/slider.php:221
 msgid "The number format"
 msgstr "Formatul numărului"
 
-#: includes/facets/slider.php:240
+#: includes/facets/slider.php:242
 msgid "Step"
 msgstr "Pas"
 
-#: includes/facets/slider.php:243
+#: includes/facets/slider.php:245
 msgid "The amount of increase between intervals"
 msgstr "Valoarea de mărit între intervale"
 
@@ -647,15 +648,21 @@ msgid "Stock Status"
 msgstr "Status stoc"
 
 #: includes/integrations/woocommerce/woocommerce.php:55
-#: includes/integrations/woocommerce/woocommerce.php:416
+#: includes/integrations/woocommerce/woocommerce.php:417
 msgid "On Sale"
 msgstr "La promoție!"
 
-#: includes/integrations/woocommerce/woocommerce.php:408
+#: includes/integrations/woocommerce/woocommerce.php:56
+#, fuzzy
+#| msgid "Post Type"
+msgid "Product Type"
+msgstr "Tip de produs"
+
+#: includes/integrations/woocommerce/woocommerce.php:409
 msgid "In Stock"
 msgstr "În stoc"
 
-#: includes/integrations/woocommerce/woocommerce.php:408
+#: includes/integrations/woocommerce/woocommerce.php:409
 msgid "Out of Stock"
 msgstr "Stoc epuizat"
 
@@ -712,7 +719,9 @@ msgstr "Acest tip de facet nu are setări adiționale."
 #, fuzzy
 #| msgid "Basic"
 msgid "Basics"
-msgstr "De bază"
+msgstr ""
+"Câmpurile de pe acest ecran determină unele dintre setările de bază ale "
+"sitului tău."
 
 #: templates/page-settings.php:64
 msgid "Support"

@@ -228,6 +228,7 @@ class EDD_Cart {
 			}
 
 			$item['quantity'] = edd_item_quantities_enabled() ? absint( $item['quantity'] ) : 1;
+			$item['quantity'] = max( 1, $item['quantity'] ); // Force quantity to 1
 
 			$options = isset( $item['options'] ) ? $item['options'] : array();
 
@@ -238,12 +239,13 @@ class EDD_Cart {
 			$discount   = apply_filters( 'edd_get_cart_content_details_item_discount_amount', $discount, $item );
 			$quantity   = $this->get_item_quantity( $item['id'], $options );
 			$fees       = $this->get_fees( 'fee', $item['id'], $price_id );
-			$subtotal   = $item_price * $quantity;
+			$subtotal   = floatval( $item_price ) * $quantity;
 
 			// Subtotal for tax calculation must exclude fees that are greater than 0. See $this->get_tax_on_fees()
 			$subtotal_for_tax = $subtotal;
 
 			foreach ( $fees as $fee ) {
+
 				$fee_amount = (float) $fee['amount'];
 				$subtotal  += $fee_amount;
 
@@ -844,7 +846,7 @@ class EDD_Cart {
 			$quantity = 1;
 		}
 
-		return apply_filters( 'edd_get_cart_item_quantity', $quantity, $download_id, $options );
+		return absint( apply_filters( 'edd_get_cart_item_quantity', $quantity, $download_id, $options ) );
 	}
 
 	/**

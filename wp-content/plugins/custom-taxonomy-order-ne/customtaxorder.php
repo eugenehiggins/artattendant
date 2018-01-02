@@ -3,7 +3,7 @@
 Plugin Name: Custom Taxonomy Order NE
 Plugin URI: http://products.zenoweb.nl/free-wordpress-plugins/custom-taxonomy-order-ne/
 Description: Allows for the ordering of categories and custom taxonomy terms through a simple drag-and-drop interface.
-Version: 2.9.1
+Version: 2.9.2
 Author: Marcel Pol
 Author URI: http://zenoweb.nl/
 License: GPLv2 or later
@@ -40,7 +40,7 @@ Domain Path: /lang/
 
 
 // Plugin Version
-define('CUSTOMTAXORDER_VER', '2.9.1');
+define('CUSTOMTAXORDER_VER', '2.9.2');
 
 
 function customtaxorder_register_settings() {
@@ -338,7 +338,7 @@ add_filter('get_terms_defaults', 'customtaxorder_get_terms_defaults', 10, 2);
  * get_terms is used in wp_list_categories and get_terms functions.
  * get_the_terms is used in the the_tags function.
  * tag_cloud_sort is used in the wp_tag_cloud and wp_generate_tag_cloud functions (but then the get_terms filter here does nothing).
- * term_query_results is used in WP_Term_Query->get_terms() (probably in WP 4.9+).
+ * term_query_results is used in WP_Term_Query->get_terms() (will probably come in WP Next).
  *
  * Default sorting is by name (according to the codex).
  *

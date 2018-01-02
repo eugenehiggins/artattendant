@@ -12,8 +12,6 @@ final class ACP_Layouts {
 
 	const LAYOUT_KEY = 'cpac_layouts';
 
-	const USER_PREFERENCE_KEY = 'cpac_layout_table';
-
 	/**
 	 * @var ACP_Layout[]
 	 */
@@ -126,10 +124,31 @@ final class ACP_Layouts {
 	}
 
 	/**
-	 * @return bool True, if layout is successfully deleted. False on failure.
+	 * @param string $layout_id
+	 *
+	 * @return ACP_Layout|false
 	 */
 	public function delete( $layout_id ) {
-		return delete_option( $this->get_storage_key( $layout_id ) );
+		$this->list_screen->set_layout_id( $layout_id );
+
+		$layout = $this->get_current_layout();
+
+		if ( ! $layout ) {
+			return false;
+		}
+
+		// Delete preferences
+		ACP()->sorting()->delete_sorting_preference( $this->list_screen );
+		ACP()->screen_options()->delete_overflow_preference( $this->list_screen );
+
+		// Delete settings
+		delete_option( self::LAYOUT_KEY . $this->list_screen->get_storage_key() );
+
+		$this->reset();
+
+		$this->list_screen->set_layout_id( $this->get_first_layout_id() );
+
+		return $layout;
 	}
 
 	/**
@@ -269,25 +288,37 @@ final class ACP_Layouts {
 	}
 
 	/**
+	 * @since 4.0.12
+	 * @return AC_Preferences
+	 */
+	public function preferences() {
+		return new AC_Preferences( 'layout_table' );
+	}
+
+	/**
 	 * @return false|ACP_Layout
 	 */
 	public function get_user_preference() {
-		$layout_id = ac_helper()->user->get_meta_site( self::USER_PREFERENCE_KEY . $this->list_screen->get_key(), true );
+		$layout_id = $this->preferences()->get( $this->list_screen->get_key() );
 
-		$layouts = $this->get_layouts_for_current_user();
+		$layout = $this->get_layout_by_id( $layout_id );
 
-		if ( ! isset( $layouts[ $layout_id ] ) ) {
+		if ( ! $layout ) {
 			return false;
 		}
 
-		return $layouts[ $layout_id ];
+		if ( ! $layout->is_current_user_eligible() ) {
+			return false;
+		}
+
+		return $layout;
 	}
 
 	/**
 	 * @param ACP_Layout $layout
 	 */
 	public function set_user_preference( $layout ) {
-		ac_helper()->user->update_meta_site( self::USER_PREFERENCE_KEY . $this->list_screen->get_key(), $layout->get_id() );
+		$this->preferences()->set( $this->list_screen->get_key(), $layout->get_id() );
 	}
 
 	/**

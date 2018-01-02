@@ -48,4 +48,8 @@ class ACA_ACF_Field_Repeater extends ACA_ACF_Field {
 		return ac_addon_acf()->get_acf_field( $this->column->get_setting( 'sub_field' )->get_value() );
 	}
 
+	public function export() {
+		return new ACP_Export_Model_Disabled( $this->column );
+	}
+
 }

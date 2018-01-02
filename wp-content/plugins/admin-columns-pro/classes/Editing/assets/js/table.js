@@ -141,6 +141,10 @@ function cacie_get_query_param_from_url( param, url ) {
 	return decodeURIComponent( results[ 2 ].replace( /\+/g, " " ) );
 }
 
+function cacie_escape_selector( s ) {
+	return s.replace( /(:|\.|\[|\])/g, "\\$1" );
+}
+
 /*
  * Init
  */
@@ -183,8 +187,7 @@ function cacie_init( $ ) {
 			fn = 'cacie_edit_' + type;
 
 			// Loop through items for current column
-			$( '.column-' + column_name, list ).each( function() {
-
+			$( '.column-' + cacie_escape_selector( column_name ), list ).each( function() {
 				if ( $( this ).hasClass( 'cacie-editable-container' ) ) {
 					// in case we run init again
 					return true;
@@ -1518,5 +1521,127 @@ jQuery.fn.cacie_edit_color = function( column, item ) {
 		type : 'color',
 		inputclass : column.editable.subtype,
 		value : el.cacie_get_value( column, item )
+	}, column, item );
+};
+
+// xEditable DateTime
+( function( $ ) {
+	"use strict";
+
+	var EditableDateTime = function( options ) {
+		this.init( 'date_time', options, EditableDateTime.defaults );
+	};
+
+	$.fn.editableutils.inherit( EditableDateTime, $.fn.editabletypes.abstractinput );
+
+	$.extend( EditableDateTime.prototype, {
+
+		render : function() {
+			var $date_field = $( '#frm_date' );
+			var $time_hours_field = $( '#frm_time_hours' );
+			var $time_minutes_field = $( '#frm_time_minutes' );
+			var $time_seconds_field = $( '#frm_time_seconds' );
+
+			$date_field.bdatepicker( {
+				format : 'yyyy-mm-dd',
+				weekStart : this.options.weekstart,
+			} ).on( 'changeDate', function() {
+				$date_field.bdatepicker( 'hide' );
+				$time_hours_field.focus();
+			} );
+
+			for ( var i = 0; i < 24; i++ ) {
+				var $option = $( '<option>' );
+				var val = ('0' + i).slice( -2 );
+				var label = ( 12 === this.options.timeformat ) ? this.formatAMPM( i ) : val;
+
+				$option.val( val ).text( label );
+				$time_hours_field.append( $option );
+			}
+			$time_hours_field.find( 'option:first' ).prop( 'selected', true );
+
+			for ( i = 0; i < 60; i++ ) {
+				$option = $( '<option>' );
+				val = ('0' + i).slice( -2 );
+
+				$option.val( val ).text( val );
+				$time_minutes_field.append( $option.clone() );
+				$time_seconds_field.append( $option );
+			}
+			$time_minutes_field.val( '00' );
+			$time_seconds_field.val( '00' );
+
+		},
+
+		formatAMPM : function( hours ) {
+			var ampm = hours >= 12 ? 'pm' : 'am';
+			hours = hours % 12;
+			hours = hours ? hours : 12; // the hour '0' should be '12'
+
+			return hours + ' ' + ampm;
+		},
+
+		value2input : function( value ) {
+			if ( !value ) {
+				return;
+			}
+
+			var date = value.substr( 0, 10 );
+			var hours = value.substr( 11, 2 );
+			var minutes = value.substr( 14, 2 );
+			var seconds = value.substr( 17, 2 );
+
+			$( '#frm_date' ).val( date ).attr( 'data-date', date ).attr( 'data-date-format', 'yyyy-mm-dd' ).bdatepicker( 'update' );
+			$( '#frm_time_hours' ).val( hours );
+			$( '#frm_time_minutes' ).val( minutes );
+			$( '#frm_time_seconds' ).val( seconds );
+		},
+
+		input2value : function() {
+			var date = $( '#frm_date' ).val();
+			var hours = $( '#frm_time_hours' ).val();
+			var minutes = $( '#frm_time_minutes' ).val();
+			var seconds = $( '#frm_time_seconds' ).val();
+
+			if ( !date || !hours || !minutes || !seconds ) {
+				return false;
+			}
+
+			return date + ' ' + hours + ':' + minutes + ':' + seconds;
+		}
+	} );
+
+	var template = '';
+
+	template += '<div class="acf-editable-date-time">';
+	template += '<div class="acf-editable-date-time__date">';
+	template += '<label>' + ACP_Editing.i18n.date + '</label>';
+	template += '<input type="text" id="frm_date" name="date" placeholder="yyyy-mm-dd" required class="form-control">';
+	template += '</div><div class="acf-editable-date-time__time">';
+	template += '<label>' + ACP_Editing.i18n.time + '</label>';
+	template += '<select type="text" id="frm_time_hours" name="time_hours"></select>:';
+	template += '<select type="text" id="frm_time_minutes" name="time_minutes"></select>:';
+	template += '<select type="text" id="frm_time_seconds" name="time_seconds"></select>';
+	template += '</div>';
+	template += '</div>';
+
+	EditableDateTime.defaults = $.extend( {}, $.fn.editabletypes.abstractinput.defaults, {
+		tpl : template,
+		weekstart : 0,
+		timeformat : 12
+	} );
+
+	$.fn.editabletypes.date_time = EditableDateTime;
+}( window.jQuery ) );
+
+jQuery.fn.cacie_edit_date_time = function( column, item ) {
+
+	var el = jQuery( this );
+
+	el.cacie_xeditable( {
+		type : 'date_time',
+		value : el.cacie_get_value( column, item ),
+		weekstart : column.editable.weekstart,
+		timeformat : column.editable.timeformat
 	}, column, item );
 };

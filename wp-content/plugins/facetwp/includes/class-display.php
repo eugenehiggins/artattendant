@@ -32,7 +32,7 @@ class FacetWP_Display
      * Detect the loop container if the "facetwp-template" class is missing
      */
     function add_template_tag( $wp_query ) {
-        if ( true === $wp_query->get( 'facetwp' ) ) {
+        if ( true === $wp_query->get( 'facetwp' ) && did_action( 'wp_head' ) ) {
             echo '<!--fwp-loop-->';
         }
     }

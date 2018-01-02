@@ -3,8 +3,8 @@ Contributors: usersnap
 Donate link: http://usersnap.com/
 Tags: feedback, visual feedback, bug tracking, screenshot, image, images, plugin, bug, bugs, typo, screenshots, widget, bugtracking, issue tracking, project management, project tracking, bug tracker, development, testing, browser testing, website testing, wp plugin, acceptance test, acceptance testing, user testing, quality assurance, website widget, feedback widget, customer support, customer widget, survey form, screenshot widget, browser screenshot widget, usersnap, bug reporter, qa, google, page, trello, JIRA, asana, basecamp, admin, administration, chat, slack, hipchat, hall, contact, form, dashboard, ecommerce, edit, content, css button, button, plugins, shortcode, fogbugz, redmine, github, desk, evernote, intercom, kanbanize, kanban, pivotal tracker, tracker, trac, bug tracker, bugs, feedback forms, notifications, notification, page screenshot, page previews, screenshot, screenshots, web page previews, visual items, user acceptance testing, uat, browser shots, browser shot, browser screenshots, browser screenshot, cross browser, cross browser testing, cross browser test
 Requires at least: 3.0
-Tested up to: 4.7
-Stable tag: 4.5
+Tested up to: 4.8
+Stable tag: 4.6
 
 Improve your Wordpress website with screenshots, bug reports and visual feedback from Usersnap.
 Usersnap helps you to get visual feedback from your users easily.
@@ -128,6 +128,10 @@ For further questions please refer to our <a href="https://usersnap.com/help/tro
 5. Get screenshots and bug reports from your users & clients with additional meta information (such as browser version, screen size, installed plugins,...)
 
 == Changelog ==
+
+= 4.6 =
+* FIX: Outdated 'Configure Widget' link is working again
+* FIX: Alternative signup url
 
 = 4.5 =
 * FIX: changed signup url

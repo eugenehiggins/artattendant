@@ -121,6 +121,7 @@ class ACP_ListScreen_Taxonomy extends AC_ListScreen {
 	protected function register_column_types() {
 		$this->register_column_type( new ACP_Column_CustomField );
 		$this->register_column_type( new ACP_Column_Menu );
+		$this->register_column_type( new ACP_Column_Actions );
 
 		$this->register_column_types_from_dir( ACP()->get_plugin_dir() . 'classes/Column/Taxonomy', ACP::CLASS_PREFIX );
 	}

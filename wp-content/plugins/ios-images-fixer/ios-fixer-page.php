@@ -50,7 +50,7 @@ if ( ! empty( $_POST['fixThemAll'] ) && ! empty( $broken_images ) ) {
 	$broken_images = self::get_broken_images();
 } ?>
 <div class="wrap">
-<h2><?php echo $title; ?> <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=7PAQ58EN6H7QJ" class="add-new-h2" id="iosif-donate-link" title="Much appreciated! :)" target="_blank">Donate</a></h2>
+<h2><?php echo $title; ?> <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=UGMBL9UDKFACG&lc=US&item_name=bishoy%2eme&item_number=ios%2dimage%2dfixer&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" class="add-new-h2" id="iosif-donate-link" title="Much appreciated! :)" target="_blank">Donate</a></h2>
 <?php 
 	if ( empty( $broken_images ) ) {
 		echo '<div class="updated"><p>Woohoo! You don\'t have any broken images!</p></div>';

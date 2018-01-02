@@ -7,19 +7,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ACP_Sorting_Model_CustomField_TitleById extends ACP_Sorting_Model_CustomField {
 
 	public function get_sorting_vars() {
+		$setting = $this->column->get_setting( 'post' );
+
+		if ( ! $setting instanceof AC_Settings_Column_Post ) {
+			return array();
+		}
+
 		$ids = array();
 
 		foreach ( $this->strategy->get_results() as $id ) {
-			// sort by the actual post_title instead of ID
-			$string = ac_helper()->array->implode_recursive( ',', $this->column->get_meta_value( $id, $this->column->get_meta_key(), true ) );
-			$title_ids = ac_helper()->string->string_to_array_integers( $string );
+			$title = false;
 
-			// use first title to sort with
-			$ids[ $id ] = is_array( $title_ids ) && isset( $title_ids[0] ) ? ac_helper()->post->get_raw_post_title( $title_ids[0] ) : '';
-		}
+			if ( $post_ids = ac_helper()->array->get_integers_from_mixed( $this->column->get_raw_value( $id ) ) ) {
 
-		if ( ! acp_sorting()->show_all_results() ) {
-			$ids = array_filter( $ids );
+				// sort by first post
+				$post_id = $post_ids[0];
+
+				$title = $setting->format( $post_id, false );
+			}
+
+			$ids[ $id ] = $title;
 		}
 
 		return array(

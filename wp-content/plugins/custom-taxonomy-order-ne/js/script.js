@@ -78,4 +78,3 @@ function customtaxorder_asc_sort(a, b) {
 	//console.log (jQuery(a).text());
 	return jQuery(a).text().toUpperCase().localeCompare(jQuery(b).text().toUpperCase());
 }
-

@@ -4,9 +4,9 @@ Donate link: https://yoast.com/
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Google Search Console, Content analysis, Readability
-Requires at least: 4.6
-Tested up to: 4.8.2
-Stable tag: 5.5.1
+Requires at least: 4.8
+Tested up to: 4.9.1
+Stable tag: 6.0
 Requires PHP: 5.2.4
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -125,116 +125,69 @@ You'll find answers to many of your questions on [kb.yoast.com](https://kb.yoast
 
 == Changelog ==
 
-= 5.5.1 =
+= 6.0.0 =
+Release Date: December 20th, 2017
 
-Release Date: September 28th, 2017
+Enhancements:
 
-* Bugfixes
-	* Fixes Snippet preview error when Yoast metabox has been removed.
+* Adds support for custom page titles and meta descriptions on the WooCommerce shop page. Props [Caleb Burks](https://github.com/WPprodigy).
+* Adds support for custom page social titles and descriptions on the WooCommerce shop page.
+* Adds a link to the Google Knowledge Graph article on Yoast.com. Props [Raaj Trambadia](https://github.com/raajtram).
+* Adds a link to an article on Yoast.com on why it might be a bad idea to use the same keyword more than once.
+* Changed the meta description maximum recommended length from 156 to 320 characters.
 
-* Changes
-	* Change Yoast Blog feed to new endpoint.
+Bugfixes:
 
-= 5.5.0 =
+* Disables the mark buttons of the content analysis when switched to text view.
+* Hides the mark buttons when the WYSIWYG editor is not loaded or the filter `wpseo_enable_assessment_markers` returns false.
+* Security hardening through stricter code checks.
 
-Release Date: September 26th, 2017
+= 5.9.3 =
 
-* Enhancements
-	* Updated the Dashboard Widget with a new design.
-	* Added additional explanations to the Configuration wizard.
-	* Added `contentinfo` landmark for assistive technologies to the Configuration wizard page.
-	* Introduces `wpseo_manager` and `wpseo_editor` roles.
-	* Introduces `wpseo_manage_options` capability to control which users have access to all SEO settings.
-	* Introduces `wpseo_edit_advanced_metadata` capability to control which users have access to the advanced SEO settings.
+Release Date: December 11th, 2017
 
-* Bugfixes
-	* Fixed a bug where certain options (`site_type`, `environment_type` and `has_multiple_authors`) would be reset to their default value whenever one of the feature toggles were changed.
-	* Ensured that `has_multiple_authors` gets validated.
+Security:
 
-= 5.4.2
+* Fixes an issue where a part of the excerpt would be leaked on password protected posts when used as a replacement variable. Such as `%%excerpt%%` and `%%excerpt_only%%`. Props to [Rolands Umbrovskis](https://profiles.wordpress.org/rolandinsh) for reporting this issue to us.
 
-Release Date: September 21st, 2017
+= 5.9.2 =
+Release Date: December 11th, 2017
 
-* Bugfixes
-	* Replace unsupported query `prepare` placeholder `%1$d` with `%d` to fix broken queries. Fixes compatibility issue with WordPress 4.8.2.
+Bugfixes:
 
-= 5.4.1
+* Fixes a bug where older browsers couldn't load the content analysis. This applies to Internet Explorer (10 and lower) and Safari (9.1 and lower).
+* Fixes a bug where the Yoast Metabox wouldn't be shown for posts set to `noindex`, therefore making it impossible to change it back to `index`, view Readability scores and not being able to optimize a post, before allowing it to be indexed.
+* Fixes a bug where translations wouldn't be applied in the Yoast SEO Metabox for SEO and Readability scores.
 
-Release Date: September 20th, 2017
+= 5.9.1 =
+Release Date: December 5th, 2017
 
-* Bugfixes
-	* Replace unsupported query `prepare` placeholder `%1$s` with `%d` to fix broken queries. Fixes compatibility issue with WordPress 4.8.2.
+Bugfixes:
 
-= 5.4.0 =
+* Fixes a bug where the configuration wizard could not be loaded, caused by a missing JavaScript dependency.
 
-Release Date: September 6th, 2017
+= 5.9.0 =
+Release Date: December 5th, 2017
 
-* Enhancements
-	* Added a hook to disabled the twitter card. (Props: @petenelson)
+Bugfixes:
 
-* Performance
-	* Replaced the use of `get_posts` and `get_children` by `WP_Query`.
+* Fixes a bug where the title isn't added back to the HTML when the debug marker has been disabled.
+* Fixes a bug where multiple help panels showed up when clicking on different help buttons.
+* Fixes a bug where the Help Center wouldn't be closed when clicking the Go Premium link.
+* Fixes a bug where the cornerstone setting for a post would be lost when quick editing the post.
+* Fixes a bug where newly created posts were taken into account for the link count, resulting in MySQL errors. Props to [stodorovic](https://github.com/stodorovic).
+* Fixes a bug where Premium plugins were being treated as WordPress.org plugins in the 'suggested plugin' notifications, resulting in download errors.
+* Fixes a bug where an empty div was visible when both Content and Readability analysis are disabled.
 
-* Bugfixes
-	* Archive pages are excluded from the sitemap based on the noindex setting. (Props: @stodorovic)
-	* Prevent the throwing of an error when `wpseoPostScraperL10n` is not defined.
-	* Escapes all input when generating links for the RSS feed.
-	* Apply the `wp_get_attachment_url` filter to Sitemap images.
+Enhancements
 
-= 5.3.3 =
-
-Release Date: August 28th, 2017
-
-* Bugfixes
-	* Fixes a bug where table listings were not giving expected content, props [Kyle B. Johnson](https://github.com/kjohnson).
-
-= 5.3.2 =
-
-Release Date: August 23rd, 2017
-
-* Bugfixes
-	* Fixes a bug where an invalid license notification could be shown in certain situations.
-
-= 5.3.1 =
-
-Release Date: August 22nd, 2017
-
-* Bugfixes
-	* Fixes a bug where "mark as fixed" on the search console page didn't work.
-	* Fixes a bug where the configuration wizard JavaScript file was too large.
-
-= 5.3.0 =
-
-Release Date: August 22nd, 2017
-
-* Enhancements
-	* Adds missing I18n function call to make a string translatable
-	* Adds XML schema for image sitemap, props: [stodorovic](https://github.com/stodorovic)
-	* Adds schema.org meta-data on every page, instead of only on the homepage
-	* Adds the possibility to filter posts by readability score.
-	* Exposes tinyMCEHelper as window.YoastSEO.wp._tinyMCEHelper in JavaScript
-	* Exposes the ReplaceVar class in YoastReplaceVarPlugin as window.YoastReplaceVarPlugin.ReplaceVar in JavaScript
-
-* Bugfixes
-	* Adds sanitization for the Twitter Image meta field
-	* Fixes use of `register_meta` for usage in WordPress 4.6 and higher
-	* Initialize the providers on hook `after_theme_setup` to make sure custom providers are added properly, props: [stodorovic](https://github.com/stodorovic)
-	* Changes the label of the "Bad" score to "Needs improvement" while filtering on SEO or readability scores.
-
-= 5.2.0 =
-
-Release Date: August 8th, 2017
-
-* Enhancements
-	* Added wpseo_pre_adjacent_rel_links filter to bypass built-in rel prev/next functionality.
-	* Introduces classes to allow collecting data in the Premium plugin.
-	* Renamed OnPage.org to Ryte.
-	* Allow WordPress WHIP messages to be dismissed for a period of 4 weeks.
-	* Adds a filter for word combinations that consist of a single one-character word.
-	* Adds aria-current to the onboarding wizard active step.
-
-* Bugfixes
-	* Removes JQMIGRATE JavaScript warnings.
+* Shows a notice regarding opening the Onboarding Wizard when the plugin is installed for the first time.
+* Makes it easier to unhook the debug code rendered as HTML comment.
+* Implements the Reactified content analysis.
+* Introduces the `wpseo_add_opengraph_additional_images` filter to allow additional OpenGraph Images to be added at a low priority.
+* Changes the Dashboard widget's progress bar height to 24px.
+* Makes the 'Next' and 'Back' buttons in the Onboarding Wizard focusable.
+* Adds grouping of feedback within the content analysis, in the following categories: 'errors', 'problems', 'needs improvement', 'considerations', and 'good'. Each category can be expanded and collapsed.
 
 = Earlier versions =
 

@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 4.0
  */
 class ACP_Column_Comment_Comment extends AC_Column_Comment_Comment
-	implements ACP_Column_EditingInterface, ACP_Column_SortingInterface {
+	implements ACP_Column_EditingInterface, ACP_Column_SortingInterface, ACP_Export_Column {
 
 	public function editing() {
 		return new ACP_Editing_Model_Comment_Comment( $this );
@@ -20,4 +20,9 @@ class ACP_Column_Comment_Comment extends AC_Column_Comment_Comment
 
 		return $model;
 	}
+
+	public function export() {
+		return new ACP_Export_Model_Comment_Comment( $this );
+	}
+
 }

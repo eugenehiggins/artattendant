@@ -53,6 +53,20 @@ https://vimeo.com/120034595
 
 == Changelog ==
 
+= 4.2.27 =
+
+- Fix: Added missing property check when checking for updates.
+
+= 4.2.26 =
+
+- Fix: Added index file to every Worker directory to prevent file listing.
+- Fix: Use the correct database prefix in a recently added user query.
+
+= 4.2.25 =
+
+- Improvement: When managing 500+ users. they are no longer sorted by roles.
+- Improvement: The Worker plugin will no longer automatically deactivate in specific cases.
+
 = 4.2.24 =
 
 - Improvement: ManageWP Worker plugin can now automatically connect to another account even if the plugin is hidden by our white label feature.

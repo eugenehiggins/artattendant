@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     $extensions = get_transient( 'fep_extensions' );
 
     if ( false === $extensions ) {
-        $response = wp_remote_get( 'https://www.shamimsplugins.com/wordpress/wp-json/api/v1/extensions/front-end-pm', array('timeout' => 15, 'sslverify' => false, 'decompress' => false) );
+        $response = wp_remote_get( 'https://www.shamimsplugins.com/wp-json/api/v1/extensions/front-end-pm', array('timeout' => 15, 'sslverify' => false, 'decompress' => false) );
 
         if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) != 200 ) {
 			echo '<div class="error">Error loading extensions. Please reload the page again!</div>';

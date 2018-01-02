@@ -1155,6 +1155,9 @@ class EDD_Discount {
 		}
 
 		if ( true == $saved ) {
+			global $edd_get_discounts_cache;
+			$edd_get_discounts_cache = array();
+
 			$this->setup_discount( WP_Post::get_instance( $this->ID ) );
 
 			/**
@@ -1753,7 +1756,7 @@ class EDD_Discount {
 						continue;
 					}
 
-					if ( in_array( $payment->status, array( 'abandoned', 'failed' ) ) ) {
+					if ( in_array( $payment->status, array( 'abandoned', 'failed', 'pending' ) ) ) {
 						continue;
 					}
 
@@ -1807,8 +1810,8 @@ class EDD_Discount {
 				$this->is_started( $set_error ) &&
 				! $this->is_maxed_out( $set_error ) &&
 				! $this->is_used( $user, $set_error ) &&
-				$this->is_min_price_met( $set_error ) &&
-				$this->is_product_requirements_met( $set_error )
+				$this->is_product_requirements_met( $set_error ) &&
+				$this->is_min_price_met( $set_error )
 			) {
 				$return = true;
 			}

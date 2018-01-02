@@ -46,4 +46,8 @@ class ACA_ACF_Field_FlexibleContent extends ACA_ACF_Field {
 		return implode( '<br/>', $output );
 	}
 
+	public function export() {
+		return new ACP_Export_Model_Disabled( $this->column );
+	}
+
 }

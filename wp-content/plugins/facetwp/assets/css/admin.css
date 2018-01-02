@@ -492,19 +492,18 @@ body.settings_page_facetwp {
 }
 
 .media-frame-router {
-    left: 10px;
+    display: none;
 }
 
 .media-frame-content {
+    top: 50px;
     bottom: 0;
     overflow: auto;
 }
 
-.media-modal-close {
-    cursor: pointer;
-    /* < WP 4.3 */
-    background: none;
-    border: 0;
+.wp-core-ui .button-link.media-modal-close {
+    text-align: center;
+    text-decoration: none;
 }
 
 .modal-content-wrap {
@@ -518,12 +517,10 @@ body.settings_page_facetwp {
     font-family: 'Courier New', sans-serif;
 }
 
-.media-modal .flexbox > div {
-    width: 40%;
-}
-
-.media-modal .flexbox > div:first-child {
-    width: 60%;
+.facetwp-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 40%;
+    grid-gap: 5px;
 }
 
 .qb-wrap .qb-row {

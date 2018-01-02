@@ -84,9 +84,9 @@ if (!function_exists('wp_all_import_get_url')) {
 
             $request = get_file_curl($filePath, $localPath);
 
-            if (!is_wp_error($request)) {
+            if ( ! is_wp_error($request) ) {
 
-                if (!$type) {
+                if ( ! $type ) {
                     if ($contentEncoding == 'gzip') {
                         $file = @fopen($localPath);
                     }

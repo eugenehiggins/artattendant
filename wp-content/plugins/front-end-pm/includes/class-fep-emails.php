@@ -29,9 +29,10 @@ class Fep_Emails
 		add_action( 'fep_save_message', array($this, 'save_send_email'), 20, 2 ); //after '_fep_participants' meta saved, if from Back End
 		add_action( 'fep_action_message_after_send', array($this, 'save_send_email'), 20, 2 ); //Front End
 		
-		if ( '1' == fep_get_option('notify_ann') ){
+		if ( '1' == fep_get_option('notify_ann', '1' ) ){
 			add_action ('transition_post_status', array($this, 'publish_notify_users'), 10, 3);
-			add_action( 'fep_save_announcement', array($this, 'save_notify_users'), 20, 2 ); //after '_fep_participant_roles' meta saved
+			add_action( 'fep_save_announcement', array($this, 'save_notify_users'), 20 ); //after '_fep_participant_roles' meta saved
+			add_action( 'fep_action_announcement_after_added', array($this, 'save_notify_users'), 20 ); //Front End
 		}
     }
 	
@@ -83,7 +84,7 @@ class Fep_Emails
 			}
 			$attachments = array();
 			$headers = array();
-			$headers['from'] = 'From: '.stripslashes( fep_get_option('from_name', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) ) ).'<'. fep_get_option('from_email', get_bloginfo('admin_email')) .'>';
+			$headers['from'] = 'From: '.stripslashes( fep_get_option('from_name', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) ) ).' <'. fep_get_option('from_email', get_bloginfo('admin_email')) .'>';
 			$headers['content_type'] = "Content-Type: $content_type";
 			
 			
@@ -127,8 +128,10 @@ class Fep_Emails
 		$this->notify_users( $post->ID, $post );
 	}
 	
-	function save_notify_users( $postid, $post )
+	function save_notify_users( $postid )
 	{
+		$post = get_post( $postid );
+		
 		if( 'publish' != $post->post_status )
 			return;
 		
@@ -179,7 +182,7 @@ class Fep_Emails
 		}
 		$attachments = array();
 		$headers = array();
-		$headers['from'] = 'From: '.stripslashes( fep_get_option('from_name', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) ) ).'<'. fep_get_option('from_email', get_bloginfo('admin_email')) .'>';
+		$headers['from'] = 'From: '.stripslashes( fep_get_option('from_name', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) ) ).' <'. fep_get_option('from_email', get_bloginfo('admin_email')) .'>';
 		$headers['content_type'] = "Content-Type: $content_type";
 		
 		$content = apply_filters( 'fep_filter_before_announcement_email_send', compact( 'subject', 'message', 'headers', 'attachments' ), $post, $user_emails );

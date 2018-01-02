@@ -13,7 +13,9 @@ class Plugin extends Ari_Plugin {
             add_action( 'clear_auth_cookie', function() { $this->clear_session(); } );
         }
 
-		if ( ! is_admin() ) 
+        $this->add_quick_icon();
+
+        if ( ! is_admin() )
 			return ;
 		
         $this->load_translations();
@@ -107,6 +109,25 @@ class Plugin extends Ari_Plugin {
                 }, 99 );
             }
         }
+    }
+
+    private function add_quick_icon() {
+        if ( ! Settings::get_option( 'show_quick_icon' ) || ! current_user_can( ARIADMINER_CAPABILITY_RUN ) ) {
+            return ;
+        }
+
+        add_action( 'admin_bar_menu', function( $admin_bar ) {
+            $admin_bar->add_menu(
+                array(
+                    'id' => 'adminer-link',
+                    'title' => __( 'Adminer', 'ari-adminer' ),
+                    'href'  => get_admin_url( null, '/admin.php?page=ari-adminer-run-adminer&action=run&noheader=1' ),
+                    'meta' => array(
+                        'target' => '_blank',
+                    )
+                )
+            );
+        });
     }
 
     protected function need_to_update() {

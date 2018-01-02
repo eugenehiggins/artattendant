@@ -12,14 +12,6 @@ if (!class_exists("fep_main_class"))
     
 	private static $instance;
 	
-	public $posted_new_message = false;
-	public $posted_reply_message = false;
-	public $posted_bulk_actions = false;
-	public $posted_user_settings = false;
-	public $have_error = false;
-	public $errors;
-	public $message;
-	
 	public static function init()
         {
             if(!self::$instance instanceof self) {
@@ -33,7 +25,7 @@ if (!class_exists("fep_main_class"))
 /******************************************MAIN DISPLAY BEGIN******************************************/
 
     //Display the proper contents
-   function main_shortcode_output()
+   function main_shortcode_output( $atts, $content = null )
     {
       global $user_ID;
       if ($user_ID)
@@ -44,12 +36,23 @@ if (!class_exists("fep_main_class"))
 	  	return "<div class='fep-error'>".__("You do not have permission to access message system", 'front-end-pm')."</div>";
 	  }
 	  
-		$this->Posted();
+	  $atts = shortcode_atts( array(
+			'fepaction'		=> 'messagebox',
+			'fep-filter'		=> 'show-all',
+		), $atts, 'front-end-pm' );
+		
+		if( empty($_GET['fepaction'] ) )
+		$_GET['fepaction'] = $atts['fepaction'];
+		
+		if( $_GET['fepaction'] == $atts['fepaction'] && empty($_GET['fep-filter'] ) )
+			$_GET['fep-filter'] = $atts['fep-filter'];
+	  
         //Add header
         $out = $this->Header();
 
         //Add Menu
         $out .= $this->Menu();
+		$menu = Fep_Menu::init()->get_menu();
 		
         //Start the guts of the display
 		$switch = ( isset($_GET['fepaction'] ) && $_GET['fepaction'] ) ? $_GET['fepaction'] : 'messagebox';
@@ -62,21 +65,30 @@ if (!class_exists("fep_main_class"))
 			$out .= ob_get_contents();
 			ob_end_clean();
 			break;
-         case 'newmessage':
+		case has_filter("fep_filter_switch_{$switch}"):
+			$out .= apply_filters( "fep_filter_switch_{$switch}", '');
+			break;
+         case ( 'newmessage' == $switch && ! empty( $menu['newmessage'] ) ):
             $out .= $this->new_message();
             break;
           case 'viewmessage':
             $out .= $this->view_message();
             break;
-          case 'settings':
+			/*
+			// See Fep_User_Settings Class
+          case ( 'settings' == $switch && ! empty( $menu['settings'] ) ):
             $out .= $this->user_settings();
             break;
+			*/
+			/*
+			// See Fep_Announcement Class
 		case 'announcements':
             $out .= Fep_Announcement::init()->announcement_box();
             break;
 		case 'view_announcement':
             $out .= Fep_Announcement::init()->view_announcement();
             break;
+			*/
 		//case 'directory': // See Fep_Directory Class
             //$out .= $this->directory();
            // break;
@@ -98,6 +110,8 @@ if (!class_exists("fep_main_class"))
 	
 	function Posted()
 	{
+		_deprecated_function( __FUNCTION__, '4.9', 'fep_form_posted()' );
+		
 		$action = !empty($_POST['fep_action']) ? $_POST['fep_action'] : '';
 		
 		if( ! $action )
@@ -128,7 +142,12 @@ if (!class_exists("fep_main_class"))
 				
 			break;
 			case 'reply' :
-				$pID = !empty($_GET['id']) ? absint($_GET['id']) : 0;
+				
+				if( isset( $_GET['fep_id'] ) ){
+					$pID = absint( $_GET['fep_id'] );
+				} else {
+					$pID = !empty($_GET['id']) ? absint($_GET['id']) : 0;
+				}
 				$parent_id = fep_get_parent_id( $pID );
 				
 				if ( ! fep_current_user_can( 'send_reply', $parent_id ) )
@@ -202,6 +221,8 @@ if (!class_exists("fep_main_class"))
 	
 	function settings_save( $where, $fields )
 	{
+		_deprecated_function( __FUNCTION__, '4.9', 'fep_user_settings_save()' );
+		
 		if( 'settings' != $where )
 			return;
 		
@@ -304,7 +325,11 @@ function view_message()
     {
       global $wpdb, $user_ID, $post;
 
-      $id = !empty($_GET['id']) ? absint($_GET['id']) : 0;
+	  if( isset( $_GET['fep_id'] ) ){
+	  	$id = absint( $_GET['fep_id'] );
+	  } else {
+	  	$id = !empty($_GET['id']) ? absint($_GET['id']) : 0;
+	  }
 	  
 	  if ( ! $id || ! fep_current_user_can( 'view_message', $id ) ) {
 	  	return "<div class='fep-error'>".__("You do not have permission to view this message!", 'front-end-pm')."</div>";
@@ -327,6 +352,4 @@ function view_message()
   } //END CLASS
 } //ENDIF
 
-//ADD SHORTCODES
-add_shortcode('front-end-pm', array(fep_main_class::init(), 'main_shortcode_output' )); //for FRONT END PM
 

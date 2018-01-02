@@ -24,6 +24,20 @@ function edd_is_test_mode() {
 }
 
 /**
+ * Is Debug Mode
+ *
+ * @since 2.8.7
+ * @return bool $ret True if debug mode is enabled, false otherwise
+ */
+function edd_is_debug_mode() {
+	$ret = edd_get_option( 'debug_mode', false );
+	if( defined( 'EDD_DEBUG_MODE' ) && EDD_DEBUG_MODE ) {
+		$ret = true;
+	}
+	return (bool) apply_filters( 'edd_is_debug_mode', $ret );
+}
+
+/**
  * Checks if Guest checkout is enabled
  *
  * @since 1.0
@@ -596,7 +610,7 @@ function edd_is_func_disabled( $function ) {
  * @author Chris Christoff
  *
  * @param unknown $v
- * @return int|string
+ * @return int
  */
 function edd_let_to_num( $v ) {
 	$l   = substr( $v, -1 );
@@ -614,7 +628,7 @@ function edd_let_to_num( $v ) {
 			break;
 	}
 
-	return $ret;
+	return (int) $ret;
 }
 
 /**
@@ -662,11 +676,19 @@ function edd_get_upload_dir() {
 /**
  * Delete symbolic links after they have been used
  *
+ * This function is only intended to be used by WordPress cron.
+ *
  * @access public
  * @since  1.5
  * @return void
  */
 function edd_cleanup_file_symlinks() {
+
+	// Bail if not in WordPress cron
+	if ( ! edd_doing_cron() ) {
+		return;
+	}
+
 	$path = edd_get_symlink_dir();
 	$dir = opendir( $path );
 
@@ -935,4 +957,29 @@ function edd_can_view_receipt( $payment_key = '' ) {
 	}
 
 	return (bool) apply_filters( 'edd_can_view_receipt', $return, $payment_key );
+}
+
+/**
+ * Abstraction for WordPress cron checking, to avoid code duplication.
+ *
+ * In future versions of EDD, this function will be changed to only refer to
+ * EDD specific cron related jobs. You probably won't want to use it until then.
+ *
+ * @since 2.8.16
+ *
+ * @return boolean
+ */
+function edd_doing_cron() {
+
+	// Bail if not doing WordPress cron (>4.8.0)
+	if ( function_exists( 'wp_doing_cron' ) && wp_doing_cron() ) {
+		return true;
+
+	// Bail if not doing WordPress cron (<4.8.0)
+	} elseif ( defined( 'DOING_CRON' ) && ( true === DOING_CRON ) ) {
+		return true;
+	}
+
+	// Default to false
+	return false;
 }

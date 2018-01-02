@@ -27,7 +27,7 @@ class ACP_Sorting_Model_Post_Parent extends ACP_Sorting_Model {
 	public function sorting_clauses_callback( $clauses ) {
 		global $wpdb;
 
-		$order = $this->get_order();
+		$order = esc_sql( $this->get_order() );
 		$join_type = acp_sorting()->show_all_results() ? 'LEFT' : 'INNER';
 
 		$clauses['join'] .= "$join_type JOIN $wpdb->posts AS pp ON $wpdb->posts.post_parent = pp.ID";

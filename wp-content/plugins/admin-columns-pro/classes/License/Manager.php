@@ -46,7 +46,7 @@ class ACP_License_Manager {
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_check' ) );
 
 		// Seen when the user clicks "view details" on the plugin listing page
-		add_action( 'install_plugins_pre_plugin-information', array( $this, 'plugin_changelog' ) );
+		add_action( 'install_plugins_pre_plugin-information', array( $this, 'plugin_changelog' ), 8 );
 
 		// Activate licence on plugin install
 		register_activation_hook( ACP_FILE, array( $this, 'auto_activate_licence' ) );
@@ -233,7 +233,7 @@ class ACP_License_Manager {
 		delete_site_transient( 'admin-columns-pro_acppluginupdate' );
 
 		// Integrations
- 		foreach ( AC()->addons()->get_addons() as $addon ) {
+		foreach ( AC()->addons()->get_addons() as $addon ) {
 			delete_site_transient( $addon->get_slug() . '_acppluginupdate' );
 		}
 	}
@@ -866,7 +866,7 @@ class ACP_License_Manager {
 		// When the plugin is network activated, the license is managed globally
 		if ( $this->is_network_managed_license() && ! is_network_admin() ) {
 			?>
-            <p>
+			<p>
 				<?php
 				$page = __( 'network settings page', 'codepress-admin-columns' );
 
@@ -876,7 +876,7 @@ class ACP_License_Manager {
 
 				printf( __( 'The license can be managed on the %s.', 'codepress-admin-columns' ), $page );
 				?>
-            </p>
+			</p>
 			<?php
 		} else {
 
@@ -899,39 +899,39 @@ class ACP_License_Manager {
 
 			?>
 
-            <form id="licence_activation" action="" method="post">
+			<form id="licence_activation" action="" method="post">
 
 				<?php if ( $this->is_license_active() ) : ?>
 
 					<?php wp_nonce_field( 'ac-addon-deactivate', '_acnonce' ); ?>
 
-                    <p>
-                        <span class="dashicons dashicons-yes"></span>
+					<p>
+						<span class="dashicons dashicons-yes"></span>
 						<?php _e( 'Automatic updates are enabled.', 'codepress-admin-columns' ); ?>
-                        <input type="submit" class="button" value="<?php _e( 'Deactivate licence', 'codepress-admin-columns' ); ?>">
-                    </p>
+						<input type="submit" class="button" value="<?php _e( 'Deactivate licence', 'codepress-admin-columns' ); ?>">
+					</p>
 
 				<?php else : ?>
 
 					<?php wp_nonce_field( 'ac-addon-activate', '_acnonce' ); ?>
 
-                    <input type="password" value="<?php echo esc_attr( $licence ); ?>" name="license" size="30" placeholder="<?php echo esc_attr( __( 'Enter your licence code', 'codepress-admin-columns' ) ); ?>">
-                    <input type="submit" class="button" value="<?php _e( 'Update licence', 'codepress-admin-columns' ); ?>">
-                    <p class="description">
+					<input type="password" value="<?php echo esc_attr( $licence ); ?>" name="license" size="30" placeholder="<?php echo esc_attr( __( 'Enter your licence code', 'codepress-admin-columns' ) ); ?>">
+					<input type="submit" class="button" value="<?php _e( 'Update licence', 'codepress-admin-columns' ); ?>">
+					<p class="description">
 						<?php printf( __( 'You can find your license key on your %s.', 'codepress-admin-columns' ), '<a href="' . ac_get_site_utm_url( 'my-account', 'license-activation' ) . '" target="_blank">' . __( 'account page', 'codepress-admin-columns' ) . '</a>' ); ?>
-                    </p>
+					</p>
 
 				<?php endif; ?>
 
-            </form>
+			</form>
 
-            <form id="toggle-ssl" action="" method="post" class="notice notice-warning hidden">
+			<form id="toggle-ssl" action="" method="post" class="notice notice-warning hidden">
 
 				<?php wp_nonce_field( 'ac-addon-toggle-ssl', '_acnonce' ); ?>
 
-                <p style="padding: 20px;">
+				<p style="padding: 20px;">
 					<?php printf( __( 'Could not connect to %s — You will not receive update notifications or be able to activate your license until this is fixed. This issue is often caused by an improperly configured SSL server (https). We recommend fixing the SSL configuration on your server, but if you need a quick fix you can:', 'codepress-admin-columns' ), ac_get_site_url() ); ?>
-                    <br/><br/>
+					<br/><br/>
 
 					<?php
 					$ssl_value = 1;
@@ -943,11 +943,11 @@ class ACP_License_Manager {
 					}
 					?>
 
-                    <input type="hidden" name="ssl" value="<?php echo esc_attr( $ssl_value ); ?>">
-                    <input type="submit" class="button" value="<?php echo esc_attr( $ssl_label ); ?>">
+					<input type="hidden" name="ssl" value="<?php echo esc_attr( $ssl_value ); ?>">
+					<input type="submit" class="button" value="<?php echo esc_attr( $ssl_label ); ?>">
 
-                </p>
-            </form>
+				</p>
+			</form>
 			<?php
 		}
 	}
@@ -1016,7 +1016,7 @@ class ACP_License_Manager {
 		wp_enqueue_style( 'acp-license-manager' );
 		?>
 
-        <a href="#" class="cpac-check-license"><?php _e( 'Check my license', 'codepress-admin-columns' ); ?>.</a>
+		<a href="#" class="cpac-check-license"><?php _e( 'Check my license', 'codepress-admin-columns' ); ?>.</a>
 
 		<?php
 	}
@@ -1118,16 +1118,16 @@ class ACP_License_Manager {
 			wp_enqueue_script( 'acp-license-manager' );
 			?>
 
-            <div class="ac-message error warning">
+			<div class="ac-message error warning">
 				<?php if ( $this->is_license_expiry_notice_hideable() ) : ?>
-                    <a href="#" class="hide-notice" data-hide-notice="license-check"></a>
+					<a href="#" class="hide-notice" data-hide-notice="license-check"></a>
 				<?php endif; ?>
-                <p>
+				<p>
 					<?php echo $message; ?>
 					<?php $this->check_license_link(); ?>
-                </p>
-                <div class="clear"></div>
-            </div>
+				</p>
+				<div class="clear"></div>
+			</div>
 
 			<?php
 		}

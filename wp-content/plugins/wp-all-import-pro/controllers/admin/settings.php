@@ -241,7 +241,8 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 						$api_params = array( 
 							'edd_action'=> 'activate_license', 
 							'license' 	=> PMXI_Plugin::decode($options['licenses'][$class]),
-							'item_name' => urlencode( $product_name ) // the name of our product in EDD
+							'item_name' => urlencode( $product_name ), // the name of our product in EDD
+							'url' => home_url()
 						);								
 						
 						// Call the custom API.

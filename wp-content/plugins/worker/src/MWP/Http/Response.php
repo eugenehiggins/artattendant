@@ -138,6 +138,8 @@ class MWP_Http_Response implements MWP_Http_ResponseInterface
         if ($this instanceof MWP_Http_StreamingResponseInterface) {
             $stream = $this->createResponseStream();
 
+            ini_set('display_errors', false);
+
             while (!$stream->eof()) {
                 print $stream->read(1048576);
             }

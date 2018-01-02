@@ -146,7 +146,7 @@ span.select2-container {
 	.select2 {
 
 		li.select2-search {
-			width: auto;
+			width: 100%;
 
 			input {
 				height: 20px;
@@ -161,7 +161,8 @@ span.select2-container {
 			padding-left: 5px !important;
 		}
 		.select2-search__field {
-			max-width: 155px !important;
+			width: 100% !important;
+
 			&::-webkit-input-placeholder {
 				font-size: 14px;
 			}
@@ -333,22 +334,25 @@ span.select2-container {
 						padding-right: 24px;
 						position: relative;
 						font-weight: normal;
-
-						&:after {
-							position: absolute;
-							top: -2px;
-							right: 0;
-							content: "\f160";
-							font-family: dashicons, sans-serif;
-							display: inline-block;
-							font-size: 18px;
-							color: darken(#ccc, 5);
-						}
 					}
 					.actions {
 						.delete,
 						.pipe {
 							display: none;
+						}
+					}
+					.toggle {
+						background: none;
+						text-align: right;
+
+						&:after {
+							font-family: dashicons, sans-serif;
+							content: "\f160";
+							margin-right: 7px;
+							color: #CCC;
+							font-size: 16px;
+							display: inline-block;
+							margin-top: 8px;
 						}
 					}
 				}

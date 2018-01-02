@@ -127,7 +127,7 @@ if ($adminer->homepage()) {
 				. "<input type='submit' name='truncate' value='" . lang('Truncate') . "'" . confirm() . on_help($jush == "sqlite" ? "'DELETE'" : "'TRUNCATE" . ($jush == "pgsql" ? "'" : " TABLE'")) . "> "
 				. "<input type='submit' name='drop' value='" . lang('Drop') . "'" . confirm() . on_help("'DROP TABLE'") . ">\n";
 				$databases = (support("scheme") ? $adminer->schemas() : $adminer->databases());
-				if (count($databases) != 1 && $jush != "sqlite") {
+				if (/*count($databases) != 1 && */$jush != "sqlite") {
 					$db = (isset($_POST["target"]) ? $_POST["target"] : (support("scheme") ? $_GET["ns"] : DB));
 					echo "<p>" . lang('Move to other database') . ": ";
 					echo ($databases ? html_select("target", $databases, $db) : '<input name="target" value="' . h($db) . '" autocapitalize="off">');

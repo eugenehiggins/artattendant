@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.4
  */
 class ACP_Column_Post_Content extends AC_Column_Post_Content
-	implements ACP_Column_EditingInterface, ACP_Column_SortingInterface, ACP_Column_FilteringInterface {
+	implements ACP_Column_EditingInterface, ACP_Column_SortingInterface, ACP_Column_FilteringInterface, ACP_Export_Column {
 
 	public function editing() {
 		return new ACP_Editing_Model_Post_Content( $this );
@@ -23,6 +23,10 @@ class ACP_Column_Post_Content extends AC_Column_Post_Content
 		$model->set_field( 'post_content' );
 
 		return $model;
+	}
+
+	public function export() {
+		return new ACP_Export_Model_StrippedValue( $this );
 	}
 
 }

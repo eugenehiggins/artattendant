@@ -10,8 +10,10 @@
     box-sizing: border-box;
     cursor: pointer;
     display: block;
+/*
     user-select: none;
     -webkit-user-select: none;
+*/
     width: 100%;
     height: 54px;
     padding-left: 60px;
@@ -42,8 +44,10 @@
     cursor: pointer;
     display: block;
     min-height: 32px;
+/*
     user-select: none;
     -webkit-user-select: none
+*/
 }
 .select2-container--filter .select2-selection--multiple .select2-selection__rendered {
     display: inline-block;
@@ -95,8 +99,10 @@
 .select2-container--filter .select2-results__option {
     line-height: 30px;
     padding-left: 60px;
+/*
     user-select: none;
     -webkit-user-select: none;
+*/
     font-weight: 300;
     font-size: 26px;
     line-height: 30px;
@@ -116,7 +122,7 @@
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    margin-top: -22px;
+    margin-top: -54px;
 }
 .select2-container--filter .select2-search--dropdown {
     display: block;
@@ -295,8 +301,10 @@
 .select2-container--filter .select2-search--dropdown .select2-search__field {
     box-sizing: border-box;
     display: block;
+/*
     user-select: none;
     -webkit-user-select: none;
+*/
     width: 100%;
     height: 54px;
     padding-left: 60px;
@@ -315,7 +323,10 @@
 }
 .select2-container--filter .select2-results>.select2-results__options {
     max-height: 200px;
-    overflow-y: auto
+    overflow-y: auto;
+        list-style: none;
+    margin: 0;
+    padding: 0;
 }
 .select2-container--filter .select2-results__option[role=group] {
     padding: 0
