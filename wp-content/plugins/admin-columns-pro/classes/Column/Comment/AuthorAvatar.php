@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Column_Comment_AuthorAvatar extends AC_Column_Comment_AuthorAvatar
 	implements ACP_Export_Column {

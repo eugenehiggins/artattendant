@@ -28,15 +28,15 @@ msgstr ""
 msgid "Please update this add-on to the latest version."
 msgstr ""
 
-#: ../acp.php:399
+#: ../acp.php:409
 msgid "You are using a beta version of %s."
 msgstr ""
 
-#: ../acp.php:400
+#: ../acp.php:410
 msgid "Please provide us with any feedback (bugs, UI or improvements) on the beta by creating a new topic on %s."
 msgstr ""
 
-#: ../acp.php:400
+#: ../acp.php:410
 msgid "our forum"
 msgstr ""
 
@@ -56,27 +56,27 @@ msgstr ""
 msgid "Enable our predefined column sets for %s?"
 msgstr ""
 
-#: ../../ac-addon-events-calendar/classes/TableScreen.php:71
+#: ../../ac-addon-events-calendar/classes/TableScreen.php:84
 msgid "upcoming"
 msgstr ""
 
-#: ../../ac-addon-events-calendar/classes/TableScreen.php:76
+#: ../../ac-addon-events-calendar/classes/TableScreen.php:89
 msgid "previous"
 msgstr ""
 
-#: ../../ac-addon-events-calendar/classes/TableScreen.php:80
+#: ../../ac-addon-events-calendar/classes/TableScreen.php:93
 msgid "all"
 msgstr ""
 
-#: ../../ac-addon-events-calendar/classes/TableScreen.php:84
+#: ../../ac-addon-events-calendar/classes/TableScreen.php:97
 msgid "Filtering on %s: Showing %s events from %s."
 msgstr ""
 
-#: ../../ac-addon-events-calendar/classes/TableScreen.php:93
+#: ../../ac-addon-events-calendar/classes/TableScreen.php:106
 msgid "Return to %s"
 msgstr ""
 
-#: ../../ac-addon-events-calendar/classes/TableScreen.php:105
+#: ../../ac-addon-events-calendar/classes/TableScreen.php:118
 msgid "Remove this filter"
 msgstr ""
 
@@ -116,15 +116,15 @@ msgstr ""
 msgid "Advanced Custom Fields"
 msgstr ""
 
-#: ../../cac-addon-woocommerce/v2/wc.php:197, ../../cac-addon-woocommerce/v3/wc.php:202
+#: ../../cac-addon-woocommerce/v2/wc.php:197, ../../cac-addon-woocommerce/v3/wc.php:197
 msgid "Regular"
 msgstr ""
 
-#: ../../cac-addon-woocommerce/v2/wc.php:199, ../../cac-addon-woocommerce/v3/wc.php:204
+#: ../../cac-addon-woocommerce/v2/wc.php:199, ../../cac-addon-woocommerce/v3/wc.php:199
 msgid "Sale from"
 msgstr ""
 
-#: ../../cac-addon-woocommerce/v2/wc.php:200, ../../cac-addon-woocommerce/v3/wc.php:205
+#: ../../cac-addon-woocommerce/v2/wc.php:200, ../../cac-addon-woocommerce/v3/wc.php:200
 msgid "Sale To"
 msgstr ""
 
@@ -168,7 +168,7 @@ msgstr ""
 msgid "BuddyPress profile"
 msgstr ""
 
-#: ../../ac-addon-events-calendar/classes/Column/UpcomingEvent.php:8
+#: ../../ac-addon-events-calendar/classes/Column/UpcomingEvent.php:9
 msgid "Upcoming Event"
 msgstr ""
 
@@ -248,16 +248,20 @@ msgstr ""
 msgid "No parent post types available."
 msgstr ""
 
-#: ../classes/Editing/Addon.php:117
+#: ../classes/Editing/Addon.php:107
 msgid "Enable inline editing for Custom Fields. Default is <code>off</code>"
 msgstr ""
 
-#: ../classes/Editing/Addon.php:120
+#: ../classes/Editing/Addon.php:110
 msgid "Inline edit will display all the raw values in an editable text field."
 msgstr ""
 
-#: ../classes/Editing/Addon.php:122
+#: ../classes/Editing/Addon.php:112
 msgid "Please read <a href='%s'>our documentation</a> if you plan to use these fields."
+msgstr ""
+
+#: ../classes/Export/Addon.php:70
+msgid "Creation of Admin Columns export directory failed. Please make sure that your uploads folder is writable."
 msgstr ""
 
 #: ../classes/LayoutScreen/Columns.php:37
@@ -376,8 +380,8 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: ../classes/LayoutScreen/Table.php:57
-msgid "Column View"
+#: ../classes/LayoutScreen/Table.php:67, ../classes/LayoutScreen/Table.php:71
+msgid "Switch View"
 msgstr ""
 
 #: ../classes/License/API.php:278
@@ -486,32 +490,32 @@ msgstr ""
 msgid "Check my license"
 msgstr ""
 
-#: ../classes/Sorting/Addon.php:285
+#: ../classes/Sorting/Addon.php:258
 msgid "Show all results when sorting."
 msgstr ""
 
-#: ../classes/Sorting/Addon.php:371
+#: ../classes/Sorting/Addon.php:344
 msgid "Sorting Preferences"
 msgstr ""
 
-#: ../classes/Sorting/Addon.php:372
+#: ../classes/Sorting/Addon.php:345
 msgid "This will reset the sorting preference for all users."
 msgstr ""
 
-#: ../classes/Sorting/Addon.php:386
+#: ../classes/Sorting/Addon.php:359
 msgid "Reset sorting preferences"
 msgstr ""
 
-#: ../classes/Sorting/Addon.php:405
+#: ../classes/Sorting/Addon.php:378
 msgid "All sorting preferences have been reset."
 msgstr ""
 
-#: ../classes/Sorting/Addon.php:495
+#: ../classes/Sorting/Addon.php:468
 msgid "Reset sorting"
 msgstr ""
 
-#: ../classes/Table/ScreenOptions.php:84
-msgid "Horizontal scrollable table"
+#: ../classes/Table/ScreenOptions.php:85
+msgid "Horizontal Scrolling"
 msgstr ""
 
 #: ../../cac-addon-acf/classes/Field/File.php:15
@@ -554,12 +558,16 @@ msgstr ""
 msgid "Activity Updates"
 msgstr ""
 
-#: ../../ac-addon-buddypress/classes/Column/User/LastActivity.php:9
+#: ../../ac-addon-buddypress/classes/Column/User/LastActivity.php:10
 msgid "Last Activity"
 msgstr ""
 
 #: ../../ac-addon-buddypress/classes/Column/User/LastSeen.php:8
 msgid "Last Seen"
+msgstr ""
+
+#: ../../ac-addon-buddypress/classes/Filtering/User/Groups.php:46
+msgid "Group"
 msgstr ""
 
 #: ../../ac-addon-events-calendar/classes/Column/Event/Costs.php:7
@@ -880,21 +888,21 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
-#: ../classes/Column/Post/Images.php:124
+#: ../classes/Column/Post/Images.php:126
 msgid "%s image"
 msgid_plural "%s images"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../classes/Column/Post/LinkCount.php:12
+#: ../classes/Column/Post/LinkCount.php:13
 msgid "Link Count"
 msgstr ""
 
-#: ../classes/Column/Post/LinkCount.php:31
+#: ../classes/Column/Post/LinkCount.php:32
 msgid "Internal Links"
 msgstr ""
 
-#: ../classes/Column/Post/LinkCount.php:32
+#: ../classes/Column/Post/LinkCount.php:33
 msgid "External Links"
 msgstr ""
 
@@ -1002,6 +1010,50 @@ msgstr ""
 
 #: ../classes/Editing/classes/TableScreen.php:264
 msgid "Invalid request."
+msgstr ""
+
+#: ../classes/Export/classes/Admin.php:51
+msgid "The requested file does not exist."
+msgstr ""
+
+#: ../classes/Export/classes/Admin.php:67
+msgid "The requested file could not be processed."
+msgstr ""
+
+#: ../classes/Export/classes/ListScreen.php:74
+msgid "Invalid value supplied for export counter."
+msgstr ""
+
+#: ../classes/Export/classes/ListScreen.php:79
+msgid "Invalid value supplied for export hash."
+msgstr ""
+
+#: ../classes/Export/classes/ListScreen.php:237
+msgid "Export"
+msgstr ""
+
+#: ../classes/Export/classes/ListScreen.php:238
+msgid "Export to CSV"
+msgstr ""
+
+#: ../classes/Export/classes/ListScreen.php:239
+msgid "Exporting current list of items."
+msgstr ""
+
+#: ../classes/Export/classes/ListScreen.php:240
+msgid "Processed {0} of {1} items ({2}%)."
+msgstr ""
+
+#: ../classes/Export/classes/ListScreen.php:241
+msgid "Export completed ({0} items). Your download will start automatically. If this does not happen, you can download the file again: "
+msgstr ""
+
+#: ../classes/Export/classes/ListScreen.php:242
+msgid "Download File"
+msgstr ""
+
+#: ../classes/Export/classes/TableScreenOptions.php:64
+msgid "Show Export Button"
 msgstr ""
 
 #: ../classes/Filtering/classes/Dropdown.php:96, ../classes/Filtering/classes/Settings.php:56
@@ -1124,7 +1176,7 @@ msgstr ""
 msgid "Only works for taxonomy attributes."
 msgstr ""
 
-#: ../../cac-addon-woocommerce/v2/classes/Settings/ProductAttributes.php:166, ../../cac-addon-woocommerce/v3/classes/Settings/ProductAttributes.php:101
+#: ../../cac-addon-woocommerce/v2/classes/Settings/ProductAttributes.php:166, ../../cac-addon-woocommerce/v3/classes/Settings/ProductAttributes.php:106
 msgid "Is a taxonomy"
 msgstr ""
 
@@ -1154,6 +1206,10 @@ msgstr ""
 
 #: ../classes/Editing/classes/Settings/Taxonomy.php:38
 msgid "Allow new %s?"
+msgstr ""
+
+#: ../classes/Export/classes/Exporter/CSV.php:34
+msgid "The requested file could not be downloaded."
 msgstr ""
 
 #: ../classes/Filtering/classes/Settings/Date.php:10
@@ -1288,7 +1344,7 @@ msgstr ""
 msgid "Product type"
 msgstr ""
 
-#: ../../cac-addon-woocommerce/v2/classes/Column/Product/ReviewsEnabled.php:13, ../../cac-addon-woocommerce/v3/classes/Column/Product/ReviewsEnabled.php:13
+#: ../../cac-addon-woocommerce/v2/classes/Column/Product/ReviewsEnabled.php:11, ../../cac-addon-woocommerce/v3/classes/Column/Product/ReviewsEnabled.php:11
 msgid "Reviews enabled"
 msgstr ""
 
@@ -1340,11 +1396,11 @@ msgstr ""
 msgid "Orders"
 msgstr ""
 
-#: ../../cac-addon-woocommerce/v2/classes/Column/ShopCoupon/UsedBy.php:10, ../../cac-addon-woocommerce/v3/classes/Column/ShopCoupon/UsedBy.php:10
+#: ../../cac-addon-woocommerce/v2/classes/Column/ShopCoupon/UsedBy.php:10, ../../cac-addon-woocommerce/v3/classes/Column/ShopCoupon/UsedBy.php:11
 msgid "Used By"
 msgstr ""
 
-#: ../../cac-addon-woocommerce/v2/classes/Column/ShopCoupon/UsedBy.php:29, ../../cac-addon-woocommerce/v3/classes/Column/ShopCoupon/UsedBy.php:30
+#: ../../cac-addon-woocommerce/v2/classes/Column/ShopCoupon/UsedBy.php:29, ../../cac-addon-woocommerce/v3/classes/Column/ShopCoupon/UsedBy.php:51
 msgid "Not a registered user"
 msgstr ""
 
@@ -1360,7 +1416,7 @@ msgstr ""
 msgid "Payment method"
 msgstr ""
 
-#: ../../cac-addon-woocommerce/v2/classes/Column/User/Orders.php:67, ../../cac-addon-woocommerce/v3/classes/Column/User/Orders.php:67
+#: ../../cac-addon-woocommerce/v2/classes/Column/User/Orders.php:67, ../../cac-addon-woocommerce/v3/classes/Column/User/Orders.php:71
 msgid "items"
 msgstr ""
 
@@ -1388,6 +1444,10 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+#: ../../cac-addon-woocommerce/v3/classes/Column/ShopCoupon/EmailRestrictions.php:11
+msgid "Email restrictions"
+msgstr ""
+
 #: ../../cac-addon-woocommerce/v3/classes/Column/ShopOrder/Purchased.php:12
 msgid "Purchased"
 msgstr ""
@@ -1397,6 +1457,10 @@ msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../../cac-addon-woocommerce/v3/classes/Export/ShopCoupon/Usage.php:16
+msgid "Infinity"
+msgstr ""
 
 #: ../classes/Editing/classes/Model/Post/Excerpt.php:8
 msgid "Excerpt automatically generated from content."

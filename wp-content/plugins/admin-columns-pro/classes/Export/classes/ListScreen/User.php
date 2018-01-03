@@ -12,6 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ACP_Export_ListScreen_User extends ACP_Export_ListScreen {
 
 	/**
+	 * @param AC_ListScreen_User $list_screen
+	 */
+	public function __construct( AC_ListScreen_User $list_screen ) {
+		parent::__construct( $list_screen );
+	}
+
+	/**
 	 * @since 1.0
 	 * @see   ACP_Export_ExportableListScreen::ajax_export()
 	 */

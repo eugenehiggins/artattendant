@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Date (default column) exportability model
  *
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_Post_Date extends ACP_Export_Model {
 

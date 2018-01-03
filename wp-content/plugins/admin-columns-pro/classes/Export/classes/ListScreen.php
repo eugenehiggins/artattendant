@@ -38,7 +38,7 @@ abstract class ACP_Export_ListScreen {
 	 *
 	 * @param AC_ListScreen $list_screen Associated Admin Columns list screen object
 	 */
-	public function __construct( $list_screen ) {
+	public function __construct( AC_ListScreen $list_screen ) {
 		$this->list_screen = $list_screen;
 	}
 
@@ -157,11 +157,6 @@ abstract class ACP_Export_ListScreen {
 					: new ACP_Export_Model_RawValue( $column );
 
 				$value = $model->get_value( $id );
-
-				// Don't export the column empty char
-				if ( $value === $column->get_empty_char() ) {
-					$value = '';
-				}
 
 				/**
 				 * Filter the column value exported to CSV or another file format in the

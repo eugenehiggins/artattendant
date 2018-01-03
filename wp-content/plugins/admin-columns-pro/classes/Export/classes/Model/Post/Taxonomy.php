@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Taxonomy (default column) exportability model
  * @property AC_Column_Taxonomy $column
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_Post_Taxonomy extends ACP_Export_Model {
 

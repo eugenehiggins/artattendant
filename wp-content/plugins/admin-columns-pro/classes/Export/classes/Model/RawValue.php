@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Exportability model for outputting the column's raw value
  *
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_RawValue extends ACP_Export_Model {
 

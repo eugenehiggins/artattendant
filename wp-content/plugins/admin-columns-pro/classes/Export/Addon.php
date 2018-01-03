@@ -86,21 +86,21 @@ class ACP_Export_Addon extends AC_Addon {
 	 * @since 1.0
 	 */
 	public function register_default_list_screens( AC_ListScreen $list_screen ) {
-		switch ( $list_screen->get_meta_type() ) {
-			case 'post':
+		switch ( true ) {
+			case $list_screen instanceof AC_ListScreenPost :
 				ACP_Export_ListScreens::register_list_screen( new ACP_Export_ListScreen_Post( $list_screen ) );
 
 				break;
-			case 'user':
+			case $list_screen instanceof AC_ListScreen_User :
 				ACP_Export_ListScreens::register_list_screen( new ACP_Export_ListScreen_User( $list_screen ) );
 
 				break;
-			case 'comment':
+			case $list_screen instanceof AC_ListScreen_Comment :
 				ACP_Export_ListScreens::register_list_screen( new ACP_Export_ListScreen_Comment( $list_screen ) );
 
 				break;
-			case 'term':
-				ACP_Export_ListScreens::register_list_screen( new ACP_Export_ListScreen_Term( $list_screen ) );
+			case $list_screen instanceof ACP_ListScreen_Taxonomy :
+				ACP_Export_ListScreens::register_list_screen( new ACP_Export_ListScreen_Taxonomy( $list_screen ) );
 
 				break;
 		}

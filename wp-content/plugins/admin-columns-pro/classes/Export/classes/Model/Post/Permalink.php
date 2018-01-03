@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Permalink column exportability model
  *
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_Post_Permalink extends ACP_Export_Model {
 

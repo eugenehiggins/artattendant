@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Posts count (default column) exportability model
  *
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_User_Posts extends ACP_Export_Model {
 

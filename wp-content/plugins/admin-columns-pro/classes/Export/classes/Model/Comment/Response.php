@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Response (default column) exportability model
  *
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_Comment_Response extends ACP_Export_Model {
 

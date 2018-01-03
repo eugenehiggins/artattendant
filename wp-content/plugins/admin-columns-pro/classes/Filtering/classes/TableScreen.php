@@ -19,8 +19,8 @@ class ACP_Filtering_TableScreen {
 	}
 
 	public function scripts() {
-		wp_enqueue_style( 'acp-filtering-table', acp_filtering()->get_url() . 'assets/css/table' . AC()->minified() . '.css', array(), acp_filtering()->get_version() );
-		wp_enqueue_script( 'acp-filtering-table', acp_filtering()->get_url() . 'assets/js/table' . AC()->minified() . '.js', array( 'jquery', 'jquery-ui-datepicker' ), acp_filtering()->get_version() );
+		wp_enqueue_style( 'acp-filtering-table', acp_filtering()->get_plugin_url() . 'assets/css/table' . AC()->minified() . '.css', array(), acp_filtering()->get_version() );
+		wp_enqueue_script( 'acp-filtering-table', acp_filtering()->get_plugin_url() . 'assets/js/table' . AC()->minified() . '.js', array( 'jquery', 'jquery-ui-datepicker' ), acp_filtering()->get_version() );
 	}
 
 	/**

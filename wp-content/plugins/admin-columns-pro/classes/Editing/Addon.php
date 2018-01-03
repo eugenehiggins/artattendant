@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0
  */
-class ACP_Editing_Addon {
+class ACP_Editing_Addon extends AC_Addon {
 
 	/**
 	 * @var ACP_Editing_Helper
@@ -25,7 +25,7 @@ class ACP_Editing_Addon {
 	 * @since 4.0
 	 */
 	function __construct() {
-		AC()->autoloader()->register_prefix( 'ACP_Editing', $this->get_dir() . 'classes' );
+		AC()->autoloader()->register_prefix( 'ACP_Editing', $this->get_plugin_dir() . 'classes' );
 
 		// Settings screen
 
@@ -37,6 +37,10 @@ class ACP_Editing_Addon {
 		$this->table_screen = new ACP_Editing_TableScreen();
 	}
 
+	protected function get_file() {
+		return __FILE__;
+	}
+
 	public function table_screen() {
 		return $this->table_screen;
 	}
@@ -46,20 +50,6 @@ class ACP_Editing_Addon {
 	 */
 	public function get_version() {
 		return ACP()->get_version();
-	}
-
-	/**
-	 * @since 4.0
-	 */
-	public function get_dir() {
-		return plugin_dir_path( __FILE__ );
-	}
-
-	/**
-	 * @since 4.0
-	 */
-	public function get_url() {
-		return plugin_dir_url( __FILE__ );
 	}
 
 	public function helper() {
@@ -134,7 +124,7 @@ class ACP_Editing_Addon {
 	 * @since 4.0
 	 */
 	public function settings_scripts() {
-		wp_enqueue_style( 'acp-editing-settings', $this->get_url() . 'assets/css/settings' . AC()->minified() . '.css', array(), $this->get_version() );
+		wp_enqueue_style( 'acp-editing-settings', $this->get_plugin_url() . 'assets/css/settings' . AC()->minified() . '.css', array(), $this->get_version() );
 	}
 
 	/**

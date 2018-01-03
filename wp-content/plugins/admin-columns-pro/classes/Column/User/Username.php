@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Column_User_Username extends AC_Column_User_Username
 	implements ACP_Export_Column {

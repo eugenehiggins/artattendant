@@ -9,7 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0
  */
-class ACP_Export_ListScreen_Term extends ACP_Export_ListScreen {
+class ACP_Export_ListScreen_Taxonomy extends ACP_Export_ListScreen {
+
+	/**
+	 * @param ACP_ListScreen_Taxonomy $list_screen
+	 */
+	public function __construct( ACP_ListScreen_Taxonomy $list_screen ) {
+		parent::__construct( $list_screen );
+	}
 
 	/**
 	 * @since 1.0

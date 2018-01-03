@@ -15,7 +15,7 @@ class ACP_Column_Media_Title extends AC_Column_Media_Title
 	}
 
 	public function export() {
-		return new ACP_Export_Model_StrippedValue( $this );
+		return new ACP_Export_Model_Media_Title( $this );
 	}
 
 }
