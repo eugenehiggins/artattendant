@@ -80,8 +80,7 @@ class products extends endpoints {
 		$args[ 'author' ] = $userargs["author"];
 		//$args[' name '][ 'params' ] ='TEST';
 
-			var_dump($userargs);
-
+//			var_dump($userargs);
 
 
 
