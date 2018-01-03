@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_Comment_AuthorAvatar extends ACP_Export_Model {
 

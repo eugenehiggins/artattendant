@@ -304,9 +304,9 @@ class FES_Emails {
 		}
 
 		// start building the email
-		$message_to_send = EDD_FES()->emails->email_tags( $id, $message, $type );
-		$message_to_send = apply_filters( 'fes_send_mail_message', $message_to_send, $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
-		$emails = new EDD_Emails;
+		$emails               = new EDD_Emails;
+		$message_to_send      = $this->email_tags( $id, $message, $type );
+		$message_to_send      = apply_filters( 'fes_send_mail_message', $message_to_send, $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
 		$emails->from_name    = $from_name;
 		$emails->from_address = $from_email;
 		$emails->heading      = $subject;
@@ -322,7 +322,6 @@ class FES_Emails {
 	 * @since 2.0.0
 	 * @access public
 	 *
-	 * @global $fes_settings FES settings to check for permissions settings against.
 	 * @deprecated 2.4.0 Notifications API will replace this.
 	 *
 	 * @param string $args Custom arguments.
@@ -330,12 +329,12 @@ class FES_Emails {
 	 */
 	public function should_send( $args = array() ) {
 		$ret = true;
-		global $fes_settings;
 
 		if ( isset( $args['permissions'] ) ) {
+
 			// See if there's a toggle for this email in the settings panel
 			// If the toggle is enabled, we send
-			$ret = isset( $fes_settings[ $args['permissions'] ] ) && ( '1' == $fes_settings[ $args['permissions'] ] || 1 == $fes_settings[ $args['permissions'] ] );
+			$ret = edd_get_option( $args['permissions'], false );
 		}
 
 		return (bool) $ret;

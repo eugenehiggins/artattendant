@@ -1,24 +1,14 @@
 ;(function ($) {
 	var product_featured_frame;
 	var avatar_frame;
-	var button_clicked = null;//start anagram, safari firefox fix
 	var FES_Form = {
 		init: function () {
 			// clone and remove repeated field
 			$('.fes-form').on('click', 'img.fes-clone-field', this.cloneField);
 			$('.fes-form').on('click', 'img.fes-remove-field', this.removeField);
 
-			//start anagram, safari firefox fix
-			$('.fes-form').on('click', '#fes-save-as-draft', function (e) {
-				button_clicked = 'draft';
-			});
-			$('.fes-form').on('click', '#fes-submit', function (e) {
-				button_clicked = 'fes-submit';
-			});
-			//end anagram, safari firefox fix
 			// form submissions
 			$('.fes-ajax-form').on('submit', this.formSubmit);
-
 
 			// featured image
 			$('.fes-fields').on('click', 'a.fes-feat-image-btn', this.featuredImage.addImage);
@@ -286,16 +276,13 @@
 			e.preventDefault();
 
 			var form = $(this),
-				submitButton = form.find('input#fes-submit'),
-				draftButton = form.find('input#fes-save-as-draft'),
+				submitButton = form.find('input[type=submit]:focus'),
+				draftButton = form.find('.fes-save-as-draft'),
 				form_data = FES_Form.validateForm(form)
-			//anagram -- add status for sumbit button
-			if ( button_clicked == 'draft' ) {
+
+			if ( submitButton.attr('id') == 'fes-save-as-draft' ) {
 				form_data = form_data + '&draft=true';
-			};
-			if ( button_clicked == 'fes-submit' ){
-				form_data = form_data + '&publish=true';
-			}; //anagram -- add status for sumbit button
+			}
 
 			if (form_data) {
 				// send the request

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: 		Admin Columns Pro - Advanced Custom Fields (ACF)
-Version: 			2.1
+Version: 			2.1.1
 Description: 		Supercharges Admin Columns Pro with very cool ACF columns.
 Author: 			Admin Columns
 Author URI: 		https://www.admincolumns.com

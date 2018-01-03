@@ -26,13 +26,17 @@ class ACP_Export_Exporter_CSV extends ACP_Export_Exporter {
 			$csv = stream_get_contents( $fh_memory );
 
 			// Encrypt the file contents
-			$cryptor = new ACP_Export_Cryptor();
-			$key = ACP_Export_Utility_Users::get_user_encryption_key();
-			$result = $cryptor->encrypt( $csv, $key );
-			$csv_encrypted = $result['result'];
+			try {
+				$cryptor = new ACP_Export_Cryptor();
+				$key = ACP_Export_Utility_Users::get_user_encryption_key();
+				$result = $cryptor->encrypt( $csv, $key );
+				$csv_encrypted = $result['result'];
 
-			// Write the encrypted contents to the file
-			fwrite( $fh, $csv_encrypted );
+				// Write the encrypted contents to the file
+				fwrite( $fh, $csv_encrypted );
+			} catch ( Exception $e ) {
+				wp_die( __( 'The requested file could not be downloaded.', 'codepress-admin-columns' ) );
+			}
 
 			return;
 		}

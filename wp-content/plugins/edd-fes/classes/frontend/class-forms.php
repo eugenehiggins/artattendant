@@ -215,8 +215,6 @@ class FES_Forms {
 		// Render the FES Form
 		$output .= $form->render_form_frontend( $user_id, $readonly );
 		$output .= '<a href="'. wp_lostpassword_url() . '" id="fes_lost_password_link" title="' . __( 'Lost Password?', 'edd_fes' ) . '">' . __( "Lost Password?", "edd_fes" ) . '</a>';
-		$output .= '<p class="join-link">Not a member? <a href="'.get_the_permalink(85).'">join today!</a></p>'; //anagram - add ljoin link to login form
-
 		return $output;
 	}
 

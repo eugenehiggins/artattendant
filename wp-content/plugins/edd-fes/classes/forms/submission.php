@@ -218,24 +218,16 @@ class FES_Submission_Form extends FES_Form {
 
 		$new     = true;
 		$pending = false;
-		$status  = 'private';//anagram / geet - change draft to private
+		$status  = 'publish';
 
 		if ( $save_id > 0 ) {
 			$new = false;
 		}
 
-//anagram_debug_to_console( $_REQUEST['draft'] );
+		if ( ! empty( $_REQUEST['draft' ] ) ) {
 
-		if ( ! empty( $_REQUEST['draft'] ) ) {
-
-			$status  = 'private';//anagram / geet - change draft to private
+			$status  = 'draft';
 			$pending = false;
-
-		} elseif ( ! empty( $_REQUEST['publish' ] ) ) {
-
-			$status  = 'publish';//anagram / geet - change draft to private
-			$pending = false;
-
 
 		} elseif ( $new ) {
 
@@ -247,12 +239,9 @@ class FES_Submission_Form extends FES_Form {
 
 		} else {
 
-
-
-
 			$current_status = get_post_status( $save_id );
 
-			if ( 'publish' !== $current_status &&  ( empty( $_REQUEST['draft' ] ) && empty( $_REQUEST['publish' ] ) ) ){ //anagram check if both buttons are empty, if so save as same status
+			if ( 'publish' !== $current_status ) {
 
 				if( ! (bool) EDD_FES()->helper->get_option( 'fes-auto-approve-submissions', false ) ) {
 
@@ -305,7 +294,7 @@ class FES_Submission_Form extends FES_Form {
 	public function after_form_save_frontend( $output = array(), $save_id = -2, $values = array(), $user_id = -2 ) {
 		$new = EDD()->session->get( 'fes_is_new' );
 
-		if ( EDD_FES()->integrations->is_commissions_active() && $new === true ) {
+		if ( EDD_FES()->integrations->is_commissions_active() && $new ) {
 			$commission = array(
 				'user_id' => get_current_user_id()
 			);
@@ -433,17 +422,20 @@ class FES_Submission_Form extends FES_Form {
 		if ( $new ) {
 			if ( $pending ) {
 				// Send email to admin
+				$emails     = new FES_Emails;
 				$to         = apply_filters( 'fes_submission_form_pending_to_admin', edd_get_admin_notice_emails(), $post_id );
 				$subject    = apply_filters( 'fes_submission_form_to_admin_subject', __( 'New Submission Received', 'edd_fes' ) );
 				$message    = EDD_FES()->helper->get_option( 'fes-admin-new-submission-email', '' );
 				$args       = array( 'permissions' => 'fes-admin-new-submission-email-toggle' );
-				EDD_FES()->emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
+				$emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
 
 				// Send email to user
+				$emails  = new FES_Emails;
 				$user    = new WP_User( $user_id );
 				$to      = $user->user_email;
+				$message = EDD_FES()->helper->get_option( 'fes-vendor-new-submission-email', '' );
 				$subject = apply_filters( 'fes_submission_new_form_to_vendor_subject', __( 'Submission Received', 'edd_fes' ) );
-				EDD_FES()->emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
+				$emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
 
 				do_action( 'fes_submission_form_new_pending', $post_id );
 			} else {
@@ -488,18 +480,20 @@ class FES_Submission_Form extends FES_Form {
 		if ( $new ) {
 			if ( $pending ) {
 				// Send email to admin
+				$emails     = new FES_Emails;
 				$to         = apply_filters( 'fes_submission_form_pending_to_admin', edd_get_admin_notice_emails(), $post_id );
 				$subject    = apply_filters( 'fes_submission_form_to_admin_subject', __( 'New Submission Received', 'edd_fes' ) );
 				$message    = EDD_FES()->helper->get_option( 'fes-admin-new-submission-email', '' );
 				$args       = array( 'permissions' => 'fes-admin-new-submission-email-toggle' );
-				EDD_FES()->emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
+				$emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
 
 				// Send email to user
+				$emails     = new FES_Emails;
 				$user       = new WP_User( $user_id );
 				$to         = $user->user_email;
 				$subject    = apply_filters( 'fes_submission_new_form_to_vendor_subject', __( 'Submission Received', 'edd_fes' ) );
 				$message    = EDD_FES()->helper->get_option( 'fes-vendor-new-submission-email', '' );
-				EDD_FES()->emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
+				$emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
 
 				do_action( 'fes_submission_form_new_pending', $post_id );
 			} else {
@@ -558,16 +552,9 @@ class FES_Submission_Form extends FES_Form {
 		$output .= wp_nonce_field( 'fes-' . $this->name() .'-form', 'fes-' . $this->name() .'-form', $referer, false );
 
 		if ( $form ) {
-			$allow_draft =  ( ! empty( $_GET['task'] ) && 'new-product' === $_GET['task'] ) || ( ! empty( $_GET['post_id'] )
-			//anagram / geet cremove status check to always allow draft/private
-			//&& 'draft' == get_post_status( absint( $_GET['post_id'] ) )
-			);
-
-			//anagram - disable save/publish buttons if item is archived
-			if('archive' !== get_post_status( absint( $_GET['post_id'] ) ) ){
-				$output .= $allow_draft ? '<input type="submit" id="fes-save-as-draft" class="edd-submit ' . $color . ' ' . $style . '" name="save-draft" value="' . esc_attr( __( 'Save Draft', 'edd_fes' ) ) . '" />' : '';
-				$output .= '<input type="submit" id="fes-submit" class="edd-submit ' . $color . ' ' . $style . '" name="submit" value="' . $label . '" />';
-			}//end anagram hiding buttons
+			$allow_draft =  ( ! empty( $_GET['task'] ) && 'new-product' === $_GET['task'] ) || ( ! empty( $_GET['post_id'] ) && 'draft' == get_post_status( absint( $_GET['post_id'] ) ) );
+			$output .= $allow_draft ? '<input type="submit" id="fes-save-as-draft" class="edd-submit ' . $color . ' ' . $style . '" name="save-draft" value="' . esc_attr( __( 'Save Draft', 'edd_fes' ) ) . '" />' : '';
+			$output .= '<input type="submit" id="fes-submit" class="edd-submit ' . $color . ' ' . $style . '" name="submit" value="' . $label . '" />';
 		}
 
 		$output .= '</div>';

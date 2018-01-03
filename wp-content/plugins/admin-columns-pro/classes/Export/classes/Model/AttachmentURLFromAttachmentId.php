@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Exportability model for outputting an attachment's URL based on its ID
  *
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_AttachmentURLFromAttachmentId extends ACP_Export_Model {
 

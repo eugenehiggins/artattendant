@@ -107,21 +107,10 @@ class FES_File_Upload_Field extends FES_Field {
 								$download = wp_get_attachment_url( $attach_id ); ?>
 								<tr class="fes-single-variation">
 									 <td class="fes-url-row">
-									 	<?php //anagram / geet if file, dont show imput, show file instead
-									if ( $download  ) {
-										$file = wp_get_attachment_metadata( $attach_id );
-									//$finfo = finfo_open(FILEINFO_MIME_TYPE);
-									//echo finfo_file($finfo, $download);
-									//mapi_var_dump($file);
-									//echo mime_content_type($file);
-									?>
-
-									 <?php printf( '<a href="%s">%s</a>', wp_get_attachment_url( $attach_id ), __( '<i class="fa fa-file" aria-hidden="true"></i> Download File', 'edd_fes' ) ); ?><?php }//anagram new link/field ?>
-
-												<input type="text" class="fes-file-value" placeholder="<?php _e( "http://", 'edd_fes' ); ?>" name="<?php echo $this->name(); ?>[<?php echo esc_attr( $index ); ?>]" value="<?php echo esc_attr( $download ); ?>" <?php /*anagram / geet hide */	if ( $download  ) { ?>style="display:none"<?php }; ?> />
+												<input type="text" class="fes-file-value" placeholder="<?php _e( "http://", 'edd_fes' ); ?>" name="<?php echo $this->name(); ?>[<?php echo esc_attr( $index ); ?>]" value="<?php echo esc_attr( $download ); ?>" />
 									 </td>
 									 <td class="fes-url-choose-row" width="1%">
-												<a href="#" class="edd-submit button upload_file_button" data-choose="<?php _e( 'Choose file', 'edd_fes' ); ?>" data-update="<?php _e( 'Insert file URL', 'edd_fes' ); ?>" <?php /*anagram / geet hide */	if ( $download  ) { ?>style="display:none"<?php }; ?>>
+												<a href="#" class="edd-submit button upload_file_button" data-choose="<?php _e( 'Choose file', 'edd_fes' ); ?>" data-update="<?php _e( 'Insert file URL', 'edd_fes' ); ?>">
 												<?php echo str_replace( ' ', '&nbsp;', __( 'Choose file', 'edd_fes' ) ); ?></a>
 									 </td>
 									 <?php if ( fes_is_admin()  ) { ?>
@@ -136,7 +125,8 @@ class FES_File_Upload_Field extends FES_Field {
 									 </td>
 									<?php } ?>
 								</tr>
-							<?php } ?>							<tr class="add_new" style="display:none !important;" id="<?php echo sanitize_key( $this->name() ); ?>"></tr>
+							<?php } ?>
+							<tr class="add_new" style="display:none !important;" id="<?php echo sanitize_key( $this->name() ); ?>"></tr>
 					</tbody>
 					<?php if ( empty( $this->characteristics['count'] ) || $this->characteristics['count'] > 1 ) : ?>
 					<tfoot>

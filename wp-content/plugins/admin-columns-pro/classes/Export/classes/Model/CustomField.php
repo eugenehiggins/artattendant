@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * @property AC_Column_CustomField $column
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_CustomField extends ACP_Export_Model_RawValue {
 

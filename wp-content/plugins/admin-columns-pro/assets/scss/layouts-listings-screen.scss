@@ -1,6 +1,6 @@
 form.layout-switcher {
 	display: inline-block;
-	margin-left: 18px;
+	margin-left: 0;
 	padding: 0 6px 0 10px;
 	border-radius: 4px;
 	position: relative;
@@ -32,6 +32,10 @@ form.layout-switcher {
 
 	.ac-wp-users & {
 		top: -2px;
+	}
+
+	.ac-wp-comments &, .edit-tags-php & {
+		transform: translateY(3px);
 	}
 }
 

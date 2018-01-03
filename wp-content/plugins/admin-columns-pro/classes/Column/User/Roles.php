@@ -28,7 +28,11 @@ class ACP_Column_User_Roles extends AC_Column_Meta
 			$roles[] = ac_helper()->html->tooltip( $label, $role );
 		}
 
-		return implode( __( ', ' ), $roles );
+		if ( empty( $roles ) ) {
+			return $this->get_empty_char();
+		}
+
+		return implode( $this->get_separator(), $roles );
 	}
 
 	public function editing() {

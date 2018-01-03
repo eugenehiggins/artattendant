@@ -1,10 +1,28 @@
+= Version 2.5.10, January 2, 2018 =
+
+* Fix: Label for URL field on Profile form not saving properly
+
+= Version 2.5.9, October 24, 2017 =
+
+* Fix: Compatibility with Commissions 3.4 and above
+* Fix: Vendor page didn't work on initial install without permalinks being updated first
+* Fix: Unable to delete existing vendor address details
+* Fix: Label for the URL field was not saving
+
+= Version 2.5.8, October 2, 2017 =
+
+* Fix: Vendor application emails sent even when disabled
+* Fix: New submission email uses admin email content instead of vendor email content
+* Fix: Commissions not automatically enabled on new submissions
+* Fix: Remove avatar link does not work in some themes
+
 = Version 2.5.7, August 30, 2017 =
 
 * Fix: X button to remove avatar does not work in all themes
 * Fix: Vendor store URL returns 404 error if assigned a parent page
 * Fix: Undefined variable payment_id
 
-= Version 2.5., July 31, 2017 =
+= Version 2.5.6, July 31, 2017 =
 
 * Fix: Auto-approve vendor submission option does not work and leaves products as pending review
 

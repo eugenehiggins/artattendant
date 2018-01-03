@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Exportability model for outputting a post's title based on its ID
  *
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_PostTitleFromPostId extends ACP_Export_Model {
 

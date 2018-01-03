@@ -411,3 +411,21 @@ function eddc_remove_legacy_commissions() {
 
 }
 add_action( 'edd_remove_legacy_commissions', 'eddc_remove_legacy_commissions' );
+
+/**
+ * Fix the `rate` column's datatype
+ *
+ * @since       3.4.2
+ * @return      void
+ */
+function eddc_342_rate_column_update() {
+
+	if ( ! edd_has_upgrade_completed( 'commissions_342_rate_column' ) ) {
+
+		$db = new EDDC_DB;
+		@$db->create_table();
+
+		edd_set_upgrade_complete( 'commissions_342_rate_column' );
+	}
+}
+add_action( 'admin_init', 'eddc_342_rate_column_update' );

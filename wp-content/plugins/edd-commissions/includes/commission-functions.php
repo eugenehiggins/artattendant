@@ -73,7 +73,7 @@ function eddc_calculate_payment_commissions( $payment_id ) {
 	$calc_base = edd_get_option( 'edd_commissions_calc_base', 'subtotal' );
 
 	// loop through each purchased download and calculate commissions, if needed
-	foreach ( $payment->cart_details as $cart_item ) {
+	foreach ( $payment->cart_details as $cart_index => $cart_item ) {
 		$download_id         = absint( $cart_item['id'] );
 		$commissions_enabled = get_post_meta( $download_id, '_edd_commisions_enabled', true );
 		$commission_settings = get_post_meta( $download_id, '_edd_commission_settings', true );
@@ -163,7 +163,7 @@ function eddc_calculate_payment_commissions( $payment_id ) {
 
 			$rate = eddc_get_recipient_rate( $download_id, $recipient );
 
-			$args = array(
+			$args = apply_filters( 'eddc_calc_commission_amount_args', array(
 				'price'             => $price,
 				'rate'              => $rate,
 				'type'              => $type,
@@ -172,7 +172,7 @@ function eddc_calculate_payment_commissions( $payment_id ) {
 				'recipient'         => $recipient,
 				'recipient_counter' => $recipient_counter,
 				'payment_id'        => $payment->ID
-			);
+			) );
 
 			$commission_amount = eddc_calc_commission_amount( $args ); // calculate the commission amount to award
 
@@ -186,7 +186,8 @@ function eddc_calculate_payment_commissions( $payment_id ) {
 				'has_variable_prices' => $has_variable_prices,
 				'price_id'            => isset( $price_id ) ? $price_id : NULL,
 				'variation'           => isset( $variation ) ? $variation : NULL,
-				'cart_item'           => $cart_item
+				'cart_item'           => $cart_item,
+				'cart_index'          => $cart_index,
 			);
 
 			$recipient_counter++;
@@ -336,7 +337,7 @@ function eddc_get_recipient_rate( $download_id = 0, $user_id = 0 ) {
 		$rate = 0;
 	}
 
-	return apply_filters( 'eddc_get_recipient_rate', intval( $rate ), $download_id, $user_id );
+	return apply_filters( 'eddc_get_recipient_rate', (float) $rate, $download_id, $user_id );
 }
 
 

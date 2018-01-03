@@ -7,14 +7,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Last modified author column exportability model
  *
- * @since NEWVERSION
+ * @since 4.1
  */
-class ACP_Export_Model_Post_LastModifiedAuthor extends ACP_Export_Model {
+class ACP_Export_Model_Post_LastModifiedAuthor extends ACP_Export_Model_Value {
 
-	public function get_value( $id ) {
-		$raw_value = $this->get_column()->get_raw_value( $id );
-
-		return $raw_value ? $this->get_column()->get_value( $id ) : '';
+	/**
+	 * @param AC_Column_Post_LastModifiedAuthor $column
+	 */
+	public function __construct( AC_Column_Post_LastModifiedAuthor $column ) {
+		parent::__construct( $column );
 	}
 
 }

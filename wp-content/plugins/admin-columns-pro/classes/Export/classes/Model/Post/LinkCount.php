@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Shows Internal / External links in post content
  *
- * @since NEWVERSION
+ * @since 4.1
  */
 class ACP_Export_Model_Post_LinkCount extends ACP_Export_Model {
 

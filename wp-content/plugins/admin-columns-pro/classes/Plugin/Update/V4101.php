@@ -4,14 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ACP_Plugin_Update_V4012 extends AC_Plugin_Update {
-
-	/**
-	 * @return bool
-	 */
-	public function needs_update() {
-		return $this->is_less_or_equal_stored_version();
-	}
+class ACP_Plugin_Update_V4101 extends AC_Plugin_Update {
 
 	public function apply_update() {
 		$this->migrate_site_and_user_specific_settings();
@@ -20,7 +13,7 @@ class ACP_Plugin_Update_V4012 extends AC_Plugin_Update {
 	}
 
 	protected function set_version() {
-		$this->version = '4.0.12';
+		$this->version = '4.1.1';
 	}
 
 	/**

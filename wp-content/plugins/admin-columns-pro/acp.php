@@ -149,6 +149,10 @@ final class ACP extends AC_Plugin {
 	 * Handle installation and updates
 	 */
 	public function install() {
+		if ( 0 === version_compare( $this->get_version(), $this->get_stored_version() ) ) {
+			return;
+		}
+
 		$classes = AC()->autoloader()->get_class_names_from_dir( $this->get_plugin_dir() . 'classes/Plugin/Update', self::CLASS_PREFIX );
 		$updater = new AC_Plugin_Updater( $this );
 
@@ -206,7 +210,7 @@ final class ACP extends AC_Plugin {
 	}
 
 	/**
-	 * @since NEWVERSION
+	 * @since 4.1
 	 */
 	public function export() {
 		return $this->export;
