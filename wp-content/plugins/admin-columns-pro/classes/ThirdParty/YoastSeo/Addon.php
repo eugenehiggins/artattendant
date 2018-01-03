@@ -9,7 +9,6 @@ final class ACP_ThirdParty_YoastSeo_Addon {
 	public function __construct() {
 		add_action( 'ac/column_types', array( $this, 'set_columns' ) );
 		add_action( 'ac/column_groups', array( $this, 'set_groups' ) );
-		add_action( 'ac/admin_footer', array( $this, 'fix_yoast_heading_tooltips' ) );
 	}
 
 	/**
@@ -33,21 +32,6 @@ final class ACP_ThirdParty_YoastSeo_Addon {
 	 */
 	private function is_active() {
 		return defined( 'WPSEO_VERSION' );
-	}
-
-	public function fix_yoast_heading_tooltips() {
-		if ( ! $this->is_active() ) {
-			return;
-		}
-
-		?>
-		<style>
-			.wp-list-table th > a.yoast-tooltip::before,
-			.wp-list-table th > a.yoast-tooltip::after {
-				display: none !important;
-			}
-		</style>
-		<?php
 	}
 
 }

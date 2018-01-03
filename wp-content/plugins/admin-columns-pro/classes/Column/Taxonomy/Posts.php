@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * @since 4.1
+ * @since NEWVERSION
  */
 class ACP_Column_Taxonomy_Posts extends AC_Column
 	implements ACP_Export_Column {

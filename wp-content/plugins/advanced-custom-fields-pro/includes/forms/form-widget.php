@@ -261,25 +261,20 @@ class acf_form_widget {
 <script type="text/javascript">
 (function($) {
 	
-	// vars
-	acf.update('post_id', 'widgets');
-	
-	
-	// restrict get fields
-	acf.add_filter('get_fields', function( $fields ){
-	
-		// widgets
-		$fields = $fields.not('#available-widgets .acf-field');
-		
-		
-		// customizer
-		$fields = $fields.not('.widget-tpl .acf-field');
-		
-		
-		// return
-		return $fields;
-		
-	});
+	 acf.add_filter('get_fields', function( $fields ){
+	 	
+	 	// widgets
+	 	$fields = $fields.not('#available-widgets .acf-field');
+	 	
+	 	
+	 	// customizer
+	 	$fields = $fields.not('.widget-tpl .acf-field');
+	 	
+	 	
+	 	// return
+	 	return $fields;
+	 	
+    });
 	
 	
 	$('#widgets-right').on('click', '.widget-control-save', function( e ){

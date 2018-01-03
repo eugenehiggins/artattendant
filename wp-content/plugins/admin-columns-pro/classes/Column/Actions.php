@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * @since 4.1
+ * @since NEWVERSION
  */
 class ACP_Column_Actions extends AC_Column_Actions
 	implements ACP_Export_Column {

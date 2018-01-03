@@ -32,12 +32,7 @@ if (!is_multisite()) {
 } else {
   $old_blog = $wpdb->blogid;
   // Get all blog ids
-  $network = get_current_site();
-  $query = $wpdb->prepare(
-                    "SELECT blog_id FROM {$wpdb->blogs} WHERE site_id=%d",
-                    array($network->id)
-                         );
-  $blogIds = $wpdb->get_col($query);
+  $blogIds = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
   foreach ($blogIds as $blog_id) {
     switch_to_blog($blog_id);
     ure_delete_options();    

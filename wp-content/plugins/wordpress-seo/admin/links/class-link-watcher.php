@@ -48,11 +48,6 @@ class WPSEO_Link_Watcher {
 			return;
 		}
 
-		// When the post status is auto-draft.
-		if ( $post->post_status === 'auto-draft' ) {
-			return;
-		}
-
 		// When the post isn't processable, just remove the saved links.
 		if ( ! $this->is_processable( $post_id ) ) {
 			return;
@@ -92,13 +87,11 @@ class WPSEO_Link_Watcher {
 	 * @return bool True when the post is processable.
 	 */
 	protected function is_processable( $post_id ) {
-		/*
-		 * Do not use the `wpseo_link_count_post_types` because we want to always count the links,
-		 * even if we don't show them.
-		 */
-		$post_types = WPSEO_Post_Type::get_accessible_post_types();
+		// When the post type is not public.
+		$post_type        = get_post_type( $post_id );
+		$post_type_object = get_post_type_object( $post_type );
 
-		return isset( $post_types[ get_post_type( $post_id ) ] );
+		return ( $post_type_object !== null && $post_type_object->public === true );
 	}
 
 	/**

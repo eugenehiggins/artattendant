@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Comment Count exportability model
  *
- * @since 4.1
+ * @since NEWVERSION
  */
 class ACP_Export_Model_Post_CommentCount extends ACP_Export_Model {
 

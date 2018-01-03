@@ -166,6 +166,7 @@ class URE_Capability {
     /**
      * Delete capability
      * 
+     * @global wpdb $wpdb
      * @global WP_Roles $wp_roles
      * @return string - information message
      */

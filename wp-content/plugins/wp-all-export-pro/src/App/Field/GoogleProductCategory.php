@@ -41,11 +41,7 @@ class GoogleProductCategory extends Field
     {
         $category = $this->getProductCategory($product);
 
-        if(is_object($category)) {
-            return $category->term_id;
-        } else {
-            return '';
-        }
+        return $category->term_id;
     }
 
     private function getProductCategoryName($product)

@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Parent (default column) exportability model
  *
- * @since 4.1
+ * @since NEWVERSION
  */
 class ACP_Export_Model_Post_Parent extends ACP_Export_Model {
 

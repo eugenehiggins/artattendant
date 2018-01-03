@@ -32,12 +32,7 @@ class Price extends Field
         }
 
         if($price) {
-            if(is_numeric($price)){
-                return number_format($price, 2) .' '.$availabilityPriceData['currency'];
-            } else {
-                return $price.' '.$availabilityPriceData['currency'];
-            }
-
+            return number_format($price, 2) .' '.$availabilityPriceData['currency'];
         } else {
             return "";
         }

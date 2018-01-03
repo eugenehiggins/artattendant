@@ -10,7 +10,7 @@ endif;
 if ( is_user_logged_in() ):
 	$payments = edd_get_users_purchases( get_current_user_id(), 20, true, 'any' );
 	if ( $payments ) :
-		do_action( 'edd_before_purchase_history', $payments ); ?>
+		do_action( 'edd_before_purchase_history' ); ?>
 		<table id="edd_user_history" class="edd-table">
 			<thead>
 				<tr class="edd_purchase_row">
@@ -56,7 +56,7 @@ if ( is_user_logged_in() ):
 			) );
 			?>
 		</div>
-		<?php do_action( 'edd_after_purchase_history', $payments ); ?>
+		<?php do_action( 'edd_after_purchase_history' ); ?>
 		<?php wp_reset_postdata(); ?>
 	<?php else : ?>
 		<p class="edd-no-purchases"><?php _e('You have not made any purchases','easy-digital-downloads' ); ?></p>

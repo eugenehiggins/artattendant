@@ -419,12 +419,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 					esc_attr( 'post-type-filter-' . $instance_type ),
 					esc_html__( 'Filter by post type', 'wordpress-seo' )
 				);
-				printf(
-					'<select name="post_type_filter" id="%2$s">%1$s</select>',
-					$options,
-					esc_attr( 'post-type-filter-' . $instance_type )
-				);
-
+				printf( '<select name="post_type_filter" id="post-type-filter-%2$s">%1$s</select>', $options, $instance_type );
 				submit_button( __( 'Filter', 'wordpress-seo' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
 				echo '</div>';
 			}
@@ -456,7 +451,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		$current_order  = $this->current_order;
 
 		// If current type doesn't compare with objects page_type, than we have to unset some vars in the requested url (which will be use for internal table urls).
-		if ( $_GET['type'] !== $this->page_type ) {
+		if ( $_GET['type'] != $this->page_type ) {
 			$request_url = remove_query_arg( 'paged', $request_url ); // Page will be set with value 1 below.
 			$request_url = remove_query_arg( 'post_type_filter', $request_url );
 			$request_url = remove_query_arg( 'post_status', $request_url );
@@ -727,7 +722,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 
 			foreach ( $records as $rec ) {
 
-				echo '<tr id="', esc_attr( 'record_' . $rec->ID ), '">';
+				echo '<tr id="record_', $rec->ID, '">';
 
 				foreach ( $columns as $column_name => $column_display_name ) {
 
@@ -851,7 +846,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 
 		static $date_format;
 
-		if ( ! isset( $date_format ) ) {
+		if ( $date_format == null ) {
 			$date_format = get_option( 'date_format' );
 		}
 

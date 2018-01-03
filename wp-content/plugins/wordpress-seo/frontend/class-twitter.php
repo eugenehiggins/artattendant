@@ -30,9 +30,6 @@ class WPSEO_Twitter {
 	 */
 	public $options;
 
-	/** @var WPSEO_Frontend_Page_Type */
-	protected $frontend_page_type;
-
 	/**
 	 * Will hold the Twitter card type being created
 	 *
@@ -45,10 +42,6 @@ class WPSEO_Twitter {
 	 */
 	public function __construct() {
 		$this->options = WPSEO_Options::get_option( 'wpseo_social' );
-
-		// Class for determine the current page type.
-		$this->frontend_page_type = new WPSEO_Frontend_Page_Type();
-
 		$this->twitter();
 	}
 
@@ -169,8 +162,11 @@ class WPSEO_Twitter {
 	 * Only used when OpenGraph is inactive.
 	 */
 	protected function description() {
-		if ( $this->frontend_page_type->is_simple_page() ) {
-			$meta_desc = $this->single_description( $this->frontend_page_type->get_simple_page_id() );
+		if ( is_singular() ) {
+			$meta_desc = $this->single_description();
+		}
+		elseif ( WPSEO_Frontend::get_instance()->is_posts_page() ) {
+			$meta_desc = $this->single_description( get_option( 'page_for_posts' ) );
 		}
 		elseif ( is_category() || is_tax() || is_tag() ) {
 			$meta_desc = $this->taxonomy_description();
@@ -248,8 +244,11 @@ class WPSEO_Twitter {
 	 * Only used when OpenGraph is inactive.
 	 */
 	protected function title() {
-		if ( $this->frontend_page_type->is_simple_page() ) {
-			$title = $this->single_title( $this->frontend_page_type->get_simple_page_id() );
+		if ( is_singular() ) {
+			$title = $this->single_title();
+		}
+		elseif ( WPSEO_Frontend::get_instance()->is_posts_page() ) {
+			$title = $this->single_title( get_option( 'page_for_posts' ) );
 		}
 		elseif ( is_category() || is_tax() || is_tag() ) {
 			$title = $this->taxonomy_title();
@@ -340,8 +339,9 @@ class WPSEO_Twitter {
 		if ( preg_match( '`([A-Za-z0-9_]{1,25})$`', $id, $match ) ) {
 			return $match[1];
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	/**
@@ -405,15 +405,12 @@ class WPSEO_Twitter {
 		if ( $this->homepage_image_output() ) {
 			return;
 		}
-
-		if ( $this->posts_page_image_output() ) { // Posts page, which won't be caught by is_singular() below.
+		elseif ( $this->posts_page_image_output() ) { // Posts page, which won't be caught by is_singular() below.
 			return;
 		}
 
-		if ( $this->frontend_page_type->is_simple_page() ) {
-			$post_id = $this->frontend_page_type->get_simple_page_id();
-
-			if ( $this->image_from_meta_values_output( $post_id ) ) {
+		if ( is_singular() ) {
+			if ( $this->image_from_meta_values_output() ) {
 				return;
 			}
 
@@ -422,14 +419,14 @@ class WPSEO_Twitter {
 			if ( $this->image_of_attachment_page_output( $post_id ) ) {
 				return;
 			}
-			if ( $this->image_thumbnail_output( $post_id ) ) {
+			if ( $this->image_thumbnail_output() ) {
 				return;
 			}
 			if ( count( $this->images ) > 0 ) {
 				$this->gallery_images_output();
 				return;
 			}
-			if ( $this->image_from_content_output( $post_id ) ) {
+			if ( $this->image_from_content_output() ) {
 				return;
 			}
 		}
@@ -594,11 +591,9 @@ class WPSEO_Twitter {
 	/**
 	 * Retrieve the image from the content
 	 *
-	 * @param int $post_id The post id to extract the images from.
-	 *
 	 * @return bool
 	 */
-	private function image_from_content_output( $post_id ) {
+	private function image_from_content_output() {
 		/**
 		 * Filter: 'wpseo_pre_analysis_post_content' - Allow filtering the content before analysis
 		 *
@@ -606,7 +601,7 @@ class WPSEO_Twitter {
 		 *
 		 * @param object $post - The post object.
 		 */
-		$post    = get_post( $post_id );
+		global $post;
 		$content = apply_filters( 'wpseo_pre_analysis_post_content', $post->post_content, $post );
 
 		if ( preg_match_all( '`<img [^>]+>`', $content, $matches ) ) {
@@ -638,8 +633,10 @@ class WPSEO_Twitter {
 		if ( is_string( $twitter ) && $twitter !== '' ) {
 			$this->output_metatag( 'creator', '@' . $twitter );
 		}
-		elseif ( $this->options['twitter_site'] !== '' && is_string( $this->options['twitter_site'] ) ) {
-			$this->output_metatag( 'creator', '@' . $this->options['twitter_site'] );
+		elseif ( $this->options['twitter_site'] !== '' ) {
+			if ( is_string( $this->options['twitter_site'] ) && $this->options['twitter_site'] !== '' ) {
+				$this->output_metatag( 'creator', '@' . $this->options['twitter_site'] );
+			}
 		}
 	}
 

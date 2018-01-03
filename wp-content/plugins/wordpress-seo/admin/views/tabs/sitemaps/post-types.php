@@ -16,15 +16,12 @@ $switch_values = array(
 	'on'  => __( 'Not in sitemap', 'wordpress-seo' ),
 );
 
-// Consider using WPSEO_Post_Type::get_accessible_post_types() to filter out any `no-index` post-types.
-$post_types = get_post_types( array( 'public' => true ), 'objects' );
-
 /**
  * Filter the post types to present in interface for exclusion.
  *
  * @param array $post_types Array of post type objects.
  */
-$post_types = apply_filters( 'wpseo_sitemaps_supported_post_types', $post_types );
+$post_types = apply_filters( 'wpseo_sitemaps_supported_post_types', get_post_types( array( 'public' => true ), 'objects' ) );
 if ( is_array( $post_types ) && $post_types !== array() ) {
 	foreach ( $post_types as $pt ) {
 		$yform->toggle_switch(
@@ -32,7 +29,6 @@ if ( is_array( $post_types ) && $post_types !== array() ) {
 			$switch_values,
 			$pt->labels->name . ' (<code>' . $pt->name . '</code>)'
 		);
-
 		/**
 		 * Allow adding custom checkboxes to the admin sitemap page - Post Types tab
 		 *

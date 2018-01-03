@@ -400,13 +400,13 @@ class WPSEO_Admin_Pages {
 		$content = '<table class="form-table">';
 		foreach ( $rows as $row ) {
 			$content .= '<tr><th scope="row">';
-			if ( ! empty( $row['id'] ) ) {
+			if ( isset( $row['id'] ) && $row['id'] != '' ) {
 				$content .= '<label for="' . esc_attr( $row['id'] ) . '">' . esc_html( $row['label'] ) . ':</label>';
 			}
 			else {
 				$content .= esc_html( $row['label'] );
 			}
-			if ( ! empty( $row['desc'] ) ) {
+			if ( isset( $row['desc'] ) && $row['desc'] != '' ) {
 				$content .= '<br/><small>' . esc_html( $row['desc'] ) . '</small>';
 			}
 			$content .= '</th><td>';

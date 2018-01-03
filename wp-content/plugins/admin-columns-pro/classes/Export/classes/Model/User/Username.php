@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Username (default column) exportability model
  *
- * @since 4.1
+ * @since NEWVERSION
  */
 class ACP_Export_Model_User_Username extends ACP_Export_Model {
 

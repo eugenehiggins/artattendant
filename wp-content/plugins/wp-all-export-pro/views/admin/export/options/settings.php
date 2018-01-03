@@ -16,7 +16,7 @@
 								<input type="hidden" name="export_only_new_stuff" value="0" />
 								<input type="checkbox" id="export_only_new_stuff" name="export_only_new_stuff" value="1" <?php echo $post['export_only_new_stuff'] ? 'checked="checked"': '' ?> />
 								<label for="export_only_new_stuff"><?php printf(__('Only export %s once', 'wp_all_export_plugin'), empty($post['cpt']) ? __('records', 'wp_all_export_plugin') : wp_all_export_get_cpt_name($post['cpt'], 2, $post)); ?></label>
-								<a href="#help" class="wpallexport-help" style="position: relative; top: 0;" title="<?php _e('If re-run, this export will only include records that have not been previously exported.', 'wp_all_export_plugin'); ?>">?</a>
+								<a href="#help" class="wpallexport-help" style="position: relative; top: -2px;" title="<?php _e('If re-run, this export will only include records that have not been previously exported.', 'wp_all_export_plugin'); ?>">?</a>							
 							</div>
 							<div class="input" style="margin:5px 0px;">
 								<input type="hidden" name="export_only_modified_stuff" value="0" />
@@ -28,13 +28,13 @@
 								<input type="hidden" name="include_bom" value="0" />
 								<input type="checkbox" id="include_bom" name="include_bom" value="1" <?php echo $post['include_bom'] ? 'checked="checked"': '' ?> />
 								<label for="include_bom"><?php _e('Include BOM in export file', 'wp_all_export_plugin') ?></label>															
-								<a href="#help" class="wpallexport-help" style="position: relative; top: 0;" title="<?php _e('The BOM will help some programs like Microsoft Excel read your export file if it includes non-English characters.', 'wp_all_export_plugin'); ?>">?</a>
+								<a href="#help" class="wpallexport-help" style="position: relative; top: -2px;" title="<?php _e('The BOM will help some programs like Microsoft Excel read your export file if it includes non-English characters.', 'wp_all_export_plugin'); ?>">?</a>							
 							</div>
 							<div class="input" style="margin:5px 0px;">
 								<input type="hidden" name="creata_a_new_export_file" value="0" />
 								<input type="checkbox" id="creata_a_new_export_file" name="creata_a_new_export_file" value="1" <?php echo $post['creata_a_new_export_file'] ? 'checked="checked"': '' ?> />
 								<label for="creata_a_new_export_file"><?php _e('Create a new file each time export is run', 'wp_all_export_plugin') ?></label>				
-								<a href="#help" class="wpallexport-help" style="position: relative; top: 0;" title="<?php _e('If disabled, the export file will be overwritten every time this export run.', 'wp_all_export_plugin'); ?>">?</a>
+								<a href="#help" class="wpallexport-help" style="position: relative; top: -2px;" title="<?php _e('If disabled, the export file will be overwritten every time this export run.', 'wp_all_export_plugin'); ?>">?</a>							
 							</div>							
 							<div class="input" style="margin:5px 0px;">
 								<input type="hidden" name="split_large_exports" value="0" />
@@ -51,7 +51,7 @@
 							<p style="text-align:right;">
 								<div class="input">
 									<label for="save_import_as" style="width: 103px;"><?php _e('Friendly Name:','wp_all_export_plugin');?></label> 
-									<input type="text" name="friendly_name" title="<?php _e('Save friendly name...', 'pmxi_plugin') ?>" style="vertical-align:middle; background:#fff !important;" value="<?php echo esc_attr($post['friendly_name'] ? $post['friendly_name']: $this->getFriendlyName($post)) ?>" />
+									<input type="text" name="friendly_name" title="<?php _e('Save friendly name...', 'pmxi_plugin') ?>" style="vertical-align:middle; background:#fff !important;" value="<?php echo esc_attr($post['friendly_name']) ?>" />
 								</div>
 							</p>
 						</td>

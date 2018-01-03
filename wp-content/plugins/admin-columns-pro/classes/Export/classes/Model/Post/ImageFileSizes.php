@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * @since 4.1
+ * @since NEWVERSION
  */
 class ACP_Export_Model_Post_ImageFileSizes extends ACP_Export_Model {
 

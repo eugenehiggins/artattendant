@@ -1,12 +1,5 @@
 == Changelog ==
 
-= 2.1.1 =
-Release Date: December 12th, 2017
-
-* [Added] Support for the ACF Button Group Field added
-* [Improved] Date field now exports as ISO-8601 format
-
-
 = 2.1 =
 Release Date: November 22nd, 2017
 

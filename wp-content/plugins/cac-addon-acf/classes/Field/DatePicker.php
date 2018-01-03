@@ -24,7 +24,7 @@ class ACA_ACF_Field_DatePicker extends ACA_ACF_Field {
 	}
 
 	public function export() {
-		return new ACA_ACF_Export_Date( $this->column );
+		return new ACP_Export_Model_StrippedValue( $this->column );
 	}
 
 	// Settings

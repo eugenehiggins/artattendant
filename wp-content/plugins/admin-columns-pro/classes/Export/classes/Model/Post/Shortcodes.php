@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Shortcodes column exportability model
  *
- * @since 4.1
+ * @since NEWVERSION
  */
 class ACP_Export_Model_Post_Shortcodes extends ACP_Export_Model {
 

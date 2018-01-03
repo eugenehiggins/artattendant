@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @since 4.0
  */
-class ACP_Filtering_Addon extends AC_Addon {
+class ACP_Filtering_Addon {
 
 	/**
 	 * @var ACP_Filtering_Helper
@@ -20,7 +20,7 @@ class ACP_Filtering_Addon extends AC_Addon {
 	private $table_screen;
 
 	public function __construct() {
-		AC()->autoloader()->register_prefix( 'ACP_Filtering', $this->get_plugin_dir() . 'classes' );
+		AC()->autoloader()->register_prefix( 'ACP_Filtering', $this->get_dir() . 'classes' );
 
 		$this->helper = new ACP_Filtering_Helper();
 
@@ -30,8 +30,18 @@ class ACP_Filtering_Addon extends AC_Addon {
 		add_action( 'ac/settings/scripts', array( $this, 'settings_scripts' ) );
 	}
 
-	protected function get_file() {
-		return __FILE__;
+	/**
+	 * @since 4.0
+	 */
+	public function get_url() {
+		return plugin_dir_url( __FILE__ );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_dir() {
+		return plugin_dir_path( __FILE__ );
 	}
 
 	/**
@@ -82,8 +92,8 @@ class ACP_Filtering_Addon extends AC_Addon {
 	}
 
 	public function settings_scripts() {
-		wp_enqueue_style( 'acp-filtering-settings', $this->get_plugin_url() . 'assets/css/settings' . AC()->minified() . '.css', array(), $this->get_version() );
-		wp_enqueue_script( 'acp-filtering-settings', $this->get_plugin_url() . 'assets/js/settings' . AC()->minified() . '.js', array( 'jquery' ), $this->get_version() );
+		wp_enqueue_style( 'acp-filtering-settings', $this->get_url() . '/assets/css/settings' . AC()->minified() . '.css', array(), $this->get_version() );
+		wp_enqueue_script( 'acp-filtering-settings', $this->get_url() . '/assets/js/settings' . AC()->minified() . '.js', array( 'jquery' ), $this->get_version() );
 	}
 
 	/**

@@ -110,21 +110,13 @@ class WPSEO_OpenGraph_Image {
 			$this->get_posts_page_image();
 		}
 
-		$frontend_page_type = new WPSEO_Frontend_Page_Type();
-		if ( $frontend_page_type->is_simple_page() ) {
-			$this->get_singular_image( $frontend_page_type->get_simple_page_id() );
+		if ( is_singular() ) {
+			$this->get_singular_image();
 		}
 
 		if ( is_category() || is_tax() || is_tag() ) {
 			$this->get_opengraph_image_taxonomy();
 		}
-
-		/**
-		 * Filter: wpseo_add_opengraph_additional_images - Allows to add additional images to the OpenGraph tags.
-		 *
-		 * @api WPSEO_OpenGraph_Image The current object.
-		 */
-		do_action( 'wpseo_add_opengraph_additional_images', $this );
 
 		$this->get_default_image();
 	}
@@ -156,27 +148,23 @@ class WPSEO_OpenGraph_Image {
 
 	/**
 	 * Get the images of the singular post.
-	 *
-	 * @param null|int $post_id The post id to get the images for.
 	 */
-	private function get_singular_image( $post_id = null ) {
-		if ( $post_id === null ) {
-			$post_id = get_the_ID();
-		}
+	private function get_singular_image() {
+		global $post;
 
-		if ( $this->get_opengraph_image_post( $post_id ) ) {
+		if ( $this->get_opengraph_image_post() ) {
 			return;
 		}
 
-		if ( $this->get_attachment_page_image( $post_id ) ) {
+		if ( $this->get_attachment_page_image( $post->ID ) ) {
 			return;
 		}
 
-		if ( $this->get_featured_image( $post_id ) ) {
+		if ( $this->get_featured_image( $post->ID ) ) {
 			return;
 		}
 
-		$this->get_content_images( get_post( $post_id ) );
+		$this->get_content_images( $post );
 	}
 
 	/**
@@ -314,7 +302,7 @@ class WPSEO_OpenGraph_Image {
 	 * @return bool|string
 	 */
 	private function get_relative_path( $img ) {
-		if ( $img[0] !== '/' ) {
+		if ( $img[0] != '/' ) {
 			return false;
 		}
 

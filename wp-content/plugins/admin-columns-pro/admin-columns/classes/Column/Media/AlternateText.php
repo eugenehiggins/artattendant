@@ -19,13 +19,7 @@ class AC_Column_Media_AlternateText extends AC_Column_Meta {
 	}
 
 	public function get_value( $id ) {
-		$value = ac_helper()->string->strip_trim( $this->get_raw_value( $id ) );
-
-		if ( ! $value ) {
-			return $this->get_empty_char();
-		}
-
-		return $value;
+		return ac_helper()->string->strip_trim( $this->get_raw_value( $id ) );
 	}
 
 	public function get_raw_value( $id ) {

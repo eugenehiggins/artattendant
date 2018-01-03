@@ -106,16 +106,11 @@ class GoogleCategoriesController extends BaseController
         $catItem = array(
             'name' => $categoryName,
             'hasChildren' => $hasChildren,
+            'parentName' => $category['parentName'],
             'id' => $category['id'],
             'opened' => false,
             'visible' => true
         );
-
-        if(isset($category['parentName'])){
-            $catItem['parentName'] = $category['parentName'];
-        } else {
-            $catItem['parentName'] = '';
-        }
 
         if (isset($category['children'])) {
             $catItem['children'] = $category['children'];

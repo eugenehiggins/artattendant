@@ -5,8 +5,7 @@ class WpaePhpInterpreterErrorHandler
     public function handle(){
 
         $error = $this->getLastError();
-
-        if($error && strpos($error['file'], 'uploads/wpallexport/functions.php') !== false){
+        if($error && strpos($error['file'], 'functions.php') !== false){
             $wp_uploads = $this->getUploadsDir();
             $functions = 'in '.$wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php:'.$error['line'];
             $error['message'] = str_replace($functions, '', $error['message']);

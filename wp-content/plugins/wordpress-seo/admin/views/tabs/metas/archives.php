@@ -10,18 +10,11 @@ if ( ! defined( 'WPSEO_VERSION' ) ) {
 }
 
 echo '<p>';
-printf(
-	/* translators: %1$s / %2$s: links to an article about duplicate content on yoast.com */
-	esc_html__( 'If you\'re running a one author blog, the author archive will be exactly the same as your homepage. This is what\'s called a %1$sduplicate content problem%2$s.', 'wordpress-seo' ),
-	'<a href="' . esc_url( WPSEO_Shortlinker::get( 'https://yoa.st/duplicate-content' ) ) . '">',
-	'</a>'
-);
+/* translators: %1$s / %2$s: links to an article about duplicate content on yoast.com */
+printf( __( 'If you\'re running a one author blog, the author archive will be exactly the same as your homepage. This is what\'s called a %1$sduplicate content problem%2$s.', 'wordpress-seo' ), '<a href="' . WPSEO_Shortlinker::get( 'https://yoa.st/duplicate-content' ) . '">', '</a>' );
 echo ' ';
-printf(
-	/* translators: %s expands to <code>noindex, follow</code> */
-	esc_html__( 'If this is the case on your site, you can choose to either disable it (which makes it redirect to the homepage), or to add %s to it so it doesn\'t show up in the search results.', 'wordpress-seo' ),
-	'<code>noindex,follow</code>'
-);
+/* translators: %s expands to <code>noindex, follow</code> */
+printf( __( 'If this is the case on your site, you can choose to either disable it (which makes it redirect to the homepage), or to add %s to it so it doesn\'t show up in the search results.', 'wordpress-seo' ), '<code>noindex,follow</code>' );
 echo ' ';
 echo esc_html__( 'Note that links to archives might be still output by your theme and you would need to remove them separately.', 'wordpress-seo' );
 echo ' ';
@@ -65,14 +58,9 @@ echo '<br/>';
 
 echo '<div id="special-pages-titles-metas">';
 echo '<h2>' . esc_html__( 'Special Pages', 'wordpress-seo' ) . '</h2>';
-echo '<p>';
-printf(
-	/* translators: %s expands to <code>noindex, follow</code> */
-	esc_html__( 'These pages will be %s by default, so they will never show up in search results.', 'wordpress-seo' ),
-	'<code>noindex, follow</code>'
-);
-echo '</p>';
-echo '<p><strong>' . esc_html__( 'Search pages', 'wordpress-seo' ) . '</strong><br/>';
+/* translators: %s expands to <code>noindex, follow</code> */
+echo '<p>' . sprintf( __( 'These pages will be %s by default, so they will never show up in search results.', 'wordpress-seo' ), '<code>noindex, follow</code>' ) . '</p>';
+echo '<p><strong>' . __( 'Search pages', 'wordpress-seo' ) . '</strong><br/>';
 $yform->textinput( 'title-search-wpseo', __( 'Title template', 'wordpress-seo' ), 'template search-template' );
 echo '</p>';
 echo '<p><strong>' . esc_html__( '404 pages', 'wordpress-seo' ) . '</strong><br/>';

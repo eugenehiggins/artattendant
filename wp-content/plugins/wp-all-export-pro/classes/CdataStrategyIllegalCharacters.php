@@ -4,14 +4,10 @@ require_once('CdataStrategy.php');
 
 class CdataStrategyIllegalCharacters implements CdataStrategy
 {
-    private $illegalCharacters = array('<','>','&', '\'', '"','**LT**', '**GT**');
+    private $illegalCharacters = array('<','>','&', '\'', '"');
 
-    public function should_cdata_be_applied($field, $hasSnippets = false)
+    public function should_cdata_be_applied($field)
     {
-        if($hasSnippets) {
-            $this->illegalCharacters = array('<','>','&', '**LT**', '**GT**');
-        }
-        
         foreach($this->illegalCharacters as $character) {
             if(strpos($field, $character) !== false) {
                 return true;

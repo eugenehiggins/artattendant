@@ -1,6 +1,8 @@
 <?php
 
+
 namespace Wpae\App\Field;
+
 
 use Wpae\App\Feed\Feed;
 use Wpae\App\Service\WooCommerceVersion;

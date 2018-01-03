@@ -328,8 +328,7 @@ class WPSEO_Replace_Vars {
 	private function retrieve_excerpt() {
 		$replacement = null;
 
-		// The check `post_password_required` is because excerpt must be hidden for a post with a password.
-		if ( ! empty( $this->args->ID ) && ! post_password_required( $this->args->ID ) ) {
+		if ( ! empty( $this->args->ID ) ) {
 			if ( $this->args->post_excerpt !== '' ) {
 				$replacement = strip_tags( $this->args->post_excerpt );
 			}
@@ -349,8 +348,7 @@ class WPSEO_Replace_Vars {
 	private function retrieve_excerpt_only() {
 		$replacement = null;
 
-		// The check `post_password_required` is because excerpt must be hidden for a post with a password.
-		if ( ! empty( $this->args->ID ) && $this->args->post_excerpt !== ''  && ! post_password_required( $this->args->ID ) ) {
+		if ( ! empty( $this->args->ID ) && $this->args->post_excerpt !== '' ) {
 			$replacement = strip_tags( $this->args->post_excerpt );
 		}
 
@@ -561,7 +559,7 @@ class WPSEO_Replace_Vars {
 				$page_number = 1;
 			}
 
-			if ( ! empty( $wp_query->max_num_pages ) ) {
+			if ( isset( $wp_query->max_num_pages ) && ( $wp_query->max_num_pages != '' && $wp_query->max_num_pages != 0 ) ) {
 				$max_num_pages = $wp_query->max_num_pages;
 			}
 		}
@@ -883,7 +881,7 @@ class WPSEO_Replace_Vars {
 
 		$user_id     = $this->retrieve_userid();
 		$description = get_the_author_meta( 'description', $user_id );
-		if ( $description !== '' ) {
+		if ( $description != '' ) {
 			$replacement = $description;
 		}
 

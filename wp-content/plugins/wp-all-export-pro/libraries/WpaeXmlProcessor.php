@@ -34,7 +34,6 @@ class WpaeXmlProcessor
 
         // Add a snippet to trigger a process
         $snippetCount = count($this->parseSnippetsInString($xml));
-
         if($snippetCount == 0 ) {
             $xml .="<filler>[str_replace('a','b','c')]</filler>";
         }
@@ -144,6 +143,7 @@ class WpaeXmlProcessor
             $tagValues = array();
 
             if (count($snippets) > 0) {
+
                 if (count($snippets) == 1) {
                     $snippet = $snippets[0];
                     $isInFunction = $this->wpaeString->isBetween($nodeAttributes.$element->nodeValue, $snippet, '[',']');
@@ -241,7 +241,6 @@ class WpaeXmlProcessor
                 if ( ! $has_text_elements ){
                     $nodeAttributes = $this->getNodeAttributes($element);
                     $snippets = $this->parseSnippetsInString($nodeAttributes);
-
                     if (!empty($snippets)){
                         $tagValues = array();
                         foreach ($snippets as $snippet) {
@@ -305,13 +304,11 @@ class WpaeXmlProcessor
      * @param $v
      * @return string
      */
-    private function maybe_cdata($v, $hasSnippets = false)
+    private function maybe_cdata($v)
     {
         if (XmlExportEngine::$is_preview) {
             $v = str_replace('&amp;', '&', $v);
             $v = htmlspecialchars($v);
-            $v = str_replace('##lt##','&lt;', $v);
-            $v = str_replace('##gt##','&gt;', $v);
         }
 
         if (XmlExportEngine::$is_preview && !XmlExportEngine::$exportOptions['show_cdata_in_preview']) {
@@ -324,7 +321,7 @@ class WpaeXmlProcessor
             XmlExportEngine::$exportOptions['custom_xml_cdata_logic'] = 'auto';
         }
         $cdataStrategy = $cdataStrategyFactory->create_strategy(XmlExportEngine::$exportOptions['custom_xml_cdata_logic']);
-        $is_wrap_into_cdata = $cdataStrategy->should_cdata_be_applied($this->decodeSpecialCharacters($v), $hasSnippets);
+        $is_wrap_into_cdata = $cdataStrategy->should_cdata_be_applied($this->decodeSpecialCharacters($v));
 
         if ($is_wrap_into_cdata === false) {
             return $v;
@@ -559,8 +556,8 @@ class WpaeXmlProcessor
     {
         $hasSnippets = $this->parseSnippetsInString($element->nodeValue);
 
-        if (strpos($element->nodeValue, '<![CDATA[') === false && strpos($element->nodeValue, 'CDATABEGIN') === false) {
-            $element->nodeValue = $this->maybe_cdata($element->nodeValue, $hasSnippets);
+        if (strpos($element->nodeValue, '<![CDATA[') === false && strpos($element->nodeValue, 'CDATABEGIN') === false && !$hasSnippets) {
+            $element->nodeValue = $this->maybe_cdata($element->nodeValue);
         }
     }
 
@@ -603,16 +600,13 @@ class WpaeXmlProcessor
         $xml = str_replace('**SINGLEQUOT**', "'", $xml);
         $xml = str_replace('**DOUBLEQUOT**', "\"", $xml);
 
-        $xml = str_replace('**GT**', ">", $xml);
-        $xml = str_replace('**LT**', "<", $xml);
-
         $xml = str_replace('##FILLER##', '', $xml);
         $xml = str_replace('<filler>c</filler>', '', $xml);
         $xml = str_replace('<filler><![CDATA[c]]></filler>', '', $xml);
         $xml = str_replace('<filler>CDATABEGINcCDATACLOSE</filler>', '', $xml);
 
-        $xml = str_replace('<commentTempNode>', '<!--', $xml);
-        $xml = str_replace('</commentTempNode>', '-->', $xml);
+        $xml = str_replace('<comment>', '<!--', $xml);
+        $xml = str_replace('</comment>', '-->', $xml);
 
         $xml = str_replace(self::SNIPPET_DELIMITER, '', $xml);
 
@@ -626,8 +620,8 @@ class WpaeXmlProcessor
      */
     private function preprocessXml($xml)
     {
-        $xml = str_replace('<!--', '<commentTempNode>', $xml);
-        $xml = str_replace('-->', '</commentTempNode>', $xml);
+        $xml = str_replace('<!--', '<comment>', $xml);
+        $xml = str_replace('-->', '</comment>', $xml);
 
         $xml = str_replace("\"{}\"", '""', $xml);
         $xml = str_replace("{}", '""', $xml);
@@ -645,7 +639,6 @@ class WpaeXmlProcessor
     {
         $response = str_replace('<root>', '', $response);
         $response = str_replace('</root>', '', $response);
-        $response = str_replace('<root/>', '', $response);
         $xml = str_replace("<?xml version=\"1.0\"?>", '', $response);
         $xml = str_replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "", $xml);
 

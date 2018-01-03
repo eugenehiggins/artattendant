@@ -263,7 +263,7 @@ function pmxe_wp_ajax_wpae_filtering_count(){
 				$foundRecords = $foundProducts;
 				$hasVariations = !!$foundVariations;
 
-                remove_filter('posts_where', 'wp_all_export_numbering_where');
+				remove_filter('posts_where', 'wp_all_export_numbering_where');
 
 			} else {
 				$exportQuery = new WP_Query( array( 'post_type' => $cpt, 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'posts_per_page' => 10));
@@ -282,10 +282,8 @@ function pmxe_wp_ajax_wpae_filtering_count(){
 		}
 	}
 
-	if(isset($exportQuery)) {
-		PMXE_Plugin::$session->set('exportQuery', $exportQuery);
-		PMXE_Plugin::$session->save_data();
-	}
+	PMXE_Plugin::$session->set('exportQuery', $exportQuery);
+	PMXE_Plugin::$session->save_data();
 
 	if ( $post['is_confirm_screen'] )
 	{

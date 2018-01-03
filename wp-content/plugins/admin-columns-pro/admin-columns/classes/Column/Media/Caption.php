@@ -15,13 +15,7 @@ class AC_Column_Media_Caption extends AC_Column {
 	}
 
 	public function get_value( $id ) {
-		$value = esc_html( $this->get_raw_value( $id ) );
-
-		if ( ! $value ) {
-			return $this->get_empty_char();
-		}
-
-		return $value;
+		return esc_html( $this->get_raw_value( $id ) );
 	}
 
 	public function get_raw_value( $id ) {

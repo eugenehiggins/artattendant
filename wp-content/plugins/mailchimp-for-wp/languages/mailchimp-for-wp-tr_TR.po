@@ -6,7 +6,6 @@
 # Emre YILMAZ <emreyilmaz@yandex.com>, 2016
 # Erdem Akgöl <erdem@kobimedya.com>, 2017
 # Ferhat, 2015
-# Hasan M. Bulut <hmb@heartcoder.net>, 2017
 # Hüseyin Sekmenoğlu <inactive+sekmenhuseyin@transifex.com>, 2015
 # İlbey Furkan Özden <ilbeyfurkanozden@gmail.com>, 2017
 # Müge Çevik <muge.cevik@gmail.com>, 2016
@@ -15,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MailChimp for WordPress\n"
-"PO-Revision-Date: 2017-12-16 22:27+0000\n"
-"Last-Translator: Hasan M. Bulut <hmb@heartcoder.net>\n"
+"PO-Revision-Date: 2017-09-20 15:49+0000\n"
+"Last-Translator: İlbey Furkan Özden <ilbeyfurkanozden@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/ibericode/mailchimp-for-wordpress/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +35,7 @@ msgstr "Ayarlar"
 
 #: includes/admin/class-admin-texts.php:80
 msgid "Documentation"
-msgstr "Yardımcı Belgeler"
+msgstr "Belgeleme"
 
 #: includes/admin/class-admin.php:204
 msgid ""
@@ -105,14 +104,14 @@ msgid ""
 "Be notified whenever someone subscribes? <a href=\"%s\">MailChimp for "
 "WordPress Premium</a> allows you to set up email notifications for your "
 "forms."
-msgstr "Birisi abone olduğunda haberdar olmak ister misiniz? <a href=\"%s\">MailChimp for WordPress Premium</a> formlarınız için e-posta bildirimleri ayarlamanızı sağlar."
+msgstr ""
 
 #: includes/admin/class-ads.php:56
 msgid ""
 "Increased conversions? <a href=\"%s\">MailChimp for WordPress Premium</a> "
 "submits forms without reloading the entire page, resulting in a much better "
 "experience for your visitors."
-msgstr "Geri dönüşlerin artmasını ister misiniz? <a href=\"%s\">MailChimp for WordPress Premium</a> tüm sayfayı yeniden yüklemeden form gönderir ve ziyaretçilerinizin daha iyi bir deneyim yaşamasını sağlar."
+msgstr ""
 
 #: includes/admin/class-ads.php:70
 msgid "Upgrade to Premium"
@@ -122,7 +121,7 @@ msgstr "Premium sürüme yükselt"
 msgid ""
 "Do you want translated forms for all of your languages? <a href=\"%s\">Try "
 "MailChimp for WordPress Premium</a>, which does just that plus more."
-msgstr "Tüm site dilleriniz için çevirisi yapılmış formlar istermisiniz? <a href=\"%s\">MailChimp for WordPress Premium</a>, bunu ve çok daha fazlasını yapar."
+msgstr ""
 
 #: includes/admin/class-ads.php:88
 msgid ""
@@ -224,7 +223,7 @@ msgstr "Ülke"
 
 #: includes/forms/class-admin.php:70
 msgid "Dropdown"
-msgstr "Aşağı açılan liste"
+msgstr ""
 
 #: includes/forms/class-admin.php:71
 msgid "Field type"
@@ -232,11 +231,11 @@ msgstr "Alan tipi"
 
 #: includes/forms/class-admin.php:72
 msgid "Field label"
-msgstr "Alan etiketi"
+msgstr ""
 
 #: includes/forms/class-admin.php:73
 msgid "Form action"
-msgstr "Form eylemi"
+msgstr ""
 
 #: includes/forms/class-admin.php:74
 msgid ""
@@ -258,7 +257,7 @@ msgstr "Başlangıç değeri"
 
 #: includes/forms/class-admin.php:78
 msgid "Interest categories"
-msgstr "İlgili kategoriler"
+msgstr ""
 
 #: includes/forms/class-admin.php:79
 msgid "Is this field required?"
@@ -303,7 +302,7 @@ msgstr "Alanın hiçbir değeri olmadığında gösterilecek metin."
 
 #: includes/forms/class-admin.php:89
 msgid "Preselect"
-msgstr "Ön seçim"
+msgstr ""
 
 #: includes/forms/class-admin.php:90
 msgid "Remove"
@@ -311,7 +310,7 @@ msgstr "Kaldır"
 
 #: includes/forms/class-admin.php:91
 msgid "Radio buttons"
-msgstr "Radyo düğmeleri"
+msgstr ""
 
 #: includes/forms/class-admin.php:92
 msgid "Street Address"
@@ -327,7 +326,7 @@ msgstr "Gönder"
 
 #: includes/forms/class-admin.php:96
 msgid "Wrap in paragraph tags?"
-msgstr "Paragraf etiketleri kullanılsın mi?"
+msgstr ""
 
 #: includes/forms/class-admin.php:97
 msgid "Value"
@@ -335,7 +334,7 @@ msgstr "Değer"
 
 #: includes/forms/class-admin.php:98
 msgid "Text to prefill this field with."
-msgstr "Alanda herhangi bir değer olmadığında gösterilecek metin."
+msgstr ""
 
 #: includes/forms/class-admin.php:99
 msgid "ZIP"
@@ -376,7 +375,7 @@ msgstr "Bir URL'den yada gönderilmiş formdan veri."
 
 #: includes/forms/class-form-tags.php:71
 msgid "Data from a cookie."
-msgstr "Çerez verisi."
+msgstr ""
 
 #: includes/forms/class-form-tags.php77,
 #: includes/integrations/class-integration-tags.php:45
@@ -413,15 +412,15 @@ msgstr "Ziyaretçinin IP adresi. Örneğin: %s."
 
 #: includes/forms/class-form-tags.php:117
 msgid "The property of the currently logged-in user."
-msgstr "Oturumu açık olan kullanıcı özelliği."
+msgstr ""
 
 #: includes/forms/class-form-tags.php:123
 msgid "Property of the current page or post."
-msgstr "Geçerli sayfanın veya yayının özelliği."
+msgstr ""
 
 #: includes/forms/class-form.php:133
 msgid "There is no form with ID %d, perhaps it was deleted?"
-msgstr "%dID'li form yok, silinmiş olabilir mi?"
+msgstr ""
 
 #: includes/forms/class-widget.php:26
 msgid "Newsletter"
@@ -494,7 +493,7 @@ msgstr "Çeşitli Ayarlar"
 
 #: includes/views/other-settings.php:17
 msgid "Usage Tracking"
-msgstr "Kullanım Raporu"
+msgstr ""
 
 #: includes/views/other-settings.php:29
 msgid ""
@@ -504,7 +503,7 @@ msgstr "Bu eklentinin ihtiyaçlarınıza daha iyi yardımcı olması için nası
 
 #: includes/views/other-settings.php:31
 msgid "This is what we track."
-msgstr "Takip ettiklerimiz."
+msgstr ""
 
 #: includes/views/other-settings.php:37
 msgid "Logging"
@@ -813,7 +812,7 @@ msgstr "MailChimp hesabınızda hiç liste bulunmamakta."
 
 #: includes/views/parts/lists-overview.php:19
 msgid "A total of %d lists were found in your MailChimp account."
-msgstr "MailChimp hesabınızda toplam %d adet liste bulundu."
+msgstr ""
 
 #: includes/views/parts/lists-overview.php:24
 msgid "List Name"

@@ -31,9 +31,7 @@ abstract class AC_Plugin_Update {
 	 *
 	 * @return bool
 	 */
-	public function needs_update() {
-		return $this->is_less_or_equal_stored_version();
-	}
+	public abstract function needs_update();
 
 	/**
 	 * @return bool

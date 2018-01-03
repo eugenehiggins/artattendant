@@ -37,20 +37,14 @@ if ( ! class_exists('XmlExportWooCommerce') )
 		public function __construct()
 		{
 			$this->_woo_data = array(
-				 '_stock_status', '_downloadable', '_virtual', '_regular_price', '_sale_price', '_purchase_note', '_featured', '_weight', '_length',
+				'_visibility', '_stock_status', '_downloadable', '_virtual', '_regular_price', '_sale_price', '_purchase_note', '_featured', '_weight', '_length',
 				'_width', '_height', '_sku', '_sale_price_dates_from', '_sale_price_dates_to', '_price', '_sold_individually', '_manage_stock', '_stock', '_upsell_ids', '_crosssell_ids',
 				'_downloadable_files', '_download_limit', '_download_expiry', '_download_type', '_product_url', '_button_text', '_backorders', '_tax_status', '_tax_class', '_product_image_gallery', '_default_attributes',
 				'total_sales', '_product_attributes', '_product_version', '_variation_description', '_wc_rating_count', '_wc_review_count', '_wc_average_rating'
 			);
 
 			$this->wooCommerceVersion = new \Wpae\App\Service\WooCommerceVersion();
-			$this->_product_data = array('_sku', '_price', '_regular_price','_sale_price', '_stock_status', '_stock', '_product_url', 'total_sales', 'attributes');
-
-			// Old way of managing visibility
-            if(!\Wpae\App\Service\WooCommerceVersion::isWooCommerceNewerThan('3.0')) {
-                $this->_woo_data[] = '_visibility';
-                $this->_product_data[] = '_visibility';
-            }
+			$this->_product_data = array('_sku', '_price', '_regular_price','_sale_price', '_stock_status', '_stock', '_visibility', '_product_url', 'total_sales', 'attributes');
 
 			if ( ! class_exists('WooCommerce') 
 				or ( XmlExportEngine::$exportOptions['export_type'] == 'specific' and ! in_array('product', XmlExportEngine::$post_types) ) 
@@ -215,10 +209,6 @@ if ( ! class_exists('XmlExportWooCommerce') )
 					{
 						$uc_title = ucwords(trim(str_replace("_", " ", $title)));
 
-						if($title == __('Excerpt')) {
-							return __('Short Description');
-						}
-
 						return stripos($uc_title, "width") === false ? str_ireplace(array(' id ', ' url ', ' sku ', ' wc '), array('ID', 'URL', 'SKU', 'WC'), $uc_title) : $uc_title;
 					}
 
@@ -343,15 +333,6 @@ if ( ! class_exists('XmlExportWooCommerce') )
 						}						
 					}
 				}
-
-				if(\Wpae\App\Service\WooCommerceVersion::isWooCommerceNewerThan('3.0')) {
-				    $available_data['existing_taxonomies'][] = array(
-                        'name'  => 'Product Visibility',
-                        'label' => 'product_visibility',
-                        'type'  => 'cats',
-                        'auto'  => true
-                    );
-                }
 
 				return $available_data;
 			}		
@@ -802,11 +783,9 @@ if ( ! class_exists('XmlExportWooCommerce') )
 		{			
 			$data_to_export = $this->prepare_export_data( $record, $options, $element_key );
 
-			foreach ($data_to_export as $key => $data)
+			foreach ($data_to_export as $key => $data) 
 			{
-				if($key == 'Price' || $key == 'Regular Price' || $key == 'Sale Price'){
-					$data = pmxe_prepare_price($data, false, true, true);
-				}
+				// $article[$key] = $data;	
 				wp_all_export_write_article( $article, $key, $data );
 			}
 		}
@@ -901,11 +880,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
 				{
 					$element_name_parts = explode(":", $element_name);
 					$element_name_ns = (empty($element_name_parts[0])) ? '' : $element_name_parts[0];
-					$element_name = (empty($element_name_parts[1])) ? 'untitled_' . $elId : $element_name_parts[1];
-				}
-
-				if($key == 'Price' || $key == 'Regular Price' || $key == 'Sale Price'){
-					$data = pmxe_prepare_price($data, false, true, true);
+					$element_name = (empty($element_name_parts[1])) ? 'untitled_' . $ID : $element_name_parts[1];							
 				}
 				
 				$xmlWriter = apply_filters('wp_all_export_add_before_element', $xmlWriter, $element_name, XmlExportEngine::$exportID, $record->ID);
@@ -1113,7 +1088,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
 
                                 foreach ($attributeOptions as $templateKey => $xpathKey){
 
-                                    if ( isset($templateOptions[$templateKey]) && ! in_array('{'. $xpathKey . $attribute_name .'[1]}', $templateOptions[$templateKey]) ){
+                                    if ( ! in_array('{'. $xpathKey . $attribute_name .'[1]}', $templateOptions[$templateKey]) ){
                                         $templateOptions[$templateKey][]  = '{'. $xpathKey . $attribute_name .'[1]}';
                                     }
                                     else{
@@ -1122,7 +1097,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
                                         do {
                                             $new_element_name = '{'. $xpathKey . $attribute_name .'_'. $i .'[1]}';
 
-                                            if ( (isset($templateOptions[$templateKey]) && is_array($templateOptions[$templateKey]) && !in_array($new_element_name, $templateOptions[$templateKey])) || !isset($templateOptions[$templateKey]) ) {
+                                            if ( ! in_array($new_element_name, $templateOptions[$templateKey]) ) {
                                                 $templateOptions[$templateKey][] = $new_element_name;
                                                 $is_added = true;
                                             }

@@ -47,9 +47,6 @@ function pmxe_wp_ajax_save_functions(){
 				file_put_contents($functions, $post);
 			}					
 		}
-        elseif(empty($body)){
-            file_put_contents($functions, $post);
-        }
 	}	
 
 	exit(json_encode(array('result' => true, 'msg' => __('File has been successfully updated.', 'wp_all_export_plugin')))); die;

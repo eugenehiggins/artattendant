@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Exportability model for outputting the column's output value
  *
- * @since 4.1
+ * @since NEWVERSION
  */
 class ACP_Export_Model_Disabled extends ACP_Export_Model {
 

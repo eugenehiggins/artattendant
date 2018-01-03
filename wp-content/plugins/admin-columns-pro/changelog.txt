@@ -1,25 +1,5 @@
 == Changelog ==
 
-= 4.1.1 =
-Release Date: December 12th, 2017
-
-* [Added] Sorting support for Yoast SEO and Readability column
-* [Added] Export support for Yoast columns
-* [Fixed] Word Limit setting now accepts 0 and empty strings
-* [Fixed] Removed double tooltips for Yoast columns wen sorting is active
-* [Improvement] Small database updates run in the background
-* [Improvement] Improved Export for media columns
-* [Improvement] Empty char can be set per Export Model
-* [Improvement] Layout Switcher styling update
-* [Improvement] Date/Time editing support for date/time columns
-* [Improvement] Editing and Filtering support for Media Date column
-* [Updated] Admin Column Core changes
-    * [Added] New setting for content fields: String limit (Limit on words or characters)
-    * [Improved] Merged the roles column into the author column
-    * [Improved] Added Before/After fields for the following columns: Content, Excerpt, User Description
-    * [Improved] Removed deprecated Welcome page
-    * [Improved] Removed deprecated Upgrade page
-
 = 4.1 =
 Release Date: November 22nd, 2017
 

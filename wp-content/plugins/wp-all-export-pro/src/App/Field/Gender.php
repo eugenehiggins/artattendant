@@ -25,11 +25,7 @@ class Gender extends Field
             
         } else if ($detailedInformationData['gender'] == self::SELECT_FROM_WOOCOMMERCE_PRODUCT_ATTRIBUTES) {
 
-            if(isset($detailedInformationData['genderAttribute'])) {
-                $genderAttribute = $detailedInformationData['genderAttribute'];
-            } else {
-                $genderAttribute = '';
-            }
+            $genderAttribute = $detailedInformationData['genderAttribute'];
             return $this->replaceSnippetsInValue($genderAttribute, $snippetData);
 
         }
