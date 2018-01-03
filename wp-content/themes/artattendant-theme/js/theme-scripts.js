@@ -1,4 +1,4 @@
- // HS.beacon.destroy();
+ //HS.beacon.destroy();
 
   HS.beacon.config({
     color: '#d2232a',
