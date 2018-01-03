@@ -113,7 +113,7 @@ function eddc_get_email_template_tags() {
  * @param       int $rate The commission rate of the user
  * @return      string $message The email body
  */
-function eddc_parse_template_tags( $message, $download_id, $commission_id, $commission_amount, $rate,  $payment_id ) { //anagram / geet - added $payment_id
+function eddc_parse_template_tags( $message, $download_id, $commission_id, $commission_amount, $rate ) {
 	$commission = new EDD_Commission( $commission_id );
 	$download   = new EDD_Download( $commission->download_id );
 
@@ -162,9 +162,6 @@ function eddc_parse_template_tags( $message, $download_id, $commission_id, $comm
 		}
 	}
 
-	 // anagram / geet -  overwrite download to show image
-	$download  = edd_email_tag_download_list( $payment_id );
-
 	$message = str_replace( '{download}', $item_purchased, $message );
 	$message = str_replace( '{amount}', $amount, $message );
 	$message = str_replace( '{date}', $date, $message );
@@ -174,11 +171,6 @@ function eddc_parse_template_tags( $message, $download_id, $commission_id, $comm
 	$message = str_replace( '{commission_id}', $commission->id, $message );
 	$message = str_replace( '{item_price}', $item_price, $message );
 	$message = str_replace( '{item_tax}', $item_tax, $message );
-
-	//anagram added some template tags
-	$payment_id = get_post_meta( $commission_id, '_edd_commission_payment_id', true );
-	$address = edd_email_tag_billing_address( $payment_id );
-	$message = str_replace( '{billing_address}', $address  , $message );
 
 	return $message;
 }
@@ -192,12 +184,12 @@ function eddc_parse_template_tags( $message, $download_id, $commission_id, $comm
  * @since       1.1.0
  * @return      void
  */
-function eddc_email_alert( $user_id, $commission_amount, $rate, $download_id, $commission_id , $payment_id  ) { //anagram / geet - added $payment_id
+function eddc_email_alert( $user_id, $commission_amount, $rate, $download_id, $commission_id ) {
 	if ( edd_get_option( 'edd_commissions_disable_sale_alerts', false ) ) {
 		return;
 	}
 
-	if ( get_user_meta( $user->ID, 'eddc_disable_user_sale_alerts', true ) ) {
+	if ( get_user_meta( $user_id, 'eddc_disable_user_sale_alerts', true ) ) {
 		return;
 	}
 
@@ -208,7 +200,7 @@ function eddc_email_alert( $user_id, $commission_amount, $rate, $download_id, $c
 	$message = edd_get_option( 'edd_commissions_email_message', eddc_get_email_default_body() );
 
 	// Parse template tags
-	$message = eddc_parse_template_tags( $message, $download_id, $commission_id, $commission_amount, $rate, $payment_id ); //anagram / geet - added $payment_id
+	$message = eddc_parse_template_tags( $message, $download_id, $commission_id, $commission_amount, $rate );
 	$message = apply_filters( 'eddc_sale_alert_email', $message, $user_id, $commission_amount, $rate, $download_id, $commission_id );
 
 	if ( class_exists( 'EDD_Emails' ) ) {
@@ -225,4 +217,4 @@ function eddc_email_alert( $user_id, $commission_amount, $rate, $download_id, $c
 		wp_mail( $email, $subject, $message, $headers );
 	}
 }
-add_action( 'eddc_insert_commission', 'eddc_email_alert', 10, 6 );  //anagram change to 6 vars adding $payment_id
+add_action( 'eddc_insert_commission', 'eddc_email_alert', 10, 5 );

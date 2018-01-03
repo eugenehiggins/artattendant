@@ -165,6 +165,8 @@ function eddc_process_commission_update() {
 			break;
 	}
 
+	do_action( 'eddc_process_commission_update', $action, $id );
+
 	wp_redirect( add_query_arg( array( 'action' => false, '_wpnonce' => false, 'edd-message' => $action ) ) );
 	exit;
 }

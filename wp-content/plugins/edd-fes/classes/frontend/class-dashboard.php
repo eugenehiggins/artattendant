@@ -385,12 +385,6 @@ class FES_Dashboard {
 			"name" => __( 'Profile', 'edd_fes' ),
 		);
 
-		$menu_items['logout'] = array(
-			"icon" => "off",
-			"task" => 'logout',
-			"name" => __( 'Logout', 'edd_fes' ),
-		);
-
 		/**
 		 * Dashboard Menu Items.
 		 *
@@ -403,6 +397,13 @@ class FES_Dashboard {
 		 * @param array $menu_items Menu items for the vendor dashboard.
 		 */
 		$menu_items = apply_filters( "fes_vendor_dashboard_menu", $menu_items );
+
+		// Log Out link is added after the filter is applied to ensure it is always at the end.
+		$menu_items['logout'] = array(
+			"icon" => "off",
+			"task" => 'logout',
+			"name" => __( 'Logout', 'edd_fes' ),
+		);
 
 		// This backcompat will be removed in 2.4 as it causes problems for some
 		// users.

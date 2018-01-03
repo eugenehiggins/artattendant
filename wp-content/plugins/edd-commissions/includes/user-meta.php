@@ -20,6 +20,7 @@ function eddc_user_paypal_email( $user ) {
 	<h3><?php _e('Easy Digital Downloads Commissions', 'eddc'); ?></h3>
 	<table class="form-table">
 		<?php if ( current_user_can( 'manage_shop_settings' ) ) : ?>
+		<?php do_action( 'eddc_user_profile_table_start', $user ); ?>
 		<tr>
 			<th><label><?php _e('User\'s PayPal Email', 'eddc'); ?></label></th>
 			<td>
@@ -51,6 +52,7 @@ function eddc_user_paypal_email( $user ) {
 				<span class="description"><?php _e( 'Check this box if you wish to prevent sale notifications from being sent to this user.', 'easy-digital-downloads' ); ?></span>
 			</td>
 		</tr>
+		<?php do_action( 'eddc_user_profile_table_end', $user ); ?>
 	</table>
 	<?php
 }

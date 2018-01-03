@@ -7,17 +7,17 @@
  * behind the scene upgrades between
  * FES versions.
  *
- * @package FES
+ * @package    FES
  * @subpackage Install/Upgrade
- * @since 2.0.0
+ * @since      2.0.0
  *
- * @todo  Perhaps move the version upgrade functions
- *        into their own file. This file is getting 
+ * @todo       Perhaps move the version upgrade functions
+ *        into their own file. This file is getting
  *        huge.
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) { 
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -25,10 +25,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * FES Install.
  *
  * This class handles a new FES install
- * as well as automatic (non-user initiated) 
+ * as well as automatic (non-user initiated)
  * upgrade routines.
  *
- * @since 2.3.0
+ * @since  2.3.0
  * @access public
  */
 class FES_Install {
@@ -36,31 +36,31 @@ class FES_Install {
 	/**
 	 * FES Settings.
 	 *
-	 * @since 2.0.0
+	 * @since  2.0.0
 	 * @access public
 	 * @var array $new_settings When the init() function starts, initially
-	 *      					contains the original settings. At the end 
-	 *      				 	of init() contains the settings to save.
-	 */	
+	 *                        contains the original settings. At the end
+	 *                        of init() contains the settings to save.
+	 */
 	public $new_settings = array();
 
 	/**
 	 * Install/Upgrade routine.
 	 *
-	 * This function is what is called to actually 
+	 * This function is what is called to actually
 	 * install FES data on new installs and to do
 	 * behind the scenes upgrades on FES upgrades.
-	 * If this function contains a bug, the results 
-	 * can be catastrophic. This function gets the 
+	 * If this function contains a bug, the results
+	 * can be catastrophic. This function gets the
 	 * highest priority in all of FES for unit tests.
 	 *
-	 * @since 2.0.0
+	 * @since  2.0.0
 	 * @access public
 	 *
-	 * @todo  I'd like to add preflight checks here.
-	 * @todo  I'd like to add a recovery system here.
-	 * @todo  Drop pre-FES 2.0 support.
-	 * 
+	 * @todo   I'd like to add preflight checks here.
+	 * @todo   I'd like to add a recovery system here.
+	 * @todo   Drop pre-FES 2.0 support.
+	 *
 	 * @return void
 	 */
 	public function init() {
@@ -68,7 +68,7 @@ class FES_Install {
 		$version = get_option( 'fes_current_version', '2.0' );
 
 		// If we don't need to upgrade, abort.
-		if ( version_compare( $version, '2.4.3', '>=' )  ) {
+		if ( version_compare( $version, '2.4.3', '>=' ) ) {
 			return;
 		}
 
@@ -78,8 +78,8 @@ class FES_Install {
 		/**
 		 * If you're having deja vu, you're not seeing things.
 		 * This call was done 10 lines up. The first time we have
-		 * to default the get_option call to 2.0, so in case of 
-		 * a pre-2.0 install or a new install we can use 
+		 * to default the get_option call to 2.0, so in case of
+		 * a pre-2.0 install or a new install we can use
 		 * version_compare accurately. Now that we're passed the
 		 * version check we now need to be able to differentiate
 		 * pre-2.0 installs from new installs. Cancel your eye
@@ -119,7 +119,7 @@ class FES_Install {
 			// In case we're upgrading from pre-2.4, let's save
 			// the settings in the EDD settings array.
 			if ( version_compare( $version, '2.4', '<' ) ) {
-				$edd_options 		= get_option( 'edd_settings' );
+				$edd_options        = get_option( 'edd_settings' );
 				$this->new_settings = array_merge( $edd_options, $this->new_settings );
 			}
 
@@ -129,25 +129,25 @@ class FES_Install {
 				fes_save_initial_login_form( $this->new_settings['fes-login-form'], true );
 			}
 
-			/** 
+			/**
 			 * The Great FES Eraser
 			 *
 			 * When you were a child you probably
 			 * did all of your exams in pencil so you
-			 * could correct mistakes later using an 
+			 * could correct mistakes later using an
 			 * eraser. This is sort of like a giant
 			 * virtual eraser. We use schema correction
 			 * to correct past mistakes (or "features")
 			 * involving the saved schema (aka characteristics)
-			 * of fields and forms. 
+			 * of fields and forms.
 			 *
 			 * Example:
 			 * If a built in field saved without a `name` attribute
-			 * we'd use schema correction to automatically fix this 
+			 * we'd use schema correction to automatically fix this
 			 * mistake.
 			 */
 			$this->schema_corrector();
-		}	
+		}
 
 		// This is the version of the FES settings themselves
 		update_option( 'fes_settings_version', '2.4.3' );
@@ -164,7 +164,7 @@ class FES_Install {
 		// There's no code for this function below this. Just an explanation
 		// of the FES core options.
 
-		/** 
+		/**
 		 * Explanation of FES core options
 		 *
 		 * By now your head is probably spinning trying to figure
@@ -172,60 +172,60 @@ class FES_Install {
 		 *
 		 * Here's a basic rundown:
 		 *
-		 * fes_settings_version: Used to store the version 
-		 * 						 of the FES settings. We use this
-		 * 						 so we can do upgrade routines where
-		 * 						 we'd have to do different actions based
-		 * 						 on the version the settings were installed
-		 * 						 in. For example: if we made a mistake with 
-		 * 						 the value we saved as the default for 
-		 * 						 a select setting, we can detect the version
-		 * 						 containing this mistake and correct it.
+		 * fes_settings_version: Used to store the version
+		 *                         of the FES settings. We use this
+		 *                         so we can do upgrade routines where
+		 *                         we'd have to do different actions based
+		 *                         on the version the settings were installed
+		 *                         in. For example: if we made a mistake with
+		 *                         the value we saved as the default for
+		 *                         a select setting, we can detect the version
+		 *                         containing this mistake and correct it.
 		 *
 		 * fes_current_version: This starts with the actual version FES was
-		 * 						installed on. We use this version to 
-		 * 						determine whether or not a site needs
-		 * 						to run one of the behind the scenes
-		 * 						FES upgrade routines. This version is updated
-		 * 						every time a minor or major background upgrade
-		 * 						routine is run. Generally lags behind the 
-		 * 						FES_VERSION constant by at most a couple minor
-		 * 						versions. Never lags behind by 1 major version
-		 * 						or more.
+		 *                        installed on. We use this version to
+		 *                        determine whether or not a site needs
+		 *                        to run one of the behind the scenes
+		 *                        FES upgrade routines. This version is updated
+		 *                        every time a minor or major background upgrade
+		 *                        routine is run. Generally lags behind the
+		 *                        FES_VERSION constant by at most a couple minor
+		 *                        versions. Never lags behind by 1 major version
+		 *                        or more.
 		 *
-		 * fes_db_version: 		This is different from fes_current_version.
-		 * 						Unlike the former, this is used to determine
-		 * 						if a site needs to run a *user* initiated
-		 * 						upgrade routine (see FES_Upgrade class). This
-		 * 						value is only update when a user initiated
-		 * 						upgrade routine is done. Because we do very
-		 * 						few user initiated upgrades compared to 
-		 * 						automatic ones, this version can lag behind by
-		 * 						2 or even 3 major versions. Generally contains
-		 * 						the current major version.
+		 * fes_db_version:        This is different from fes_current_version.
+		 *                        Unlike the former, this is used to determine
+		 *                        if a site needs to run a *user* initiated
+		 *                        upgrade routine (see FES_Upgrade class). This
+		 *                        value is only update when a user initiated
+		 *                        upgrade routine is done. Because we do very
+		 *                        few user initiated upgrades compared to
+		 *                        automatic ones, this version can lag behind by
+		 *                        2 or even 3 major versions. Generally contains
+		 *                        the current major version.
 		 *
-		 * edd_settings:		This isn't actually our option. This is the 
-		 * 						EDD core settings option. However since FES
-		 * 						2.4 we save settings into it.
+		 * edd_settings:        This isn't actually our option. This is the
+		 *                        EDD core settings option. However since FES
+		 *                        2.4 we save settings into it.
 		 *
-		 * fes_settings:		Deprecated, unused and no longer used since
-		 * 						FES 2.4, this used to contain the FES settings
-		 * 						when we used Redux. We automatically migrated 
-		 * 						these to edd_settings, and the helper functions
-		 * 						automatically pull the setting values from
-		 * 						edd_settings once the settings have been 
-		 * 						migrated. This option will be deleted as part
-		 * 						of the FES 2.5 upgrade routine.
+		 * fes_settings:        Deprecated, unused and no longer used since
+		 *                        FES 2.4, this used to contain the FES settings
+		 *                        when we used Redux. We automatically migrated
+		 *                        these to edd_settings, and the helper functions
+		 *                        automatically pull the setting values from
+		 *                        edd_settings once the settings have been
+		 *                        migrated. This option will be deleted as part
+		 *                        of the FES 2.5 upgrade routine.
 		 *
-		 * edd_fes_options:		A long time ago in a galaxy far, far away....
-		 * 						this used to contain FES settings when we used
-		 * 						the Jigoshop settings panel in FES versions before
-		 * 						2.1. This is long deprecated. The settings were
-		 * 						transferred to fes_settings as part of the FES 2.2
-		 * 						upgrade routine. The option itself is deleted as 
-		 * 						part of the FES 2.3 routine because of the issues
-		 * 						it caused due to it's size.
-		 */			
+		 * edd_fes_options:        A long time ago in a galaxy far, far away....
+		 *                        this used to contain FES settings when we used
+		 *                        the Jigoshop settings panel in FES versions before
+		 *                        2.1. This is long deprecated. The settings were
+		 *                        transferred to fes_settings as part of the FES 2.2
+		 *                        upgrade routine. The option itself is deleted as
+		 *                        part of the FES 2.3 routine because of the issues
+		 *                        it caused due to it's size.
+		 */
 	}
 
 
@@ -233,22 +233,22 @@ class FES_Install {
 	 * New FES Install routine.
 	 *
 	 * This function installs all of the default
-	 * things on new FES installs. Flight 4953 with 
-	 * non-stop service to a whole world of 
+	 * things on new FES installs. Flight 4953 with
+	 * non-stop service to a whole world of
 	 * possibilities is now boarding.
 	 *
-	 * @since 2.0.0
+	 * @since  2.0.0
 	 * @access public
 	 *
-	 * @uses FES_Install::create_vendor_dashboard_page() Creates the vendor dashboard page.
-	 * @uses FES_Install::create_vendor_page() Creates the vendor page.
-	 * @uses FES_Install::create_submission_form() Creates the default submission form.
-	 * @uses FES_Install::create_profile_form() Creates the default profile form.
-	 * @uses FES_Install::create_registration_form() Creates the default registration form.
-	 * @uses FES_Install::create_login_form() Creates the default login form.
-	 * @uses FES_Install::create_vendor_contact_form() Creates the default vendor contact form.
-	 * @uses FES_DB_Vendors::create_table() Creates the FES vendor table.
-	 * 
+	 * @uses   FES_Install::create_vendor_dashboard_page() Creates the vendor dashboard page.
+	 * @uses   FES_Install::create_vendor_page() Creates the vendor page.
+	 * @uses   FES_Install::create_submission_form() Creates the default submission form.
+	 * @uses   FES_Install::create_profile_form() Creates the default profile form.
+	 * @uses   FES_Install::create_registration_form() Creates the default registration form.
+	 * @uses   FES_Install::create_login_form() Creates the default login form.
+	 * @uses   FES_Install::create_vendor_contact_form() Creates the default vendor contact form.
+	 * @uses   FES_DB_Vendors::create_table() Creates the FES vendor table.
+	 *
 	 * @return void
 	 */
 	public function fes_new_install() {
@@ -291,8 +291,10 @@ class FES_Install {
 		);
 		foreach ( $default_settings_to_true as $setting ) {
 			edd_update_option( $setting, '1' );
-			$this->new_settings[$setting] = '1';
+			$this->new_settings[ $setting ] = '1';
 		}
+
+		flush_rewrite_rules();
 	}
 
 	/**
@@ -301,11 +303,11 @@ class FES_Install {
 	 * This function used to do the
 	 * upgrade routine from FES 2.0->2.1.
 	 *
-	 * @since 2.1.0
-	 * @access public
+	 * @since      2.1.0
+	 * @access     public
 	 *
 	 * @deprecated 2.2.0 No longer needed.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function fes_v21_upgrades() {
@@ -318,9 +320,9 @@ class FES_Install {
 	 * This function does the
 	 * upgrade routine from FES 2.1->2.2.
 	 *
-	 * @since 2.2.0
+	 * @since  2.2.0
 	 * @access public
-	 * 
+	 *
 	 * @return void
 	 */
 	public function fes_v22_upgrades() {
@@ -460,8 +462,8 @@ class FES_Install {
 					}
 					// skip these fields as they are already in the new form
 					$to_skip = array( 'last_name', 'first_name', 'user_email', 'username', 'password', 'display_name' );
-					if ( isset( $field['template'] ) && !in_array( $field['template'] , $to_skip ) ) {
-						$new_fields[$key] = $field;
+					if ( isset( $field['template'] ) && ! in_array( $field['template'], $to_skip ) ) {
+						$new_fields[ $key ] = $field;
 						$counter++;
 					}
 				}
@@ -472,7 +474,7 @@ class FES_Install {
 		// if submission form
 		if ( isset( $this->new_settings['fes-submission-form'] ) && $this->new_settings['fes-submission-form'] != '' ) {
 			$old_fields = get_post_meta( $this->new_settings['fes-submission-form'], 'fes-form', true );
-			if ( !is_array( $old_fields ) ) {
+			if ( ! is_array( $old_fields ) ) {
 				return;
 			} else {
 				// replace image uploaders with file ones
@@ -508,11 +510,11 @@ class FES_Install {
 				}
 
 				end( $old_fields );
-				$last = key( $old_fields );
+				$last      = key( $old_fields );
 				$nextindex = $last + 1;
 			}
 
-			$old_fields[$nextindex] = array(
+			$old_fields[ $nextindex ] = array(
 				'template'    => 'text',
 				'required'    => 'yes',
 				'label'       => 'Name of Store',
@@ -522,10 +524,10 @@ class FES_Install {
 				'css'         => '',
 				'placeholder' => '',
 				'default'     => '',
-				'size'        => '40'
+				'size'        => '40',
 			);
 			$nextindex++;
-			$old_fields[$nextindex] = array(
+			$old_fields[ $nextindex ] = array(
 				'template'    => 'email',
 				'required'    => 'yes',
 				'label'       => 'Email to use for Contact Form',
@@ -535,7 +537,7 @@ class FES_Install {
 				'css'         => '',
 				'placeholder' => '',
 				'default'     => '',
-				'size'        => '40'
+				'size'        => '40',
 			);
 			update_post_meta( $this->new_settings['fes-profile-form'], 'fes-form', $old_fields );
 		}
@@ -544,22 +546,22 @@ class FES_Install {
 		// foreach fes_form if has editor in the name, remove it ( only affects FES Forms from pre 2.2 )
 		// Submission form
 		if ( isset( $this->new_settings['fes-submission-form'] ) && $this->new_settings['fes-submission-form'] != '' ) {
-			$id = $this->new_settings['fes-submission-form'];
+			$id     = $this->new_settings['fes-submission-form'];
 			$update = array(
-				'ID'           => $id,
-				'post_title'   => __( 'Submission Form', 'edd_fes' ),
-				'post_name'    =>'fes-submission-form'
+				'ID'         => $id,
+				'post_title' => __( 'Submission Form', 'edd_fes' ),
+				'post_name'  => 'fes-submission-form',
 			);
 			wp_update_post( $update );
 		}
 
 		// Profile form
 		if ( isset( $this->new_settings['fes-profile-form'] ) && $this->new_settings['fes-profile-form'] != '' ) {
-			$id = $this->new_settings['fes-profile-form'];
+			$id     = $this->new_settings['fes-profile-form'];
 			$update = array(
-				'ID'           => $id,
-				'post_title'   => __( 'Profile Form', 'edd_fes' ),
-				'post_name'    =>'fes-profile-form'
+				'ID'         => $id,
+				'post_title' => __( 'Profile Form', 'edd_fes' ),
+				'post_name'  => 'fes-profile-form',
 			);
 			wp_update_post( $update );
 		}
@@ -572,9 +574,9 @@ class FES_Install {
 	 * This function does the
 	 * upgrade routine from FES 2.2->2.3.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
-	 * 
+	 *
 	 * @return void
 	 */
 	public function fes_v23_upgrades() {
@@ -622,13 +624,13 @@ class FES_Install {
 		$forms = get_posts( array( 'post_type' => 'fes-forms', 'fields' => 'ids', 'posts_per_page' => -1, '' ) );
 		if ( $forms ) {
 			foreach ( $forms as $form ) {
-				if ( isset( $this->new_settings['fes-submission-form'] )          && $this->new_settings['fes-submission-form'] == $form  && $this->new_settings['fes-submission-form'] ) {
+				if ( isset( $this->new_settings['fes-submission-form'] ) && $this->new_settings['fes-submission-form'] == $form && $this->new_settings['fes-submission-form'] ) {
 					continue;
-				} else if ( isset( $this->new_settings['fes-profile-form'] )        && $this->new_settings['fes-profile-form'] == $form       && $this->new_settings['fes-profile-form'] ) {
+				} else if ( isset( $this->new_settings['fes-profile-form'] ) && $this->new_settings['fes-profile-form'] == $form && $this->new_settings['fes-profile-form'] ) {
 					continue;
-				} else if ( isset( $this->new_settings['fes-registration-form'] )   && $this->new_settings['fes-registration-form'] == $form   && $this->new_settings['fes-registration-form'] ) {
+				} else if ( isset( $this->new_settings['fes-registration-form'] ) && $this->new_settings['fes-registration-form'] == $form && $this->new_settings['fes-registration-form'] ) {
 					continue;
-				} else if ( isset( $this->new_settings['fes-login-form'] )     && $this->new_settings['fes-login-form'] == $form    && $this->new_settings['fes-login-form'] ) {
+				} else if ( isset( $this->new_settings['fes-login-form'] ) && $this->new_settings['fes-login-form'] == $form && $this->new_settings['fes-login-form'] ) {
 					continue;
 				} else if ( isset( $this->new_settings['fes-vendor-contact-form'] ) && $this->new_settings['fes-vendor-contact-form'] == $form && $this->new_settings['fes-vendor-contact-form'] ) {
 					continue;
@@ -655,12 +657,12 @@ class FES_Install {
 
 		// delete all old applications
 		$posts = get_posts( array(
-				'nopaging'    => true,
-				'orderby'     => 'title',
-				'post_type'   => 'fes-applications',
-				'post_status' => 'any',
-				'order'       => 'ASC'
-			) );
+			'nopaging'    => true,
+			'orderby'     => 'title',
+			'post_type'   => 'fes-applications',
+			'post_status' => 'any',
+			'order'       => 'ASC',
+		) );
 		if ( $posts ) {
 			foreach ( $posts as $post ) {
 				wp_delete_post( $post->ID, true );
@@ -674,9 +676,9 @@ class FES_Install {
 	 * This function does the
 	 * upgrade routine from FES 2.3->2.4.
 	 *
-	 * @since 2.4.0
+	 * @since  2.4.0
 	 * @access public
-	 * 
+	 *
 	 * @return void
 	 */
 	public function fes_v24_upgrades() {
@@ -687,13 +689,13 @@ class FES_Install {
 		// Remove user login field from the profile form
 		if ( isset( $this->new_settings['fes-profile-form'] ) && $this->new_settings['fes-profile-form'] != '' ) {
 			$old_fields = get_post_meta( $this->new_settings['fes-profile-form'], 'fes-form', true );
-			$count = 0;
+			$count      = 0;
 			if ( is_array( $old_fields ) ) {
 				foreach ( $old_fields as $id => $field ) {
 					if ( isset( $field['template'] ) && $field['template'] === 'user_login' ) {
 						continue;
 					}
-					
+
 					$old_fields[ $count ] = $field; // save new field back
 					$count++;
 				}
@@ -704,21 +706,21 @@ class FES_Install {
 
 	/**
 	 * FES Schema correction.
-	 * 
+	 *
 	 * When you were a child you probably
 	 * did all of your exams in pencil so you
-	 * could correct mistakes later using an 
+	 * could correct mistakes later using an
 	 * eraser. This is sort of like a giant
 	 * virtual eraser. We use schema correction
 	 * to correct past mistakes (or "features")
 	 * involving the saved schema (aka characteristics)
-	 * of fields and forms. If a built in field saved 
+	 * of fields and forms. If a built in field saved
 	 * without a `name` attribute we'd use schema correction
 	 * to automatically fix this mistake.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
-	 * 
+	 *
 	 * @return void
 	 */
 	public function schema_corrector() {
@@ -727,7 +729,7 @@ class FES_Install {
 			$old_fields = get_post_meta( $this->new_settings['fes-submission-form'], 'fes-form', true );
 			if ( is_array( $old_fields ) ) {
 				foreach ( $old_fields as $id => $field ) {
-					$field = fes_upgrade_field( $field ); // upgrade field
+					$field             = fes_upgrade_field( $field ); // upgrade field
 					$old_fields[ $id ] = $field; // save new field back
 				}
 				update_post_meta( $this->new_settings['fes-submission-form'], 'fes-form', $old_fields );
@@ -739,7 +741,7 @@ class FES_Install {
 			$old_fields = get_post_meta( $this->new_settings['fes-profile-form'], 'fes-form', true );
 			if ( is_array( $old_fields ) ) {
 				foreach ( $old_fields as $id => $field ) {
-					$field = fes_upgrade_field( $field ); // upgrade field
+					$field             = fes_upgrade_field( $field ); // upgrade field
 					$old_fields[ $id ] = $field; // save new field back
 				}
 				update_post_meta( $this->new_settings['fes-profile-form'], 'fes-form', $old_fields );
@@ -751,7 +753,7 @@ class FES_Install {
 			$old_fields = get_post_meta( $this->new_settings['fes-registration-form'], 'fes-form', true );
 			if ( is_array( $old_fields ) ) {
 				foreach ( $old_fields as $id => $field ) {
-					$field = fes_upgrade_field( $field ); // upgrade field
+					$field             = fes_upgrade_field( $field ); // upgrade field
 					$old_fields[ $id ] = $field; // save new field back
 				}
 				update_post_meta( $this->new_settings['fes-registration-form'], 'fes-form', $old_fields );
@@ -763,7 +765,7 @@ class FES_Install {
 			$old_fields = get_post_meta( $this->new_settings['fes-login-form'], 'fes-form', true );
 			if ( is_array( $old_fields ) ) {
 				foreach ( $old_fields as $id => $field ) {
-					$field = fes_upgrade_field( $field ); // upgrade field
+					$field             = fes_upgrade_field( $field ); // upgrade field
 					$old_fields[ $id ] = $field; // save new field back
 				}
 				update_post_meta( $this->new_settings['fes-login-form'], 'fes-form', $old_fields );
@@ -775,7 +777,7 @@ class FES_Install {
 			$old_fields = get_post_meta( $this->new_settings['fes-vendor-contact-form'], 'fes-form', true );
 			if ( is_array( $old_fields ) ) {
 				foreach ( $old_fields as $id => $field ) {
-					$field = fes_upgrade_field( $field ); // upgrade field
+					$field             = fes_upgrade_field( $field ); // upgrade field
 					$old_fields[ $id ] = $field; // save new field back
 				}
 				update_post_meta( $this->new_settings['fes-vendor-contact-form'], 'fes-form', $old_fields );
@@ -785,17 +787,17 @@ class FES_Install {
 
 	/**
 	 * Create Vendor Dashboard Page.
-	 * 
+	 *
 	 * Checks to ensure the vendor
 	 * dashboard page doesn't already exist
 	 * and if it doesn't then creates it, and
 	 * inserts the post id into the FES settings.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
 	 *
 	 * @global  $wpdb WordPress database object for page retrieval.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function create_vendor_dashboard_page() {
@@ -812,36 +814,38 @@ class FES_Install {
 		if ( $page_found ) {
 			if ( ! $page_id ) {
 				$this->new_settings['fes-vendor-dashboard-page'] = $page_found;
+
 				return;
 			}
+
 			return;
 		}
-		$page_data = array(
+		$page_data                                       = array(
 			'post_status'    => 'publish',
 			'post_type'      => 'page',
 			'post_author'    => get_current_user_id(),
 			'post_name'      => 'vendor-dashboard',
 			'post_title'     => __( 'Vendor Dashboard', 'edd_fes' ),
 			'post_content'   => '[fes_vendor_dashboard]',
-			'comment_status' => 'closed'
+			'comment_status' => 'closed',
 		);
-		$page_id = wp_insert_post( $page_data );
+		$page_id                                         = wp_insert_post( $page_data );
 		$this->new_settings['fes-vendor-dashboard-page'] = $page_id;
 	}
 
 	/**
 	 * Create Vendor Page.
-	 * 
+	 *
 	 * Checks to ensure the vendor
 	 * page doesn't already exist
 	 * and if it doesn't then creates it, and
 	 * inserts the post id into the FES settings.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
 	 *
 	 * @global  $wpdb WordPress database object for page retrieval.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function create_vendor_page() {
@@ -859,8 +863,10 @@ class FES_Install {
 
 			if ( ! $page_id ) {
 				$this->new_settings['fes-vendor-page'] = $page_found;
+
 				return;
 			}
+
 			return;
 		}
 
@@ -871,35 +877,35 @@ class FES_Install {
 			'post_name'      => 'vendor',
 			'post_title'     => __( 'Vendor', 'edd_fes' ),
 			'post_content'   => '[downloads]',
-			'comment_status' => 'closed'
+			'comment_status' => 'closed',
 		);
 
-		$page_id = wp_insert_post( $page_data );
+		$page_id                               = wp_insert_post( $page_data );
 		$this->new_settings['fes-vendor-page'] = $page_id;
 
 	}
 
 	/**
 	 * Create Submission Form.
-	 * 
+	 *
 	 * Checks to ensure the submission
 	 * form doesn't already exist
 	 * and if it doesn't then creates it, and
 	 * inserts the post id into the FES settings.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
 	 *
 	 * @global  $wpdb WordPress database object for post retrieval.
-	 * 
+	 *
 	 * @return void
 	 */
-	public function create_submission_form( ) {
+	public function create_submission_form() {
 		global $wpdb;
 
 		$slug = "fes-submission-form";
 
-		$page_id = isset( $this->new_settings[$slug] ) ? $this->new_settings[$slug] : 0;
+		$page_id = isset( $this->new_settings[ $slug ] ) ? $this->new_settings[ $slug ] : 0;
 
 		if ( $page_id > 0 && get_post( $page_id ) ) {
 			return;
@@ -910,8 +916,10 @@ class FES_Install {
 		if ( $page_found ) {
 			if ( ! $page_id ) {
 				$this->new_settings['fes-submission-form'] = $page_found;
+
 				return;
 			}
+
 			return;
 		}
 
@@ -919,7 +927,7 @@ class FES_Install {
 			'post_status' => 'publish',
 			'post_type'   => 'fes-forms',
 			'post_author' => get_current_user_id(),
-			'post_title'  => __( 'Submission Form', 'edd_fes' )
+			'post_title'  => __( 'Submission Form', 'edd_fes' ),
 		);
 
 		$page_id = wp_insert_post( $page_data );
@@ -929,24 +937,24 @@ class FES_Install {
 
 	/**
 	 * Create Profile Form.
-	 * 
+	 *
 	 * Checks to ensure the profile
 	 * form doesn't already exist
 	 * and if it doesn't then creates it, and
 	 * inserts the post id into the FES settings.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
 	 *
 	 * @global  $wpdb WordPress database object for post retrieval.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function create_profile_form() {
 		global $wpdb;
 
-		$slug = "fes-profile-form";
-		$page_id = isset( $this->new_settings[$slug] ) ? $this->new_settings[$slug] : 0;
+		$slug    = "fes-profile-form";
+		$page_id = isset( $this->new_settings[ $slug ] ) ? $this->new_settings[ $slug ] : 0;
 
 		if ( $page_id > 0 && get_post( $page_id ) ) {
 			return;
@@ -958,7 +966,7 @@ class FES_Install {
 
 			if ( ! $page_id ) {
 
-				$this->new_settings[$slug] = $page_found;
+				$this->new_settings[ $slug ] = $page_found;
 
 				return;
 			}
@@ -971,7 +979,7 @@ class FES_Install {
 			'post_status' => 'publish',
 			'post_type'   => 'fes-forms',
 			'post_author' => get_current_user_id(),
-			'post_title'  => __( 'Profile Form', 'edd_fes' )
+			'post_title'  => __( 'Profile Form', 'edd_fes' ),
 		);
 
 		$page_id = wp_insert_post( $page_data );
@@ -982,24 +990,24 @@ class FES_Install {
 
 	/**
 	 * Create Registration Form.
-	 * 
+	 *
 	 * Checks to ensure the registration
 	 * form doesn't already exist
 	 * and if it doesn't then creates it, and
 	 * inserts the post id into the FES settings.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
 	 *
 	 * @global  $wpdb WordPress database object for post retrieval.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function create_registration_form() {
 		global $wpdb;
 
-		$slug = "fes-registration-form";
-		$page_id = isset( $this->new_settings[$slug] ) ? $this->new_settings[$slug] : 0;
+		$slug    = "fes-registration-form";
+		$page_id = isset( $this->new_settings[ $slug ] ) ? $this->new_settings[ $slug ] : 0;
 
 		if ( $page_id > 0 && get_post( $page_id ) ) {
 			return;
@@ -1011,7 +1019,7 @@ class FES_Install {
 
 			if ( ! $page_id ) {
 
-				$this->new_settings[$slug] = $page_found;
+				$this->new_settings[ $slug ] = $page_found;
 
 				return;
 			}
@@ -1023,9 +1031,9 @@ class FES_Install {
 			'post_status' => 'publish',
 			'post_type'   => 'fes-forms',
 			'post_author' => get_current_user_id(),
-			'post_title'  => __( 'Registration Form', 'edd_fes' )
+			'post_title'  => __( 'Registration Form', 'edd_fes' ),
 		);
-		$page_id = wp_insert_post( $page_data );
+		$page_id   = wp_insert_post( $page_data );
 
 		fes_save_initial_registration_form( $page_id );
 		$this->new_settings['fes-registration-form'] = $page_id;
@@ -1033,24 +1041,24 @@ class FES_Install {
 
 	/**
 	 * Create Login Form.
-	 * 
+	 *
 	 * Checks to ensure the login
 	 * form doesn't already exist
 	 * and if it doesn't then creates it, and
 	 * inserts the post id into the FES settings.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
 	 *
 	 * @global  $wpdb WordPress database object for post retrieval.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function create_login_form() {
 		global $wpdb;
 
-		$slug = "fes-login-form";
-		$page_id = isset( $this->new_settings[$slug] ) ? $this->new_settings[$slug] : 0;
+		$slug    = "fes-login-form";
+		$page_id = isset( $this->new_settings[ $slug ] ) ? $this->new_settings[ $slug ] : 0;
 
 		if ( $page_id > 0 && get_post( $page_id ) ) {
 			return;
@@ -1063,6 +1071,7 @@ class FES_Install {
 			if ( ! $page_id ) {
 
 				$this->new_settings['fes-login-form'] = $page_found;
+
 				return;
 
 			}
@@ -1074,7 +1083,7 @@ class FES_Install {
 			'post_status' => 'publish',
 			'post_type'   => 'fes-forms',
 			'post_author' => get_current_user_id(),
-			'post_title'  => __( 'Login Form', 'edd_fes' )
+			'post_title'  => __( 'Login Form', 'edd_fes' ),
 		);
 
 		$page_id = wp_insert_post( $page_data );
@@ -1085,25 +1094,25 @@ class FES_Install {
 
 	/**
 	 * Create Vendor Contact Form.
-	 * 
+	 *
 	 * Checks to ensure the vendor contact
 	 * form doesn't already exist
 	 * and if it doesn't then creates it, and
 	 * inserts the post id into the FES settings.
 	 *
-	 * @since 2.3.0
+	 * @since  2.3.0
 	 * @access public
 	 *
 	 * @global  $wpdb WordPress database object for post retrieval.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function create_vendor_contact_form() {
 
 		global $wpdb;
 
-		$slug = "fes-vendor-contact-form";
-		$page_id = isset( $this->new_settings[$slug] ) ? $this->new_settings[$slug] : 0;
+		$slug    = "fes-vendor-contact-form";
+		$page_id = isset( $this->new_settings[ $slug ] ) ? $this->new_settings[ $slug ] : 0;
 
 		if ( $page_id > 0 && get_post( $page_id ) ) {
 			return;
@@ -1116,6 +1125,7 @@ class FES_Install {
 			if ( ! $page_id ) {
 
 				$this->new_settings['fes-vendor-contact-form'] = $page_found;
+
 				return;
 
 			}
@@ -1127,7 +1137,7 @@ class FES_Install {
 			'post_status' => 'publish',
 			'post_type'   => 'fes-forms',
 			'post_author' => get_current_user_id(),
-			'post_title'  => __( 'Vendor Contact Form', 'edd_fes' )
+			'post_title'  => __( 'Vendor Contact Form', 'edd_fes' ),
 		);
 
 		$page_id = wp_insert_post( $page_data );

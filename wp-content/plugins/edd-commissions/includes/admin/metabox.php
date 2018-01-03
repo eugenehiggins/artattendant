@@ -116,6 +116,7 @@ function eddc_render_commissions_meta_box() {
 		<table class="widefat edd_repeatable_table" width="100%" cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
+					<?php do_action( 'eddc_meta_box_table_header_before', $post->ID ); ?>
 					<th class="eddc-commission-rate-user"><?php _e( 'User', 'eddc' ); ?></th>
 					<th class="eddc-commission-rate-rate">
 						<?php _e( 'Rate', 'eddc' ); ?>
@@ -123,10 +124,12 @@ function eddc_render_commissions_meta_box() {
 							<?php _e( 'Enter the flat or percentage rate for commissions for each user. If no rate is entered, the default rate for the user will be used. If no user rate is set, the global default rate will be used. Currency and percent symbols are not required.', 'eddc' ); ?>">
 						</span>
 					</th>
+					<?php do_action( 'eddc_meta_box_table_header_after', $post->ID ); ?>
 					<th class="eddc-commission-rate-remove"></th>
 				</tr>
 			</thead>
 			<tbody>
+			<?php do_action( 'eddc_meta_box_table_body_before', $post->ID ); ?>
 				<?php if ( ! empty( $rates ) ) : ?>
 					<?php foreach ( $rates as $key => $value ) : ?>
 						<tr class="edd_repeatable_upload_wrapper edd_repeatable_row" data-key="' . esc_attr( $key ) . '">
@@ -156,9 +159,11 @@ function eddc_render_commissions_meta_box() {
 						<td>
 							<input type="text" name="edd_commission_settings[rates][1][amount]" id="edd_commission_amount_1" placeholder=" <?php _e( 'Rate for this user', 'eddc' ); ?>"/>
 						</td>
+						<?php do_action( 'eddc_meta_box_table_cell_remove_before', $post->ID ); ?>
 						<td>
 							<a href="#" class="edd_commissions_remove_repeatable" data-type="commission"><span class="dashicons dashicons-dismiss"></span></a>
 						</td>
+						<?php do_action( 'eddc_meta_box_table_cell_remove_after', $post->ID ); ?>
 					</tr>
 				<?php endif; ?>
 				<tr>

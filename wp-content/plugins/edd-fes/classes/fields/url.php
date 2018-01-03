@@ -72,22 +72,6 @@ class FES_Url_Field extends FES_Field {
 	);
 
 	/**
-	 * Constructor.
-	 *
-	 * @access public
-	 *
-	 * @param string $field   Usually this is the same as the meta_key for saving. This is the name of a field. Unique to each field.
-	 * @param string $form    Int ID of the form post that the field appears on.
-	 * @param int    $type    The type of form the field is being used on (post, user, custom).
-	 * @param int    $save_id Corresponds to the ID of the object the field's value is saved to.
-	 */
-	public function __construct( $field = '', $form = 'notset', $type = -2, $save_id = -2 ) {
-		parent::__construct( $field, $form, $type, $save_id );
-
-		$this->characteristics['label'] = __( 'URL', 'edd-fes' );
-	}
-
-	/**
 	 * Sets the title of the field. Called in FES_Field::__construct().
 	 *
 	 * @access public
