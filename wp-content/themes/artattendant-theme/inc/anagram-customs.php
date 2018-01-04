@@ -239,13 +239,13 @@ function anagram_output_artwork_status( $artwork_id ) {
 
 	switch ($status) {
 	    case 1:
-	        $content .=  ' <i class="fa fa-eye fa-lg green" aria-hidden="true" title="For Sale"></i>';
+	        $content .=  ' <i class="fa fa-usd fa-lg green" aria-hidden="true" title="For Sale"></i>';
 	        break;
 	    case 2:
 	        $content .= ' <i class="fa fa-eye fa-lg" aria-hidden="true" title="For Loan"></i>';
 	        break;
 	    case 3:
-	       $content .=  ' <i class="fa fa-eye fa-lg green" aria-hidden="true" title="For Sale"></i> <i class="fa fa-eye fa-lg" aria-hidden="true" title="For Loan"></i>';
+	       $content .=  ' <i class="fa fa-usd fa-lg green" aria-hidden="true" title="For Sale"></i> <i class="fa fa-eye fa-lg" aria-hidden="true" title="For Loan"></i>';
 	        break;
 	}
 
