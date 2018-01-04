@@ -12758,6 +12758,15 @@ body {
             flex-direction: row;
   }
 }
+.editable-click.editable-disabled,
+a.editable-click.editable-disabled,
+a.editable-click.editable-disabled:hover {
+  color: #000;
+}
+.editable-click,
+a.editable-click {
+  color: #585858;
+}
 /*
 .sidebar-nav > .sidebar-brand {
     height: 65px;
