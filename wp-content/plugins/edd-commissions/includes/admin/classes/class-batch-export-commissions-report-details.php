@@ -228,7 +228,7 @@ class EDD_Batch_Commissions_Report_Details_Export extends EDD_Batch_Export {
 			'query_args' => array(
 				'date_query' => array(
 					'after'     => $start_date,
-					'before'    => $end_date . ' 23:59:59',
+					'before'    => $end_date,
 					'inclusive' => true,
 				)
 			),

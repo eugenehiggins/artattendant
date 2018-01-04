@@ -205,9 +205,7 @@ class EDD_C_List_Table extends WP_List_Table {
 			'revoked'   => sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( 'view', 'revoked', $base ) ), $current === 'revoked' ? ' class="current"' : '', __( 'Revoked', 'eddc' ), $status_counts['revoked'] ) . sprintf( _x( '(%d)', 'post count', 'eddc' ), $status_counts['revoked'] ),
 			'paid'      => sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( 'view', 'paid', $base ) ), $current === 'paid' ? ' class="current"' : '', __( 'Paid', 'eddc' ), $status_counts['paid'] ) . sprintf( _x( '(%d)', 'post count', 'eddc' ), $status_counts['paid'] ),
 		);
-		
-		$views = apply_filters( 'manage_edd_commissions_views', $views, $base, $current, $status_counts );
-		
+
 		return $views;
 	}
 
@@ -225,8 +223,6 @@ class EDD_C_List_Table extends WP_List_Table {
 			'mark_as_revoked' => __( 'Mark as Revoked', 'eddc' ),
 			'delete'          => __( 'Delete', 'eddc' )
 		);
-
-		$actions = apply_filters( 'manage_edd_commissions_bulk_actions', $actions );
 
 		return $actions;
 	}
@@ -314,12 +310,8 @@ class EDD_C_List_Table extends WP_List_Table {
 		if ( ! is_array( $ids ) ) {
 			$ids = array( $ids );
 		}
-		
-		$current_action = $this->current_action();
 
 		foreach ( $ids as $id ) {
-			
-			do_action( 'edd_commissions_process_bulk_action_start', $id, $current_action );
 
 			// Detect when a bulk action is being triggered...
 			if ( 'delete' === $this->current_action() ) {
@@ -342,9 +334,6 @@ class EDD_C_List_Table extends WP_List_Table {
 			if ( 'mark_as_accepted' === $this->current_action() ) {
 				eddc_set_commission_status( $id, 'unpaid' );
 			}
-
-			do_action( 'edd_commissions_process_bulk_action_end', $id, $current_action );
-			
 		}
 	}
 
@@ -406,8 +395,6 @@ class EDD_C_List_Table extends WP_List_Table {
 
 			}
 		}
-		
-		$commissions_data = apply_filters( 'edd_commissions_get_commission_data', $commissions_data );
 
 		return $commissions_data;
 	}
@@ -452,8 +439,6 @@ class EDD_C_List_Table extends WP_List_Table {
 		);
 
 		$status_counts['all'] = $status_counts['paid'] + $status_counts['unpaid'] + $status_counts['revoked'];
-		
-		$status_counts = apply_filters( 'edd_commissions_get_status_counts', $status_counts, $base_args );
 
 		$this->status_counts = $status_counts;
 

@@ -147,6 +147,9 @@ class FacetWP_Indexer
         // Index everything
         if ( false === $post_id ) {
 
+            // Store the pre-index settings (see FacetWP_Diff)
+            update_option( 'facetwp_settings_last_index', get_option( 'facetwp_settings' ) );
+
             // Index all flag
             $this->index_all = true;
 

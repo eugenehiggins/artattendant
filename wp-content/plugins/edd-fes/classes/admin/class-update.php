@@ -9,20 +9,20 @@
  * @subpackage Install/Upgrade
  * @since 2.2.0
  *
- * @todo Split upgrade routines off into their 
+ * @todo Split upgrade routines off into their
  *       own files.
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) { 
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
  * FES Upgrade Page registration.
  *
- * Register an upgrade page for FES to 
- * use during user initiated upgrade 
+ * Register an upgrade page for FES to
+ * use during user initiated upgrade
  * routines.
  *
  * @since 2.2.0
@@ -62,14 +62,14 @@ function fes_upgrades_screen() {
 			document.location.href = "index.php?edd_action=<?php echo $_GET['edd_upgrade']; ?>&step=<?php echo absint( $_GET['step'] ); ?>";
 		</script>
 	</div>
-<?php	
+<?php
 }
 
 /**
  * FES Show Upgrade Notice.
  *
  * Determines if the FES install needs
- * to run an upgrade routine and if 
+ * to run an upgrade routine and if
  * so shows an admin notice for the user
  * to run it.
  *
@@ -128,8 +128,8 @@ add_action( 'edd_upgrade_vendor_permissions', 'fes_22_upgrade_vendor_permissions
  *
  * In FES 2.3, we needed to add the vendor
  * database table, and add all of the vendors
- * to that table. Once this was done, we 
- * removed the suspended_vendor and 
+ * to that table. Once this was done, we
+ * removed the suspended_vendor and
  * pending_vendor roles.
  *
  * @since 2.3.0
@@ -152,7 +152,7 @@ function fes_23_upgrade() {
 	}
 
 	$step   = isset( $_GET['step'] ) ? absint( $_GET['step'] ) : 1;
-	$offset = $step === 1 ? 0 : $step * 100; 
+	$offset = $step === 1 ? 0 : $step * 100;
 
 	$users = new WP_User_Query( array( 'fields' => 'ID', 'number' => 100, 'offset' => $offset ) );
 	$users = $users->results;
@@ -167,7 +167,7 @@ function fes_23_upgrade() {
 				} else if ( user_can( $id, 'suspended_vendor' ) ) {
 					$status = 'suspended';
 				} else if ( user_can( $id, 'frontend_vendor' ) || user_can( $id, 'fes_is_admin' ) || user_can( $id,'administrator' ) || user_can( $id,'editor' ) ) {
-					$status = 'approved';			    
+					$status = 'approved';
 				} else{
 					$status = false; // not a vendor
 				}
@@ -179,7 +179,7 @@ function fes_23_upgrade() {
 						'author'      => $id,
 						'orderby'     => 'title',
 						'post_type'   => 'download',
-						'post_status' => 'publish',
+						'post_status' => array('publish','private','draft'), //anagram / geet - count private and draft
 						'order'		  => 'ASC'
 					) );
 

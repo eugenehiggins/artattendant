@@ -14,8 +14,13 @@ class ProductType extends Field
         if($productCategoriesData['productType'] == 'useWooCommerceProductCategories') {
             $categories = wp_get_post_terms($this->entry->ID, 'product_cat');
             if(is_array($categories)){
-                $category = $categories[0];
-                return $category->name;
+                if(isset($categories[0])) {
+                    $category = $categories[0];
+                    return $category->name;
+                } else {
+                    return '';
+                }
+
             } else {
                 return '';
             }

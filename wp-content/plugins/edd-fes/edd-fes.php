@@ -6,9 +6,9 @@
  * Author:              Easy Digital Downloads
  * Author URI:          https://easydigitaldownloads.com
  *
- * Version:             2.5.10
+ * Version:             2.5.7
  * Requires at least:   4.2
- * Tested up to:        4.9
+ * Tested up to:        4.8
  *
  * Text Domain:         edd_fes
  * Domain Path:         /languages/
@@ -361,7 +361,7 @@ class EDD_Front_End_Submissions {
 		}
 		// Plugin Version
 		if ( ! defined( 'fes_plugin_version' ) ) {
-			define( 'fes_plugin_version', '2.5.10' );
+			define( 'fes_plugin_version', '2.5.7' );
 		}
 		// Plugin Root File
 		if ( ! defined( 'fes_plugin_file' ) ) {

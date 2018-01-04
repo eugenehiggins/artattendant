@@ -1239,7 +1239,7 @@ class FES_Vendors {
 			'author' => $user_id,
 			'orderby' => 'title',
 			'post_type' => 'download',
-			'post_status' => 'publish',
+			'post_status' => array('publish', 'draft', 'private', 'archive'),  //anagram / geet show more status 'publish',
 			'order' => 'ASC',
 		) );
 

@@ -5,9 +5,9 @@
  * This file contains functions used to perform
  * actions on the FES vendor admin profiles.
  *
- * @package    FES
+ * @package FES
  * @subpackage Administration
- * @since      2.3.0
+ * @since 2.3.0
  */
 
 // Exit if accessed directly
@@ -20,15 +20,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Renders the vendors page contents.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @return void
  */
 function fes_vendors_page() {
-	$default_views  = fes_vendor_views();
+	$default_views = fes_vendor_views();
 	$requested_view = isset( $_GET['view'] ) ? sanitize_text_field( $_GET['view'] ) : 'vendors';
-	if ( array_key_exists( $requested_view, $default_views ) && function_exists( $default_views[ $requested_view ] ) ) {
+	if ( array_key_exists( $requested_view, $default_views ) && function_exists( $default_views[$requested_view] ) ) {
 		fes_render_vendor_view( $requested_view, $default_views );
 	} else {
 		fes_vendors_list();
@@ -41,14 +41,13 @@ function fes_vendors_page() {
  * Registers the views for the
  * admin vendor profile page.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @return array Array of views and their callbacks
  */
 function fes_vendor_views() {
 	$views = array();
-
 	/**
 	 * Admin Vendor Profile Views.
 	 *
@@ -68,14 +67,13 @@ function fes_vendor_views() {
  * Registers the tabs for the
  * admin vendor profile page.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @return array Array of tabs and their callbacks
  */
 function fes_vendor_tabs() {
 	$tabs = array();
-
 	/**
 	 * Admin Vendor Profile Tabs.
 	 *
@@ -96,7 +94,7 @@ function fes_vendor_tabs() {
  * Creates the vendor list table
  * in the admin.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @return void
@@ -106,7 +104,7 @@ function fes_vendors_list() {
 	$vendors_table->prepare_items();
 	$view = isset( $_GET['view'] ) ? sanitize_text_field( $_GET['view'] ) : 'all'; ?>
 	<div class="wrap">
-		<h2 id="fes-vendor-edit-page"><?php printf( _x( 'FES %s', 'FES uppercase plural setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = true, $uppercase = true ) ); ?></h2>
+		<h2 id="fes-vendor-edit-page" ><?php printf( _x( 'FES %s', 'FES uppercase plural setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = true, $uppercase = true ) ); ?></h2>
 		<?php do_action( 'fes_vendors_table_top' ); ?>
 		<form id="fes-vendors-filter" method="get" action="<?php echo admin_url( 'admin.php?page=fes-vendors' ); ?>">
 			<?php
@@ -127,19 +125,18 @@ function fes_vendors_list() {
  * Is the div wrapper around the entire
  * admin vendor profile.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @param string $view      The View being requested.
- * @param array  $callbacks The Registered views and their callback functions.
- *
+ * @param string  $view      The View being requested.
+ * @param array   $callbacks The Registered views and their callback functions.
  * @return void
  */
 function fes_render_vendor_view( $view, $callbacks ) {
 
 	if ( ! isset( $_GET['id'] ) || ! is_numeric( $_GET['id'] ) ) {
 		edd_set_error( 'fes-invalid_vendor', sprintf( _x( 'Invalid %s ID Provided.', 'FES lowercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = false ) ) );
-	} else {
+	} else{
 		$vendor_id = (int) $_GET['id'];
 		$vendor    = new FES_Vendor( $vendor_id );
 		$db_user   = new FES_DB_Vendors();
@@ -148,18 +145,18 @@ function fes_render_vendor_view( $view, $callbacks ) {
 		}
 	}
 
-	$vendor_tabs            = fes_vendor_tabs();
+	$vendor_tabs = fes_vendor_tabs();
 	$vendor_constant_single = EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true );
 	?>
 
 	<div class='wrap'>
 		<h2><?php printf( _x( '%s Details', 'FES uppercase singular setting for vendor', 'edd_fes' ), $vendor_constant_single ); ?></h2>
-		<?php if ( edd_get_errors() ) : ?>
+		<?php if ( edd_get_errors() ) :?>
 			<div class="error settings-error">
 				<?php edd_print_errors(); ?>
 			</div>
-			<?php
-			return;
+		<?php
+		return;
 		endif; ?>
 
 		<?php if ( $vendor ) : ?>
@@ -167,44 +164,44 @@ function fes_render_vendor_view( $view, $callbacks ) {
 			<div id="edd-vendor-wrapper" class="edd-clearfix">
 				<div id="vendor-tab-wrapper">
 					<ul id="vendor-tab-wrapper-list">
-						<?php foreach ( $vendor_tabs as $key => $tab ) : ?>
-							<?php $active = $key === $view ? true : false; ?>
-							<?php $class = $active ? 'active' : 'inactive'; ?>
+					<?php foreach ( $vendor_tabs as $key => $tab ) : ?>
+						<?php $active = $key === $view ? true : false; ?>
+						<?php $class  = $active ? 'active' : 'inactive'; ?>
 
-							<li class="<?php echo sanitize_html_class( $class ); ?>">
+						<li class="<?php echo sanitize_html_class( $class ); ?>">
 
-								<?php
-								// prevent double "Vendor" output from extensions ... rare, but possible
-								$tab['title'] = preg_replace( "(^Vendor )", "", $tab['title'] );
+							<?php
+							// prevent double "Vendor" output from extensions ... rare, but possible
+							$tab['title'] = preg_replace("(^Vendor )","",$tab['title']);
 
-								// vendor tab full title
-								$tab_title = $vendor_constant_single . ' ' . sprintf( '%s', esc_attr( $tab['title'] ) );
+							// vendor tab full title
+							$tab_title = $vendor_constant_single . ' ' . sprintf( '%s', esc_attr( $tab[ 'title' ] ) );
 
-								// aria-label output
-								$aria_label = ' aria-label="' . $tab_title . '"';
-								?>
+							// aria-label output
+							$aria_label = ' aria-label="' . $tab_title . '"';
+							?>
 
-								<?php if ( ! $active ) : ?>
+							<?php if ( ! $active ) : ?>
 								<a href="<?php echo esc_url( admin_url( 'admin.php?page=fes-vendors&view=' . $key . '&id=' . $vendor_id ) ); ?>" title="<?php echo esc_attr( $tab['title'] ); ?>"<?php echo $aria_label; ?>>
-									<?php endif; ?>
+							<?php endif; ?>
 
-									<span class="vendor-tab-label-wrap"<?php echo $active ? $aria_label : ''; ?>>
+								<span class="vendor-tab-label-wrap"<?php echo $active ? $aria_label : ''; ?>>
 									<span class="dashicons <?php echo sanitize_html_class( $tab['dashicon'] ); ?>" aria-hidden="true"></span>
 									<span class="vendor-tab-label"><?php echo esc_attr( $tab['title'] ); ?></span>
 								</span>
 
-									<?php if ( ! $active ) : ?>
+							<?php if ( ! $active ) : ?>
 								</a>
 							<?php endif; ?>
 
-							</li>
+						</li>
 
-						<?php endforeach; ?>
+					<?php endforeach; ?>
 					</ul>
 				</div>
 
 				<div id="edd-vendor-card-wrapper" class="edd-clearfix" style="float: left">
-					<?php $callbacks[ $view ]( $vendor ) ?>
+					<?php $callbacks[$view]( $vendor ) ?>
 				</div>
 			</div>
 
@@ -223,11 +220,10 @@ function fes_render_vendor_view( $view, $callbacks ) {
  * for the admin vendor profile
  * page so to speak.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @param FES_Vendor $vendor The Vendor object being displayed
- *
  * @return void
  */
 function fes_vendors_view( $vendor ) { ?>
@@ -245,54 +241,54 @@ function fes_vendors_view( $vendor ) { ?>
 
 					<span class="info-item editable vendor-edit-link"><a title="<?php printf( _x( 'Edit %s', 'FES uppercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) ); ?>" href="#" id="edit-vendor"><?php printf( _x( 'Edit %s', 'FES uppercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) ) ?></a></span>
 					<?php
-					$user_id       = $vendor->user_id;
+					$user_id = $vendor->user_id;
 					$admin_actions = array();
 					if ( EDD_FES()->vendors->user_is_status( 'approved', $user_id ) ) {
-						$admin_actions['revoke']  = array(
+						$admin_actions['revoke'] = array(
 							'action' => 'revoked',
 							'label'  => __( 'Revoke', 'edd_fes' ),
 							'name'   => sprintf( __( 'Revoke (and delete all %s of)', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) ),
-							'url'    => '#',
+							'url'    => '#'
 						);
 						$admin_actions['suspend'] = array(
 							'action' => 'suspended',
 							'name'   => __( 'Suspend', 'edd_fes' ),
 							'label'  => __( 'Suspend', 'edd_fes' ),
-							'url'    => '#',
+							'url'    => '#'
 						);
 					} else if ( EDD_FES()->vendors->user_is_status( 'pending', $user_id ) ) {
 						$admin_actions['approve'] = array(
 							'action' => 'approved',
 							'name'   => __( 'Approve', 'edd_fes' ),
 							'label'  => __( 'Approve', 'edd_fes' ),
-							'url'    => '#',
+							'url'    => '#'
 						);
 						$admin_actions['decline'] = array(
 							'action' => 'declined',
 							'name'   => __( 'Decline', 'edd_fes' ),
 							'label'  => __( 'Decline', 'edd_fes' ),
-							'url'    => '#',
+							'url'    => '#'
 						);
 					} else if ( EDD_FES()->vendors->user_is_status( 'suspended', $user_id ) ) {
-						$admin_actions['revoke']    = array(
+						$admin_actions['revoke'] = array(
 							'action' => 'revoked',
 							'label'  => __( 'Revoke', 'edd_fes' ),
 							'name'   => sprintf( __( 'Revoke (and delete all %s of)', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) ),
-							'url'    => '#',
+							'url'    => '#'
 						);
 						$admin_actions['unsuspend'] = array(
 							'action' => 'unsuspended',
 							'name'   => __( 'Unsuspend', 'edd_fes' ),
 							'label'  => __( 'Unsuspend', 'edd_fes' ),
-							'url'    => '#',
+							'url'    => '#'
 						);
 					}
 					/** Filter documented in classes/admin/vendors/class-vendor-table.php **/
 					$admin_actions = apply_filters( 'fes_admin_actions', $admin_actions, $vendor );
-					$data          = '';
+					$data = '';
 					foreach ( $admin_actions as $action ) {
 						$image = isset( $action['image_url'] ) ? $action['image_url'] : fes_plugin_url . 'assets/img/icons/' . $action['action'] . '.png';
-						$data  .= sprintf( '<a class="button tips vendor-change-status" data-vendor="%d" data-status="%s" data-nstatus="%s" href="%s" data-tip="%s">%s</a>', (int) esc_attr( $user_id ), esc_attr( $action['action'] ), esc_attr( $action['name'] ), esc_url( $action['url'] ), esc_attr( $action['name'] ), esc_attr( $action['label'] ) );
+						$data .= sprintf( '<a class="button tips vendor-change-status" data-vendor="%d" data-status="%s" data-nstatus="%s" href="%s" data-tip="%s">%s</a>', (int) esc_attr( $user_id ), esc_attr( $action['action'] ), esc_attr( $action['name'] ), esc_url( $action['url'] ), esc_attr( $action['name'] ), esc_attr( $action['label'] ) );
 					}
 					echo $data;
 					?>
@@ -303,26 +299,26 @@ function fes_vendors_view( $vendor ) { ?>
 				</div>
 
 				<div class="vendor-address-wrapper right">
-					<?php if ( isset( $vendor->user_id ) && $vendor->user_id > 0 ) : ?>
+				<?php if ( isset( $vendor->user_id ) && $vendor->user_id > 0 ) : ?>
 
-						<?php
-						$address  = get_user_meta( $vendor->user_id, '_fes_vendor_address', true );
-						$defaults = array(
-							'line1'   => '',
-							'line2'   => '',
-							'city'    => '',
-							'state'   => '',
-							'country' => '',
-							'zip'     => '',
-						);
+					<?php
+					$address = get_user_meta( $vendor->user_id, '_fes_vendor_address', true );
+					$defaults = array(
+						'line1'   => '',
+						'line2'   => '',
+						'city'    => '',
+						'state'   => '',
+						'country' => '',
+						'zip'     => ''
+					);
 
-						$address = wp_parse_args( $address, $defaults );
-						?>
+					$address = wp_parse_args( $address, $defaults );
+					?>
 
-						<?php if ( ! empty( $address ) ) : ?>
+					<?php if ( ! empty( $address ) ) : ?>
 
-							<strong><?php printf( _x( '%s Address', 'FES uppercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) ); ?></strong>
-							<span class="vendor-address info-item editable">
+					<strong><?php printf( _x( '%s Address', 'FES uppercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) ); ?></strong>
+					<span class="vendor-address info-item editable">
 						<span class="info-item" data-key="line1"><?php echo $address['line1']; ?></span>
 						<span class="info-item" data-key="line2"><?php echo $address['line2']; ?></span>
 						<span class="info-item" data-key="city"><?php echo $address['city']; ?></span>
@@ -330,8 +326,8 @@ function fes_vendors_view( $vendor ) { ?>
 						<span class="info-item" data-key="country"><?php echo $address['country']; ?></span>
 						<span class="info-item" data-key="zip"><?php echo $address['zip']; ?></span>
 					</span>
-						<?php endif; ?>
-						<span class="vendor-address info-item edit-item">
+					<?php endif; ?>
+					<span class="vendor-address info-item edit-item">
 						<input class="info-item" type="text" data-key="line1" name="vendorinfo[line1]" placeholder="<?php _e( 'Address 1', 'edd_fes' ); ?>" value="<?php echo $address['line1']; ?>" />
 						<input class="info-item" type="text" data-key="line2" name="vendorinfo[line2]" placeholder="<?php _e( 'Address 2', 'edd_fes' ); ?>" value="<?php echo $address['line2']; ?>" />
 						<input class="info-item" type="text" data-key="city" name="vendorinfo[city]" placeholder="<?php _e( 'City', 'edd_fes' ); ?>" value="<?php echo $address['city']; ?>" />
@@ -345,7 +341,7 @@ function fes_vendors_view( $vendor ) { ?>
 								echo '<option value="' . esc_attr( $country_code ) . '"' . selected( $country_code, $selected_country, false ) . '>' . $country . '</option>';
 							} ?>
 						</select>
-							<?php
+						<?php
 							$selected_state = edd_get_shop_state();
 							$states         = edd_get_shop_states( $selected_country );
 
@@ -354,17 +350,17 @@ function fes_vendors_view( $vendor ) { ?>
 							if ( ! empty( $states ) ) : ?>
 								<select data-key="state" name="vendorinfo[state]" id="card_state" class="card_state edd-select info-item">
 							<?php
-							foreach ( $states as $state_code => $state ) {
-								echo '<option value="' . $state_code . '"' . selected( $state_code, $selected_state, false ) . '>' . $state . '</option>';
-							}
-							?>
+								foreach ( $states as $state_code => $state ) {
+									echo '<option value="' . $state_code . '"' . selected( $state_code, $selected_state, false ) . '>' . $state . '</option>';
+								}
+						?>
 						</select>
-							<?php else : ?>
-								<input type="text" size="6" data-key="state" name="vendorinfo[state]" id="card_state" class="card_state edd-input info-item" placeholder="<?php _e( 'State / Province', 'edd_fes' ); ?>" />
-							<?php endif; ?>
-							<input class="info-item" type="text" data-key="zip" name="vendorinfo[zip]" placeholder="<?php _e( 'Postal', 'edd_fes' ); ?>" value="<?php echo $address['zip']; ?>" />
+						<?php else : ?>
+						<input type="text" size="6" data-key="state" name="vendorinfo[state]" id="card_state" class="card_state edd-input info-item" placeholder="<?php _e( 'State / Province', 'edd_fes' ); ?>"/>
+						<?php endif; ?>
+						<input class="info-item" type="text" data-key="zip" name="vendorinfo[zip]" placeholder="<?php _e( 'Postal', 'edd_fes' ); ?>" value="<?php echo $address['zip']; ?>" />
 					</span>
-					<?php endif; ?>
+				<?php endif; ?>
 				</div>
 
 				<div class="vendor-main-wrapper left">
@@ -380,20 +376,20 @@ function fes_vendors_view( $vendor ) { ?>
 					<span class="vendor-user-id info-item edit-item">
 						<?php
 
-						$user_id   = $vendor->user_id > 0 ? $vendor->user_id : '';
-						$data_atts = array( 'key' => 'user_login', 'exclude' => $user_id );
-						$user_args = array(
-							'name'  => 'vendorinfo[user_login]',
-							'class' => 'edd-user-dropdown',
-							'data'  => $data_atts,
-						);
+							$user_id    = $vendor->user_id > 0 ? $vendor->user_id : '';
+							$data_atts  = array( 'key' => 'user_login', 'exclude' => $user_id );
+							$user_args  = array(
+								'name'  => 'vendorinfo[user_login]',
+								'class' => 'edd-user-dropdown',
+								'data'  => $data_atts,
+							);
 
-						if ( ! empty( $user_id ) ) {
-							$userdata           = get_userdata( $user_id );
-							$user_args['value'] = $userdata->user_login;
-						}
+							if ( ! empty( $user_id ) ) {
+								$userdata = get_userdata( $user_id );
+								$user_args['value'] = $userdata->user_login;
+							}
 
-						echo EDD()->html->ajax_user_search( $user_args );
+							echo EDD()->html->ajax_user_search( $user_args );
 						?>
 						<input type="hidden" name="vendorinfo[user_id]" data-key="user_id" value="<?php echo $vendor->user_id; ?>" />
 					</span>
@@ -416,7 +412,7 @@ function fes_vendors_view( $vendor ) { ?>
 						} else if ( $vendor->status == 'approved' ) {
 							$data = __( 'Approved', 'edd_fes' );
 						} else if ( $vendor->status == 'suspended' ) {
-							$data = __( 'Suspended', 'edd_fes' );
+							$data =  __( 'Suspended', 'edd_fes' );
 						} else {
 							$data = __( 'Unknown Column', 'edd_fes' );
 						}
@@ -458,12 +454,12 @@ function fes_vendors_view( $vendor ) { ?>
 			<li>
 				<?php if ( EDD_FES()->integrations->is_commissions_active() ) { ?>
 				<a title="<?php _e( 'View All Purchases', 'edd_fes' ); ?>" href="<?php echo admin_url( 'edit.php?post_type=download&page=edd-commissions&user=&user=' . urlencode( $vendor->user_id ) ); ?>">
-					<?php } ?>
+				<?php } ?>
 					<span class="dashicons dashicons-cart"></span>
 					<?php printf( _n( '%d Sale To Date', '%d Sales To Date', $vendor->sales_count, 'edd_fes' ), $vendor->sales_count ); ?>
-					<?php if ( EDD_FES()->integrations->is_commissions_active() ) { ?>
+				<?php if ( EDD_FES()->integrations->is_commissions_active() ) { ?>
 				</a>
-			<?php } ?>
+				<?php } ?>
 			</li>
 			<li>
 				<span class="dashicons dashicons-chart-area"></span>
@@ -481,7 +477,7 @@ function fes_vendors_view( $vendor ) { ?>
 			 *
 			 * @param  FES_Vendor $vendor FES vendor being viewed.
 			 */
-			do_action( 'fes_vendor_stats_list', $vendor ); ?>
+			 do_action( 'fes_vendor_stats_list', $vendor ); ?>
 		</ul>
 	</div>
 
@@ -505,10 +501,7 @@ function fes_vendors_view( $vendor ) { ?>
 		<?php if ( EDD_FES()->integrations->is_commissions_active() ) { ?>
 
 			<h3><?php _e( 'Recently Earned Unpaid Commissions', 'edd_fes' ); ?></h3>
-			<?php $unpaid_commissions = eddc_get_unpaid_commissions( array(
-				'user_id' => $vendor->user_id,
-				'number'  => 5,
-			) ); ?>
+			<?php $unpaid_commissions = eddc_get_unpaid_commissions( array( 'user_id' => $vendor->user_id, 'number' => 5 ) ); ?>
 			<table class="wp-list-table widefat striped payments">
 				<thead>
 					<tr>
@@ -523,23 +516,14 @@ function fes_vendors_view( $vendor ) { ?>
 						<?php foreach ( $unpaid_commissions as $commission ) : ?>
 							<tr>
 								<?php
-								if ( class_exists( 'EDD_Commission' ) ) {
-									$item_name = get_the_title( $commission->download_id );
-									$amount    = $commission->amount;
-									$rate      = $commission->rate;
-									$date      = $commission->date_created;
-								} else {
-									$item_name        = get_the_title( get_post_meta( $commission->ID, '_download_id', true ) );
-									$commission_info  = get_post_meta( $commission->ID, '_edd_commission_info', true );
-									$amount           = $commission_info['amount'];
-									$rate             = $commission_info['rate'];
-									$date             = $commission->post_date;
-								}
-								?>
+								$item_name        = get_the_title( get_post_meta( $commission->ID, '_download_id', true ) );
+								$commission_info  = get_post_meta( $commission->ID, '_edd_commission_info', true );
+								$amount           = $commission_info['amount'];
+								$rate             = $commission_info['rate']; ?>
 								<td><?php echo esc_html( $item_name ); ?></td>
 								<td><?php echo edd_currency_filter( edd_format_amount( edd_sanitize_amount( $amount ) ) ); ?></td>
 								<td><?php echo $rate . '%'; ?></td>
-								<td><?php echo date_i18n( get_option( 'date_format' ), strtotime( $date) ); ?></td>
+								<td><?php echo date_i18n( get_option( 'date_format' ), strtotime( $commission->post_date ) ); ?></td>
 							</tr>
 						<?php endforeach; ?>
 					<?php else : ?>
@@ -565,15 +549,8 @@ function fes_vendors_view( $vendor ) { ?>
 			<tbody>
 				<?php if ( ! empty( $products ) ) : ?>
 					<?php $counter = 0; ?>
-					<?php foreach ( $products as $product ) : if ( ! get_post( $product ) ) {
-						continue;
-					} ?>
-						<?php
-						$counter++;
-						if ( $counter > 10 ) {
-							break;
-						}
-						?>
+					<?php foreach ( $products as $product ) : if ( ! get_post( $product ) ) continue; ?>
+					<?php $counter++; if ( $counter > 10 ) break; ?>
 						<tr>
 							<td>
 								<a title="<?php echo esc_attr( sprintf( _x( 'View %s', 'download title', 'edd_fes' ), get_the_title( $product ) ) ); ?>" href="<?php echo esc_url( admin_url( 'post.php?action=edit&post=' . $product ) ); ?>">
@@ -583,12 +560,12 @@ function fes_vendors_view( $vendor ) { ?>
 							<td><?php echo edd_get_download_sales_stats( $product ); ?></td>
 						</tr>
 					<?php endforeach; ?>
-					<tr>
-						<td colspan="2">
-							<a title="<?php echo esc_attr( sprintf( _x( 'View all %s', 'view all downloads', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) ) ); ?>" href="<?php echo esc_url( admin_url( 'admin.php?page=fes-vendors&view=products&id=' . $vendor->id ) ); ?>">
-								<?php echo esc_html( sprintf( _x( 'View all %s', 'view all downloads', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) ) ); ?>
-						</td>
-					</tr>
+						<tr>
+							<td colspan="2">
+								<a title="<?php echo esc_attr( sprintf( _x( 'View all %s', 'view all downloads', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) ) ); ?>" href="<?php echo esc_url( admin_url( 'admin.php?page=fes-vendors&view=products&id=' . $vendor->id ) ); ?>">
+									<?php echo esc_html( sprintf( _x( 'View all %s', 'view all downloads', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) ) ); ?>
+							</td>
+						</tr>
 				<?php else : ?>
 					<tr>
 						<td colspan="4"><?php printf( _x( 'No Live %s', 'FES uppercase plural setting for download', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = true ) ); ?></td>
@@ -609,8 +586,8 @@ function fes_vendors_view( $vendor ) { ?>
 		 *
 		 * @param  FES_Vendor $vendor FES vendor being viewed.
 		 */
-		do_action( 'fes_vendor_after_tables', $vendor );
-		?>
+		do_action( 'fes_vendor_after_tables', $vendor ); ?>
+
 	</div>
 
 	<?php
@@ -624,7 +601,9 @@ function fes_vendors_view( $vendor ) { ?>
 	 *
 	 * @param  FES_Vendor $vendor FES vendor being viewed.
 	 */
-	do_action( 'fes_vendor_card_bottom', $vendor );
+	do_action( 'fes_vendor_card_bottom', $vendor ); ?>
+
+	<?php
 }
 
 /**
@@ -632,19 +611,18 @@ function fes_vendors_view( $vendor ) { ?>
  *
  * Renders the vendor notes view.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @param FES_Vendor $vendor The Vendor being displayed.
- *
  * @return void
  */
 function fes_vendor_notes_view( $vendor ) {
-	$paged      = isset( $_GET['paged'] ) && is_numeric( $_GET['paged'] ) ? $_GET['paged'] : 1;
-	$paged      = absint( $paged );
-	$note_count = $vendor->get_notes_count();
-	$default    = 20;
 
+	$paged       = isset( $_GET['paged'] ) && is_numeric( $_GET['paged'] ) ? $_GET['paged'] : 1;
+	$paged       = absint( $paged );
+	$note_count  = $vendor->get_notes_count();
+	$default     = 20;
 	/**
 	 * Admin Vendor Notes Per Page.
 	 *
@@ -668,16 +646,16 @@ function fes_vendor_notes_view( $vendor ) {
 		<h3><?php _e( 'Notes', 'edd_fes' ); ?></h3>
 
 		<?php if ( 1 == $paged ) : ?>
-			<div style="display: block; margin-bottom: 35px;">
-				<form id="edd-add-vendor-note" method="post" action="<?php echo admin_url( 'admin.php?page=fes-vendors&view=notes&id=' . $vendor->id ); ?>">
-					<textarea id="vendor-note" name="vendor_note" class="vendor-note-input" rows="10"></textarea>
-					<br />
-					<input type="hidden" id="vendor-id" name="vendor_id" value="<?php echo $vendor->id; ?>" />
-					<input type="hidden" name="edd_action" value="add-vendor-note" />
-					<?php wp_nonce_field( 'add-vendor-note', 'add_vendor_note_nonce', true, true ); ?>
-					<input id="add-vendor-note" class="right button-primary" type="submit" value="Add Note" />
-				</form>
-			</div>
+		<div style="display: block; margin-bottom: 35px;">
+			<form id="edd-add-vendor-note" method="post" action="<?php echo admin_url( 'admin.php?page=fes-vendors&view=notes&id=' . $vendor->id ); ?>">
+				<textarea id="vendor-note" name="vendor_note" class="vendor-note-input" rows="10"></textarea>
+				<br />
+				<input type="hidden" id="vendor-id" name="vendor_id" value="<?php echo $vendor->id; ?>" />
+				<input type="hidden" name="edd_action" value="add-vendor-note" />
+				<?php wp_nonce_field( 'add-vendor-note', 'add_vendor_note_nonce', true, true ); ?>
+				<input id="add-vendor-note" class="right button-primary" type="submit" value="Add Note" />
+			</form>
+		</div>
 		<?php endif; ?>
 
 		<?php
@@ -686,32 +664,35 @@ function fes_vendor_notes_view( $vendor ) {
 			'format'   => '?paged=%#%',
 			'total'    => $total_pages,
 			'current'  => $paged,
-			'show_all' => true,
+			'show_all' => true
 		);
 
 		echo paginate_links( $pagination_args );
 		?>
 
 		<div id="edd-vendor-notes">
-			<?php if ( count( $vendor_notes ) > 0 ) : ?>
-				<?php foreach ( $vendor_notes as $key => $note ) : ?>
-					<div class="vendor-note-wrapper dashboard-comment-wrap comment-item">
+		<?php if ( count( $vendor_notes ) > 0 ) : ?>
+			<?php foreach ( $vendor_notes as $key => $note ) : ?>
+				<div class="vendor-note-wrapper dashboard-comment-wrap comment-item">
 					<span class="note-content-wrap">
 						<?php echo stripslashes( $note ); ?>
 					</span>
-					</div>
-				<?php endforeach; ?>
-			<?php else: ?>
-				<div class="edd-no-vendor-notes">
-					<?php _e( 'No Vendor Notes', 'edd_fes' ); ?>
 				</div>
-			<?php endif; ?>
+			<?php endforeach; ?>
+		<?php else: ?>
+			<div class="edd-no-vendor-notes">
+				<?php _e( 'No Vendor Notes', 'edd_fes' ); ?>
+			</div>
+		<?php endif; ?>
 		</div>
 
 		<?php echo paginate_links( $pagination_args ); ?>
+
 	</div>
+
 	<?php
 }
+
 
 /**
  * View the registration of a vendor.
@@ -723,7 +704,6 @@ function fes_vendor_notes_view( $vendor ) {
  * @access public
  *
  * @param FES_Vendor $vendor The vendor being displayed.
- *
  * @return void
  */
 function fes_vendor_registration_view( $vendor ) { ?>
@@ -731,17 +711,13 @@ function fes_vendor_registration_view( $vendor ) { ?>
 		<div class="vendor-registration-header">
 			<?php echo get_avatar( $vendor->email, 30 ); ?> <span><?php echo $vendor->name; ?></span>
 		</div>
-
 		<h3><?php _e( 'Registration Data', 'edd_fes' ); ?></h3>
-
 		<?php
 		$user_id  = get_current_user_id();
 		$form_id  = EDD_FES()->helper->get_option( 'fes-registration-form', false );
 		$readonly = false;
-
 		EDD_FES()->setup->enqueue_form_assets();
-
-		$output = '';
+		$output   = '';
 
 		// Make the FES Form
 		$form = EDD_FES()->helper->get_form_by_id( $form_id, $vendor->user_id );
@@ -760,11 +736,10 @@ function fes_vendor_registration_view( $vendor ) { ?>
  * Outputs the vendor profile form
  * as a tab on the admin vendor profile.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @param FES_Vendor $vendor The vendor being displayed.
- *
  * @return void
  */
 function fes_vendor_profile_view( $vendor ) { ?>
@@ -772,17 +747,13 @@ function fes_vendor_profile_view( $vendor ) { ?>
 		<div class="vendor-profile-header">
 			<?php echo get_avatar( $vendor->email, 30 ); ?> <span><?php echo $vendor->name; ?></span>
 		</div>
-
 		<h3><?php _e( 'Profile Data', 'edd_fes' ); ?></h3>
-
 		<?php
 		$user_id  = get_current_user_id();
 		$form_id  = EDD_FES()->helper->get_option( 'fes-profile-form', false );
 		$readonly = false;
-
 		EDD_FES()->setup->enqueue_form_assets();
-
-		$output = '';
+		$output   = '';
 
 		// Make the FES Form
 		$form = EDD_FES()->helper->get_form_by_id( $form_id, $vendor->user_id );
@@ -802,69 +773,64 @@ function fes_vendor_profile_view( $vendor ) { ?>
  * products as a tab on the admin
  * vendor profile.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @param FES_Vendor $vendor The vendor being displayed
- *
  * @return void
  */
 function fes_vendor_products_view( $vendor ) {
-	?>
+    ?>
 	<div id="vendor-products-wrapper">
 		<div class="vendor-products-header">
 			<?php echo get_avatar( $vendor->email, 30 ); ?> <span><?php echo $vendor->name; ?></span>
 		</div>
-
 		<h3><?php printf( __( '%s Overview', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( true, true ) ); ?></h3>
-
 		<?php
-		$product_count = EDD_FES()->vendors->get_all_products_count( $vendor->user_id, 'any' );
-		$plural        = $product_count == 1 ? false : true;
-		$product_label = EDD_FES()->helper->get_product_constant_name( $plural, true );
+			$product_count = EDD_FES()->vendors->get_all_products_count( $vendor->user_id, 'any' );
+			$plural        = $product_count == 1 ? false : true;
+			$product_label = EDD_FES()->helper->get_product_constant_name( $plural, true );
 		?>
-
-		<p><?php echo $product_count . ' ' . $product_label; ?></p>
-
+		<p>
+        	<?php echo $product_count . ' ' . $product_label; ?>
+		</p>
 		<?php
-		$concat   = get_option( "permalink_structure" ) ? "?" : "&";
-		$products = EDD_FES()->vendors->get_all_products( $vendor->user_id );
 
-		if ( ! empty( $products ) ) { ?>
-			<table class="widefat" id="fes-all-products">
-				<thead>
-					<tr>
-						<th><?php _e( 'ID', 'edd_fes' ); ?></th>
-						<th><?php _e( 'Title', 'edd_fes' ); ?></th>
-						<th><?php _e( 'Status', 'edd_fes' ); ?></th>
-						<th><?php _e( 'Sales', 'edd_fes' ); ?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					$i = 'alternate';
-					foreach ( $products as $product ) :
-						?>
-						<tr <?php if ( $i == 'alternate' ) {
-							echo 'class="alternate"';
-						} ?>>
-							<td><?php echo esc_html( $product['ID'] ); ?></td>
-							<td>
-								<a href="<?php echo esc_html( esc_url( admin_url( 'post.php?post=' . $product['ID'] . '&action=edit' ) ) ); ?>"><?php echo esc_html( $product['title'] ); ?></a>
-							</td>
-							<td><?php echo esc_html( EDD_FES()->dashboard->product_list_generate_status( $product['ID'], false ) ); ?></td>
-							<td><?php echo esc_html( edd_get_download_sales_stats( $product['ID'] ) ); ?></td>
-						</tr>
+			$concat   = get_option( "permalink_structure" ) ? "?" : "&";
+			$products = EDD_FES()->vendors->get_all_products( $vendor->user_id );
+
+			if ( ! empty( $products ) ) { ?>
+					<table class="widefat" id="fes-all-products">
+						<thead>
+							 <tr>
+								<th><?php _e( 'ID', 'edd_fes' ); ?></th>
+								<th><?php _e( 'Title', 'edd_fes' ); ?></th>
+								<th><?php _e( 'Status', 'edd_fes' ); ?></th>
+								<th><?php _e( 'Sales', 'edd_fes' ); ?></th>
+							</tr>
+						</thead>
+						 <tbody>
+
+						 <?php
+							$i = 'alternate';
+							foreach ( $products as $product ) :
+							?>
+							 <tr <?php if ( $i == 'alternate' ) { echo 'class="alternate"'; } ?>>
+								<td><?php echo esc_html( $product['ID'] ); ?></td>
+								<td><a href="<?php echo esc_html( esc_url( admin_url( 'post.php?post=' . $product['ID'] . '&action=edit' ) ) ); ?>"><?php echo esc_html( $product['title'] ); ?></a></td>
+								<td><?php echo esc_html( EDD_FES()->dashboard->product_list_generate_status( $product['ID'], false ) ); ?></td>
+								<td><?php echo esc_html( edd_get_download_sales_stats( $product['ID'] ) ); ?></td>
+							</tr>
 						<?php $i = $i == 'alternate' ? 'regular' : 'alternate'; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-			<?php
-			EDD_FES()->dashboard->product_list_pagination( $vendor->user_id );
-		} else {
-			printf( __( '%s has no %s', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) );
-		}
-		?>
+						<?php endforeach; ?>
+						</tbody>
+					</table>
+					<?php EDD_FES()->dashboard->product_list_pagination( $vendor->user_id );?>
+				<?php
+			} else {
+				printf( __( '%s has no %s', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) );
+			}
+			?>
 	</div>
 	<?php
 }
@@ -875,11 +841,10 @@ function fes_vendor_products_view( $vendor ) {
  * Shows the commissions tab content
  * on the admin vendor profile.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @param FES_Vendor $vendor The vendor being displayed.
- *
  * @return void
  */
 function fes_vendor_commissions_view( $vendor ) { ?>
@@ -888,19 +853,19 @@ function fes_vendor_commissions_view( $vendor ) { ?>
 			<?php echo get_avatar( $vendor->email, 30 ); ?> <span><?php echo $vendor->name; ?></span>
 		</div>
 		<?php
-		$user_id = $vendor->user_id;
+			$user_id = $vendor->user_id;
 
-		// If still empty, exit
-		if ( empty( $user_id ) ) {
-			return;
-		}
-		?>
-		<div id="edd_user_commissions">
-			<?php
-			echo eddc_user_commissions_overview( $user_id );
-			echo eddc_user_commissions( $user_id );
+			// If still empty, exit
+			if ( empty( $user_id ) ) {
+				return;
+			}
 			?>
-		</div>
+			<div id="edd_user_commissions">
+				<?php
+					echo eddc_user_commissions_overview( $user_id );
+					echo eddc_user_commissions( $user_id );
+				?>
+			</div>
 	</div>
 	<?php
 }
@@ -911,13 +876,12 @@ function fes_vendor_commissions_view( $vendor ) { ?>
  * For now simply outputs a graph of
  * earnings, sales and commissions.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @todo   Add more reports.
+ * @todo Add more reports.
  *
  * @param FES_Vendor $vendor The vendor being displayed.
- *
  * @return void
  */
 function fes_vendor_reports_view( $vendor ) { ?>
@@ -937,18 +901,17 @@ function fes_vendor_reports_view( $vendor ) { ?>
  * For now this allows an admin
  * to export a CSV of a vendor's customers.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @todo   Add more exports.
+ * @todo  Add more exports.
  *
  * @param FES_Vendor $vendor The vendor being displayed.
- *
  * @return void
  */
 function fes_vendor_exports_view( $vendor ) {
 	$products = EDD_FES()->vendors->get_all_products( $vendor->user_id );
-	$arr      = array();
+	$arr = array();
 	if ( empty ( $products ) ) {
 		?>
 		<div id="vendor-exports-wrapper">
@@ -963,7 +926,7 @@ function fes_vendor_exports_view( $vendor ) {
 		<?php
 		return;
 	}
-	foreach ( $products as $product ) {
+	foreach( $products as $product ) {
 		$arr[] = $product['ID'];
 	}
 
@@ -981,41 +944,35 @@ function fes_vendor_exports_view( $vendor ) {
 				<div class="inside">
 					<h4><?php _e( 'Export PDF of Sales and Earnings', 'edd_fes' ); ?></h4>
 					<p><?php echo sprintf( _x( 'Download a PDF of Sales and Earnings reports for all %s for the current year.', 'FES uppercase plural setting for download', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = false ) ); ?></p>
-					<p>
-						<a class="button" href="<?php echo wp_nonce_url( add_query_arg( array( 'edd-action' => 'generate_fes_pdf' ) ), 'edd_generate_fes_pdf' ); ?>"><?php _e( 'Generate PDF', 'edd_fes' ); ?></a>
-					</p>
+					<p><a class="button" href="<?php echo wp_nonce_url( add_query_arg( array( 'edd-action' => 'generate_fes_pdf' ) ), 'edd_generate_fes_pdf' ); ?>"><?php _e( 'Generate PDF', 'edd_fes' ); ?></a></p>
 				</div>
 			</div>
 
 			<div class="postbox edd-export-customers">
 				<div class="inside">
-					<h4><?php _e( 'Export Customers in CSV', 'edd_fes' ); ?></h4>
+				<h4><?php _e('Export Customers in CSV', 'edd_fes'); ?></h4>
 					<p><?php echo sprintf( _x( 'Download a CSV of all customer emails. Optionally export only customers that have purchased a particular %s. Note, if you have a large number of customers, exporting the purchase stats may fail.', 'FES lowercase singular setting for download', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = false, $uppercase = false ) ); ?></p>
 					<p>
-					<form method="post" id="edd_customer_export">
-						<select name="edd_export_download" id="edd_customer_export_download">
-							<option value="0"><?php printf( _x( 'All %s', 'FES uppercase plural setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = true ) ); ?></option>
-							<?php
-							$downloads = get_posts( array(
-								'post_type'      => 'download',
-								'posts_per_page' => -1,
-								'post__in'       => $arr,
-							) );
-							if ( $downloads ) {
-								foreach ( $downloads as $download ) {
-									echo '<option value="' . $download->ID . '">' . get_the_title( $download->ID ) . '</option>';
+						<form method="post" id="edd_customer_export">
+							<select name="edd_export_download" id="edd_customer_export_download">
+								<option value="0"><?php printf( _x( 'All %s', 'FES uppercase plural setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_product_constant_name( $plural = true, $uppercase = true ) ); ?></option>
+								<?php
+								$downloads = get_posts( array( 'post_type' => 'download', 'posts_per_page' => -1, 'post__in' => $arr ) );
+								if ( $downloads ) {
+									foreach( $downloads as $download ) {
+										echo '<option value="' . $download->ID . '">' . get_the_title( $download->ID ) . '</option>';
+									}
 								}
-							}
-							?>
-						</select>
-						<select name="fes_export_option" id="fes_export_option">
-							<option value="emails"><?php _e( 'Emails', 'edd_fes' ); ?></option>
-							<option value="emails_and_names"><?php _e( 'Emails and Names', 'edd_fes' ); ?></option>
-							<!--<option value="full"><?php //_e( 'Emails, Names, and Purchase Stats', 'edd_fes' ); ?></option>-->
-						</select>
-						<input type="hidden" name="edd-action" value="email_fes_export" />
-						<input type="submit" value="<?php _e( 'Generate CSV', 'edd_fes' ); ?>" class="button-secondary" />
-					</form>
+								?>
+							</select>
+							<select name="fes_export_option" id="fes_export_option">
+								<option value="emails"><?php _e( 'Emails', 'edd_fes' ); ?></option>
+								<option value="emails_and_names"><?php _e( 'Emails and Names', 'edd_fes' ); ?></option>
+								<!--<option value="full"><?php //_e( 'Emails, Names, and Purchase Stats', 'edd_fes' ); ?></option>-->
+							</select>
+							<input type="hidden" name="edd-action" value="email_fes_export"/>
+							<input type="submit" value="<?php _e( 'Generate CSV', 'edd_fes' ); ?>" class="button-secondary"/>
+						</form>
 					</p>
 				</div>
 			</div>
@@ -1029,7 +986,7 @@ function fes_vendor_exports_view( $vendor ) {
  *
  * This exports a CSV of a vendor's customers.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @return void
@@ -1038,7 +995,6 @@ function fes_export_all_customers() {
 	$customer_export = new FES_Customers_Export();
 	$customer_export->export();
 }
-
 add_action( 'edd_email_fes_export', 'fes_export_all_customers' );
 
 /**
@@ -1046,7 +1002,7 @@ add_action( 'edd_email_fes_export', 'fes_export_all_customers' );
  *
  * Used for a bulk status change.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @return void
@@ -1072,7 +1028,6 @@ function fes_vendor_table_process_bulk_action() {
 		fes_change_vendor_status( $id, $current_action, false );
 	}
 }
-
 add_action( 'admin_init', 'fes_vendor_table_process_bulk_action' );
 
 /**
@@ -1080,28 +1035,27 @@ add_action( 'admin_init', 'fes_vendor_table_process_bulk_action' );
  *
  * Used for a vendor status change action button.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @param int    $id     Id of the user whose vendor account status is being changed.
+ * @param int $id Id of the user whose vendor account status is being changed.
  * @param string $status Status to change vendor to.
- * @param bool   $output Whether to output a JSON encoded array with message.
- *
+ * @param bool $output Whether to output a JSON encoded array with message.
  * @return mixed If output is requested, a JSON encoded array with message.
  */
 function fes_change_vendor_status( $id = 0, $status = '', $output = true ) {
 	if ( fes_is_ajax_request() ) {
 		@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
-		if ( isset( $_REQUEST['vendor'] ) ) {
-			$id = intval( $_REQUEST['vendor'] );
+		if ( isset( $_REQUEST[ 'vendor' ] ) ) {
+			$id = intval( $_REQUEST[ 'vendor' ] );
 		}
 
-		if ( isset( $_REQUEST['status'] ) ) {
-			$status = sanitize_text_field( $_REQUEST['status'] );
+		if ( isset( $_REQUEST[ 'status' ] ) ) {
+			$status = sanitize_text_field( $_REQUEST[ 'status' ] );
 		}
 
-		if ( isset( $_REQUEST['output'] ) ) {
-			$output = (bool) $_REQUEST['output'];
+		if ( isset( $_REQUEST[ 'output' ] ) ) {
+			$output = (bool) $_REQUEST[ 'output' ];
 		}
 	}
 
@@ -1123,7 +1077,7 @@ function fes_change_vendor_status( $id = 0, $status = '', $output = true ) {
 		}
 	}
 
-	$vendor = new FES_Vendor( $id, true );
+	$vendor  = new FES_Vendor( $id, true );
 	$output = $vendor->change_status( $status, true, $output );
 	if ( $output ) {
 		if ( fes_is_ajax_request() ) {
@@ -1136,7 +1090,6 @@ function fes_change_vendor_status( $id = 0, $status = '', $output = true ) {
 		return;
 	}
 }
-
 add_action( 'wp_ajax_fes_change_vendor_status', 'fes_change_vendor_status', 10, 3 );
 
 /**
@@ -1146,12 +1099,11 @@ add_action( 'wp_ajax_fes_change_vendor_status', 'fes_change_vendor_status', 10, 
  * offer a link to the vendor profile
  * page on the WordPres core user table.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @param  array   $actions     Actions (links) for admins to perform on a user.
+ * @param  array $actions Actions (links) for admins to perform on a user.
  * @param  WP_User $user_object User object of the user for a row.
- *
  * @return array Actions for the admin.
  */
 function vendor_row_links( $actions, $user_object ) {
@@ -1159,14 +1111,12 @@ function vendor_row_links( $actions, $user_object ) {
 	$is_vendor    = EDD_FES()->vendors->user_is_status( 'approved', $user_object->ID );
 	$is_suspended = EDD_FES()->vendors->user_is_status( 'suspended', $user_object->ID );
 	if ( $is_suspended || $is_pending || $is_vendor ) {
-		$vendor                    = new FES_Vendor( $user_object->ID, true );
-		$id                        = $vendor->id;
-		$actions['to_vendor_page'] = "<a href='" . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id" ) . "'>" . sprintf( _x( 'View %s Profile', 'FES uppercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) ) . "</a>";
+		$vendor  = new FES_Vendor( $user_object->ID, true );
+		$id = $vendor->id;
+		$actions['to_vendor_page'] = "<a href='" . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id") . "'>" . sprintf( _x( 'View %s Profile', 'FES uppercase singular setting for vendor','edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) ) . "</a>";
 	}
-
 	return $actions;
 }
-
 add_action( 'user_row_actions', 'vendor_row_links', 10, 2 );
 
 /**
@@ -1175,18 +1125,16 @@ add_action( 'user_row_actions', 'vendor_row_links', 10, 2 );
  * Adds a column for vendor status to the
  * user list table.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @param  array $columns Columns on the user list table.
- *
  * @return array Columns on the user list table.
  */
 function fes_replace_column( $columns ) {
 	unset( $columns['posts'] );
 	$columns['fes_vendor'] = sprintf( _x( '%s Status', 'FES uppercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) );
 	$columns['posts']      = __( 'Posts' );
-
 	return $columns;
 }
 
@@ -1197,13 +1145,12 @@ function fes_replace_column( $columns ) {
  * status column FES adds to the user
  * list table.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @param  string $output  Content for a column.
- * @param  string $column  Column currently being filtered.
+ * @param  string $output Content for a column.
+ * @param  string $column Column currently being filtered.
  * @param  int    $user_id User ID of the current row.
- *
  * @return string Content for the column in the user list table.
  */
 function fes_output_user_column_content( $output, $column, $user_id ) {
@@ -1217,26 +1164,25 @@ function fes_output_user_column_content( $output, $column, $user_id ) {
 	$role         = '';
 
 	if ( $is_suspended ) {
-		$vendor = new FES_Vendor( $user_id, true );
-		$id     = $vendor->id;
-		$role   = '<a href="' . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id" ) . '" >' . __( 'Suspended', 'edd_fes' ) . '</a>';
+		$vendor  = new FES_Vendor( $user_id, true );
+		$id      = $vendor->id;
+		$role    = '<a href="' . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id" ) . '" >' . __( 'Suspended', 'edd_fes' ) . '</a>';
 	} else if ( $is_pending ) {
-		$vendor = new FES_Vendor( $user_id, true );
-		$id     = $vendor->id;
-		$role   = '<a href="' . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id" ) . '" >' . __( 'Pending', 'edd_fes' ) . '</a>';
+		$vendor  = new FES_Vendor( $user_id, true );
+		$id      = $vendor->id;
+		$role    = '<a href="' . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id" ) . '" >' . __( 'Pending', 'edd_fes' ) . '</a>';
 	} else if ( $is_vendor ) {
-		$vendor = new FES_Vendor( $user_id, true );
-		$id     = $vendor->id;
-		$role   = '<a href="' . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id" ) . '" >' . __( 'Approved', 'edd_fes' ) . '</a>';
+		$vendor  = new FES_Vendor( $user_id, true );
+		$id      = $vendor->id;
+		$role    = '<a href="' . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id" ) . '" >' . __( 'Approved', 'edd_fes' ) . '</a>';
 	} else {
-		$role = sprintf( _x( 'Not a %s', 'FES lowercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = false ) );
+		$role    = sprintf( _x( 'Not a %s', 'FES lowercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = false ) );
 	}
-
 	return $role;
 }
 
-add_filter( 'manage_users_columns', 'fes_replace_column', 11 );
-add_filter( 'manage_users_custom_column', 'fes_output_user_column_content', 10, 3 );
+add_filter( 'manage_users_columns',       'fes_replace_column' , 11 );
+add_filter( 'manage_users_custom_column', 'fes_output_user_column_content' , 10, 3 );
 
 /**
  * FES user profile metabox content.
@@ -1245,27 +1191,26 @@ add_filter( 'manage_users_custom_column', 'fes_output_user_column_content', 10, 
  * and profile page for a user in WordPress
  * offering FES vendor status and actions.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
  * @param  WP_User $user User object of the user currently
  *                       being edited.
- *
  * @return void
  */
 function fes_user_edit_profile_metabox( $user ) {
 	?>
-	<h3><?php _e( 'Easy Digital Downloads Frontend Submissions', 'edd_fes' ); ?></h3>
+	<h3><?php _e('Easy Digital Downloads Frontend Submissions', 'edd_fes'); ?></h3>
 	<table class="form-table">
 		<tr>
-			<th><label><?php _e( 'Status:', 'edd_fes' ); ?></label></th>
+			<th><label><?php _e('Status:', 'edd_fes'); ?></label></th>
 			<td>
 				<?php
 				$db_user = new FES_DB_Vendors();
-				$output  = '';
+				$output = '';
 				if ( ! $db_user->exists( 'user_id', $user->ID ) ) {
 					$output = __( 'Not a vendor', 'edd_fes' );
-				} else {
+				} else{
 					$vendor = $db_user->get_vendor_by( 'user_id', $user->ID );
 					if ( $vendor->status == 'pending' ) {
 						$output = __( 'Pending', 'edd_fes' );
@@ -1276,8 +1221,8 @@ function fes_user_edit_profile_metabox( $user ) {
 					} else {
 						$output = __( 'Unknown', 'edd_fes' );
 					}
-					$id     = $vendor->id;
-					$output .= "<br /><a href='" . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id" ) . "'>" . sprintf( _x( 'View %s Profile', 'FES uppercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) ) . "</a>";
+					$id = $vendor->id;
+					$output .= "<br /><a href='" . admin_url( "admin.php?page=fes-vendors&view=overview&id=$id") . "'>" . sprintf( _x( 'View %s Profile', 'FES uppercase singular setting for vendor','edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = true ) ) . "</a>";
 				}
 				?>
 				<span><?php echo $output; ?></span>
@@ -1285,24 +1230,23 @@ function fes_user_edit_profile_metabox( $user ) {
 		</tr>
 		<?php
 		$db_user = new FES_DB_Vendors();
-		if ( EDD_FES()->vendors->user_is_admin() && ! $db_user->exists( 'user_id', $user->ID ) ) { ?>
-			<tr>
-				<th><label><?php _e( 'Actions:', 'edd_fes' ); ?></label></th>
-				<td>
-					<?php
-					$output = '';
-					$link   = sprintf( _x( 'Make %s', 'FES lowercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = false ) );
-					$string = __( 'Create', 'edd_fes' );
-					$output .= sprintf( '<a class="create-vendor-user-edit" data-vendor="%d" data-status="approved" data-nstatus="%s" href="#"/>%s</a>', $user->ID, $string, $link );
-					?>
-					<span><?php echo $output; ?></span>
-				</td>
-			</tr>
+		if ( EDD_FES()->vendors->user_is_admin() && !$db_user->exists( 'user_id', $user->ID ) ) { ?>
+		<tr>
+			<th><label><?php _e('Actions:', 'edd_fes'); ?></label></th>
+			<td>
+				<?php
+				$output  = '';
+				$link    = sprintf( _x( 'Make %s', 'FES lowercase singular setting for vendor', 'edd_fes' ), EDD_FES()->helper->get_vendor_constant_name( $plural = false, $uppercase = false ) );
+				$string  =  __( 'Create', 'edd_fes' );
+				$output .= sprintf( '<a class="create-vendor-user-edit" data-vendor="%d" data-status="approved" data-nstatus="%s" href="#"/>%s</a>', $user->ID, $string, $link );
+				?>
+				<span><?php echo $output; ?></span>
+			</td>
+		</tr>
 		<?php } ?>
 	</table>
 	<?php
 }
-
 add_action( 'show_user_profile', 'fes_user_edit_profile_metabox', 2, 1 );
 add_action( 'edit_user_profile', 'fes_user_edit_profile_metabox', 2, 1 );
 
@@ -1312,15 +1256,14 @@ add_action( 'edit_user_profile', 'fes_user_edit_profile_metabox', 2, 1 );
  * Change status action from the user profile or
  * my profile page in WordPress.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @todo   How many of these types of functions do we have?
+ * @todo  How many of these types of functions do we have?
  *        We can probably simplify these down.
  *
- * @param  int $id       User id of the user currently
+ * @param  int $id User id of the user currently
  *                       being edited.
- *
  * @return array JSON encoded array with message.
  */
 function fes_create_vendor_user_edit( $id = 0 ) {
@@ -1330,8 +1273,8 @@ function fes_create_vendor_user_edit( $id = 0 ) {
 
 	@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 
-	if ( isset( $_REQUEST['vendor'] ) ) {
-		$id = intval( $_REQUEST['vendor'] );
+	if ( isset( $_REQUEST[ 'vendor' ] ) ) {
+		$id = intval( $_REQUEST[ 'vendor' ] );
 	}
 
 	if ( ! EDD_FES()->vendors->user_is_admin() ) {
@@ -1368,16 +1311,16 @@ function fes_create_vendor_user_edit( $id = 0 ) {
 
 	// create user
 	$db_user->add( array(
-		'user_id'       => $user->ID,
-		'email'         => $user->user_email,
-		'username'      => $user->user_login,
-		'name'          => $user->display_name,
-		'product_count' => 0,
-		'sales_count'   => 0,
-		'sales_value'   => 0.00,
-		'status'        => 'pending',
-		'notes'         => '',
-		'date_created'  => date( 'Y-m-d H:i:s' ),
+		'user_id'        => $user->ID,
+		'email'          => $user->user_email,
+		'username'       => $user->user_login,
+		'name'           => $user->display_name,
+		'product_count'  => 0,
+		'sales_count'	 => 0,
+		'sales_value'	 => 0.00,
+		'status'		 => 'pending',
+		'notes'          => '',
+		'date_created'   => date( 'Y-m-d H:i:s' ),
 	) );
 
 	// set to approved
@@ -1391,7 +1334,6 @@ function fes_create_vendor_user_edit( $id = 0 ) {
 	echo json_encode( $output );
 	exit;
 }
-
 add_action( 'wp_ajax_fes_create_vendor_user_edit', 'fes_create_vendor_user_edit', 10, 1 );
 
 /**
@@ -1400,28 +1342,26 @@ add_action( 'wp_ajax_fes_create_vendor_user_edit', 'fes_create_vendor_user_edit'
  * Processes the submission of the profile form
  * in the WordPress admin.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @param  int   $id     User id of the user currently being edited.
+ * @param  int $id User id of the user currently being edited.
  * @param  array $values Values to save.
- * @param  array $args   Args for the save function. Deprecated.
- *
+ * @param  array $args Args for the save function. Deprecated.
  * @return void
  */
 function fes_admin_submit_profile_form( $id = 0, $values = array(), $args = array() ) {
-	$form_id   = ! empty( $values ) && isset( $values['form_id'] ) ? absint( $values['form_id'] ) : ( isset( $_REQUEST['form_id'] ) ? absint( $_REQUEST['form_id'] ) : EDD_FES()->helper->get_option( 'fes-profile-form', false ) );
-	$user_id   = ! empty( $values ) && isset( $values['user_id'] ) ? absint( $values['user_id'] ) : ( isset( $_REQUEST['user_id'] ) ? absint( $_REQUEST['user_id'] ) : get_current_user_id() );
-	$vendor_id = ! empty( $values ) && isset( $values['vendor_id'] ) ? absint( $values['vendor_id'] ) : ( isset( $_REQUEST['vendor_id'] ) ? absint( $_REQUEST['vendor_id'] ) : -2 );
+	$form_id   = ! empty( $values ) && isset( $values['form_id'] )   ? absint( $values['form_id'] )     : ( isset( $_REQUEST['form_id'] )   ? absint( $_REQUEST['form_id'] )   : EDD_FES()->helper->get_option( 'fes-profile-form', false ) );
+	$user_id   = ! empty( $values ) && isset( $values['user_id'] )   ? absint( $values['user_id'] )     : ( isset( $_REQUEST['user_id'] )   ? absint( $_REQUEST['user_id'] )   : get_current_user_id() );
+	$vendor_id = ! empty( $values ) && isset( $values['vendor_id'] ) ? absint( $values['vendor_id'] )   : ( isset( $_REQUEST['vendor_id'] ) ? absint( $_REQUEST['vendor_id'] ) : -2 );
 	$values    = ! empty( $values ) ? $values : $_POST;
 
 	// Make the FES Form
-	$form = new FES_Profile_Form( $form_id, 'id', $vendor_id );
+	$form      = new FES_Profile_Form( $form_id, 'id', $vendor_id );
 
 	// Save the FES Form
-	$form->save_form_admin( $values, $user_id );
+	$form->save_form_admin( $values , $user_id );
 }
-
 add_action( 'wp_ajax_fes_submit_profile_form', 'fes_admin_submit_profile_form', 10, 3 );
 
 /**
@@ -1430,26 +1370,24 @@ add_action( 'wp_ajax_fes_submit_profile_form', 'fes_admin_submit_profile_form', 
  * Processes the submission of the registration form
  * in the WordPress admin.
  *
- * @since  2.3.0
+ * @since 2.3.0
  * @access public
  *
- * @param  int   $id     User id of the user currently being edited.
+ * @param  int $id User id of the user currently being edited.
  * @param  array $values Values to save.
- * @param  array $args   Args for the save function. Deprecated.
- *
+ * @param  array $args Args for the save function. Deprecated.
  * @return void
  */
 function fes_admin_submit_registration_form( $id = 0, $values = array(), $args = array() ) {
-	$form_id   = ! empty( $values ) && isset( $values['form_id'] ) ? absint( $values['form_id'] ) : ( isset( $_REQUEST['form_id'] ) ? absint( $_REQUEST['form_id'] ) : EDD_FES()->helper->get_option( 'fes-login-form', false ) );
-	$user_id   = ! empty( $values ) && isset( $values['user_id'] ) ? absint( $values['user_id'] ) : ( isset( $_REQUEST['user_id'] ) ? absint( $_REQUEST['user_id'] ) : get_current_user_id() );
+	$form_id   = ! empty( $values ) && isset( $values['form_id'] )   ? absint( $values['form_id'] )   : ( isset( $_REQUEST['form_id'] )   ? absint( $_REQUEST['form_id'] )   : EDD_FES()->helper->get_option( 'fes-login-form', false ) );
+	$user_id   = ! empty( $values ) && isset( $values['user_id'] )   ? absint( $values['user_id'] )   : ( isset( $_REQUEST['user_id'] )   ? absint( $_REQUEST['user_id'] )   : get_current_user_id() );
 	$vendor_id = ! empty( $values ) && isset( $values['vendor_id'] ) ? absint( $values['vendor_id'] ) : ( isset( $_REQUEST['vendor_id'] ) ? absint( $_REQUEST['vendor_id'] ) : -2 );
 
-	$values = ! empty( $values ) ? $values : $_POST;
+	$values    = ! empty( $values ) ? $values : $_POST;
 	// Make the FES Form
-	$form = new FES_Registration_Form( $form_id, 'id', $vendor_id );
+	$form      = new FES_Registration_Form( $form_id, 'id', $vendor_id );
 
 	// Save the FES Form
 	$form->save_form_admin( $values, $user_id );
 }
-
-add_action( 'wp_ajax_fes_submit_registration_form', 'fes_admin_submit_registration_form', 10, 3 );
+add_action( 'wp_ajax_fes_submit_registration_form', 'fes_admin_submit_registration_form', 10, 3  );

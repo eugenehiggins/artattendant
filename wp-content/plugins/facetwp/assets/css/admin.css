@@ -61,6 +61,22 @@ body.settings_page_facetwp {
     margin-right: 20px;
 }
 
+.button.facetwp-rebuild {
+    margin-right: 4px;
+    opacity: 0.4;
+}
+
+.facetwp-rebuild.flux {
+    animation: glowing 2s infinite;
+    opacity: 1;
+}
+
+@keyframes glowing {
+    0% { box-shadow: 0; }
+    25% { box-shadow: 0 0 15px #FF5722; }
+    50% { box-shadow: 0; }
+}
+
 /* Loading animation */
 
 .facetwp-loading {
@@ -132,7 +148,7 @@ body.settings_page_facetwp {
     grid-gap: 5px;
 }
 
-.facetwp-add {
+.facetwp-btn {
     display: inline-block;
     cursor: pointer;
     padding: 3px 6px;
@@ -144,7 +160,7 @@ body.settings_page_facetwp {
     color: #e91e63;
 }
 
-.facetwp-add:hover {
+.facetwp-btn:hover {
     background: #e91e63;
     color: #fff;
 }
@@ -277,7 +293,7 @@ body.settings_page_facetwp {
 /* Data Source dropdown */
 
 .name-source .fs-dropdown {
-    width: 280px;
+    width: 300px;
 }
 
 /* Code-based facets */

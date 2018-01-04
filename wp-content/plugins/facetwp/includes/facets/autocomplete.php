@@ -83,8 +83,8 @@ class FacetWP_Facet_Autocomplete extends FacetWP_Facet
      */
     function front_scripts() {
         FWP()->display->json['no_results'] = __( 'No results', 'fwp' );
-        FWP()->display->assets['jquery.autocomplete.js'] = FACETWP_URL . '/assets/js/jquery-autocomplete/jquery.autocomplete.min.js';
-        FWP()->display->assets['jquery.autocomplete.css'] = FACETWP_URL . '/assets/js/jquery-autocomplete/jquery.autocomplete.css';
+        FWP()->display->assets['jquery.autocomplete.js'] = FACETWP_URL . '/assets/vendor/jquery-autocomplete/jquery.autocomplete.min.js';
+        FWP()->display->assets['jquery.autocomplete.css'] = FACETWP_URL . '/assets/vendor/jquery-autocomplete/jquery.autocomplete.css';
     }
 
 

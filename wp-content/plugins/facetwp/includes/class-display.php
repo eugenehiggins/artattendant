@@ -110,9 +110,7 @@ class FacetWP_Display
                 $this->assets['front.css'] = FACETWP_URL . '/assets/css/front.css';
             }
 
-            $this->assets['event-manager.js'] = FACETWP_URL . '/assets/js/src/event-manager.js';
-            $this->assets['front.js'] = FACETWP_URL . '/assets/js/front.js';
-            $this->assets['front-facets.js'] = FACETWP_URL . '/assets/js/front-facets.js';
+            $this->assets['front.js'] = FACETWP_URL . '/assets/js/dist/front.min.js';
 
             // Use the REST API?
             $ajaxurl = admin_url( 'admin-ajax.php' );
@@ -171,8 +169,8 @@ class FacetWP_Display
             echo $inline_scripts;
 ?>
 <script>
-var FWP_JSON = <?php echo json_encode( $this->json ); ?>;
-var FWP_HTTP = <?php echo json_encode( $http_params ); ?>;
+window.FWP_JSON = <?php echo json_encode( $this->json ); ?>;
+window.FWP_HTTP = <?php echo json_encode( $http_params ); ?>;
 </script>
 <?php
         }

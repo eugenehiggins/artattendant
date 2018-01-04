@@ -77,8 +77,10 @@ final class FacetWP_Helper
     /**
      * Get settings and allow for developer hooks
      */
-    function load_settings() {
-        $settings = json_decode( get_option( 'facetwp_settings' ), true );
+    function load_settings( $last_index = false ) {
+        $name = $last_index ? 'facetwp_settings_last_index' : 'facetwp_settings';
+        $option = get_option( $name );
+        $settings = ( false !== $option ) ? json_decode( $option, true ) : array();
 
         if ( empty( $settings['facets'] ) ) {
             $settings['facets'] = array();

@@ -68,28 +68,26 @@ class Tests_EDD_Commissions_Functions extends EDD_Commissions_Unitestcase {
 			array(
 				'recipient'           => self::$_user->ID,
 				'commission_amount'   => ( 3 / 100 ) * self::$_payment->cart_details[0]['price'],
-				'rate'                => 3.0,
+				'rate'                => 3,
 				'download_id'         => self::$_download_id,
 				'payment_id'          => self::$_payment->ID,
 				'currency'            => self::$_payment->currency,
 				'has_variable_prices' => false,
 				'price_id'            => NULL,
 				'variation'           => NULL,
-				'cart_item'           => self::$_payment->cart_details[0],
-				'cart_index'          => 0,
+				'cart_item'           => self::$_payment->cart_details[0]
 			),
 			array(
 				'recipient'           => self::$_author->ID,
 				'commission_amount'   => ( 0 / 100 ) * self::$_payment->cart_details[0]['price'],
-				'rate'                => 0.0,
+				'rate'                => 0,
 				'download_id'         => self::$_download_id,
 				'payment_id'          => self::$_payment->ID,
 				'currency'            => self::$_payment->currency,
 				'has_variable_prices' => false,
 				'price_id'            => NULL,
 				'variation'           => NULL,
-				'cart_item'           => self::$_payment->cart_details[0],
-				'cart_index'          => 0,
+				'cart_item'           => self::$_payment->cart_details[0]
 			)
 		);
 

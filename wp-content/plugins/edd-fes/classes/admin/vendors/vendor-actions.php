@@ -93,7 +93,7 @@ function fes_edit_vendor( $args ) {
 
 		$current_address = get_user_meta( $vendor_info['user_id'], '_fes_vendor_address', true );
 
-		if ( empty( $current_address ) ) {
+		if ( false === $current_address ) {
 			$address['line1']   = isset( $vendor_info['line1'] )   ? $vendor_info['line1']   : '';
 			$address['line2']   = isset( $vendor_info['line2'] )   ? $vendor_info['line2']   : '';
 			$address['city']    = isset( $vendor_info['city'] )    ? $vendor_info['city']    : '';
@@ -102,12 +102,18 @@ function fes_edit_vendor( $args ) {
 			$address['state']   = isset( $vendor_info['state'] )   ? $vendor_info['state']   : '';
 		} else {
 			$current_address    = wp_parse_args( $current_address, array( 'line1', 'line2', 'city', 'zip', 'state', 'country' ) );
-			$address['line1']   = isset( $vendor_info['line1'] )   ? $vendor_info['line1']   : $current_address['line1']  ;
-			$address['line2']   = isset( $vendor_info['line2'] )   ? $vendor_info['line2']   : $current_address['line2']  ;
-			$address['city']    = isset( $vendor_info['city'] )    ? $vendor_info['city']    : $current_address['city']   ;
-			$address['country'] = isset( $vendor_info['country'] ) ? $vendor_info['country'] : $current_address['country'];
-			$address['zip']     = isset( $vendor_info['zip'] )     ? $vendor_info['zip']     : $current_address['zip']    ;
-			$address['state']   = isset( $vendor_info['state'] )   ? $vendor_info['state']   : $current_address['state']  ;
+			$line1              = ! empty( $current_address['line1']  )  ? $current_address['line1']   : '';
+			$line2              = ! empty( $current_address['line2']  )  ? $current_address['line2']   : '';
+			$city               = ! empty( $current_address['city']  )   ? $current_address['city']    : '';
+			$zip                = ! empty( $current_address['zip']  )    ? $current_address['zip']     : '';
+			$state              = ! empty( $current_address['state']  )  ? $current_address['state']   : '';
+			$country            = ! empty( $current_address['country'] ) ? $current_address['country'] : '';
+			$address['line1']   = ! empty( $vendor_info['line1'] )       ? $vendor_info['line1']   : $line1   ;
+			$address['line2']   = ! empty( $vendor_info['line2'] )        ? $vendor_info['line2']   : $line2   ;
+			$address['city']    = ! empty( $vendor_info['city'] )        ? $vendor_info['city']    : $city    ;
+			$address['country'] = ! empty( $vendor_info['country'] )     ? $vendor_info['country'] : $country ;
+			$address['zip']     = ! empty( $vendor_info['zip'] )         ? $vendor_info['zip']     : $zip     ;
+			$address['state']   = ! empty( $vendor_info['state'] )       ? $vendor_info['state']   : $state   ;
 		}
 
 	}

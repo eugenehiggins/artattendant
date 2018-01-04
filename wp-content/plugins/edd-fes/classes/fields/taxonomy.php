@@ -169,7 +169,7 @@ class FES_Taxonomy_Field extends FES_Field {
 					<input class="textfield<?php echo $this->required_class( $readonly ); ?>" id="<?php echo $this->name(); ?>" type="text" data-required="<?php echo $required; ?>" data-type="text"<?php $this->required_html5( $readonly ); ?> name="<?php echo esc_attr( $this->name() ); ?>" value="<?php echo esc_attr( implode( ', ', $terms ) ); ?>" size="40" />
 					<script type="text/javascript">
 						jQuery(function(){
-							jQuery('#<?php echo $this->name(); ?>').suggest( fes_form.ajaxurl + '?action=fes_ajax_taxonomy_search&tax=<?php echo $this->name(); ?>', { delay: 500, minchars: 2, multiple: true, multipleSep: ', ' } );
+							jQuery('#<?php echo $this->name(); ?>').suggest( fes_form.ajaxurl + '?action=fes_ajax_taxonomy_search&tax=<?php echo $this->name(); ?>', { delay: 200, minchars: 2, multiple: false, multipleSep: ', ' } ); //anagram / geet change default to single and 200 delay
 						});
 					</script>
 

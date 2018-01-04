@@ -2,10 +2,10 @@
 /*
 Plugin Name: Easy Digital Downloads - Commissions
 Plugin URI: http://easydigitaldownloads.com/extension/commissions
-Description: Record commissions automatically for users in your site when downloads are sold
+Description: Record commisions automatically for users in your site when downloads are sold
 Author: Easy Digital Downloads
 Author URI: https://easydigitaldownloads.com
-Version: 3.4.5
+Version: 3.4.1
 Text Domain: eddc
 Domain Path: languages
 */
@@ -82,7 +82,7 @@ if ( ! class_exists( 'EDDC' ) ) {
 		 */
 		private function setup_constants() {
 			// Plugin version
-			define( 'EDD_COMMISSIONS_VERSION', '3.4.5' );
+			define( 'EDD_COMMISSIONS_VERSION', '3.4.1' );
 
 			// Plugin folder url
 			define( 'EDDC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -283,7 +283,6 @@ function edd_commissions_install() {
 			if ( ! $has_commissions ) {
 				edd_set_upgrade_complete( 'migrate_commissions' );
 				edd_set_upgrade_complete( 'remove_legacy_commissions' );
-				edd_set_upgrade_complete( 'commissions_342_rate_column' );
 			}
 		}
 

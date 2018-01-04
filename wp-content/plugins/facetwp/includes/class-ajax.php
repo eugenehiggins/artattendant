@@ -130,12 +130,11 @@ class FacetWP_Ajax
                 return;
             }
 
+            // Generate the FWP output
             if ( $this->is_preload ) {
                 $this->get_preload_data( 'wp' );
             }
             else {
-
-                // Generate the FWP output
                 $this->output = FWP()->facet->render(
                     $this->process_post_data()
                 );
@@ -241,11 +240,21 @@ class FacetWP_Ajax
         // Check for valid JSON
         if ( isset( $json_test['settings'] ) ) {
             update_option( 'facetwp_settings', $settings );
-            echo __( 'Settings saved', 'fwp' );
+            $response = array(
+                'code' => 'success',
+                'message' => __( 'Settings saved', 'fwp' ),
+                'reindex' => FWP()->diff->is_reindex_needed()
+            );
         }
         else {
-            echo __( 'Error: invalid JSON', 'fwp' );
+            $response = array(
+                'code' => 'error',
+                'message' => __( 'Error: invalid JSON', 'fwp' )
+            );
         }
+
+        echo json_encode( $response );
+
         exit;
     }
 

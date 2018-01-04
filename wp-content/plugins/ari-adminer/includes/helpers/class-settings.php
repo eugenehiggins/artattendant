@@ -22,6 +22,8 @@ class Settings {
         'roles' => array(),
 
         'stop_on_logout' => false,
+
+        'show_quick_icon' => false,
     );
 
     public static function init() {
@@ -82,6 +84,18 @@ class Settings {
                 __( 'Only users with the selected user role will have access to the plugin.', 'ari-adminer' )
             ),
             array( __CLASS__, 'render_general_roles' ),
+            ARIADMINER_SETTINGS_GENERAL_PAGE,
+            ARIADMINER_SETTINGS_GENERAL_SECTION
+        );
+
+        add_settings_field(
+            'show_quick_icon',
+            self::format_option_name(
+                __( 'Show quick icon', 'ari-adminer' ),
+
+                __( 'An icon will be added to quick links to open the page with DB using default connection.', 'ari-adminer' )
+            ),
+            array( __CLASS__, 'render_general_quick_link' ),
             ARIADMINER_SETTINGS_GENERAL_PAGE,
             ARIADMINER_SETTINGS_GENERAL_SECTION
         );
@@ -241,6 +255,24 @@ class Settings {
                 $label
             );
         }
+
+        echo $html;
+    }
+
+    public static function render_general_quick_link() {
+        $val = self::get_option( 'show_quick_icon' );
+
+        $html = sprintf(
+            '<p>
+                <label>
+                    <input type="checkbox" name="%1$s[show_quick_icon]" value="1" %2$s />
+                    %3$s
+                </label>
+            </p>',
+            ARIADMINER_SETTINGS_NAME,
+            $val ? ' checked="checked"' : '',
+            __( 'Show quick icon', 'ari-adminer' )
+        );
 
         echo $html;
     }

@@ -86,7 +86,7 @@ class EDDC_DB extends EDD_DB {
 			'date_created' => date( 'Y-m-d H:i:s' ),
 			'date_paid'    => '',
 			'type'         => '',
-			'rate'         => 0.00,
+			'rate'         => 0,
 			'currency'     => edd_get_currency(),
 		);
 	}
@@ -348,14 +348,14 @@ class EDDC_DB extends EDD_DB {
 			}
 
 			if ( ! empty( $after_date ) && ! empty( $before_date ) ) {
-				$where .= " AND date_created BETWEEN CAST('$after_date' AS DATETIME) AND CAST('$before_date' AS DATETIME)";
+				$where .= " AND date_created BETWEEN CAST('$after_date' AS DATE) AND CAST('$before_date' AS DATE)";
 			} else {
 				if ( ! empty( $after_date ) ) {
-					$where .= " AND date_created >= CAST('$after_date' AS DATETIME)";
+					$where .= " AND date_created >= CAST('$after_date' AS DATE)";
 				}
 
 				if ( ! empty( $before_date ) ) {
-					$where .= " AND date_created <= CAST('$before_date' AS DATETIME)";
+					$where .= " AND date_created <= CAST('$before_date' AS DATE)";
 				}
 			}
 		}
@@ -409,7 +409,7 @@ class EDDC_DB extends EDD_DB {
 		date_created datetime NOT NULL,
 		date_paid datetime NOT NULL,
 		type varchar(20) NOT NULL,
-		rate DOUBLE NOT NULL,
+		rate bigint(20) NOT NULL,
 		currency varchar(10) NOT NULL,
 		PRIMARY KEY  (id),
 		KEY download_id (download_id),

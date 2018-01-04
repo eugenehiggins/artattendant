@@ -483,7 +483,7 @@ class FES_Registration_Form extends FES_Form {
 			$id         = $save_id;
 			$args       = array( 'permissions' => 'fes-admin-new-app-email-toggle' );
 
-			EDD_FES()->emails->send_email( $to , $from_name, $from_email, $subject, $message, $type, $id, $args );
+			EDD_FES()->emails->send_email( $to , $from_name, $from_email, $subject, $message, $type, $id );
 
 			// email user
 			$to         = apply_filters( 'fes_registration_form_frontend_vendor_to_vendor', $values['user_email'], $values );
@@ -495,7 +495,7 @@ class FES_Registration_Form extends FES_Form {
 			$id         = $save_id;
 			$args       = array( 'permissions' => 'fes-vendor-new-auto-vendor-email-toggle' );
 
-			EDD_FES()->emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id, $args );
+			EDD_FES()->emails->send_email( $to, $from_name, $from_email, $subject, $message, $type, $id );
 
 			do_action ( 'fes_register_form_frontend_autoapproved_vendor_email', $save_id, $values );
 
@@ -511,7 +511,7 @@ class FES_Registration_Form extends FES_Form {
 			$id         = $save_id;
 			$args       = array( 'permissions' => 'fes-admin-new-app-email-toggle' );
 
-			EDD_FES()->emails->send_email( $to , $from_name, $from_email, $subject, $message, $type, $id, $args );
+			EDD_FES()->emails->send_email( $to , $from_name, $from_email, $subject, $message, $type, $id );
 
 			// email user
 			$to         = apply_filters( 'fes_registration_form_pending_vendor_to_vendor', $values['user_email'], $values );
@@ -523,7 +523,7 @@ class FES_Registration_Form extends FES_Form {
 			$id         = $save_id;
 			$args       = array( 'permissions' => 'fes-vendor-new-app-email-toggle' );
 
-			EDD_FES()->emails->send_email( $to , $from_name, $from_email, $subject, $message, $type, $id, $args );
+			EDD_FES()->emails->send_email( $to , $from_name, $from_email, $subject, $message, $type, $id );
 
 			do_action ( 'fes_register_form_frontend_pending_vendor_email', $save_id, $values );
 		}

@@ -186,9 +186,9 @@ class FES_Setup {
 			// FES outputs minified scripts by default on the frontend. To load full versions, hook into this and return empty string.
 			$minify = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 			$minify = apply_filters( 'fes_output_minified_versions', $minify );
-			wp_enqueue_script( 'fes_form', fes_plugin_url . 'assets/js/frontend-form' . $minify . '.js', array(
+			wp_enqueue_script( 'fes_form', fes_plugin_url . 'assets/js/frontend-form.js', array(
 					'jquery'
-			), fes_plugin_version );
+			), fes_plugin_version ); //anagram / geet remove minify for troubleshooting
 
 			$options = array(
 				'ajaxurl'             => admin_url( 'admin-ajax.php' ),

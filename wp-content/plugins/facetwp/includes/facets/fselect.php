@@ -217,8 +217,8 @@ class FacetWP_Facet_fSelect extends FacetWP_Facet
      * Output any front-end scripts
      */
     function front_scripts() {
-        FWP()->display->assets['fSelect.css'] = FACETWP_URL . '/assets/js/fSelect/fSelect.css';
-        FWP()->display->assets['fSelect.js'] = FACETWP_URL . '/assets/js/fSelect/fSelect.js';
+        FWP()->display->assets['fSelect.css'] = FACETWP_URL . '/assets/vendor/fSelect/fSelect.css';
+        FWP()->display->assets['fSelect.js'] = FACETWP_URL . '/assets/vendor/fSelect/fSelect.js';
     }
 
 
