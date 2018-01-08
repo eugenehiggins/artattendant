@@ -109,7 +109,7 @@ $('.refiner').click(function(){
 		});
 
 //Show hide content
-jQuery(".refiner").toggle(function(){
+jQuery(".refiner .refine-click").toggle(function(){
 	jQuery('i', this).addClass('fa-rotate-270');
 	//jQuery('i', this).removeClass("fa-angle-down").addClass("fa-angle-up");
   $('.the-filters').slideDown('normal').parent().addClass('open');
@@ -120,6 +120,18 @@ jQuery(".refiner").toggle(function(){
 });
 
 
+//Show hide artists
+jQuery(".refiner .artists-click").toggle(function(){
+    $('#artist-list').slideDown('normal');
+}, function(){
+	$('#artist-list').slideUp('normal');
+});
+
+
+
+ $( ".facetwp-facet-artist_list " ).on( "click", ".facetwp-radio", function() {
+  	jQuery(".refiner .artists-click").click();
+});
 
 
 

@@ -46,6 +46,7 @@ class MWP_Worker_Exception extends Exception
     const WORKER_RECOVERING = 10036;
     const WORKER_UPDATING = 10037;
     const WORKER_RECOVER_STARTED = 10038;
+    const CONNECTION_INVALID_KEY = 10100;
 
     const GENERAL_ERROR = 10000;
 

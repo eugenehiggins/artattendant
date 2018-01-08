@@ -38,6 +38,30 @@ class MWP_Worker_Request
      */
     protected $signatureHeaderName = 'MWP-Signature';
 
+    /**
+     * Header that contains the name of the key used for signing.
+     * Must be compliant with {@link http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html RFC 2616}
+     *
+     * @var string
+     */
+    protected $keyNameHeaderName = 'MWP-Key-Name';
+
+    /**
+     * Header that contains the message signed by the corresponding service.
+     * Must be compliant with {@link http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html RFC 2616}
+     *
+     * @var string
+     */
+    protected $serviceSignatureHeaderName = 'MWP-Service-Signature';
+
+    /**
+     * Header that contains the communication key.
+     * Must be compliant with {@link http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html RFC 2616}
+     *
+     * @var string
+     */
+    protected $communicationKeyHeaderName = 'MWP-Communication-Key';
+
     protected $protocolVersionHeaderName = 'MWP-Protocol';
 
     /**
@@ -97,13 +121,13 @@ class MWP_Worker_Request
     private $method;
 
     /**
-     * @param array       $query      The GET parameters.
-     * @param array       $request    The POST parameters.
+     * @param array       $query The GET parameters.
+     * @param array       $request The POST parameters.
      * @param array       $attributes The request attributes.
-     * @param array       $cookies    The COOKIE parameters.
-     * @param array       $files      The FILES parameters.
-     * @param array       $server     The SERVER parameters.
-     * @param null|string $content    The raw request body data. If null, it will be lazy-loaded.
+     * @param array       $cookies The COOKIE parameters.
+     * @param array       $files The FILES parameters.
+     * @param array       $server The SERVER parameters.
+     * @param null|string $content The raw request body data. If null, it will be lazy-loaded.
      */
     public function __construct($query = array(), $request = array(), $attributes = array(), $cookies = array(), $files = array(), $server = array(), $content = null)
     {
@@ -165,15 +189,22 @@ class MWP_Worker_Request
         }
         $this->initialized = true;
 
-        $this->attributes['action']        = $this->getHeader($this->actionHeaderName);
-        $this->attributes['id']            = $this->getHeader($this->messageIdHeaderName);
-        $this->attributes['signature']     = base64_decode($this->getHeader($this->signatureHeaderName));
-        $this->attributes['data']          = null;
-        $this->attributes['params']        = null;
-        $this->attributes['setting']       = null;
-        $this->attributes['user']          = null;
-        $this->attributes['authenticated'] = false;
-        $this->attributes['protocol']      = (int) $this->getHeader($this->protocolVersionHeaderName);
+        $this->attributes['action']            = $this->getHeader($this->actionHeaderName);
+        $this->attributes['id']                = $this->getHeader($this->messageIdHeaderName);
+        $this->attributes['signature']         = base64_decode($this->getHeader($this->signatureHeaderName));
+        $this->attributes['key_name']          = $this->getHeader($this->keyNameHeaderName);
+        $this->attributes['service_signature'] = $this->getHeader($this->serviceSignatureHeaderName);
+        $this->attributes['communication_key'] = $this->getHeader($this->communicationKeyHeaderName);
+        $this->attributes['data']              = null;
+        $this->attributes['params']            = null;
+        $this->attributes['setting']           = null;
+        $this->attributes['user']              = null;
+        $this->attributes['authenticated']     = false;
+        $this->attributes['protocol']          = (int)$this->getHeader($this->protocolVersionHeaderName);
+
+        if (!empty($this->attributes['service_signature'])) {
+            $this->attributes['service_signature'] = base64_decode($this->attributes['service_signature']);
+        }
 
         // Do we have {"params":{...}} inside of body?
         if ($this->isMasterRequest() && is_array($data = json_decode($this->getContent(), true)) && array_key_exists('params', $data)) {
@@ -264,6 +295,30 @@ class MWP_Worker_Request
     public function getSignature()
     {
         return $this->attributes['signature'];
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getKeyName()
+    {
+        return $this->attributes['key_name'];
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getServiceSignature()
+    {
+        return $this->attributes['service_signature'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommunicationKey()
+    {
+        return !empty($this->attributes['communication_key']) ? $this->attributes['communication_key'] : '';
     }
 
     /**

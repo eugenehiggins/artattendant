@@ -84,10 +84,6 @@ class MMB_Core extends MMB_Helper
 
         add_action('init', array(&$this, 'mmb_remote_action'), 9999);
         add_action('setup_theme', 'mmb_run_forked_action', 1);
-
-        if (!get_option('_worker_nossl_key') && !get_option('_worker_public_key')) {
-            add_action('init', array(&$this, 'deactivateWorkerIfNotAddedAfterTenMinutes'));
-        }
     }
 
     public function mmb_remote_action()
@@ -380,6 +376,7 @@ EOF;
                             delete_blog_option($blog_id, '_worker_nossl_key');
                             delete_blog_option($blog_id, '_worker_public_key');
                             delete_blog_option($blog_id, '_action_message_id');
+                            delete_blog_option($blog_id, 'mwp_communication_key');
                             delete_blog_option($blog_id, 'mwp_maintenace_mode');
                             delete_blog_option($blog_id, 'mwp_notifications');
                             delete_blog_option($blog_id, 'mwp_worker_brand');
@@ -395,12 +392,14 @@ EOF;
                     delete_option('_worker_nossl_key');
                     delete_option('_worker_public_key');
                     delete_option('_action_message_id');
+                    delete_option('mwp_communication_key');
                 }
             }
         } else {
             delete_option('_worker_nossl_key');
             delete_option('_worker_public_key');
             delete_option('_action_message_id');
+            delete_option('mwp_communication_key');
         }
 
         //Delete options
@@ -481,21 +480,6 @@ EOF;
         return array(
             'error' => 'Bad download path for worker installation file.',
         );
-    }
-
-    public function deactivateWorkerIfNotAddedAfterTenMinutes()
-    {
-        $workerActivationTime = get_option("mmb_worker_activation_time");
-        if ((int)$workerActivationTime + 600 > time()) {
-            return;
-        }
-        $activated_plugins = get_option('active_plugins');
-        $keyWorker         = array_search("worker/init.php", $activated_plugins, true);
-        if ($keyWorker === false) {
-            return;
-        }
-        unset($activated_plugins[$keyWorker]);
-        update_option('active_plugins', $activated_plugins);
     }
 
     public function updateKeys()

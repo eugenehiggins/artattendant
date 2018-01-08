@@ -20,7 +20,7 @@ class MWP_WordPress_Context
     private $constants;
 
     /**
-     * @param array $globals   The context to work with. Defaults to $GLOBALS, using the same global variables as WordPress.
+     * @param array $globals The context to work with. Defaults to $GLOBALS, using the same global variables as WordPress.
      * @param array $constants The list of constants to use. Defaults to global constants.
      */
     public function __construct(array &$globals = null, array $constants = null)
@@ -117,7 +117,7 @@ class MWP_WordPress_Context
 
     /**
      * @param string $optionName The option to delete.
-     * @param bool   $global     Whether to delete the option from the whole network. Used for network un-installation.
+     * @param bool   $global Whether to delete the option from the whole network. Used for network un-installation.
      *
      * @see  delete_site_option()
      * @see  delete_option()
@@ -154,14 +154,14 @@ class MWP_WordPress_Context
                 update_blog_option($blogID, $optionName, $optionValue);
             }
         } else {
-            update_option($optionName, $optionValue);
+            update_option($optionName, $optionValue, true);
         }
     }
 
     /**
-     * @param string $option   Name of option to retrieve.
-     * @param mixed  $default  Optional. Default value to return if the option does not exist.
-     * @param int    $siteId   Site ID to update. Only used in multisite installations.
+     * @param string $option Name of option to retrieve.
+     * @param mixed  $default Optional. Default value to return if the option does not exist.
+     * @param int    $siteId Site ID to update. Only used in multisite installations.
      * @param bool   $useCache Whether to use cache. Multisite only.
      *
      * @return mixed Value set for the option.

@@ -282,6 +282,11 @@ class MMB_Installer extends MMB_Core
             $plugin_files = array();
             $this->ithemes_updater_compatiblity();
             foreach ($upgrade_plugins as $plugin) {
+                if (isset($plugin['envatoPlugin']) && $plugin['envatoPlugin'] === true) {
+                    $upgrades['plugins'] = $this->upgrade_envato_component($plugin);
+                    continue;
+                }
+
                 if (isset($plugin['file'])) {
                     $plugin_files[$plugin['file']] = $plugin['old_version'];
                 } else {
@@ -297,6 +302,11 @@ class MMB_Installer extends MMB_Core
         if (!empty($upgrade_themes)) {
             $theme_temps = array();
             foreach ($upgrade_themes as $theme) {
+                if (isset($theme['envatoTheme']) && $theme['envatoTheme'] === true) {
+                    $upgrades['themes'] = $this->upgrade_envato_component($theme);
+                    continue;
+                }
+
                 if (isset($theme['theme_tmp'])) {
                     $theme_temps[] = $theme['theme_tmp'];
                 } else {
@@ -317,6 +327,36 @@ class MMB_Installer extends MMB_Core
         $this->mmb_maintenance_mode(false);
 
         return $upgrades;
+    }
+
+    /**
+     * @param array $component
+     *
+     * @return array
+     */
+    private function upgrade_envato_component(array $component)
+    {
+        $result = $this->install_remote_file($component);
+        $return = array();
+
+        if (empty($result)) {
+            return array(
+                'error' => 'Upgrade failed.',
+            );
+        }
+
+        foreach ($result as $component_slug => $component_info) {
+            if (!$component_info || is_wp_error($component_info)) {
+                $return[$component_slug] = $this->mmb_get_error($component_info);
+                continue;
+            }
+
+            $return[$component_info['destination_name']] = 1;
+        }
+
+        return array(
+            'upgraded' => $return,
+        );
     }
 
     /**
@@ -533,7 +573,8 @@ class MMB_Installer extends MMB_Core
                 }
 
                 return array(
-                    'upgraded' => $return,
+                    'upgraded'           => $return,
+                    'additional_updates' => $this->get_additional_plugin_updates($result),
                 );
             } else {
                 return array(
@@ -545,6 +586,39 @@ class MMB_Installer extends MMB_Core
                 'error' => 'WordPress update required first.',
             );
         }
+    }
+
+    private function get_additional_plugin_updates($plugin_upgrades)
+    {
+        if (empty($plugin_upgrades)) {
+            return array();
+        }
+
+        $additional_updates = array();
+
+        if (array_key_exists('woocommerce/woocommerce.php', $plugin_upgrades) && is_plugin_active('woocommerce/woocommerce.php') && $this->has_woocommerce_db_update()) {
+            $additional_updates['woocommerce/woocommerce.php'] = 1;
+        }
+
+        return $additional_updates;
+    }
+
+    private function has_woocommerce_db_update()
+    {
+        $current_db_version = get_option('woocommerce_db_version', null);
+        $current_wc_version = get_option('woocommerce_version');
+        if (version_compare($current_wc_version, '3.0.0', '<')) {
+            return true;
+        }
+
+        if (!is_callable('WC_Install::get_db_update_callbacks')) {
+            return false;
+        }
+
+        /** @handled static */
+        $updates = WC_Install::get_db_update_callbacks();
+
+        return !is_null($current_db_version) && version_compare($current_db_version, max(array_keys($updates)), '<');
     }
 
     public function upgrade_themes($themes = false)

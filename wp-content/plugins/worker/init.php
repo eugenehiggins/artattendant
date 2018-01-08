@@ -3,7 +3,7 @@
 Plugin Name: ManageWP - Worker
 Plugin URI: https://managewp.com
 Description: We help you efficiently manage all your WordPress websites. <strong>Updates, backups, 1-click login, migrations, security</strong> and more, on one dashboard. This service comes in two versions: standalone <a href="https://managewp.com">ManageWP</a> service that focuses on website management, and <a href="https://godaddy.com/pro">GoDaddy Pro</a> that includes additional tools for hosting, client management, lead generation, and more.
-Version: 4.2.27
+Version: 4.3.3
 Author: ManageWP
 Author URI: https://managewp.com
 License: GPL2
@@ -253,7 +253,7 @@ if (!class_exists('MwpRecoveryKit', false)):
             $lockTime = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'mwp_incremental_recover_lock' LIMIT 1");
 
 
-            if ($lockTime && time() - (int) $lockTime < 1200) { // lock for 20 minutes
+            if ($lockTime && time() - (int)$lockTime < 1200) { // lock for 20 minutes
                 throw new Exception('Another incremental update or recovery process is already active', 1337);
             }
 
@@ -559,7 +559,8 @@ if (!function_exists('mwp_try_recovery')):
 endif;
 
 if (!function_exists('hide_worker_update')):
-    function hide_worker_update($value) {
+    function hide_worker_update($value)
+    {
         if (isset($value->response['worker/init.php'])) {
             unset($value->response['worker/init.php']);
         }
@@ -576,8 +577,8 @@ if (!function_exists('mwp_init')):
         // reason (eg. the site can't ping itself). Handle that case early.
         register_activation_hook(__FILE__, 'mwp_activation_hook');
 
-        $GLOBALS['MMB_WORKER_VERSION']  = '4.2.27';
-        $GLOBALS['MMB_WORKER_REVISION'] = '2017-11-11 00:00:00';
+        $GLOBALS['MMB_WORKER_VERSION']  = '4.3.3';
+        $GLOBALS['MMB_WORKER_REVISION'] = '2018-01-05 00:00:00';
 
         // Ensure PHP version compatibility.
         if (version_compare(PHP_VERSION, '5.2', '<')) {
@@ -595,7 +596,7 @@ if (!function_exists('mwp_init')):
 
                 global $wpdb;
 
-                $tries = 0;
+                $tries      = 0;
                 $lastResult = true;
 
                 while ($tries < 60 && ($lastResult = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'mwp_incremental_update_active' LIMIT 1"))) {
@@ -623,7 +624,7 @@ if (!function_exists('mwp_init')):
 
         if ($recoveringTime = get_option('mwp_recovering')) {
             if (isset($_SERVER['HTTP_MWP_ACTION'])) {
-                $tries = 0;
+                $tries      = 0;
                 $lastResult = false;
 
                 while ($tries < 60 && !($lastResult = mwp_try_recovery())) {
@@ -709,6 +710,7 @@ if (!function_exists('mwp_init')):
         add_filter('cron_schedules', 'mmb_more_reccurences');
         add_action('mmb_remote_upload', 'mmb_call_scheduled_remote_upload');
         add_action('mwp_datasend', 'mwp_datasend');
+        add_action('mwp_update_public_keys', 'mwp_refresh_live_public_keys');
         add_action('init', 'mmb_plugin_actions', 99999);
         add_filter('install_plugin_complete_actions', 'mmb_iframe_plugins_fix');
         add_filter('comment_edit_redirect', 'mwb_edit_redirect_override');
@@ -720,6 +722,11 @@ if (!function_exists('mwp_init')):
         // Datasend cron.
         if (!wp_next_scheduled('mwp_datasend')) {
             wp_schedule_event(time(), 'threehours', 'mwp_datasend');
+        }
+
+        // Public key updating cron.
+        if (!wp_next_scheduled('mwp_update_public_keys')) {
+            wp_schedule_event(time(), 'daily', 'mwp_update_public_keys');
         }
 
         // Register updater hooks.
@@ -738,7 +745,7 @@ if (!function_exists('mwp_init')):
         if (wp_next_scheduled('mwp_backup_tasks')) {
             wp_clear_scheduled_hook('mwp_backup_tasks');
         }
-
+        mwp_provision_keys();
         mwp_set_plugin_priority();
 
         $request   = MWP_Worker_Request::createFromGlobals();

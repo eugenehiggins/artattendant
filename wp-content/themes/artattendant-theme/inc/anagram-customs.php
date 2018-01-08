@@ -759,6 +759,37 @@ elseif( is_tax('folder') || $pt == 'collections' ||  $pt == 'attachment' ) {
 
 
 
+/*
+*
+* Redirect categories to facetwp links
+*
+*/
+add_action( 'template_redirect', 'anagram_artist_redirect_to' );
+function anagram_artist_redirect_to()
+{
+	global $post;
+	is_tax( array('artist') )
+	and $cat = get_queried_object()
+and wp_redirect( site_url('/discover/') . '?fwp_artist_search=' . $cat->slug )
+	//and wp_redirect( home_url( '/collections/' ), 301 )
+	and exit;
+/*
+
+	is_tax( array('product_tag') )
+	and $cat = get_queried_object()
+and wp_redirect( site_url('/') . '?fwp_tag_filter=' . $cat->slug )
+	//and wp_redirect( home_url( '/collections/' ), 301 )
+	and exit;
+
+	is_tax( array('onview') )
+	and $cat = get_queried_object()
+and wp_redirect( site_url('/') . '?fwp_on_view=' . $cat->slug )
+	//and wp_redirect( home_url( '/collections/' ), 301 )
+	and exit;
+*/
+}
+
+
 //Sort post types
 function custom_sort_pre_get_posts( $query ) {
 
@@ -766,7 +797,7 @@ function custom_sort_pre_get_posts( $query ) {
 
     if( $query->is_main_query() && !is_admin() && is_post_type_archive( 'download' ) ) {
         $query->set( 'post_status', 'publish' );
-         $query->set( 'posts_per_page', 60 );
+        // $query->set( 'posts_per_page', 60 );
         /*$query->set( 'meta_query', array(
             array(
                 'key' => 'start_date',
@@ -786,7 +817,7 @@ add_filter('pre_get_posts' , 'custom_sort_pre_get_posts');
 function add_query_vars($aVars) {
 
     $aVars[] = "task";    // represents the name of the product category as shown in the URL
-
+	 $aVars[] = "artists";
     return $aVars;
 }
 
@@ -798,6 +829,8 @@ function add_rewrite_rules($aRules) {
     $aNewRules = array(
     //'([^/]+)/?$' => 'index.php?pagename=$matches[1]&page=$matches[1]',
     'collection/([^/]+)/?$' => 'index.php?pagename=collection&task=$matches[1]',
+    //'collection/artist/([^/]+)/?$' => 'index.php?pagename=collection&task=$matches[1]',
+    //'collection/artist/([^/]+)/?$' => 'index.php?pagename=collection&task=$matches[1]',
     );
     $aRules = $aNewRules + $aRules;
     return $aRules;

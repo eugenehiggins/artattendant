@@ -60,12 +60,16 @@ class MWP_EventListener_MasterRequest_VerifyConnectionInfo implements Symfony_Ev
 
         $publicKey = file_get_contents($publicKeyLocation);
 
-        $message = json_encode(array('setting' => $request->getSetting(), 'params' => $request->getParams()));
+        $message = json_encode(array('setting' => $request->getSetting(), 'params' => $request->getParams())).strtolower($request->getCommunicationKey());
 
         $verify = $this->signer->verify($message, $connectionSignature, $publicKey);
 
         if (!$verify) {
             throw new MWP_Worker_Exception(MWP_Worker_Exception::CONNECTION_SIGNATURE_NOT_VALID, "Invalid message signature. Deactivate and activate the ManageWP Worker plugin on this site, then re-add it to your ManageWP account.");
+        }
+
+        if (strtolower($request->getCommunicationKey()) !== strtolower(mwp_get_potential_key())) {
+            throw new MWP_Worker_Exception(MWP_Worker_Exception::CONNECTION_INVALID_KEY, "Invalid communication key provided. Please make sure to provide the latest communication key from your Worker plugin.");
         }
 
         $request->setAuthenticated(true);

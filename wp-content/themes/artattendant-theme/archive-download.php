@@ -10,7 +10,10 @@
 						<?php //echo facetwp_display( 'facet', 'search' ); ?><!-- <input placeholder="Discover" class="search-all form-control"> -->
 					</div>
 					<div class="col-md-3 col-xs-2 refiner">
-						<i class="fa fa-sliders fa-2x fa-rotate-90" aria-hidden="true"></i> <span class="upper hidden-xs">Refine</span>
+						<span class="refine-click"><i class="fa fa-sliders fa-2x fa-rotate-90" aria-hidden="true"></i> <span class="upper hidden-xs">Refine</span></span>
+						<?php if( current_user_can('editor') || current_user_can('administrator') ) {  ?>
+								<span class="artists-click pull-right"> <span class="upper hidden-xs">Artists</span> <i class="fa fa-users fa-2x" aria-hidden="true"></i></span>
+							<?php } ?>
 					</div>
 				</div>
 				<div class="the-filters">
@@ -51,10 +54,42 @@
 -->
 					</section>
 				</div>
-			</div>
-			<?php if( current_user_can('editor') || current_user_can('administrator') ) {  ?>
 
+						<?php if( current_user_can('editor') || current_user_can('administrator') ) {  ?>
+			<style>
+				#artist-list{
+					 margin-top: 20px;margin-bottom: 20px;
+					 overflow: hidden;
+					 display: none;
+					     border-top: 5px solid #D2232A;
+				}
+				.facetwp-facet-artist_list{
+					 -webkit-column-count: 3; /* Chrome, Safari, Opera */
+					    -moz-column-count: 3; /* Firefox */
+					    column-count: 3;
+				}
+
+				.facetwp-facet-artist_list .facetwp-radio{
+				     padding: 5px 0;
+					 display: block;
+					 text-align: center;
+					 color: #d2232a;
+					 cursor: pointer;
+				}
+				.facetwp-facet-artist_list .facetwp-radio:hover{
+				     color: #90181d;
+					 text-decoration: underline;
+				}
+
+
+			</style>
+					<div id="artist-list">
+						<?php echo facetwp_display( 'facet', 'artist_list' ); ?>
+                    </div>
 			<?php } ?>
+
+			</div>
+
 
 
 		<div class="row filter-count">

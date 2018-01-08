@@ -3,7 +3,7 @@ Contributors: managewp,freediver
 Donate link: https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=520781390
 Tags: manage multiple sites, backup, security, migrate, performance, analytics, Manage WordPress, Managed WordPress, WordPress management, WordPress manager, WordPress management, site management, control multiple sites, WordPress management dashboard, administration, automate, automatic, comments, clone, dashboard, duplicate, google analytics, login, manage, managewp, multiple, multisite, remote, seo, spam
 Requires at least: 3.1
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/quick-guide-gplv3.html
@@ -21,7 +21,11 @@ Just the hassle of logging into each of your websites is enough to ruin your day
 57 updates on 12 sites? Update them all with a single click. And it's not just updates. Clean spam, database overhead, run security checks and more - with just one click you can do these things on all your websites at once. [Read more](https://managewp.com/features/manage-plugins-and-themes "Manage plugins & themes")
 
 = Cloud Backup that just works =
-A reliable backup is the backbone of any business. And we have a free monthly backup for all of your websites. It's, incremental, reliable, and works where other backup solutions fail. The free Backup includes monthly scheduled backup, off-site storage, 1-click restore, US/EU storage choice and the option to exclude files and folders. The premium Backup gives you on-demand backups, more frequent automated backup cycles & [more](https://managewp.com/features/backup "ManageWP Backup").
+A reliable backup is the backbone of any business. And we have a free monthly backup for all of your websites. It's, incremental, reliable, and works where other backup solutions fail. The free Backup includes monthly scheduled backup, off-site storage, 1-click restore, US/EU storage choice and the option to exclude files and folders. The premium Backup gives you on-demand backups, weekly/daily/hourly backup cycles & [more](https://managewp.com/features/backup "ManageWP Backup").
+
+= Safe updates =
+Updating plugins & themes is a huge pain, so we came with this: a backup is automatically created before each update. After the update, the system checks the website and rolls back automatically if something's wrong. And the best part is that you can set these updates to run at 3am, when the website traffic as its lowest.
+[Read more](https://managewp.com/features/safe-updates "Safe Updates").
 
 = Client Report =
 Summarize your hard work in a professional looking report and send it to your clients to showcase your work. The free Client Report includes basic customization and on-demand reports. The premium Client Report lets you white label and automate your reports. [Read more](https://managewp.com/features/backup "Client Report")
@@ -47,11 +51,30 @@ Rename or completely hide the ManageWP Worker plugin. Clients don’t need to kn
 = Is This All? =
 No way! We've got a bunch of other awesome features, both free and premium, you can check out on our [ManageWP features page](https://managewp.com/features "ManageWP Features")
 
-Check out the [ManageWP promo video](https://vimeo.com/120034595).
+Check out the [ManageWP promo video](https://vimeo.com/220647227).
 
-https://vimeo.com/120034595
+https://vimeo.com/220647227
 
 == Changelog ==
+
+= 4.3.3 =
+
+- Improvement: Always use charset for database backup
+- Change: The Worker plugin is fully compatible with WordPress 4.9
+
+= 4.3.2 =
+
+- Fix: The Worker plugin throw exception while recovering from failed update
+
+= 4.3.1 =
+
+- Fix: The Worker plugin could not fetch keys for the new communication system in some cases.
+
+= 4.3.0 =
+
+- New: Ability to install/update Envato plugins and themes.
+- New: WooCommerce database upgrade support.
+- New: More secure and flexible communication between the Worker plugin and the ManageWP servers.
 
 = 4.2.27 =
 
@@ -311,7 +334,7 @@ https://vimeo.com/120034595
 - New: Add automatic recovery process when the ManageWP Worker plugin update gets interrupted on some server setups.
 - Fix: Fix maintenance mode on some WordPress setups.
 - Fix: Fix issue when a wrong backup file was being deleted.
-- Fix: Fix issues when sites got disconnected from [ManageWP Orion](http://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement").
+- Fix: Fix issues when sites got disconnected from [ManageWP Orion](https://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement").
 
 = 4.1.4 =
 
@@ -324,7 +347,7 @@ https://vimeo.com/120034595
 
 = 4.1.2 =
 
-- The following changelog is for [ManageWP Orion](http://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement") only.
+- The following changelog is for [ManageWP Orion](https://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement") only.
 - Fix: Fix PHP database dumper fallback in incremental backups.
 - Fix: Fix restore functionality on some server setups.
 
@@ -335,19 +358,19 @@ https://vimeo.com/120034595
 
 = 4.1.0 =
 
-- New: Incremental backup capability for [ManageWP Orion](http://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement").
+- New: Incremental backup capability for [ManageWP Orion](https://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement").
 
 = 4.0.15 =
 
-- Fix: Improve compatibility with some plugin updates in [ManageWP Orion](http://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement").
+- Fix: Improve compatibility with some plugin updates in [ManageWP Orion](https://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement").
 
 = 4.0.14 =
 
-- Fix: Show custom message when the plugin can not destroy active [ManageWP Orion](http://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement") sessions when logging out.
+- Fix: Show custom message when the plugin can not destroy active [ManageWP Orion](https://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement") sessions when logging out.
 
 = 4.0.13 =
 
-- New: Destroy all admin sessions started from [ManageWP Orion](http://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement") when a user logs out from the dashboard.
+- New: Destroy all admin sessions started from [ManageWP Orion](https://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement") when a user logs out from the dashboard.
 - Fix: Improve update detection.
 
 = 4.0.12 =
@@ -369,7 +392,7 @@ https://vimeo.com/120034595
 = 4.0.9 =
 
 - New: Make the ManageWP Worker plugin upgradable through the dashboard widget
-- Fix: Improve auto-connect functionality with [ManageWP Orion](http://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement")
+- Fix: Improve auto-connect functionality with [ManageWP Orion](https://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement")
 
 = 4.0.8 =
 
@@ -388,7 +411,7 @@ https://vimeo.com/120034595
 
 = 4.0.1 =
 
-- New: New features for the [ManageWP Orion release](http://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement")
+- New: New features for the [ManageWP Orion release](https://managewp.com/managewp-orion-official-announcement "ManageWP Orion Official Announcement")
 - Fix: Misc bug fixes and performance improvements
 
 = 3.9.30 =
@@ -464,7 +487,7 @@ https://vimeo.com/120034595
 - Fix: Backup history preserved on website re-add
 
 = 3.9.21 =
-* New: Continuous updates! Read more at http://managewp.com/continuous-updates
+* New: Continuous updates! Read more at https://managewp.com/continuous-updates
 
 = 3.9.20 =
 * New: ManageWP iOS app compatibility
@@ -494,7 +517,7 @@ https://vimeo.com/120034595
 * New: Manage Posts and Pages across all sites in a more efficient way
 * New: Support for all WPMU.org premium plugin updates
 * New: Complete Dropbox integration through Oauth which allows us to restore/delete Dropbox backups directly
-* New: We have the user guide as PDF now. [Download] (http://managewp.com/files/ManageWP_User_Guide.zip)
+* New: We have the user guide as PDF now. [Download] (https://managewp.com/files/ManageWP_User_Guide.zip)
 
 
 = 3.9.16 =
@@ -519,7 +542,7 @@ https://vimeo.com/120034595
 * You can now opt to completely hide the Worker plugin from the list of plugins (part of Worker branding features)
 * We improved the backups for folks running Windows servers
 * Amazon S3 directory name now "ManageWP" by default
-* Read more on ManageWP.com http://managewp.com/update-two-factor-authentication-run-code-tool-sucuri-security-check-more-accurate-pageview-statistics
+* Read more on ManageWP.com https://managewp.com/update-two-factor-authentication-run-code-tool-sucuri-security-check-more-accurate-pageview-statistics
 
 = 3.9.13 =
 * Added bucket location for Amazon S3 backups
@@ -558,7 +581,7 @@ https://vimeo.com/120034595
 * Enhanced security for your account
 * Better backups
 * Better update interface
-* [Full changelog](http://managewp.com/update-goals-and-adsense-analytics-integration-update-notifications-login-by-ip-better-backups "Full changelog")
+* [Full changelog](https://managewp.com/update-goals-and-adsense-analytics-integration-update-notifications-login-by-ip-better-backups "Full changelog")
 
 = 3.9.7 =
 * Fixed problem with cron schedules
@@ -623,7 +646,7 @@ https://vimeo.com/120034595
 = 3.8.6 =
 * Added seach websites feature
 * Enhanced dashboard actions (spam comments, post revisions, table overhead)
-* Added developer [API] (http://managewp.com/api "ManageWP API")
+* Added developer [API] (https://managewp.com/api "ManageWP API")
 * Improved Migrate/Clone site feature
 
 = 3.8.4 =
@@ -688,7 +711,7 @@ ManageWP Worker is free software: you can redistribute it and/or modify it under
 
 ManageWP Worker is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with ManageWP Worker. If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with ManageWP Worker. If not, see <https://www.gnu.org/licenses/>.
 
 
 == Frequently Asked Questions ==
@@ -703,7 +726,7 @@ Yes. No matter if you're free or premium user, we are here for you 24/7. Expect 
 
 = How much do premium ManageWP features cost? =
 
-Our pricing is highly flexible. We don't charge anything upfront, and the usage is calculated on a per-website, per-addon basis. Like Amazon Web Services. Check out our [pricing page](https://managewp.com/pricing "ManageWP pricing page") for more info.
+Our pricing is highly flexible, we don't charge anything upfront. The usage is calculated on a per-website, per-addon basis, like Amazon Web Services. Check out our [pricing page](https://managewp.com/pricing "ManageWP pricing page") for more info.
 
 = Is ManageWP secure? =
 
@@ -721,9 +744,13 @@ Yes, multisite networks are fully supported, including the ability to backup and
 
 No. ManageWP works only with self-hosted WordPress sites.
 
+= Worker plugin can connect to ManageWP and Pro Sites. What is the difference between the two? =
+
+[ManageWP](https://managewp.com "ManageWP website") is focused on the hosting-agnostic WordPress website management. [Pro Sites](https://www.godaddy.com/pro "GoDaddy Pro Sites website") is the GoDaddy version of the service. It's part of the GoDaddy Pro program, which incorporates different tools for website & client management, lead generation, and tighter integration with other GoDaddy products.
+
 = I have problems adding my site =
 
-Make sure you use the latest version of the Worker plugin on the site you are trying to add. If you still have problems, check our dedicated [FAQ page](http://managewp.com/user-guide/faq/my-sites-fail-to-addload-to-managewp "Add site FAQ") or [contact us](http://managewp.com/contact "ManageWP Contact").
+Make sure you use the latest version of the Worker plugin on the site you are trying to add. If you still have problems, check our dedicated [FAQ page](https://managewp.com/troubleshooting/site-connection/why-cant-i-add-some-of-my-sites "Add site FAQ") or [contact us](https://managewp.com/contact "ManageWP Contact").
 
 = How does ManageWP compare to backup plugins like BackupBuddy, Backwpup, UpdraftPlus, WP-DB-Backup ? =
 
@@ -733,5 +760,9 @@ There is a limit to what a PHP based backup can do, that's why we've built a com
 
 These solutions are simple A-B cloning solutions that tend to break in critical moments. ManageWP does it more intelligently. We first upload the backup archive to a cloud infrastructure that we control, and then we transfer it to the destination website. This effectively compartmentalizes the process into two separate steps, making the whole cloning experience much more robust and stress free.
 
+= Is Worker PHP7 compatible? =
 
-Got more questions? [Contact us!](http://managewp.com/contact "ManageWP Contact")
+Yes, ManageWP Worker is fully compatible with PHP7. We also have chunks of backward compatible code, that triggers in case you're still running PHP5.x - if your code check comes up with a compatibility flag, just ignore it.
+
+
+Got more questions? [Contact us!](https://managewp.com/contact "ManageWP Contact")

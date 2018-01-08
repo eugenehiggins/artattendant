@@ -37,6 +37,7 @@ class MWP_Action_ConnectWebsite extends MWP_Action_Abstract
         }
 
         $configuration->setPublicKey($publicKey);
+        mwp_accept_potential_key();
 
         $this->setBrand($params);
 

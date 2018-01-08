@@ -77,8 +77,38 @@
 
 			<?php  };//if images ?>
 
+				<div class="view-more" style="margin-top:40px;">
+				<?php
+					$terms = get_the_terms(get_the_ID(), 'artist');
+
+						if (! empty($terms)) {
+
+						    $url = get_term_link($terms[0]->slug, 'artist');
+						    //var_dump($terms);
+						   // echo $url ;
+						    echo '<a href="'.$url.'"> View more works by '.$terms[0]->name.'</a>';
+
+						}
+
+					?>
+
+				</div>
+				<?php if ( current_user_can( 'manage_options' )  ) { ?>
+				<br/>
+					<div class="panel panel-default">
 
 
+							<div class="panel-body">
+							<h4 class="upper">Owner Info</h4>
+									<?php $owner_id = anagram_user_details( get_the_ID() ); ?>
+									<a href="https://artattendant.com/wp-admin/admin.php?page=fes-vendors&view=overview&id=<?php echo  EDD_FES()->vendors->get_vendor_id( get_the_author_meta( 'user_login', $owner_id  ) ); ?>"><?php the_author_meta( 'display_name', $owner_id  ); ?></a>
+									<br/>
+									<a href="https:/
+/artattendant.com/messages/?fepaction=newmessage&to=<?php the_author_meta( 'user_login', $owner_id  ); ?>">Message user</a>
+<br/><br/><small>Admin only info</small>
+							</div>
+					</div>
+					<?php  };//if not admin ?>
 			</div>
 		</div>
 	</div>

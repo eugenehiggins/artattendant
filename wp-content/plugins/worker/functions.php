@@ -220,7 +220,7 @@ function mmb_delete_all_revisions($filter)
 {
     global $wpdb;
 
-    $num_rev = isset($filter['num_to_keep']) ? (int) str_replace("r_", "", $filter['num_to_keep']) : 5;
+    $num_rev = isset($filter['num_to_keep']) ? (int)str_replace("r_", "", $filter['num_to_keep']) : 5;
 
     $allRevisions = $wpdb->get_results("SELECT post_parent FROM {$wpdb->posts} WHERE post_type = 'revision' AND post_parent != 0 GROUP BY post_parent HAVING COUNT(ID) > {$num_rev}");
 
@@ -269,7 +269,7 @@ function mmb_handle_overhead($clear = false)
             continue;
         }
 
-        $tableOverhead += $table['Data_free'] / 1024;
+        $tableOverhead      += $table['Data_free'] / 1024;
         $tablesToOptimize[] = $table['Name'];
     }
 
@@ -281,7 +281,7 @@ function mmb_handle_overhead($clear = false)
 
     foreach ($tablesToOptimize as $tableToOptimize) {
         $query    = 'OPTIMIZE TABLE '.$tableToOptimize;
-        $optimize = ((bool) $wpdb->query($query)) && $optimize;
+        $optimize = ((bool)$wpdb->query($query)) && $optimize;
     }
 
     return $optimize;
@@ -555,7 +555,7 @@ function mwp_datasend($params = array())
                     $brand = $settings['worker_brand'];
                 }
 
-                if(!$current_from_orion) {
+                if (!$current_from_orion) {
                     update_option("mwp_worker_brand", $brand);
                 }
 
@@ -1286,7 +1286,7 @@ function mmb_plugin_actions()
                                 ob_end_clean();
                                 ob_end_flush();
                                 if (!headers_sent()) {
-                                    if($status_code == 503){
+                                    if ($status_code == 503) {
                                         header(sprintf('%s 503 Service Unavailable', isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1'), true, $status_code);
                                     } else {
                                         header(sprintf('%s %d Service Unavailable', isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1', $status_code), true, $status_code);
@@ -1298,7 +1298,7 @@ function mmb_plugin_actions()
                     }
                 } else {
                     if (!headers_sent()) {
-                        if($status_code == 503) {
+                        if ($status_code == 503) {
                             header(sprintf('%s 503 Service Unavailable', isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1'), true, 503);
                         } else {
                             header(sprintf('%s %d Service Unavailable', isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1', $status_code), true, $status_code);
@@ -1421,4 +1421,173 @@ function mwp_uninstall()
     } catch (Exception $e) {
         mwp_logger()->error('Unable to remove loader', array('exception' => $e));
     }
+}
+
+function mwp_get_service_key()
+{
+    $serviceKey = get_option('mwp_service_key');
+    if (empty($serviceKey)) {
+        $serviceKey = mwp_generate_uuid4();
+        update_option('mwp_service_key', $serviceKey, true);
+    }
+
+    return $serviceKey;
+}
+
+function mwp_get_communication_key()
+{
+    return get_option('mwp_communication_key');
+}
+
+function mwp_accept_potential_key()
+{
+    $potentialKey = mwp_get_potential_key();
+
+    update_option('mwp_communication_key', $potentialKey, true);
+    delete_option('mwp_potential_key');
+    delete_option('mwp_potential_key_time');
+
+    return $potentialKey;
+}
+
+function mwp_get_potential_key()
+{
+    $potentialKey     = get_option('mwp_potential_key');
+    $potentialKeyTime = get_option('mwp_potential_key_time');
+    $now              = time();
+
+    if (empty($potentialKey) || empty($potentialKeyTime) || ($now - $potentialKeyTime) > 86400) {
+        $potentialKey     = mwp_generate_uuid4();
+        $potentialKeyTime = $now;
+        update_option('mwp_potential_key', $potentialKey, true);
+        update_option('mwp_potential_key_time', $potentialKeyTime, true);
+    }
+
+    return $potentialKey;
+}
+
+function mwp_provision_keys()
+{
+    mwp_get_service_key();
+    mwp_get_potential_key();
+}
+
+function mwp_generate_uuid4()
+{
+    $data = null;
+    if (function_exists('openssl_random_pseudo_bytes')) {
+        $data = openssl_random_pseudo_bytes(16);
+    }
+
+    if (empty($data)) {
+        $data = '';
+        for ($i = 0; $i < 16; ++$i) {
+            $data .= chr(mt_rand(0, 255));
+        }
+    }
+
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+}
+
+function mwp_refresh_live_public_keys($params = array())
+{
+    $liveContent = mwp_get_public_keys_from_live();
+    $liveKeys    = !empty($liveContent) ? @json_decode($liveContent, true) : null;
+
+    if (empty($liveKeys)) {
+        return;
+    }
+
+    update_option('mwp_public_keys', $liveKeys, true);
+}
+
+function mwp_get_public_keys_from_live()
+{
+    $result = file_get_contents('https://cdn.managewp.com/public-keys', false, stream_context_create(array(
+        'ssl' => array(
+            'verify_peer'       => true,
+            'verify_peer_name'  => true,
+            'allow_self_signed' => false,
+            'cafile'            => dirname(__FILE__).'/publickeys/godaddy_g2_root.cer',
+        ),
+    )));
+
+    if ($result === false) {
+        return mwp_get_public_keys_from_live_fallback();
+    }
+
+    return $result;
+}
+
+function mwp_get_public_keys_from_live_fallback()
+{
+    $transports         = array_flip(stream_get_transports());
+    $preferredTransport = array(
+        'tls',
+        'tlsv1.2',
+        'tlsv1.1',
+        'tlsv1.0',
+    );
+
+    $transportToUse = null;
+
+    foreach ($preferredTransport as $transport) {
+        if (!empty($transportToUse) || !isset($transports[$transport])) {
+            continue;
+        }
+
+        $transportToUse = $transport;
+    }
+
+    $socket = stream_socket_client("$transportToUse://cdn.managewp.com:443", $errno, $errstr, 30, STREAM_CLIENT_CONNECT, stream_context_create(array(
+        'ssl' => array(
+            'verify_peer'       => true,
+            'verify_peer_name'  => true,
+            'allow_self_signed' => false,
+            'cafile'            => dirname(__FILE__).'/publickeys/godaddy_g2_root.cer',
+        ),
+    )));
+
+    if (!$socket) {
+        return null;
+    }
+
+    $requestContent = <<<EOL
+GET /public-keys HTTP/1.1
+Host: cdn.managewp.com
+Accept-Language: en-US,en;q=0.9,hr;q=0.8,sr;q=0.7
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Cache-Control: max-age=0
+Authority: cdn.managewp.com
+Connection: close
+
+
+EOL;
+
+
+    if (fwrite($socket, $requestContent) === false) {
+        return null;
+    }
+
+    do {
+        $line = fgets($socket);
+    } while ($line !== false && $line !== "\n" && $line !== "\r\n");
+
+    if ($line === false) {
+        return null;
+    }
+
+    $content = stream_get_contents($socket);
+
+    fclose($socket);
+
+    if ($content === false || !is_string($content)) {
+        return null;
+    }
+
+    return $content;
 }

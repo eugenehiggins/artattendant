@@ -57,4 +57,55 @@ class MWP_Worker_Configuration
     {
         $this->context->optionSet('_worker_nossl_key', '');
     }
+
+    public function getLivePublicKey($keyName)
+    {
+        $keyData = $this->findKeyData($keyName);
+        return $keyData !== null ? $keyData['publicKey'] : null;
+    }
+
+    public function isCommunicationKey($keyName)
+    {
+        $keyData = $this->findKeyData($keyName);
+        return ($keyData === null || empty($keyData['useServiceKey']));
+    }
+
+    public function getCommunicationStringByKeyName($keyName)
+    {
+        return $this->isCommunicationKey($keyName) ? mwp_get_communication_key() : mwp_get_service_key();
+    }
+
+    protected function findKeyData($keyName)
+    {
+        $keys = $this->context->optionGet('mwp_public_keys', null);
+
+        if (empty($keys)) {
+            mwp_refresh_live_public_keys(array());
+            $keys = $this->context->optionGet('mwp_public_keys', null);
+        }
+
+        if (empty($keys) || !is_array($keys)) {
+            return null;
+        }
+
+        foreach ($keys as $key) {
+            if (empty($key['id']) || $key['id'] !== $keyName) {
+                continue;
+            }
+
+            if (empty($key['validFrom']) || empty($key['validTo']) || empty($key['publicKey']) || empty($key['service'])) {
+                continue;
+            }
+
+            $timeNow = new DateTime();
+
+            if ($timeNow < new DateTime($key['validFrom']) || $timeNow > new DateTime($key['validTo'])) {
+                continue;
+            }
+
+            return $key;
+        }
+
+        return null;
+    }
 }

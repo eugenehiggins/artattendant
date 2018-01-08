@@ -38,10 +38,7 @@ class MWP_IncrementalBackup_Database_PdoConnection implements MWP_IncrementalBac
         // Warning:  PDO::__construct(): The server requested authentication method unknown to the client [mysql_old_password]
         $this->connection = @new PDO(self::getDsn($this->configuration), $this->configuration->getUsername(), $this->configuration->getPassword(), $options);
 
-        // Prior to PHP 5.3.6, the charset option was ignored.
-        if (version_compare(PHP_VERSION, '5.3.6', '<')) {
-            $this->connection->exec('SET NAMES '.$configuration->getCharset());
-        }
+        $this->connection->exec('SET NAMES '.$configuration->getCharset());
     }
 
     /**
