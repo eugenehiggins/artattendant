@@ -12091,6 +12091,14 @@ ul.links li {
 }
 /* =Footer Menu
 --------------------------------------------------------------------------------------------------------*/
+#footer {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background-color: white;
+}
+.page-template-template-login-join #footer,
 .page-id-102 #footer {
   background-color: #757777;
   color: white;
@@ -12099,27 +12107,32 @@ ul.links li {
   font-weight: 100;
   padding-bottom: 40px;
 }
+.page-template-template-login-join #footer #menu-footer.nav,
 .page-id-102 #footer #menu-footer.nav {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
+.page-template-template-login-join #footer #menu-footer.nav > li,
 .page-id-102 #footer #menu-footer.nav > li {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   text-align: center;
 }
+.page-template-template-login-join #footer #menu-footer.nav > li > a,
 .page-id-102 #footer #menu-footer.nav > li > a {
   font-family: 'Palanquin';
   font-weight: 700;
   font-size: 18px;
   color: white;
 }
+.page-template-template-login-join #footer #menu-footer.nav > li > a:hover,
 .page-id-102 #footer #menu-footer.nav > li > a:hover {
   color: #b9e2dd;
 }
+.page-template-template-login-join #footer .wrapper,
 .page-id-102 #footer .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -12129,23 +12142,29 @@ ul.links li {
       -ms-flex-align: center;
           align-items: center;
 }
+.page-template-template-login-join #footer .wrapper > div,
 .page-id-102 #footer .wrapper > div {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
 }
+.page-template-template-login-join #footer .wrapper .icon img,
 .page-id-102 #footer .wrapper .icon img {
   width: 100px;
 }
+.page-template-template-login-join #footer .wrapper .contact,
 .page-id-102 #footer .wrapper .contact {
   text-align: center;
 }
+.page-template-template-login-join #footer .wrapper .contact a,
 .page-id-102 #footer .wrapper .contact a {
   color: white;
 }
+.page-template-template-login-join #footer .wrapper .social,
 .page-id-102 #footer .wrapper .social {
   text-align: right;
 }
+.page-template-template-login-join #footer .wrapper .social .fa-circle,
 .page-id-102 #footer .wrapper .social .fa-circle {
   color: #c90e17;
 }
@@ -12672,7 +12691,6 @@ html {
 body {
   margin-bottom: 30px;
   color: #414042;
-  font-family: 'Muli';
 }
 body {
   overflow-x: hidden;
