@@ -12100,6 +12100,7 @@ ul.links li {
 }
 .page-template-template-login-join #footer,
 .page-id-102 #footer {
+  position: static;
   background-color: #757777;
   color: white;
   font-family: 'Muli';
