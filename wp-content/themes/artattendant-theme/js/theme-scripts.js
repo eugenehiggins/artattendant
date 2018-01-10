@@ -115,7 +115,7 @@ jQuery(".refiner .refine-click").toggle(function(){
   $('.the-filters').slideDown('normal').parent().addClass('open');
 
   // close artist list
-    $('#artist-list').slideDown('normal');
+    $('#artist-list').slideUp('normal');
 }, function(){
 	jQuery('i', this).removeClass('fa-rotate-270');
 	//jQuery('i', this).removeClass("fa-angle-up").addClass("fa-angle-down");
