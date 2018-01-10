@@ -11,9 +11,9 @@
 					</div>
 					<div class="col-md-3 col-xs-2 refiner">
 						<span class="refine-click"><i class="fa fa-sliders fa-2x fa-rotate-90" aria-hidden="true"></i> <span class="upper hidden-xs">Refine</span></span>
-						<?php if( current_user_can('editor') || current_user_can('administrator') ) {  ?>
+						<?php // if( current_user_can('editor') || current_user_can('administrator') ) {  ?>
 								<span class="artists-click pull-right"> <span class="upper hidden-xs">Artists</span> <i class="fa fa-users fa-2x" aria-hidden="true"></i></span>
-							<?php } ?>
+							<?php // } ?>
 					</div>
 				</div>
 				<div class="the-filters">
