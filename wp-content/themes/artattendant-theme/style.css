@@ -12498,8 +12498,11 @@ section .active + .tab-content {
   cursor: pointer;
   padding-top: 10px;
 }
-.refiner:hover,
-.refiner:hover .upper {
+.refiner > span {
+  display: inline-block;
+}
+.refiner > span:hover i,
+.refiner > span:hover span {
   color: #D2232A;
 }
 .filter-bar {

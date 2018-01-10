@@ -113,6 +113,9 @@ jQuery(".refiner .refine-click").toggle(function(){
 	jQuery('i', this).addClass('fa-rotate-270');
 	//jQuery('i', this).removeClass("fa-angle-down").addClass("fa-angle-up");
   $('.the-filters').slideDown('normal').parent().addClass('open');
+
+  // close artist list
+    $('#artist-list').toggle();
 }, function(){
 	jQuery('i', this).removeClass('fa-rotate-270');
 	//jQuery('i', this).removeClass("fa-angle-up").addClass("fa-angle-down");
@@ -123,6 +126,10 @@ jQuery(".refiner .refine-click").toggle(function(){
 //Show hide artists
 jQuery(".refiner .artists-click").toggle(function(){
     $('#artist-list').slideDown('normal');
+
+    //close refiner toggle
+    $('i.fa-sliders').removeClass('fa-rotate-270');
+    $('.the-filters').toggle();
 }, function(){
 	$('#artist-list').slideUp('normal');
 });

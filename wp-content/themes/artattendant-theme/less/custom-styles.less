@@ -1707,12 +1707,23 @@ section .active + .tab-content {
   min-height: 54px;
   cursor: pointer;
   padding-top: 10px;
+  > span {
+    display: inline-block;
+    &:hover  {
+      i, span {
+        color: @red;
+      }
+    }
+  }
+  //&:hover .upper {
+  //  color: @red;
+  //}
 }
 
-.refiner:hover,
-.refiner:hover .upper {
-  color: @red;
-}
+
+
+
+
 
 .filter-bar {
   border-bottom: 1px solid @dark-gray;
