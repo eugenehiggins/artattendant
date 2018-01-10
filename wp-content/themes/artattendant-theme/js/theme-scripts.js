@@ -115,7 +115,7 @@ jQuery(".refiner .refine-click").toggle(function(){
   $('.the-filters').slideDown('normal').parent().addClass('open');
 
   // close artist list
-    $('#artist-list').toggle();
+    $('#artist-list').slideDown('normal');
 }, function(){
 	jQuery('i', this).removeClass('fa-rotate-270');
 	//jQuery('i', this).removeClass("fa-angle-up").addClass("fa-angle-down");
@@ -129,7 +129,7 @@ jQuery(".refiner .artists-click").toggle(function(){
 
     //close refiner toggle
     $('i.fa-sliders').removeClass('fa-rotate-270');
-    $('.the-filters').toggle();
+    $('.the-filters').slideUp('normal').parent().removeClass('open');
 }, function(){
 	$('#artist-list').slideUp('normal');
 });
