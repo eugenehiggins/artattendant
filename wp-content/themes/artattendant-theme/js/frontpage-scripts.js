@@ -1,16 +1,26 @@
 jQuery(document).ready(function ($) {
 
+    $boxes = $('.section3 .box');
+
     function slideOnHover(){
         $('.section3 .box').hover(function (e) {
+                var $self = $(this);
                 var $img = $(this).find('img');
                 if (!$img.is(':animated')) {
-                    $img.stop().hide("slide", {direction: "up"}, 700);
+                    $img.stop().hide("slide", {direction: "up"}, 200);
                 }
+                console.log("first",$self);
+                // $boxes.each(function(index){
+                //     if (!$self.is($(this))) {
+                //         console.log("second", $(this).is($self) );
+                //         $(this).find('img').stop().show("slide", {direction: "up"}, 700);
+                //     }
+                // })
             },
             function () {
                 var $img = $(this).find('img');
                 if (!$img.is(':animated')) {
-                    $(this).find('img').stop().show("slide", {direction: "up"}, 700);
+                    $(this).find('img').stop().show("slide", {direction: "up"}, 200);
                 }
             }
         )
@@ -18,12 +28,12 @@ jQuery(document).ready(function ($) {
     }
 
     if ($( window ).width() >= 1200) {
-        slideOnHover();
+        //slideOnHover();
     }
 
     $( window ).resize(function (){
         if ($( window ).width() >= 1200) {
-            slideOnHover();
+           // slideOnHover();
         }
     })
 

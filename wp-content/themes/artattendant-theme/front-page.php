@@ -327,7 +327,7 @@ get_header('pre'); ?>
             </div>
             <div class="box box3">
                 <h3>Galleries & Art Dealers</h3>
-                <div class="content">x
+                <div class="content">
                     <span class="text">
 						Organize, archive and manage your collection in our secure and private online
                                         database. Collectors can opt to make your collection visible to the public in or

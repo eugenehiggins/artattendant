@@ -364,6 +364,10 @@ article#post-74 {
             &:hover + .svg-container .top {
               opacity: 0;
             }
+            
+            &:hover img {
+              transform: translate(0, -100%);
+            }
   
             span.text {
               position: absolute;
@@ -380,6 +384,12 @@ article#post-74 {
               width: 100%;
               height: auto;
               z-index: 10;
+  
+              overflow-y: scroll;
+
+              transition:        transform .3s ease;
+              
+              transform: translate(0, 0%);
             }
           }
         }

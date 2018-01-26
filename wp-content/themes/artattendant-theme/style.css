@@ -11325,6 +11325,10 @@ article#post-74 #wrapper {
   .page-id-102 .section3 .row .box div.content:hover + .svg-container .top {
     opacity: 0;
   }
+  .page-id-102 .section3 .row .box div.content:hover img {
+    -webkit-transform: translate(0, -100%);
+            transform: translate(0, -100%);
+  }
   .page-id-102 .section3 .row .box div.content span.text {
     position: absolute;
     top: 0;
@@ -11339,6 +11343,13 @@ article#post-74 #wrapper {
     width: 100%;
     height: auto;
     z-index: 10;
+    overflow-y: scroll;
+    -webkit-transition: -webkit-transform .3s ease;
+    transition: -webkit-transform .3s ease;
+    transition: transform .3s ease;
+    transition: transform .3s ease, -webkit-transform .3s ease;
+    -webkit-transform: translate(0, 0%);
+            transform: translate(0, 0%);
   }
 }
 @media screen and (min-width: 1200px) {
