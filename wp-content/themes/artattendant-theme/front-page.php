@@ -13,8 +13,7 @@ get_header('pre'); ?>
                 </div>
                 <div class="text">
                     <h1>Free Unlimited Art Archive</h1>
-                    <strong>Connect with us at the <a href="https://www.laartshow.com/" target="_blank">LA Art Show</a>:
-                        Modern & Contemporary • January 11 - 14 • Los Angeles Convention Center</strong>
+<!--                    <strong>We believe in connecting the vibrant and diverse worldwide arts community.</strong>-->
                 </div>
             </div><!-- .entry-content -->
         </header><!-- close .*-inner (main-content or sidebar, depending if sidebar is used) -->
