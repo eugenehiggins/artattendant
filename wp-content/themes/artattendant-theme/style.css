@@ -14,6 +14,7 @@ License: GNU General Public License
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
 @navbar-collapse-max-height:       340px;*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import "css/fontawesome-all.css";
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -12915,6 +12916,34 @@ a.editable-click {
 }
 .jssocials-share:last-child {
   margin-right: 0;
+}
+.dash-holder #open-close-tab {
+  background-color: white;
+  text-decoration: none;
+  cursor: pointer;
+  float: none;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: none;
+  position: absolute;
+  right: 10px;
+  bottom: -35px;
+  height: 27px;
+  border: 1px solid darkgray;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 3px 10px 10px;
+}
+.dash-holder #open-close-tab .open {
+  display: none;
+}
+.dash-holder #open-close-tab .close {
+  display: inline-block;
+  float: none;
+  opacity: 1;
+  text-shadow: none;
 }
 /*
 	.jssocials-share-logo {

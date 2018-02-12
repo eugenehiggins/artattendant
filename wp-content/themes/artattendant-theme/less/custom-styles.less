@@ -5,6 +5,8 @@
 @artattend-aqua: #b9e2dd;
 @artattend-dk-aqua: #88B0AB;
 
+@import "css/fontawesome-all.css";
+
 
 .aspect-ratio(@width, @height) {
   position: relative;
@@ -2223,6 +2225,40 @@ body {
 
 .jssocials-share:last-child {
   margin-right: 0;
+}
+
+.dash-holder {
+  #open-close-tab {
+    color: #000;
+    background-color: white;
+    text-decoration: none;
+    cursor: pointer;
+    float: none;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: none;
+    position: absolute;
+    right: 10px;
+    bottom: -35px;
+    height: 27px;
+  
+    border: 1px solid darkgray;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 3px 10px 10px;
+
+    .open {
+      display: none;
+    }
+    .close {
+      display: inline-block;
+      float: none;
+      opacity: 1;
+      text-shadow: none;
+    }
+  }
 }
 
 /*

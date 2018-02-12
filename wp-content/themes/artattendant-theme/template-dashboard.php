@@ -10,7 +10,6 @@ get_header('dashboard');
 	 ?>
 
 
-
 				<?php if(is_page( 'collection' )): ?>
 					<header class="dash-holder">
 						<div class="col-sm-3 weclome-name">
@@ -38,6 +37,10 @@ get_header('dashboard');
 								<div class="dash-title">Total Value</div>
 								<span id="totalPrice"><?php  if (function_exists('count_total_edd_price')) echo count_total_edd_price('$'); ?></span>
 							</div>
+                            <div id="open-close-tab">
+                                <span class="tab close"><i class="fas fa-times"></i>close</span>
+                                <span class="tab open"><i class="fas fa-plus"></i>open</span>
+                            </div>
 						</div>
 					</header><!-- .entry-header -->
 				<?php endif; ?>
