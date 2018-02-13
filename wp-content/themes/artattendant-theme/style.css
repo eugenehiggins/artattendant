@@ -10261,7 +10261,6 @@ input[type="radio"] .styled:checked + label::after {
 /* =Dashboard Header
 --------------------------------------------------------------------------------------------------------*/
 .dash-holder {
-  border-bottom: 1px solid #AFB1B4;
   height: 60px;
 }
 .weclome-name {
@@ -12917,6 +12916,17 @@ a.editable-click {
 .jssocials-share:last-child {
   margin-right: 0;
 }
+.dash-holder {
+  position: relative;
+  height: auto;
+  z-index: 100;
+}
+.dash-holder #dash-content {
+  border-bottom: 1px solid #AFB1B4;
+  height: 68px;
+  z-index: 10;
+  /* sliding behavior */
+}
 .dash-holder #open-close-tab {
   background-color: white;
   text-decoration: none;
@@ -12929,21 +12939,23 @@ a.editable-click {
   text-shadow: none;
   position: absolute;
   right: 10px;
-  bottom: -35px;
-  height: 27px;
-  border: 1px solid darkgray;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+  bottom: -44px;
+  height: 38px;
+  z-index: -1;
   padding: 3px 10px 10px;
 }
-.dash-holder #open-close-tab .open {
+.dash-holder #open-close-tab .tab .fas {
+  padding-right: 10px;
+}
+.dash-holder #open-close-tab .tab.open {
   display: none;
 }
-.dash-holder #open-close-tab .close {
+.dash-holder #open-close-tab .tab.close {
   display: inline-block;
   float: none;
   opacity: 1;
   text-shadow: none;
+  font-size: inherit;
 }
 /*
 	.jssocials-share-logo {

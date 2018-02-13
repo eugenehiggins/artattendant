@@ -7,7 +7,6 @@
 
 @import "css/fontawesome-all.css";
 
-
 .aspect-ratio(@width, @height) {
   position: relative;
   &:before {
@@ -22,12 +21,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    span:before{
-      content:"@{width}";
+    span:before {
+      content: "@{width}";
     }
-  
-    span:after{
-      content:"@{height}";
+    
+    span:after {
+      content: "@{height}";
     }
   }
 }
@@ -59,6 +58,7 @@ a[href^="tel"] {
     }
   }
 }
+
 textarea,
 input.text,
 input[type="text"],
@@ -285,7 +285,7 @@ article#post-74 {
       @media screen and (min-width: @screen-md) {
         margin-left: inherit;
       }
-    
+      
     }
     @media screen and (min-width: @screen-md) {
       padding-bottom: 120px;
@@ -301,7 +301,7 @@ article#post-74 {
         font-weight: 600;
         margin: 0 0 30px;
       }
-    //}
+      //}
     }
     .row {
       display: flex;
@@ -328,7 +328,7 @@ article#post-74 {
             svg {
               position: absolute;
               transition: opacity 150ms ease-in-out;
-    
+              
               .cls-2 {
                 stroke-width: 0px;
               }
@@ -341,7 +341,7 @@ article#post-74 {
             }
           }
         }
-
+        
         div.content {
           display: flex;
           flex-direction: column;
@@ -370,7 +370,7 @@ article#post-74 {
             &:hover img {
               transform: translate(0, -100%);
             }
-  
+            
             span.text {
               position: absolute;
               top: 0;
@@ -381,15 +381,16 @@ article#post-74 {
               font-size: 16px;
               
             }
+            
             img {
               position: relative;
               width: 100%;
               height: auto;
               z-index: 10;
-  
+              
               overflow-y: scroll;
-
-              transition:        transform .3s ease;
+              
+              transition: transform .3s ease;
               
               transform: translate(0, 0%);
             }
@@ -398,17 +399,18 @@ article#post-74 {
         //div.content:hover ~ .svg-container {
         //  display: none;
         //}
-
-        @media screen and (min-width: @screen-lg-min){
+        
+        @media screen and (min-width: @screen-lg-min) {
           &.box1, &.box3 {
             margin-top: 0;
           }
+          
           &.box2, &.box4 {
             margin-top: 80px;
           }
         }
       }
-      @media screen and (min-width: @screen-sm-min){
+      @media screen and (min-width: @screen-sm-min) {
       
       }
     }
@@ -438,12 +440,12 @@ article#post-74 {
     .first-col {
       padding-right: 0;
     }
-    .second-col{
+    .second-col {
       padding-left: 0;
       @media screen and (min-width: @screen-sm-min) {
         padding-top: 90px;
       }
-      }
+    }
     
   }
   
@@ -464,7 +466,7 @@ article#post-74 {
         margin-left: -15px;
       }
     }
-
+    
     font-family: 'Muli';
     h2 {
       font-size: 40px;
@@ -492,7 +494,7 @@ article#post-74 {
       font-weight: 700;
       font-size: 22px;
       //width: 30%;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
       transition: box-shadow 0.3s ease-in-out;
       &:hover {
         color: white;
@@ -506,11 +508,11 @@ article#post-74 {
       font-family: 'Muli';
       padding: 0 35px 0 0;
       margin-bottom: 4em;
-      text-shadow: 0 1px 0 rgba(255,255,255,.5);
-    
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+      
       &.first-list {
         counter-reset: li;
-      
+        
       }
       &.second-list {
         counter-reset: li 5;
@@ -561,7 +563,7 @@ article#post-74 {
         }
       }
     }
-
+    
   }
   
   .section5.testimonial {
@@ -610,7 +612,7 @@ article#post-74 {
     //  }
     //}
   }
-
+  
   /* flip the pane when hovered */
   .flip-container:hover .flipper, .flip-container.hover .flipper {
     transform: rotateY(180deg);
@@ -619,7 +621,7 @@ article#post-74 {
   .flip-container, .front, .back {
     width: 100%;
     height: 72vh;
-    overflow:hidden;
+    overflow: hidden;
   }
   
   /* flip speed goes here */
@@ -1721,7 +1723,7 @@ section .active + .tab-content {
   padding-top: 10px;
   > span {
     display: inline-block;
-    &:hover  {
+    &:hover {
       i, span {
         color: @red;
       }
@@ -1731,11 +1733,6 @@ section .active + .tab-content {
   //  color: @red;
   //}
 }
-
-
-
-
-
 
 .filter-bar {
   border-bottom: 1px solid @dark-gray;
@@ -1983,8 +1980,6 @@ body {
   //font-family: 'Muli';
 }
 
-
-
 body {
   overflow-x: hidden;
 }
@@ -2228,6 +2223,30 @@ body {
 }
 
 .dash-holder {
+  //overflow-y: hidden;
+  position: relative;
+  height: auto;
+  z-index: 100;
+  #dash-content {
+    border-bottom: 1px solid @gray;
+    height: 68px;
+    z-index: 10;
+    //overflow-y: hidden;
+    
+    /* sliding behavior */
+    
+    //max-height: 80px; /* approximate max height */
+    //height: 60px;
+    //position: relative;
+    //transition-property: all;
+    //transition-duration: .5s;
+    //transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    //
+    &.closed {
+      //max-height: 0;
+    }
+  }
+  
   #open-close-tab {
     color: #000;
     background-color: white;
@@ -2241,22 +2260,29 @@ body {
     text-shadow: none;
     position: absolute;
     right: 10px;
-    bottom: -35px;
-    height: 27px;
-  
-    border: 1px solid darkgray;
-    border-top: none;
-    border-radius: 0 0 8px 8px;
+    bottom: -44px;
+    height: 38px;
+    z-index: -1;
+    
+    //border: 1px solid darkgray;
+    //border-top: none;
+    //border-radius: 0 0 8px 8px;
     padding: 3px 10px 10px;
-
-    .open {
-      display: none;
-    }
-    .close {
-      display: inline-block;
-      float: none;
-      opacity: 1;
-      text-shadow: none;
+    
+    .tab {
+      .fas {
+        padding-right: 10px;
+      }
+      &.open {
+        display: none;
+      }
+      &.close {
+        display: inline-block;
+        float: none;
+        opacity: 1;
+        text-shadow: none;
+        font-size: inherit;
+      }
     }
   }
 }
