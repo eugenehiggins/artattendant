@@ -886,7 +886,7 @@ add_action( 'fes_save_submission_form_values_after_save', 'anagram_increase_inve
  */
 function anagram_add_invetory_field($form, $save_id, $field) {
 
-	$disabled = '';
+	$readonly = '';
 	$inventory = get_post_meta( $save_id, 'inventory', true );
 	$auto   = get_user_meta( get_current_user_id(), 'auto_inventory', true );
 	$auto_number  = get_user_meta( get_current_user_id(), 'user_inventory_number', true );
@@ -897,7 +897,7 @@ function anagram_add_invetory_field($form, $save_id, $field) {
 			$auto_number = max($allinvo)+1;
 		}
 		$inventory = $auto_number;
-		$disabled = 'disabled';
+		$readonly = 'readonly';
 	};
 
 	//mapi_var_dump($inventory);
@@ -908,7 +908,7 @@ function anagram_add_invetory_field($form, $save_id, $field) {
 				<?php if($auto=='Yes'){ ?> <span class="fes-help">The inventory number will auto increment, you can turn this off on you <a href="<?php echo get_site_url(); ?>/collection/?task=profile">profile</a>.</span><?php }; ?>
 			</div>
 			<div class="fes-fields">
-			   <input class="textfield" id="inventory" type="text" data-required="" data-type="text" name="inventory" <?php echo $disabled; ?> placeholder="" value="<?php echo $inventory; ?>" size="">
+			   <input class="textfield" id="inventory" type="text" data-required="" data-type="text" name="inventory" <?php echo $readonly; ?> placeholder="" value="<?php echo $inventory; ?>" size="">
 			</div>
 		</fieldset>
 	<?php

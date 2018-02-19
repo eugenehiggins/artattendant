@@ -475,7 +475,7 @@ function detailFormatter(index, row) {
                     source: [
                         {value: 'publish', text: 'Public'},
                         {value: 'private', text: 'Private'},
-                        {value: 'archive', text: 'Archived', disabled: true},
+                        {value: 'archive', text: 'Sold', disabled: true},
 
                     ],
                     display: function (value, sourceData) {

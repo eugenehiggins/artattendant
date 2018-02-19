@@ -12,6 +12,10 @@ $user = wp_get_current_user();
 
 <?php if (is_page('collection')): ?>
     <header class="dash-holder">
+	    <a href="#dash-content" data-toggle="collapse" id="open-close-tab"  title="Show/Hide summary" role="button" aria-expanded="false" aria-controls="dash-content" style="bottom: auto;z-index:2;background: transparent;">
+            <span class="tab close"><i class="fas fa-times"></i></span>
+            <span class="tab open"><i class="fas fa-plus"></i></span>
+        </a>
         <div id="dash-content" class="collapse in">
             <div class="col-sm-3 weclome-name">
                 <div class="profile-icon"><?php if (get_avatar($user->ID, 32)) {
@@ -46,10 +50,7 @@ $user = wp_get_current_user();
                 </div>
             </div>
         </div>
-        <a href="#dash-content" data-toggle="collapse" id="open-close-tab" role="button" aria-expanded="false" aria-controls="dash-content">
-            <span class="tab close"><i class="fas fa-times"></i>close</span>
-            <span class="tab open"><i class="fas fa-plus"></i>open</span>
-        </a>
+  
     </header><!-- .entry-header -->
 <?php endif; ?>
 

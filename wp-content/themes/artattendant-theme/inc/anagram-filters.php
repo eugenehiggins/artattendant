@@ -127,6 +127,37 @@ function custom_slider_steps( $output, $params ) {
 }
 //add_filter( 'facetwp_render_output', 'custom_slider_steps', 10, 2 );
 
+    function convertToDecimal ($fraction)
+    {
+        $numbers=explode("/",$fraction);
+        return round($numbers[0]/$numbers[1],6);
+    }
+
+add_filter( 'facetwp_index_row', 'smyles_facetwp_index_integer_only', 10 );
+function smyles_facetwp_index_integer_only( $params ){
+	if( $params['facet_name'] === 'width' || $params['facet_name'] === 'height'  ){
+
+		$width = get_post_meta($params['post_id'], 'art'.$params['facet_name'] , true);
+		$roundNumber = explode(" ", $width);
+
+		$roundNumber = explode(".", $roundNumber[0]);
+
+		$params['facet_value'] = $roundNumber[0];
+		$params['facet_display_value']= $roundNumber[0];
+
+
+		// Use regex preg_replace to remove all non-integers (execpt for .)
+		//$params['facet_value'] = preg_replace("/([^0-9\\.])/i", '', $params['facet_value'] );
+
+		// Uncomment settype line below to remove decimals
+		//settype( $params['facet_value'], 'integer' );
+
+		// Uncomment below to also remove formatting on display_value (may not be necessary)
+		//$params['facet_display_value'] = preg_replace("/([^0-9\\.])/i", '', $params['facet_display_value'] );
+	}
+
+	return $params;
+}
 
 
 /*

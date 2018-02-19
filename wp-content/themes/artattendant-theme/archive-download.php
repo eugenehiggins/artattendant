@@ -55,7 +55,7 @@
 					</section>
 				</div>
 
-						<?php if( current_user_can('editor') || current_user_can('administrator') ) {  ?>
+
 			<style>
 				#artist-list{
 					 margin-top: 20px;margin-bottom: 20px;
@@ -86,7 +86,7 @@
 					<div id="artist-list">
 						<?php echo facetwp_display( 'facet', 'artist_list' ); ?>
                     </div>
-			<?php } ?>
+
 
 			</div>
 
