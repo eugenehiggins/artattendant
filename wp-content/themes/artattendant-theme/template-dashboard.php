@@ -47,8 +47,8 @@ $user = wp_get_current_user();
             </div>
         </div>
         <a href="#dash-content" data-toggle="collapse" id="open-close-tab" role="button" aria-expanded="false" aria-controls="dash-content">
-            <span class="tab close"><i class="fas fa-times"></i>close</span>
-            <span class="tab open"><i class="fas fa-plus"></i>open</span>
+            <span class="tab close"><i class="fas fa-times"></i>hide dashboard</span>
+            <span class="tab open"><i class="fas fa-plus"></i>show dashboard</span>
         </a>
     </header><!-- .entry-header -->
 <?php endif; ?>
