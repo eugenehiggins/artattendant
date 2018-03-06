@@ -11988,6 +11988,9 @@ footer{
       border-bottom: 1px solid #e5e5e5;
   */
 }
+.page-template-template-dashboard .artwork-notes {
+  display: none;
+}
 .extra-details {
   margin-top: 15px;
 }
