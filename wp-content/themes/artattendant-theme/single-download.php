@@ -6,7 +6,7 @@
 
 		 ?>
 
-	<div id="artwork" class="container switcher">
+	<div id="artwork" class="container-fluid switcher">
 	<div class="loading" ><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
 		<div class="col-sm-6 nopadding  artwork-image">
 			<img class="original " src="<?php echo anagram_resize_image(array('width'=>877, 'crop'=>false, 'image_id'=> get_post_thumbnail_id( $post->ID ), 'url'=> true )); ?>" >
@@ -150,7 +150,7 @@
 				</a>
 								<div class="art-info">
 									<h4><?php echo get_custom_taxonomy('artist', ' ', 'name', get_the_ID() ); ?></h4>
-									<h5><em><?php the_title(); ?></em></h4>
+									<h5><em><?php the_title(); ?></em></h5>
 									<div class="row"><div class="col-xs-6"><a href="<?php the_permalink(); ?>" class="more-link">view more //</a></div><div class="col-xs-6 text-right"><?php echo anagram_output_artwork_status( get_the_ID() ); ?></div></div>
 
 								</div>

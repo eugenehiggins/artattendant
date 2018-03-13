@@ -29,11 +29,11 @@
 		</div>
 
 
-		<div id="artwork" class="container switcher">
-		<div class="col-sm-4 nopadding  artwork-image">
+		<div id="artwork" class="container-fluid switcher">
+		<div class="col-sm-6 nopadding  artwork-image">
 			<img class="original " src="<?php echo anagram_resize_image(array('width'=>877, 'crop'=>false, 'image_id'=> get_post_thumbnail_id( $post_id ), 'url'=> true )); ?>" >
 		</div>
-		<div class="col-sm-8 nopadding">
+		<div class="col-sm-6 nopadding">
 					<div id="no-more-tables-off" class="clearfix">
 
 								<?php //echo anagram_get_public_artwork_info($post_id, true); ?>
