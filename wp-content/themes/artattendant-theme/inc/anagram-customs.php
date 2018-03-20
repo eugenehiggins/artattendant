@@ -532,7 +532,7 @@ function anagram_get_private_artwork_info($artwork_id ) {
 	if( get_post_meta( $artwork_id, 'edition_number',true ) )$artwork_details .= '<tr><td class="field-label col-md-3 active">Edition #</td><td> '.get_post_meta( $artwork_id, 'edition_number',true ).'</td></tr>';
 
 
-	if( get_post_field('post_content', $artwork_id) )$artwork_details .= '<tr><td class="field-label col-md-3 active">Notes</td><td>'.get_post_field('post_content', $artwork_id).'</td></tr>';
+//	if( get_post_field('post_content', $artwork_id) )$artwork_details .= '<tr><td class="field-label col-md-3 active">Notes</td><td>'.get_post_field('post_content', $artwork_id).'</td></tr>';
 
 	if( get_post_meta( $artwork_id, 'private_notes',true) )$artwork_details .= '<tr><td class="field-label col-md-3 active">Notes</td><td>'.get_post_meta( $artwork_id, 'private_notes',true).'</td></tr>';
 	if( get_post_meta( $artwork_id, 'location',true) )$artwork_details .= '<tr><td class="field-label col-md-3 active">Location</td><td>'.get_post_meta( $artwork_id, 'location',true).'</td></tr>';

@@ -25,7 +25,7 @@
 
 		<div class="alert alert-warning">
 		<strong>Your Private View</strong>
-		  <a href="https://artattendant.com/collection/?task=edit-product&post_id=<?php echo $post_id; ?>"  class="alert-link pull-right"><i class="fa fa-edit fa-lg"></i> Edit <?php echo get_the_title($post_id); ?></a>
+		  <a href="/collection/?task=edit-product&post_id=<?php echo $post_id; ?>"  class="alert-link pull-right"><i class="fa fa-edit fa-lg"></i> Edit <?php echo get_the_title($post_id); ?></a>
 		</div>
 
 
