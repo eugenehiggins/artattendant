@@ -1,5 +1,1 @@
-/* Column Revision */
-td.column-revisions .acp-row-revision {
-  margin-bottom: 5px; }
-  td.column-revisions .acp-row-revision .avatar {
-    vertical-align: middle; }
+td.column-revisions .acp-row-revision{margin-bottom:5px}td.column-revisions .acp-row-revision .avatar{vertical-align:middle}td.column-ancestors span{width:15px;font-size:12px;height:15px;display:inline-block;vertical-align:middle}

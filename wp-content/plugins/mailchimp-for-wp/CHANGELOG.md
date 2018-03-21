@@ -1,6 +1,53 @@
 Changelog
 =========
 
+#### 4.2 - March 5, 2018
+
+**Additions**
+
+- Live form preview while editing form. 
+
+**Improvements**
+
+- Improved [conditional fields logic](https://kb.mc4wp.com/conditional-fields-elements/).
+- Debug log now includes request & response data.
+- [Form JavaScript events](https://kb.mc4wp.com/javascript-form-events/) are fired in an isolated thread now, to prevent errors in event callbacks from breaking form functionality.
+- Don't send empty field values to MailChimp when updating subscribers.
+- Show interest grouping ID in list overview on settings page.
+
+**Fixes**
+
+- Ninja Forms export checkbox would always state "checked" when form contained a MailChimp sign-up checkbox.
+
+
+
+#### 4.1.15 - February 7, 2018
+
+**Fixes**
+
+- Dropdown fields with special characters were not properly passed to MailChimp.
+- Interest groups with an all-numeric ID were not properly passed to MailChimp.
+
+**Improvements**
+
+- Various minor code optimizations
+- Do not redirect when showing "already subscribed" warning.
+- Improved scroll to form handling after a form is submitted without AJAX.
+
+
+#### 4.1.14 - January 8, 2018
+
+**Fixes**
+
+- Validate method was incorrectly checking required array fields.
+
+**Improvements**
+
+- Wrap some missing strings in translate calls. Thanks [morlor](https://github.com/morloi).
+- Make it clear that redirecting after successful form submissions will not show the "subscribed" message.
+
+
+
 #### 4.1.13 - December 28, 2017
 
 **Fixes**

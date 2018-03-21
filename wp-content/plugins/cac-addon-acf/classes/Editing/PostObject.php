@@ -15,7 +15,7 @@ class ACA_ACF_Editing_PostObject extends ACA_ACF_Editing {
 		}
 
 		// ACF Free
-		if ( ac_addon_acf()->is_acf_free() ) {
+		if ( ACA_ACF_API::is_free() ) {
 			foreach ( $ids as $id ) {
 				$values[ $id ] = html_entity_decode( get_the_title( $id ) );
 			}
@@ -52,7 +52,7 @@ class ACA_ACF_Editing_PostObject extends ACA_ACF_Editing {
 	public function get_ajax_options( $request ) {
 
 		// ACF Free
-		if ( ac_addon_acf()->is_acf_free() ) {
+		if ( ACA_ACF_API::is_free() ) {
 			return acp_editing_helper()->get_posts_list( array(
 				's'         => $request['search'],
 				'post_type' => $this->get_post_type(),

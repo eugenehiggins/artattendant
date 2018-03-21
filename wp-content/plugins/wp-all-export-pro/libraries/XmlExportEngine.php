@@ -285,6 +285,12 @@ if ( ! class_exists('XmlExportEngine') ){
 									'type'  => 'image_alt',
 									'auto'  => 1
 								),
+								array(
+									'name'  => 'Featured',
+									'label' => 'featured',
+									'type'  => 'image_featured',
+									'auto'  => 1
+								),
 							)
 						),
 						'attachments' => array(
@@ -513,7 +519,7 @@ if ( ! class_exists('XmlExportEngine') ){
 			}	
 			if ( 'advanced' == $this->post['export_type'] and ! self::$is_user_export and ! self::$is_comment_export and ! self::$is_taxonomy_export )
 			{
-				$meta_keys = $wpdb->get_results("SELECT DISTINCT meta_key FROM {$table_prefix}postmeta WHERE {$table_prefix}postmeta.meta_key NOT LIKE '_edit%' LIMIT 500");
+				$meta_keys = $wpdb->get_results("SELECT DISTINCT meta_key FROM {$table_prefix}postmeta WHERE {$table_prefix}postmeta.meta_key NOT LIKE '_edit%' LIMIT 700");
 				if ( ! empty($meta_keys)){
 					$exclude_keys = array('_first_variation_attributes', '_is_first_variation_created');
 					foreach ($meta_keys as $meta_key) {

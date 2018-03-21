@@ -56,6 +56,20 @@ class ACP_PluginActions {
 		return false;
 	}
 
+	/**
+	 * Calls get_plugin_data() for this plugin
+	 *
+	 * @see get_plugin_data()
+	 * @return false|string
+	 */
+	private function get_plugin_version( $file ) {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+		$plugin = get_plugin_data( $file, false, false );
+
+		return isset( $plugin['Version'] ) ? $plugin['Version'] : false;
+	}
+
 	public function notice() {
 		add_action( 'after_plugin_row_' . $this->plugin, array( $this, 'display_notice' ) );
 	}
@@ -82,7 +96,7 @@ class ACP_PluginActions {
 	 */
 	public function is_compatible() {
 		if ( file_exists( $this->get_file() ) && function_exists( 'AC' ) ) {
-			$current_version = AC()->get_plugin_version( $this->get_file() );
+			$current_version = $this->get_plugin_version( $this->get_file() );
 			if ( $current_version && version_compare( $current_version, $this->required_version, '<' ) ) {
 				return false;
 			}

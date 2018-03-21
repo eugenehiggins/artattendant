@@ -137,11 +137,14 @@ final class ACP_Layouts {
 			return false;
 		}
 
+		// Delete columns settings
+		$this->list_screen->delete();
+
 		// Delete preferences
 		ACP()->sorting()->delete_sorting_preference( $this->list_screen );
 		ACP()->screen_options()->delete_overflow_preference( $this->list_screen );
 
-		// Delete settings
+		// Delete layout settings
 		delete_option( self::LAYOUT_KEY . $this->list_screen->get_storage_key() );
 
 		$this->reset();
@@ -292,7 +295,7 @@ final class ACP_Layouts {
 	 * @return AC_Preferences
 	 */
 	public function preferences() {
-		return new AC_Preferences( 'layout_table' );
+		return new AC_Preferences_Site( 'layout_table' );
 	}
 
 	/**

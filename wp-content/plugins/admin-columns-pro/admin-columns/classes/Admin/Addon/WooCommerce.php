@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class AC_Admin_Addon_WooCommerce extends AC_Admin_Addon {
 
 	public function __construct() {
-		parent::__construct( 'cac-addon-woocommerce' );
+		parent::__construct( 'ac-addon-woocommerce' );
 
 		$this
 			->set_title( __( 'WooCommerce', 'codepress-admin-columns' ) )

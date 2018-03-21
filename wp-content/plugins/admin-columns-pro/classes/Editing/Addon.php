@@ -12,11 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ACP_Editing_Addon extends AC_Addon {
 
 	/**
-	 * @var ACP_Editing_Helper
-	 */
-	private $helper;
-
-	/**
 	 * @var ACP_Editing_TableScreen
 	 */
 	private $table_screen;
@@ -28,10 +23,8 @@ class ACP_Editing_Addon extends AC_Addon {
 		AC()->autoloader()->register_prefix( 'ACP_Editing', $this->get_plugin_dir() . 'classes' );
 
 		// Settings screen
-
 		add_action( 'ac/column/settings', array( $this, 'register_column_settings' ) );
 		add_action( 'ac/settings/general', array( $this, 'register_general_settings' ) );
-		add_action( 'ac/settings/scripts', array( $this, 'settings_scripts' ) );
 
 		// Table screen
 		$this->table_screen = new ACP_Editing_TableScreen();
@@ -53,11 +46,7 @@ class ACP_Editing_Addon extends AC_Addon {
 	}
 
 	public function helper() {
-		if ( null === $this->helper ) {
-			$this->helper = new ACP_Editing_Helper();
-		}
-
-		return $this->helper;
+		return new ACP_Editing_Helper();
 	}
 
 	/**
@@ -70,34 +59,15 @@ class ACP_Editing_Addon extends AC_Addon {
 			return false;
 		}
 
-		$model = $column->editing();
+		$list_screen = $column->get_list_screen();
 
-		switch ( $column->get_list_screen()->get_meta_type() ) {
-			case 'post' :
-				$model->set_strategy( new ACP_Editing_Strategy_Post( $model ) );
-
-				break;
-			case 'user' :
-				$model->set_strategy( new ACP_Editing_Strategy_User( $model ) );
-
-				break;
-			case 'comment' :
-				$model->set_strategy( new ACP_Editing_Strategy_Comment( $model ) );
-
-				break;
-			case 'term' :
-				$model->set_strategy( new ACP_Editing_Strategy_Taxonomy( $model ) );
-
-				break;
-			case 'site' :
-				$model->set_strategy( new ACP_Editing_Strategy_Site( $model ) );
-
-				break;
+		if ( ! $list_screen instanceof ACP_Editing_ListScreen ) {
+			return false;
 		}
 
-		do_action( 'acp/editing/model', $model, $column );
+		$model = $column->editing();
 
-		return $model;
+		return $model->set_strategy( $list_screen->editing( $model ) );
 	}
 
 	/**
@@ -118,13 +88,6 @@ class ACP_Editing_Addon extends AC_Addon {
 				)
 			),
 		) );
-	}
-
-	/**
-	 * @since 4.0
-	 */
-	public function settings_scripts() {
-		wp_enqueue_style( 'acp-editing-settings', $this->get_plugin_url() . 'assets/css/settings' . AC()->minified() . '.css', array(), $this->get_version() );
 	}
 
 	/**

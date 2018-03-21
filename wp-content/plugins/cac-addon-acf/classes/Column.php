@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.1
  * @abstract
  */
-class ACA_ACF_Column extends AC_Column_Meta
+abstract class ACA_ACF_Column extends AC_Column_Meta
 	implements ACP_Column_EditingInterface, ACP_Column_FilteringInterface, ACP_Column_SortingInterface, ACP_Export_Column {
 
 	public function __construct() {
@@ -56,10 +56,6 @@ class ACA_ACF_Column extends AC_Column_Meta
 
 	// Settings
 
-	public function register_settings() {
-		$this->register_settings_by_type( 'Post' );
-	}
-
 	/**
 	 * @param string $type Comment, Post, Taxonomy, User or Media
 	 */
@@ -67,11 +63,11 @@ class ACA_ACF_Column extends AC_Column_Meta
 		$setting = 'Setting_Field_' . $type;
 
 		// Default version
-		$class = ACA_ACF::CLASS_PREFIX . $setting;
+		$class = ac_addon_acf()->get_prefix() . $setting;
 
 		// Free version specific
-		if ( ac_addon_acf()->is_acf_free() ) {
-			$free_class = ACA_ACF::CLASS_PREFIX . 'Free_' . $setting;
+		if ( ACA_ACF_API::is_free() ) {
+			$free_class = ac_addon_acf()->get_prefix() . 'Free_' . $setting;
 
 			if ( class_exists( $free_class ) ) {
 				$class = $free_class;
@@ -111,7 +107,7 @@ class ACA_ACF_Column extends AC_Column_Meta
 	 * @return array|false ACF Field settings
 	 */
 	public function get_acf_field() {
-		return ac_addon_acf()->get_acf_field( $this->get_field_hash() );
+		return ACA_ACF_API::get_field( $this->get_field_hash() );
 	}
 
 	/**
@@ -140,7 +136,7 @@ class ACA_ACF_Column extends AC_Column_Meta
 	 * @return ACA_ACF_Field|false
 	 */
 	public function get_field_by_type( $field_type ) {
-		$class = ACA_ACF::CLASS_PREFIX . 'Field';
+		$class = ac_addon_acf()->get_prefix() . 'Field';
 
 		// Specific field types
 		$type = $class . '_' . AC_Autoloader::string_to_classname( $field_type );
@@ -150,8 +146,8 @@ class ACA_ACF_Column extends AC_Column_Meta
 		}
 
 		// Free version specific
-		if ( ac_addon_acf()->is_acf_free() ) {
-			$type = ACA_ACF::CLASS_PREFIX . 'Free_Field_' . AC_Autoloader::string_to_classname( $field_type );
+		if ( ACA_ACF_API::is_free() ) {
+			$type = ac_addon_acf()->get_prefix() . 'Free_Field_' . AC_Autoloader::string_to_classname( $field_type );
 
 			if ( class_exists( $type ) ) {
 				$class = $type;
@@ -181,8 +177,6 @@ class ACA_ACF_Column extends AC_Column_Meta
 	 *
 	 * @since 1.2.2
 	 */
-	public function get_formatted_id( $id ) {
-		return $id;
-	}
+	public abstract function get_formatted_id( $id );
 
 }

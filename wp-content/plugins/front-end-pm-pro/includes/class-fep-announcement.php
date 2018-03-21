@@ -31,7 +31,7 @@ class Fep_Announcement
 		
 		$menu = Fep_Menu::init()->get_menu();
 		if( ! empty( $menu['announcements'] ) ){
-			add_filter( 'posts_where' , array( $this, 'posts_where' ), 99, 2 );
+			//add_filter( 'posts_where' , array( $this, 'posts_where' ), 99, 2 );
 			add_filter('fep_filter_switch_announcements', array($this, 'announcement_box'));
 			add_filter('fep_filter_switch_view_announcement', array($this, 'view_announcement'));
 			add_action( 'fep_posted_bulk_announcement_bulk_action', array($this, 'bulk_action') );
@@ -97,19 +97,23 @@ class Fep_Announcement
 		}
 	
 function recalculate_user_stats( $new_status, $old_status, $post ){
+	global $wpdb;
 	
 	if ( 'fep_announcement' != $post->post_type || $old_status === $new_status ) {
 		return;
 	}
 	
 	if( 'publish' == $new_status || 'publish' == $old_status ){
-		delete_metadata( 'user', 0, '_fep_user_announcement_count', '', true );
+		delete_metadata( 'user', 0, $wpdb->get_blog_prefix() . '_fep_user_announcement_count', '', true );
+	}
+	if( 'publish' == $new_status ){
+		delete_metadata( 'user', 0, $wpdb->get_blog_prefix() . '_fep_notification_dismiss', '', true );
 	}
 }
 
 function set_user_role( $user_id, $role, $old_roles ){
 	
-	delete_user_meta( $user_id, '_fep_user_announcement_count' );
+	delete_user_option( $user_id, '_fep_user_announcement_count' );
 }
 
 function get_announcement( $id )
@@ -135,15 +139,20 @@ function get_user_announcements()
 			'post_parent' => 0,
 			'posts_per_page' => fep_get_option('announcements_page',15),
 			'paged'	=> !empty($_GET['feppage']) ? absint($_GET['feppage']): 1,
-			'meta_query' => array(
+		 );
+		 $args['meta_query'][] = array(
+ 			'relation' => 'OR',
 				array(
 					'key' => '_fep_participant_roles',
-					'value' => wp_get_current_user()->roles,
+					'value' => get_userdata( $user_id )->roles,
 					'compare' => 'IN'
-				)
-				
-			)
-		 );
+				),
+ 				array(
+ 					'key' => '_fep_author',
+ 					'value' => $user_id,
+ 					'compare' => '='
+ 				),
+ 		);
 		$args['meta_query'][] = array(
 			'relation' => 'OR',
 				array(
@@ -161,10 +170,6 @@ function get_user_announcements()
 		 
 		 if( ! $user_id )
 			$args['post__in'] = array(0);
-			
-		if( $user_id && apply_filters( 'fep_filter_announcement_include_own', true ) ){
-			$args['fep_announcement_include_own'] = true;
-		}
 		 
 		 switch( $filter ) {
 		 	case 'after-i-registered' :
@@ -219,24 +224,30 @@ function get_user_announcement_count( $value = 'all', $force = false, $user_id =
 		}
 	}
 	
-	$user_meta = get_user_meta( $user_id, '_fep_user_announcement_count', true );
+	$user_meta = get_user_option( '_fep_user_announcement_count', $user_id );
 	
-	if( false === $user_meta || $force || !isset( $user_meta['total'] ) || !isset( $user_meta['read'] )|| !isset( $user_meta['unread'] ) ) {
+	if( false === $user_meta || $force || !isset( $user_meta['unread'] ) ) {
 	
 		$args = array(
 			'post_type' => 'fep_announcement',
 			'post_status' => 'publish',
 			'post_parent' => 0,
 			'posts_per_page' => -1,
-			'meta_query' => array(
+			'fields' => 'ids',
+		 );
+		 $args['meta_query'][] = array(
+ 			'relation' => 'OR',
 				array(
 					'key' => '_fep_participant_roles',
 					'value' => get_userdata( $user_id )->roles,
 					'compare' => 'IN'
-				)
-				
-			)
-		 );
+				),
+ 				array(
+ 					'key' => '_fep_author',
+ 					'value' => $user_id,
+ 					'compare' => '='
+ 				),
+ 		);
 		 $args['meta_query'][] = array(
 			'relation' => 'OR',
 				array(
@@ -250,48 +261,27 @@ function get_user_announcement_count( $value = 'all', $force = false, $user_id =
 					'compare' => 'NOT LIKE'
 				),
 		);
-		if( apply_filters( 'fep_filter_announcement_include_own', true ) ){
-			$args['fep_announcement_include_own'] = true;
-			$args['suppress_filters'] = false;
-		}
+		$args['meta_query'][] = array(
+			'relation' => 'OR',
+				array(
+					'key' => '_fep_read_by',
+					'compare' => 'NOT EXISTS'
+				),
+				array(
+					'key' => '_fep_read_by',
+					'value' => serialize($user_id),
+					'compare' => 'NOT LIKE'
+				),
+		);
+
 		$args = apply_filters( 'fep_announcement_count_query_args', $args);
 		
 		 $announcements = get_posts( $args );
 		 
-		 $total_count 		= 0;
-		 $read_count 		= 0;
-		 $unread_count 		= 0;
-		 $after_i_registered_count = 0;
-		 
-		 if( $announcements && !is_wp_error($announcements) ) {
-			 foreach( $announcements as $announcement ) {
-		
-			 	$total_count++;
-				
-			 	$read_by = get_post_meta( $announcement->ID, '_fep_read_by', true );
-			
-				if( is_array( $read_by ) && in_array( $user_id, $read_by ) ) {
-					$read_count++;
-				} else {
-					$unread_count++;
-				}
-				$user_registered = strtotime(fep_get_userdata( $user_id, 'user_registered', 'id' ));
-					
-				if( $user_registered < strtotime( $announcement->post_date ) ) {
-					$after_i_registered_count++;
-				}
-				
-			 }
-			}
-
-		 
 		 $user_meta = array(
-			'total' => $total_count,
-			'read' => $read_count,
-			'unread' => $unread_count,
-			'after-i-registered' => $after_i_registered_count
+			'unread' => count( $announcements ),
 		);
-		update_user_meta( $user_id, '_fep_user_announcement_count', $user_meta );
+		update_user_option( $user_id, '_fep_user_announcement_count', $user_meta );
 	}
 	if( isset($user_meta[$value]) ) {
 		return $user_meta[$value];
@@ -322,7 +312,7 @@ function bulk_action( $action, $ids = null ) {
 	$message = '';
 	
 	if( $count ) {
-		delete_user_meta( get_current_user_id(), '_fep_user_announcement_count' );
+		delete_user_option( get_current_user_id(), '_fep_user_announcement_count' );
 		
 		if( 'delete' == $action ){
 			$message = sprintf(_n('%s announcement', '%s announcements', $count, 'front-end-pm'), number_format_i18n($count) );
@@ -429,9 +419,9 @@ function get_column_content($column)
 	{		
 		  $g_filter = ! empty( $_GET['fep-filter'] ) ? $_GET['fep-filter'] : '';
 		  
-		  $total_announcements = $this->get_user_announcement_count('total');
-		  
 		  $announcements = $this->get_user_announcements();
+		  
+		  $total_announcements = $announcements->found_posts;
 		  
 		  $template = fep_locate_template( 'announcement_box.php');
 		  

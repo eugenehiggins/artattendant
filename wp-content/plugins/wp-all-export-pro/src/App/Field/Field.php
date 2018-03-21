@@ -67,6 +67,10 @@ abstract class Field
                 }
             }
         }
+
+        $value = str_replace("**DOUBLEQUOT**", "\\\"", $value);
+        $value = str_replace("**SINGLEQUOT**","'", $value);
+
         return $value;
     }
 
@@ -130,6 +134,10 @@ abstract class Field
         $function = str_replace("**BETWEENPARAMS**", '","', $function);
         $function = str_replace("**BEFOREPARAMS**", '("', $function);
         $function = str_replace("**AFTERPARAMS**", '")', $function);
+
+        $function = str_replace("**DOUBLEQUOT**", "\\\"", $function);
+        $function = str_replace("**SINGLEQUOT**","'", $function);
+
         return $function;
     }
 }

@@ -36,11 +36,11 @@ if (!class_exists('Fep_Form'))
 	$fields = array(
 				'message_to' => array(
 					'label'       => __( 'To', 'front-end-pm' ),
-					//'description' => __( 'Name of the receipent you want to send message.', 'front-end-pm' ),
+					//'description' => __( 'Name of the recipient you want to send message.', 'front-end-pm' ),
 					'type'        => 'message_to',
 					'required'    => true,
-					'placeholder' => __( 'Name of the receipent.', 'front-end-pm' ),
-					'noscript-placeholder' => __( 'Username of the receipent.', 'front-end-pm' ),
+					'placeholder' => __( 'Name of the recipient.', 'front-end-pm' ),
+					'noscript-placeholder' => __( 'Username of the recipient.', 'front-end-pm' ),
 					'value' => '',
 					'id' => 'fep-message-to',
 					'name' => 'message_to',
@@ -226,7 +226,7 @@ function field_output( $field, $errors )
 			$field['class'] = implode( ' ', array_filter( $field['class'] ) );
 		}
 		
-		?><div class="fep-form-field"><?php if ( !empty($field['label']) ) { ?>
+		?><div class="fep-form-field fep-form-field-<?php esc_attr_e( $field['id'] ); ?>"><?php if ( !empty($field['label']) ) { ?>
 			<div class="fep-label"><label for="<?php echo esc_attr( $field['id'] ); ?>"><?php echo esc_html( $field['label'] ) ; ?>: <?php if ( ! empty( $field['required'] ) ) : ?><span class="required">*</span><?php endif; ?></label></div>
 			<?php } ?>
 			<div class="fep-field"><?php
@@ -258,7 +258,7 @@ function field_output( $field, $errors )
 					
 					if( ! empty( $field['posted-value' ] ) ) {
 						$message_to = fep_get_userdata( $field['posted-value' ], 'user_nicename' );
-						$message_top = fep_get_userdata( $message_to, 'display_name' );
+						$message_top = fep_user_name( fep_get_userdata( $message_to, 'ID' ) );
 					} elseif( $to ){
 						$support = array(
 							'nicename' 	=> true,
@@ -271,16 +271,16 @@ function field_output( $field, $errors )
 							
 						if ( !empty( $support['nicename'] ) && $user = fep_get_userdata( $to, 'user_nicename' ) ) {
 							$message_to = $user;
-							$message_top = fep_get_userdata( $user, 'display_name');
+							$message_top = fep_user_name( fep_get_userdata( $user, 'ID') );
 						} elseif( is_numeric( $to ) && !empty( $support['id'] ) && $user = fep_get_userdata( $to, 'user_nicename', 'id' ) ) {
 							$message_to = $user;
-							$message_top = fep_get_userdata( $user, 'display_name');
+							$message_top = fep_user_name( fep_get_userdata( $user, 'ID') );
 						} elseif ( is_email( $to ) && !empty( $support['email'] ) && $user = fep_get_userdata( $to, 'user_nicename', 'email' ) ) {
 							$message_to = $user;
-							$message_top = fep_get_userdata( $user, 'display_name');
+							$message_top = fep_user_name( fep_get_userdata( $user, 'ID') );
 						} elseif ( !empty( $support['login'] ) && $user = fep_get_userdata( $to, 'user_nicename', 'login' ) ) {
 							$message_to = $user;
-							$message_top = fep_get_userdata( $user, 'display_name');
+							$message_top = fep_user_name( fep_get_userdata( $user, 'ID') );
 						} else {
 							$message_to = '';
 							$message_top = '';
@@ -474,7 +474,7 @@ function field_output( $field, $errors )
 							if( $to && get_current_user_id() != $to) {
 								$_POST['message_to_id'][] = $to;
 								if ( ! fep_current_user_can('send_new_message_to', $to ) ) {
-									$errors->add( $field['id'] , sprintf(__("%s does not want to receive messages!", 'front-end-pm'), fep_get_userdata( $to, 'display_name', 'id')));
+									$errors->add( $field['id'] .'-permission' , sprintf(__("%s does not want to receive messages!", 'front-end-pm'), fep_user_name( $to )));
 								}
 							} else {
 								$errors->add( $field['id'] , sprintf(__('Invalid receiver "%s".', "front-end-pm"), $pre ) );
@@ -484,7 +484,7 @@ function field_output( $field, $errors )
 					  	$to = $_POST['message_to_id'] = fep_get_userdata( $preTo ); //return ID;
 						if( $to && get_current_user_id() != $to) {
 							if ( ! fep_current_user_can('send_new_message_to', $to ) ) {
-								$errors->add( $field['id'] , sprintf(__("%s does not want to receive messages!", 'front-end-pm'), fep_get_userdata( $to, 'display_name', 'id')));
+								$errors->add( $field['id'] .'-permission', sprintf(__("%s does not want to receive messages!", 'front-end-pm'), fep_user_name( $to )));
 							}
 						} else {
 							$errors->add( $field['id'] , sprintf(__('Invalid receiver "%s".', "front-end-pm"), $preTo ) );
@@ -532,15 +532,26 @@ function field_output( $field, $errors )
 
 					$size_limit = (int) wp_convert_hr_to_bytes(fep_get_option('attachment_size','4MB'));
 					$fields = (int) fep_get_option('attachment_no', 4);
+					
+					if( ! isset( $_FILES[ $field['name'] ] )
+						|| !is_array( $_FILES[ $field['name'] ] )
+						|| empty( $_FILES[ $field['name'] ]['tmp_name'] )
+						|| !is_array( $_FILES[ $field['name'] ]['tmp_name'] ) )
+						break;
+					
+					if( $fields < count( $_FILES[ $field['name'] ]['tmp_name'] ) ){
+						$errors->add('AttachmentCount', sprintf( __( 'Maximum %s allowed', 'front-end-pm' ), sprintf(_n('%s file', '%s files', $fields, 'front-end-pm'), number_format_i18n( $fields ) ) ) );
+						break;
+					}
 				
-					for ($i = 0; $i < $fields; $i++) {
-						$tmp_name = isset( $_FILES[$field['name']]['tmp_name'][$i] ) ? basename( $_FILES[$field['name']]['tmp_name'][$i] ) : '' ;
-						$file_name = isset( $_FILES[$field['name']]['name'][$i] ) ? basename( $_FILES[$field['name']]['name'][$i] ) : '' ;
+					foreach( $_FILES[ $field['name'] ]['tmp_name'] as $key => $tmp_name ) {
+						
+						$file_name = isset( $_FILES[$field['name']]['name'][ $key ] ) ? basename( $_FILES[$field['name']]['name'][ $key ] ) : '' ;
 				
 						//if file is uploaded
 						if ( $tmp_name ) {
-							$attach_type = wp_check_filetype( $file_name );
-							$attach_size = $_FILES[$field['name']]['size'][$i];
+							$attach_type = wp_check_filetype( $file_name, $mime );
+							$attach_size = $_FILES[ $field['name'] ]['size'][ $key ];
 				
 							//check file size
 							if ( $attach_size > $size_limit ) {
@@ -548,11 +559,11 @@ function field_output( $field, $errors )
 							}
 				
 							//check file type
-							if ( !in_array( $attach_type['type'], $mime ) ) {
+							if ( empty( $attach_type['type'] ) ) {
 								$errors->add('AttachmentType', sprintf(__( "Invalid attachment file type. Allowed Types are (%s)", 'front-end-pm' ),implode(', ',array_keys($mime))));
 							}
-						} // if $filename
-					}// endfor
+						} // if $tmp_name
+					}// endforeach
 					break;
 					
 				default :
@@ -581,7 +592,7 @@ public function form_field_output( $where = 'newmessage', $errors= '', $value = 
 	  
 		$form_attr = array(
 			'method' => 'post',
-			'class' => 'fep-form'
+			'class' => "fep-form fep-form-{$where}"
 			);
 		
 		if( 'settings' == $where ) {
@@ -602,7 +613,7 @@ public function form_field_output( $where = 'newmessage', $errors= '', $value = 
 		
 		$attr = array();
 		foreach ( $form_attr as $k => $v ) {
-			$attr[] = $k . '="' . $v . '"';
+			$attr[] = $k . '="' . esc_attr( $v ) . '"';
 		}
 		
 	ob_start();

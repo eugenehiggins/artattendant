@@ -33,7 +33,7 @@ if (!class_exists("fep_main_class"))
 	  
 	  if ( ! fep_current_user_can('access_message') ){
 	  
-	  	return "<div class='fep-error'>".__("You do not have permission to access message system", 'front-end-pm')."</div>";
+	  	return apply_filters('fep_main_shortcode_output', '<div class="fep-error">'.__("You do not have permission to access message system", 'front-end-pm').'</div>' );
 	  }
 	  
 	  $atts = shortcode_atts( array(
@@ -286,11 +286,12 @@ if (!class_exists("fep_main_class"))
 	  	$g_filter = ! empty( $_GET['fep-filter'] ) ? $_GET['fep-filter'] : '';
 	  
 	  	if( false === $total_message ) {
-	  		$total_message = fep_get_user_message_count('total');
+	  		//$total_message = fep_get_user_message_count('total');
 	  	}
 	  
 	  	if( false === $messages ){
 	  		$messages = Fep_Message::init()->user_messages( $action );
+			$total_message = Fep_Message::init()->found_messages;
 	  	}
 	  
 	  $template = fep_locate_template( 'messagebox.php');

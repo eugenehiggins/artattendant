@@ -22,7 +22,7 @@ class Fep_Email_Beautify
 			add_action( 'fep_pro_plugin_update', array($this, 'email_beautify_activate' ));
 			add_filter( 'cron_schedules', array($this, 'cron_schedules' ));
 			add_action( 'fep_pro_plugin_update', array($this, 'schedule_event' ) );
-			add_action( 'fep_action_before_admin_options_save', array($this, 'reschedule_event_on_save' ));
+			add_action( 'fep_action_after_admin_options_save', array($this, 'reschedule_event_on_save' ) );
 			add_filter( 'fep_admin_settings_tabs', array($this, 'admin_settings_tabs' ) );
 			add_filter( 'fep_settings_fields', array($this, 'settings_fields' ) );
 			add_filter( 'fep_filter_before_email_send', array($this, 'filter_before_email_send' ), 10, 3 );
@@ -73,8 +73,11 @@ class Fep_Email_Beautify
 		}
 	}
 
-	function reschedule_event_on_save( $settings ){
-		if( fep_get_option('eb_announcement_interval', 60 ) != $settings['eb_announcement_interval'] ) {
+	function reschedule_event_on_save( $old_value ){
+		if( !isset( $old_value['eb_announcement_interval'] ) )
+		$old_value['eb_announcement_interval'] = 60;
+		
+		if( fep_get_option('eb_announcement_interval', 60 ) != $old_value['eb_announcement_interval'] ) {
 			fep_eb_reschedule_event();
 		}
 	}
@@ -99,24 +102,24 @@ class Fep_Email_Beautify
 			'message_url' => array(
 				'description' => __('URL of message', 'front-end-pm'),
 				'where' => array( 'newmessage', 'reply' ),
-				'replace_with' => ! empty( $post->ID ) ? fep_query_url( 'viewmessage', array( 'fep_id' => $post->ID ) ) : ''
+				'replace_with' => ! empty( $post->ID ) ? fep_query_url_raw( 'viewmessage', array( 'fep_id' => $post->ID ) ) : ''
 				),
 			'announcement_url' => array(
 				'description' => __('URL of announcement', 'front-end-pm'),
 				'where' => 'announcement',
-				'replace_with' => ! empty( $post->ID ) ? fep_query_url( 'viewannouncement', array( 'fep_id' => $post->ID ) ) : ''
+				'replace_with' => ! empty( $post->ID ) ? fep_query_url_raw( 'viewannouncement', array( 'fep_id' => $post->ID ) ) : ''
 				),
 			'sender' => array(
 				'description' => __('Sender Name', 'front-end-pm'),
-				'replace_with' => ! empty( $post->post_author ) ? fep_get_userdata( $post->post_author, 'display_name', 'id' ) : ''
+				'replace_with' => ! empty( $post->post_author ) ? fep_user_name( $post->post_author ) : ''
 				),
 			'receiver' => array(
 				'description' => __('Receiver Name', 'front-end-pm'),
-				'replace_with' => fep_get_userdata( $user_email, 'display_name', 'email' )
+				'replace_with' => fep_user_name( fep_get_userdata( $user_email, 'ID', 'email' ) )
 				),
 			'site_title' => array(
 				'description' => __('Website title', 'front-end-pm'),
-				'replace_with' => get_bloginfo('name')
+				'replace_with' => wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES )
 				),
 			'site_url' => array(
 				'description' => __('Website URL', 'front-end-pm'),
@@ -456,7 +459,7 @@ class Fep_Email_Beautify
 			
 			$post = get_post( $id );
 			
-			if( ! $post || 'fep_announcement' != $post->post_type) {
+			if( ! $post || 'fep_announcement' != $post->post_type || 'publish' != $post->post_status ) {
 				unset( $queue[$k] );
 				continue;
 			}
@@ -479,6 +482,10 @@ class Fep_Email_Beautify
 				if( wp_mail( $y, $content['subject'], $content['message'], $content['headers'], $content['attachments'] ) || apply_filters( 'fep_eb_announcement_email_return_check_bypass', false ) ) {
 					unset( $queue[$k][$x] );
 					$count++;
+				}
+				if( $count && ( $count % 10 == 0 ) ){
+					//Save in every 10th emails for timeout issue
+					update_option( 'fep_announcement_email_queue', $queue, 'no' );
 				}
 			}
 		}

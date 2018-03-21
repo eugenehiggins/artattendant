@@ -20,7 +20,7 @@ class ACP_Table_ScreenOptions {
 	 * @return AC_Preferences
 	 */
 	public function preferences() {
-		return new AC_Preferences( 'show_overflow_table' );
+		return new AC_Preferences_Site( 'show_overflow_table' );
 	}
 
 	/**
@@ -109,8 +109,8 @@ class ACP_Table_ScreenOptions {
 	 * Load scripts
 	 */
 	public function scripts() {
-		wp_enqueue_style( 'ac-table-screen-option', acp()->get_plugin_url() . 'assets/css/table-screen-options' . AC()->minified() . '.css', array(), ACP()->get_version() );
-		wp_enqueue_script( 'ac-table-screen-option', acp()->get_plugin_url() . 'assets/js/table-screen-options' . AC()->minified() . '.js', array(), ACP()->get_version() );
+		wp_enqueue_style( 'ac-table-screen-option', acp()->get_plugin_url() . 'assets/css/table-screen-options.css', array(), ACP()->get_version() );
+		wp_enqueue_script( 'ac-table-screen-option', acp()->get_plugin_url() . 'assets/js/table-screen-options.js', array(), ACP()->get_version() );
 	}
 
 	/**

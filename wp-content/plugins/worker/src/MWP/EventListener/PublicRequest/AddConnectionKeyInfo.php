@@ -83,6 +83,10 @@ class MWP_EventListener_PublicRequest_AddConnectionKeyInfo implements Symfony_Ev
 
     public function printConnectionModalDialog()
     {
+        if ($this->context->isMultisite() && !$this->context->isNetworkAdmin()) {
+            return;
+        }
+
         if (!$this->userCanViewConnectionKey()) {
             return;
         }
@@ -90,6 +94,7 @@ class MWP_EventListener_PublicRequest_AddConnectionKeyInfo implements Symfony_Ev
         ob_start();
         ?>
         <div id="mwp_connection_key_dialog" style="display: none;">
+            <?php if (!mwp_get_communication_key()) { ?>
             <p>There are two ways to connect your website to the management dashboard:</p>
 
             <h2>Automatic</h2>
@@ -107,6 +112,7 @@ class MWP_EventListener_PublicRequest_AddConnectionKeyInfo implements Symfony_Ev
                 <li>Click the Add website icon at the top left</li>
                 <li>Enter this website's URL. When prompted, paste the connection key</li>
             </ol>
+            <?php } ?>
 
             <div style="text-align: center;font-weight: bold;"><p style="margin-bottom: 4px;margin-top: 20px;">Connection Key</p></div>
             <div style="padding: 10px;background-color: #fafafa;border: 1px solid black;border-radius: 10px;font-weight: bold;font-size: 14px;text-align: center;"><?php echo mwp_get_potential_key(); ?></div>
@@ -122,6 +128,10 @@ class MWP_EventListener_PublicRequest_AddConnectionKeyInfo implements Symfony_Ev
      */
     public function addConnectionKeyLink($meta, $slug)
     {
+        if ($this->context->isMultisite() && !$this->context->isNetworkAdmin()) {
+            return $meta;
+        }
+
         if ($slug !== $this->slug) {
             return $meta;
         }
@@ -137,8 +147,6 @@ class MWP_EventListener_PublicRequest_AddConnectionKeyInfo implements Symfony_Ev
 
     private function userCanViewConnectionKey()
     {
-        return $this->context->isGranted('activate_plugins') &&
-            $this->context->isGranted('update_plugins') &&
-            $this->context->isGranted('install_plugins');
+        return $this->context->isGranted('activate_plugins');
     }
 }

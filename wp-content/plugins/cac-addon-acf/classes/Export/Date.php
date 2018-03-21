@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * @since NEWVERSION
+ * @since 2.2
  */
 class ACA_ACF_Export_Date extends ACP_Export_Model {
 

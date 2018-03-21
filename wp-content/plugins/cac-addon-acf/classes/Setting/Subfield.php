@@ -64,7 +64,7 @@ class ACA_ACF_Setting_Subfield extends AC_Settings_Column {
 	}
 
 	public function get_dependent_settings() {
-		$acf_field = ac_addon_acf()->get_acf_field( $this->sub_field );
+		$acf_field = ACA_ACF_API::get_field( $this->sub_field );
 
 		if ( ! $acf_field ) {
 			return array();

@@ -13,9 +13,7 @@ class ACP_Sorting_Model_Value extends ACP_Sorting_Model {
 			$ids[ $id ] = strip_tags( $this->column->get_value( $id ) );
 		}
 
-		return array(
-			'ids' => $this->sort( $ids ),
-		);
+		return array( 'ids' => $this->sort( $ids ) );
 	}
 
 }

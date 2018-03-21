@@ -38,8 +38,6 @@ class MWP_EventListener_ActionResponse_SetLegacyWebsiteConnectionData implements
             return;
         }
 
-        $params = $event->getRequest()->getParams();
-
         $this->context->requireWpRewrite();
         $this->context->requireTaxonomies();
         $this->context->requirePostTypes();
@@ -47,11 +45,6 @@ class MWP_EventListener_ActionResponse_SetLegacyWebsiteConnectionData implements
         $this->context->requireCookieConstants();
 
         $stats = new MMB_Stats();
-
-        if (!empty($params['notifications'])) {
-            $this->context->optionSet('mwp_notifications', $params['notifications']);
-        }
-
         $event->setData($stats->get_initial_stats());
     }
 }

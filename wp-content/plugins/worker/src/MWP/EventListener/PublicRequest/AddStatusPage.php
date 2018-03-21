@@ -53,7 +53,6 @@ class MWP_EventListener_PublicRequest_AddStatusPage implements Symfony_EventDisp
         $deactivateUrl = $this->context->wpNonceUrl('plugins.php?action=deactivate&amp;plugin='.$pluginFile, 'deactivate-plugin_'.$pluginFile);
 
         $info = json_encode(array(
-            'wrksettings'     => $this->context->optionGet('wrksettings'),
             'connected'       => (bool) $this->configuration->getPublicKey(),
             'connectedLegacy' => (bool) $this->configuration->getSecureKey(),
         ));

@@ -89,7 +89,7 @@ class ACP_Plugin_Update_V4101 extends AC_Plugin_Update {
 				$key = rtrim( $key, get_current_blog_id() );
 
 				// Store as new preference
-				$preferences = new AC_Preferences( $new, $row->user_id );
+				$preferences = new AC_Preferences_Site( $new, $row->user_id );
 				$preferences->set( $key, maybe_unserialize( $row->meta_value ) );
 			}
 
@@ -117,7 +117,7 @@ class ACP_Plugin_Update_V4101 extends AC_Plugin_Update {
 				$key = str_replace( $meta_key, '', $row->meta_key );
 
 				// Store as new preference
-				$preferences = new AC_Preferences( $new, $row->user_id );
+				$preferences = new AC_Preferences_Site( $new, $row->user_id );
 				$preferences->set( $key, maybe_unserialize( $row->meta_value ) );
 			}
 

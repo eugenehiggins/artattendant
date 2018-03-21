@@ -74,7 +74,7 @@ class MWP_IncrementalBackup_HashComputer
         while ($limit > 0) {
             // Limit chunk size to either our remaining chunk or max chunk size
             $chunkSize = $limit < $this->maxChunkByteSize ? $limit : $this->maxChunkByteSize;
-            $limit -= $chunkSize;
+            $limit     -= $chunkSize;
 
             $chunk = fread($fh, $chunkSize);
             hash_update($ctx, $chunk);
@@ -100,7 +100,7 @@ class MWP_IncrementalBackup_HashComputer
                 ->add($realPath);
 
             if (!mwp_is_shell_available()) {
-                throw new MMB_Exception("Shell is not available");
+                throw new MWP_Worker_Exception(MWP_Worker_Exception::SHELL_NOT_AVAILABLE, "Shell is not available");
             }
 
             $process = $processBuilder->getProcess();

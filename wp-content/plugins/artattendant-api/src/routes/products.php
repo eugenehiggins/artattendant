@@ -225,7 +225,7 @@ With server-side pagination
 			'title'        => $post->post_title,
 			'artist'       => get_custom_taxonomy('artist', ' ', 'name' , $post->ID),
 			'link'         => get_the_permalink( $post->ID ),
-			'image' 	   => '<a href="https://artattendant.com/collection/?task=preview&post_id='.$post->ID.'">'.get_the_post_thumbnail( $post->ID, array(220,220) ).'</a>',
+			'image' 	   => '<a href="https://artattendant.com/collection/?task=preview&post_id='.$post->ID.'">'.get_the_post_thumbnail( $post->ID, array(400,400) ).'</a>',
 			'image_src'    => $image,
 			'status' 	   => get_post_status ($post->ID ),
 			'public_status'  => anagram_artwork_status( $post->ID ),

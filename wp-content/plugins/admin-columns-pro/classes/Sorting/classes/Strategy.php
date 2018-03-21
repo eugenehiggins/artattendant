@@ -7,6 +7,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class ACP_Sorting_Strategy extends ACP_Strategy {
 
 	/**
+	 * @var ACP_Sorting_Model
+	 */
+	protected $model;
+
+	/**
+	 * @param ACP_Sorting_Model $model
+	 */
+	public function __construct( ACP_Sorting_Model $model ) {
+		$this->model = $model;
+	}
+
+	/**
+	 * @return ACP_Sorting_Model
+	 */
+	public function get_model() {
+		return $this->model;
+	}
+
+	/**
 	 * Return the current sorting order
 	 *
 	 * @return string ASC|DESC
@@ -21,6 +40,13 @@ abstract class ACP_Sorting_Strategy extends ACP_Strategy {
 	 * @return array
 	 */
 	abstract public function get_results( array $data = array() );
+
+	/**
+	 * @param array $data
+	 *
+	 * @return mixed
+	 */
+	abstract public function manage_sorting();
 
 	/**
 	 * Add the meta query for sorting to an existing meta query

@@ -10,7 +10,7 @@ class ACP_Sorting_Settings extends AC_Settings_Column
 	private $sort;
 
 	protected function define_options() {
-		return array( 'sort' => 'off' );
+		return array( 'sort' => 'on' );
 	}
 
 	public function create_header_view() {

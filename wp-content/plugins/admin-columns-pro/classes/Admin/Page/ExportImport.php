@@ -501,9 +501,9 @@ class ACP_Admin_Page_ExportImport extends AC_Admin_Page {
 			return;
 		}
 
-		wp_enqueue_style( 'acp-export-import', $this->get_assets_url() . 'css/export-import' . AC()->minified() . '.css', array(), ACP()->get_version() );
-		wp_enqueue_script( 'acp-export-import', $this->get_assets_url() . 'js/export-import' . AC()->minified() . '.js', array( 'jquery' ), ACP()->get_version() );
-		wp_enqueue_script( 'acp-export-import-multi-select', $this->get_assets_url() . 'js/jquery.multi-select' . AC()->minified() . '.js', array( 'jquery' ), ACP()->get_version() );
+		wp_enqueue_style( 'acp-export-import', $this->get_assets_url() . 'css/export-import.css', array(), ACP()->get_version() );
+		wp_enqueue_script( 'acp-export-import', $this->get_assets_url() . 'js/export-import.js', array( 'jquery' ), ACP()->get_version() );
+		wp_enqueue_script( 'acp-export-import-multi-select', $this->get_assets_url() . 'js/jquery.multi-select.js', array( 'jquery' ), ACP()->get_version() );
 	}
 
 	/**

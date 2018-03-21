@@ -20,9 +20,15 @@ class Fep_Admin_Settings
     function actions_filters()
     {
 		add_action('admin_menu', array($this, 'addAdminPage'));
+		add_action('admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action('admin_init', array($this, 'settings_output'));
+		add_action( 'admin_notices', array( $this, 'notice_review' ) );
 		add_filter('plugin_action_links_' . plugin_basename( FEP_PLUGIN_FILE ), array( $this, 'add_settings_link' ) );
-		add_action('fep_action_before_admin_options_save', array($this, 'recalculate_user_message_count'), 10, 2 );
+		
+		add_action('add_option_FEP_admin_options', array($this, 'after_option_save'), 99 );
+		add_action('update_option_FEP_admin_options', array($this, 'after_option_save'), 99 );
+		
+		add_action('fep_action_after_admin_options_save', array($this, 'recalculate_user_message_count'), 10, 2 );
     }
 
     function addAdminPage()
@@ -33,16 +39,51 @@ class Fep_Admin_Settings
 		add_submenu_page('edit.php?post_type=fep_message', 'Front End PM - ' .__('Extensions','front-end-pm'), __('Extensions','front-end-pm'), $admin_cap, 'fep_extensions', array($this, "extensions_page"));
 	
     }
-	function recalculate_user_message_count( $settings, $tab ){
 	
-		if( 'message' == $tab && fep_get_message_view() != $settings['message_view'] ) {
-			if( 'threaded' == fep_get_message_view() ){
-				delete_metadata( 'user', 0, '_fep_user_message_count', '', true );
+	function admin_enqueue_scripts(){
+		if( isset($_GET['tab']) && 'appearance' == $_GET['tab'] ){
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'wp-color-picker' );
+		}
+		
+		if( isset($_GET['post_type']) && 'fep_message' == $_GET['post_type'] ){
+			wp_enqueue_script( 'fep-admin', FEP_PLUGIN_URL . 'assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), '6.4', true );
+		}
+	}
+	
+	function recalculate_user_message_count( $old_value, $tab ){
+		global $wpdb;
+		
+		if( isset( $old_value['message_view'] ) && fep_get_message_view() != $old_value['message_view'] ) {
+			if( 'threaded' != fep_get_message_view() ){
+				delete_metadata( 'user', 0, $wpdb->get_blog_prefix() . '_fep_user_message_count', '', true );
 			} else {
 				update_option( '_fep_message_view_changed', 1 );
 				delete_metadata( 'post', 0, '_fep_last_reply_by', '', true );
 			}
 		}
+	}
+	
+	function after_option_save( $old_value ){
+		global $wp_settings_sections;
+		
+		if( ! is_array( $old_value ) ){
+			$old_value = array();
+		}
+		$tab = 'general';
+		$is_settings_page = false;
+		
+		if( ! empty( $_POST['_wp_http_referer'] ) ){
+		
+			wp_parse_str( $_POST['_wp_http_referer'], $referrer );
+
+			$tab       = !empty( $referrer['tab'] ) ? $referrer['tab'] : 'general';
+			
+			if( isset( $referrer['page'] ) && 'fep_settings' == $referrer['page'] && ! empty( $wp_settings_sections['fep_settings_' . $tab] ) ){
+				$is_settings_page = true;
+			}
+		}
+		do_action( 'fep_action_after_admin_options_save', $old_value, $tab, $is_settings_page );
 	}
 	
 	public function form_fields( $section = 'general' )
@@ -68,12 +109,31 @@ class Fep_Admin_Settings
 				'options'	=> $pages,
 				'description' => __( 'Must have <code>[front-end-pm]</code> in content.', 'front-end-pm' )					
 				),
+			'message_view'	=> array(
+				'type'	=>	'select',
+				'value' => fep_get_message_view(),
+				'priority'	=> 3,
+				//'section'	=> 'message',
+				'label' => __( 'Message view', 'front-end-pm' ),
+				'description' => ( 'threaded' == fep_get_message_view() ) ? '' : __( 'This setting change will redirect you to update page for database update.', 'front-end-pm' ),
+				'options'	=> array(
+					'threaded'	=> __( 'Threaded', 'front-end-pm' ),
+					'individual'	=> __( 'Individual', 'front-end-pm' )
+					)					
+				),
 			'messages_page'	=> array(
 				'type'	=>	'number',
 				'value' => fep_get_option('messages_page',15),
 				'priority'	=> 4,
 				'label' => __('Messages to show per page', 'front-end-pm'),
 				'description' => __( 'Messages to show per page', 'front-end-pm' )
+				),
+			'announcements_page'	=> array(
+				'type'	=>	'number',
+				'value' => fep_get_option('announcements_page',15),
+				'priority'	=> 5,
+				'label' => __('Announcements per page', 'front-end-pm'),
+				'description' => __( 'Announcements to show per page', 'front-end-pm' )
 				),
 					
 			'user_page'	=> array(
@@ -170,23 +230,6 @@ class Fep_Admin_Settings
 				'description' => __( 'Always shown to Admins.', 'front-end-pm' )
 				),
 					
-			'show_notification'	=> array(
-				'type'	=>	'checkbox',
-				'value' => fep_get_option('show_notification', 1),
-				'priority'	=> 28,
-				'class'	=> '',
-				'label' => __( 'Show notification', 'front-end-pm' ),
-				'cb_label' => __( 'Show site wide notification in header?', 'front-end-pm' ),
-				),
-			'show_unread_count_in_title'	=> array(
-				'type'	=>	'checkbox',
-				'value' => fep_get_option('show_unread_count_in_title', 1),
-				'priority'	=> 29,
-				'class'	=> '',
-				'label' => __( 'Show count', 'front-end-pm' ),
-				'cb_label' => __( 'Show unread message count in website title?', 'front-end-pm' ),
-				),
-					
 			'show_branding'	=> array(
 				'type'	=>	'checkbox',
 				'value' => fep_get_option('show_branding', 1),
@@ -202,6 +245,109 @@ class Fep_Admin_Settings
 				'label' => __( 'Remove Data on Uninstall?', 'front-end-pm' ),
 				'description' => '<div style="color:red">'. sprintf(__( 'Check this box if you would like %s to completely remove all of its data when the plugin is deleted.', 'front-end-pm' ), fep_is_pro() ? 'Front End PM PRO' : 'Front End PM' ). '</div>'
 				),
+			'load_css'	=> array(
+				'type'	=>	'select',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('load_css','only_in_message_page'),
+				'priority'	=> 2,
+				'label' => __( 'Load CSS file', 'front-end-pm' ),
+				'description' => __('Select when you want to load CSS file of this plugin', 'front-end-pm' ),
+				'options'	=> array(
+					'always'				=> __( 'Always', 'front-end-pm' ),
+					'only_in_message_page'	=> __( 'Only in message page', 'front-end-pm' ),
+					'never'					=> __( 'Never', 'front-end-pm' ),
+					)					
+				),
+			'bg_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('bg_color','#ffffff'),
+				'default_value' => '#ffffff',
+				'priority'	=> 5,
+				'label' => __( 'Background Color', 'front-end-pm' ),
+				),
+			'text_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('text_color','#000000'),
+				'default_value' => '#000000',
+				'priority'	=> 10,
+				'label' => __( 'Text Color', 'front-end-pm' ),
+				),
+			'link_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('link_color','#000080'),
+				'default_value' => '#000080',
+				'priority'	=> 20,
+				'label' => __( 'Link Color', 'front-end-pm' ),
+				),
+			'btn_bg_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('btn_bg_color','#F0FCFF'),
+				'default_value' => '#F0FCFF',
+				'priority'	=> 25,
+				'label' => __( 'Button Color', 'front-end-pm' ),
+				),
+			'btn_text_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('btn_text_color','#000000'),
+				'default_value' => '#000000',
+				'priority'	=> 30,
+				'label' => __( 'Button Text Color', 'front-end-pm' ),
+				),
+			'active_btn_bg_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('active_btn_bg_color','#D3EEF5'),
+				'default_value' => '#D3EEF5',
+				'priority'	=> 35,
+				'label' => __( 'Active Button Color', 'front-end-pm' ),
+				),
+			'active_btn_text_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('active_btn_text_color','#000000'),
+				'default_value' => '#000000',
+				'priority'	=> 40,
+				'label' => __( 'Active Button Text Color', 'front-end-pm' ),
+				),
+			'odd_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('odd_color','#F2F7FC'),
+				'default_value' => '#F2F7FC',
+				'priority'	=> 45,
+				'label' => __( 'Odd Messages Color', 'front-end-pm' ),
+				),
+			'even_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('even_color','#FAFAFA'),
+				'default_value' => '#FAFAFA',
+				'priority'	=> 50,
+				'label' => __( 'Even Messages Color', 'front-end-pm' ),
+				),
+			'mgs_heading_color'	=> array(
+				'type'	=>	'color_picker',
+				//'class'	=> 'fep-color-picker',
+				'section'	=> 'appearance',
+				'value' => fep_get_option('mgs_heading_color','#F2F7FC'),
+				'default_value' => '#F2F7FC',
+				'priority'	=> 50,
+				'label' => __( 'Messages Heading Color', 'front-end-pm' ),
+				),
 			//Recipient
 			'show_autosuggest'	=> array(
 				'type'	=>	'checkbox',
@@ -215,56 +361,9 @@ class Fep_Admin_Settings
 				),
 				
 			//Message
-			'message_view'	=> array(
-				'type'	=>	'select',
-				'value' => fep_get_message_view(),
-				'priority'	=> 5,
-				'section'	=> 'message',
-				'label' => __( 'Message view', 'front-end-pm' ),
-				'description' => ( 'threaded' == fep_get_message_view() ) ? '' : __( 'This setting change will redirect you to update page for database update.', 'front-end-pm' ),
-				'options'	=> array(
-					'threaded'	=> __( 'Threaded', 'front-end-pm' ),
-					'individual'	=> __( 'Individual', 'front-end-pm' )
-					)					
-				),
+			
 				
 			//Announcement
-			
-			'announcements_page'	=> array(
-				'type'	=>	'number',
-				'value' => fep_get_option('announcements_page',15),
-				'priority'	=> 5,
-				'section'	=> 'announcement',
-				'label' => __('Announcements per page', 'front-end-pm'),
-				'description' => __( 'Announcements to show per page', 'front-end-pm' )
-				),
-				
-			'notify_ann'	=> array(
-				'type'	=>	'checkbox',
-				'value' => fep_get_option('notify_ann', '1' ),
-				'priority'	=> 10,
-				'class'	=> '',
-				'section'	=> 'announcement',
-				'label' => __( 'Send email?', 'front-end-pm' ),
-				'cb_label' => __( 'Send email to all users when a new announcement is published?', 'front-end-pm' )
-				),
-			'ann_to'	=> array(
-				'type'	=>	'email',
-				'value' => fep_get_option('ann_to', get_bloginfo('admin_email')),
-				'priority'	=> 20,
-				'section'	=> 'announcement',
-				'label' => __( 'Valid email address for "to" field of announcement email', 'front-end-pm' ),
-				'description' => __( 'All users email will be in "Bcc" field.', 'front-end-pm' )
-				),
-			'add_ann_frontend'	=> array(
-				'type'	=>	'checkbox',
-				'value' => fep_get_option('add_ann_frontend',0),
-				'priority'	=> 25,
-				'section'	=> 'announcement',
-				'class'	=> '',
-				'label' => __( 'Add Announcement', 'front-end-pm' ),
-				'cb_label' => __( 'Can permitted users add Announcement from frontend?', 'front-end-pm' ),
-				),
 						
 			//Email Settings
 			
@@ -296,6 +395,23 @@ class Fep_Admin_Settings
 				'section'	=> 'emails',
 				'label' => __( 'From Email', 'front-end-pm' ),
 				'description' => __( 'All email send by Front End PM plugin will have this email address as sender.', 'front-end-pm' )
+				),
+			'notify_ann'	=> array(
+				'type'	=>	'checkbox',
+				'value' => fep_get_option('notify_ann', '1' ),
+				'priority'	=> 20,
+				'class'	=> '',
+				'section'	=> 'emails',
+				'label' => __( 'Send email?', 'front-end-pm' ),
+				'cb_label' => __( 'Send email to all users when a new announcement is published?', 'front-end-pm' )
+				),
+			'ann_to'	=> array(
+				'type'	=>	'email',
+				'value' => fep_get_option('ann_to', get_bloginfo('admin_email')),
+				'priority'	=> 25,
+				'section'	=> 'emails',
+				'label' => __( 'Valid email address for "to" field of announcement email', 'front-end-pm' ),
+				'description' => __( 'All users email will be in "Bcc" field.', 'front-end-pm' )
 				),
 				
 			//Security
@@ -357,6 +473,53 @@ class Fep_Admin_Settings
 				'label' => __( 'Block other users', 'front-end-pm' ),
 				'cb_label' => __( 'Can user block other users?', 'front-end-pm' ),
 				),
+			'add_ann_frontend'	=> array(
+				'type'	=>	'checkbox',
+				'value' => fep_get_option('add_ann_frontend',0),
+				'priority'	=> 35,
+				'section'	=> 'security',
+				'class'	=> '',
+				'label' => __( 'Add Announcement', 'front-end-pm' ),
+				'cb_label' => __( 'Can permitted users add Announcement from frontend?', 'front-end-pm' ),
+				),
+				
+			//Notification
+			'show_notification'	=> array(
+				'type'	=>	'checkbox',
+				'value' => fep_get_option('show_notification', 1),
+				'priority'	=> 5,
+				'section'	=> 'notification',
+				'class'	=> '',
+				'label' => __( 'Show notification', 'front-end-pm' ),
+				'cb_label' => __( 'Show site wide notification in header?', 'front-end-pm' ),
+				),
+			'show_unread_count_in_title'	=> array(
+				'type'	=>	'checkbox',
+				'value' => fep_get_option('show_unread_count_in_title', 1),
+				'priority'	=> 10,
+				'section'	=> 'notification',
+				'class'	=> '',
+				'label' => __( 'Show count', 'front-end-pm' ),
+				'cb_label' => __( 'Show unread message count in website title?', 'front-end-pm' ),
+				),
+			'show_unread_count_in_desktop'	=> array(
+				'type'	=>	'checkbox',
+				'value' => fep_get_option('show_unread_count_in_desktop', 1),
+				'priority'	=> 15,
+				'section'	=> 'notification',
+				'class'	=> '',
+				'label' => __( 'Show desktop notification', 'front-end-pm' ),
+				'cb_label' => __( 'Show desktop notification for new messages and announcements?', 'front-end-pm' ),
+				),
+			'play_sound'	=> array(
+				'type'	=>	'checkbox',
+				'value' => fep_get_option('play_sound', 1),
+				'priority'	=> 20,
+				'section'	=> 'notification',
+				'class'	=> '',
+				'label' => __( 'Play Sound', 'front-end-pm' ),
+				'cb_label' => __( 'Play notification sound on message and announcement received?', 'front-end-pm' ),
+				),
 					
 			);
 				
@@ -369,6 +532,10 @@ class Fep_Admin_Settings
 					'description' => sprintf(__( 'Max messages a %s can keep in box? (0 = Unlimited)', 'front-end-pm' ), $role )
 					);
 					
+		}
+		
+		if(! fep_get_option('page_id', 0 )){
+			$fields['page_id']['description'] = $fields['page_id']['description'] . '<br/><a class="button-secondary" href="'. esc_url( add_query_arg( array( 'post_title' => 'Front End PM', 'content' => '[front-end-pm]' ), admin_url('post-new.php?post_type=page') ) ).'">' . __( 'Create Page',  'front-end-pm' ) . '</a>';
 		}
 				
 		$fields = apply_filters( 'fep_settings_fields', $fields );
@@ -393,7 +560,7 @@ class Fep_Admin_Settings
 								'key'			=> $key,
 								'type'			=> $type,
 								'name'			=> $key,
-								'class'			=> ($type == 'number' ) ? 'small-text' : 'regular-text', //sanitize_html_class()
+								'class'			=> ($type == 'number' ) ? 'small-text' : 'regular-text',
 								'id'			=> $key,
 								'label'			=> '',
 								'cb_label'		=> '',
@@ -450,9 +617,7 @@ class Fep_Admin_Settings
 		 if ( ! empty( $field['maxlength'] ) ) $attrib .= 'maxlength = "' . absint( $field['maxlength'] ) . '" ';
 		 
 		 if ( ! empty( $field['class'] ) ){
-			$field['class'] = explode( ' ', $field['class'] );
-			$field['class'] = array_map( 'sanitize_html_class', $field['class'] );
-			$field['class'] = implode( ' ', array_filter( $field['class'] ) );
+			$field['class'] = fep_sanitize_html_class( $field['class'] );
 		}
 		 
 		switch( $field['type'] ) {
@@ -468,6 +633,10 @@ class Fep_Admin_Settings
 				case 'url' :
 				case 'number' :
 							?><input id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" type="<?php esc_attr_e( $field['type'] ); ?>" name="<?php esc_attr_e( $field['name'] ); ?>" placeholder="<?php esc_attr_e( $field['placeholder'] ); ?>" value="<?php esc_attr_e( stripslashes($field['value' ]) ); ?>" <?php echo $attrib; ?> /><?php
+
+					break;
+				case "color_picker" :
+						?><input type="text" name="<?php esc_attr_e( $field['name'] ); ?>" value="<?php esc_attr_e( stripslashes($field['value' ]) ); ?>" class="fep-color-picker" data-default-color="<?php esc_attr_e( $field['default_value'] ); ?>" ><?php
 
 					break;
 				case "textarea" :
@@ -541,6 +710,12 @@ class Fep_Admin_Settings
 								$sanitized = $field['value'];
 							}
 					break;
+				case 'color_picker' :
+					if ( ! preg_match( '/^#[a-f0-9]{6}$/i', $value ) ) { // if user insert a HEX color with #     
+						add_settings_error( 'fep-settings', $field['id'], sprintf(__( 'Provide valid color for %s', 'front-end-pm' ), $field['label'] ));
+						$sanitized = $field['value'];
+					}
+					break;
 				case 'url' :
 							$sanitized = esc_url( $value );
 					break;
@@ -594,9 +769,14 @@ class Fep_Admin_Settings
 		wp_parse_str( $_POST['_wp_http_referer'], $referrer );
 
 		$tab       = !empty( $referrer['tab'] ) ? $referrer['tab'] : 'general';
+		
+		if( empty( $referrer['page'] ) || 'fep_settings' != $referrer['page'] )
+		return $value;
 	
-		if( empty( $wp_settings_sections['fep_settings_' . $tab] ) )
-			return /** $value */ get_option('FEP_admin_options');
+		if( empty( $wp_settings_sections['fep_settings_' . $tab] ) ){
+			//return /** $value */ get_option('FEP_admin_options');
+			return $value;
+		}
 	
 		$posted_value = array();
 	
@@ -613,6 +793,7 @@ class Fep_Admin_Settings
 		
 		$settings = apply_filters( 'fep_filter_before_admin_options_save', $settings, $tab );
 		
+		//Do not use this action hook 
 		do_action( 'fep_action_before_admin_options_save', $settings, $tab );
 
 		return $settings;
@@ -639,18 +820,26 @@ class Fep_Admin_Settings
 					'tab_title'			=> __('General', 'front-end-pm'),
 					'priority'			=> 5
 					),
+				'appearance'	=> array(
+					'tab_title'			=> __('Appearance', 'front-end-pm'),
+					'priority'			=> 6,
+				),
 				'recipient'	=> array(
 					'tab_title'			=> __('Recipient', 'front-end-pm'),
 					'priority'			=> 7
 					),
+					/*
 				'message'	=> array(
 					'tab_title'			=> __('Message', 'front-end-pm'),
 					'priority'			=> 10
 					),
+					*/
+					/*
 				'announcement'	=> array(
 					'tab_title'			=> __('Announcement', 'front-end-pm'),
 					'priority'			=> 15
 					),
+					*/
 				'emails'	=> array(
 					'tab_title'			=> __('Emails', 'front-end-pm'),
 					'priority'			=> 20
@@ -659,12 +848,22 @@ class Fep_Admin_Settings
 					'tab_title'			=> __('Security', 'front-end-pm'),
 					'priority'			=> 25
 					),
+				'misc'	=> array(
+					'tab_title'			=> __('Misc', 'front-end-pm'),
+					'priority'			=> 27
+					),
+				'notification'	=> array(
+					'section_title'			=> __('Notification', 'front-end-pm'),
+					'section_page'		=> 'fep_settings_misc',
+					'priority'			=> 10,
+					'tab_output'		=> false
+				),
 				'message_box'	=> array(
 					'section_title'			=> __('Message Box', 'front-end-pm'),
-					'section_page'		=> 'fep_settings_message',
+					'section_page'		=> 'fep_settings_misc',
 					'priority'			=> 15,
 					'tab_output'		=> false
-					)
+				),
 							
 				);
 							
@@ -785,6 +984,7 @@ function fep_admin_sidebar()
 							<li><a href="https://www.shamimsplugins.com/docs/front-end-pm-pro/getting-started-2/email-piping/?utm_campaign=admin&utm_source=sidebar&utm_medium=pro" target="_blank">Email Piping</a></li>
 							<li><a href="https://www.shamimsplugins.com/docs/front-end-pm-pro/getting-started-2/multiple-recipients/?utm_campaign=admin&utm_source=sidebar&utm_medium=pro" target="_blank">Multiple Recipient</a></li>
 							<li><a href="https://www.shamimsplugins.com/docs/front-end-pm-pro/getting-started-2/only-admin/?utm_campaign=admin&utm_source=sidebar&utm_medium=pro" target="_blank">Only Admin</a></li>
+							<li><a href="https://www.shamimsplugins.com/docs/front-end-pm-pro/getting-started-2/group-messaging/?utm_campaign=admin&utm_source=sidebar&utm_medium=pro" target="_blank">Group Messaging</a></li>
 							<li><a href="https://www.shamimsplugins.com/docs/front-end-pm-pro/getting-started-2/email-beautify/?utm_campaign=admin&utm_source=sidebar&utm_medium=pro" target="_blank">Email Beautify</a></li>
 							<li><a href="https://www.shamimsplugins.com/docs/front-end-pm-pro/getting-started-2/read-receipt/?utm_campaign=admin&utm_source=sidebar&utm_medium=pro" target="_blank">Read Receipt</a></li>
 							<li><a href="https://www.shamimsplugins.com/docs/front-end-pm-pro/getting-started-2/role-to-role-block/?utm_campaign=admin&utm_source=sidebar&utm_medium=pro" target="_blank">Role to Role Block</a></li>
@@ -793,6 +993,42 @@ function fep_admin_sidebar()
 						</ul></div>
 					</div>
 				</div>';
+	}
+	
+	/**
+	 * Admin notices for review
+	 *
+	 * @access  public
+	 * @return  void
+	 */
+	public function notice_review() {
+	
+		if( ! current_user_can('manage_options') )
+		return;
+		
+		if( fep_is_pro() )
+		return;
+		
+		if( ! isset($_GET['post_type']) || 'fep_message' != $_GET['post_type'] )
+		return;
+		
+		if ( fep_get_option( 'dismissed-review' ) )
+		return;
+		
+		$dismissed_time = get_user_option( 'fep_review_notice_dismiss');
+		
+		if( $dismissed_time && time() < ( $dismissed_time + WEEK_IN_SECONDS )  )
+		return;
+		
+		?><div class="notice notice-info inline fep-review-notice">
+			<p><?php printf(__( 'like %s plugin? Please consider review in WordPress.org and give 5&#9733; rating.', 'front-end-pm' ), 'Front End PM'); ?></p>
+			<p>
+				<a href="https://wordpress.org/support/plugin/front-end-pm/reviews/?filter=5#new-post" class="button button-secondary fep-review-notice-dismiss" data-fep_click="sure" target="_blank" rel="noopener"><?php _e( 'Sure, deserve it', 'front-end-pm' ); ?></a>
+				<button class="button-secondary fep-review-notice-dismiss" data-fep_click="later"><?php _e( 'Maybe later', 'front-end-pm' ); ?></button>
+				<button class="button-secondary fep-review-notice-dismiss" data-fep_click="did"><?php _e( 'Already did', 'front-end-pm' ); ?></button>
+			</p>
+		</div>
+		<?php
 	}
 	
 function add_settings_link( $links ) {

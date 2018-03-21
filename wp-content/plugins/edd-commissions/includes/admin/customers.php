@@ -72,6 +72,8 @@ function eddc_customer_commissions_view( $customer ) {
 		<?php echo get_avatar( $customer->email, 30 ); ?> <span><?php echo $customer->name; ?></span>
 	</div>
 
+	<?php do_action( 'eddc_customer_commissions_view_stats_before', $customer ); ?>
+
 	<div id="edd-item-stats-wrapper" class="customer-section">
 		<ul>
 			<li>
@@ -98,6 +100,8 @@ function eddc_customer_commissions_view( $customer ) {
 			</li>
 		</ul>
 	</div>
+	
+	<?php do_action( 'eddc_customer_commissions_view_downloads_table_before', $customer ); ?>
 
 	<?php $downloads = eddc_get_download_ids_of_user( $customer->user_id ); ?>
 	<?php if ( false !== $downloads ) : ?>
@@ -139,6 +143,8 @@ function eddc_customer_commissions_view( $customer ) {
 
 	</div>
 	<?php endif; ?>
+
+	<?php do_action( 'eddc_customer_commissions_view_downloads_table_after', $customer ); ?>
 
 	<div id="edd-item-tables-wrapper" class="customer-section">
 
@@ -188,6 +194,8 @@ function eddc_customer_commissions_view( $customer ) {
 		</table>
 
 	</div>
+
+	<?php do_action( 'eddc_customer_commissions_view_unpaid_table_after', $customer ); ?>
 
 	<?php
 }

@@ -75,11 +75,6 @@ class MWP_EventListener_ActionRequest_SetSettings implements Symfony_EventDispat
             return;
         }
 
-        if (!empty($data['setting']['dataown'])) {
-            $oldSettings = (array) $this->context->optionGet('wrksettings');
-            $this->context->optionSet('wrksettings', array_merge($oldSettings, array('dataown' => $data['setting']['dataown'])));
-        }
-
         $configurationService = new MWP_Configuration_Service();
         $configuration        = new MWP_Configuration_Conf($data['setting']);
         $configurationService->saveConfiguration($configuration);

@@ -7,44 +7,51 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @since 4.0
  */
-class ACP_Filtering_TableScreen {
+abstract class ACP_Filtering_TableScreen {
 
-	public function __construct() {
+	/**
+	 * @var ACP_Filtering_Model[]
+	 */
+	protected $models;
+
+	public function __construct( array $models ) {
+		$this->models = $models;
+
 		add_action( 'ac/table_scripts', array( $this, 'scripts' ) );
-		add_action( 'ac/admin_footer', array( $this, 'add_indicator' ) );
-		add_action( 'ac/admin_footer', array( $this, 'maybe_hide_default_dropdowns' ) );
-		add_action( 'wp_ajax_acp_update_filtering_cache', array( $this, 'ajax_update_dropdown_cache' ) );
-		add_action( 'ac/table/list_screen', array( $this, 'handle_filtering' ) ); // Before sorting
-		add_action( 'ac/columns_stored', array( $this, 'clear_timeout' ) );
+		add_action( 'ac/admin_head', array( $this, 'add_indicator' ), 10, 0 );
+		add_action( 'ac/admin_head', array( $this, 'hide_default_dropdowns' ), 10, 0 );
 	}
 
 	public function scripts() {
-		wp_enqueue_style( 'acp-filtering-table', acp_filtering()->get_plugin_url() . 'assets/css/table' . AC()->minified() . '.css', array(), acp_filtering()->get_version() );
-		wp_enqueue_script( 'acp-filtering-table', acp_filtering()->get_plugin_url() . 'assets/js/table' . AC()->minified() . '.js', array( 'jquery', 'jquery-ui-datepicker' ), acp_filtering()->get_version() );
+		wp_enqueue_style( 'acp-filtering-table', acp_filtering()->get_plugin_url() . 'assets/css/table.css', array(), acp_filtering()->get_version() );
+		wp_enqueue_script( 'acp-filtering-table', acp_filtering()->get_plugin_url() . 'assets/js/table.js', array( 'jquery', 'jquery-ui-datepicker' ), acp_filtering()->get_version() );
 	}
 
 	/**
 	 * Colors the column label orange on the listing screen when it is being filtered
-	 *
-	 * @param AC_ListScreen $list_screen
 	 */
 	public function add_indicator() {
-		$class_names = array();
+		$classes = array();
 
-		$filtered_column_names = array_keys( $this->get_requested_filter_values() );
+		foreach ( $this->models as $model ) {
+			if ( ! $model->is_active() || ! $model->get_filter_value() ) {
+				continue;
+			}
 
-		foreach ( $filtered_column_names as $name ) {
-			$class_names[] = 'thead tr th.column-' . $name;
-			$class_names[] = 'thead tr th.column-' . $name . ' > a span:first-child';
+			$column_class = 'thead tr th.column-' . $model->get_column()->get_name();
+
+			$classes[] = $column_class;
+			$classes[] = $column_class . ' > a span:first-child';
 		}
 
-		if ( ! $class_names ) {
+		if ( ! $classes ) {
 			return;
 		}
+
 		?>
 
 		<style>
-			<?php echo implode( ', ', $class_names ) .  '{ font-weight: bold; position: relative; }'; ?>
+			<?php echo implode( ', ', $classes ) .  '{ font-weight: bold; position: relative; }'; ?>
 		</style>
 
 		<?php
@@ -52,443 +59,165 @@ class ACP_Filtering_TableScreen {
 
 	/**
 	 * @since 3.8
-	 *
-	 * @param $list_screen AC_ListScreen
 	 */
-	public function maybe_hide_default_dropdowns( AC_ListScreen $list_screen ) {
+	public function hide_default_dropdowns() {
 		$disabled = array();
 
-		foreach ( $list_screen->get_columns() as $column ) {
-			$model = acp_filtering()->get_filtering_model( $column );
-
-			if ( ! $model instanceof ACP_Filtering_Model_Delegated ) {
-				continue;
+		foreach ( $this->models as $model ) {
+			if ( $model instanceof ACP_Filtering_Model_Delegated && ! $model->is_active() ) {
+				$disabled[] = '#' . $model->get_dropdown_attr_id();
 			}
-
-			if ( $model->is_active() ) {
-				continue;
-			}
-
-			$disabled[] = '#' . $model->get_dropdown_attr_id();
 		}
 
 		if ( ! $disabled ) {
 			return;
 		}
+
 		?>
+
 		<style>
 			<?php echo implode( ', ', $disabled ) . '{ display: none; }'; ?>
 		</style>
+
 		<?php
+	}
+
+	protected function get_data_from_cache( ACP_Filtering_Model $model ) {
+		$cache = new ACP_Filtering_Cache_Model( $model );
+		$data = $cache->get();
+
+		if ( ! $data ) {
+			$data = array(
+				'options' => array(
+					ACP_Filtering_Markup_Dropdown::get_disabled_prefix() . 'loading' => __( 'Loading values', 'codepress-admin-columns' ) . ' ...',
+				),
+			);
+		}
+
+		return $data;
 	}
 
 	/**
 	 * @since 3.6
-	 */
-	public function ajax_update_dropdown_cache() {
-		check_ajax_referer( 'ac-ajax' );
-
-		$list_screen = AC()->get_list_screen( filter_input( INPUT_POST, 'list_screen' ) );
-
-		if ( ! $list_screen ) {
-			wp_die();
-		}
-
-		$list_screen->set_layout_id( filter_input( INPUT_POST, 'layout' ) );
-		$cache = $this->cache( 'timeout' . $list_screen->get_storage_key() );
-
-		if ( $cache->get() && $this->is_cache_enabled() ) {
-			wp_send_json_error( $cache->time_left() );
-		}
-
-		// 10 seconds cache
-		$cache->set( true, 10 );
-
-		wp_send_json_success( $this->get_html_dropdowns( $list_screen ) );
-	}
-
-	/**
-	 * Init hooks for columns screen
-	 *
-	 * @since 1.0
-	 */
-	public function handle_filtering( AC_ListScreen $list_screen ) {
-
-		// Display dropdown
-		switch ( true ) {
-
-			case $list_screen instanceof AC_ListScreenPost :
-				add_action( 'restrict_manage_posts', array( $this, 'filter_markup' ) );
-
-				break;
-			case $list_screen instanceof ACP_ListScreen_MSUser :
-				add_action( 'in_admin_footer', array( $this, 'filter_markup' ) );
-				add_action( 'in_admin_footer', array( $this, 'filter_button' ) );
-
-				break;
-			case $list_screen instanceof AC_ListScreen_User :
-				add_action( 'restrict_manage_users', array( $this, 'filter_markup' ) );
-				add_action( 'restrict_manage_users', array( $this, 'filter_button' ) );
-
-				break;
-			case $list_screen instanceof AC_ListScreen_Comment :
-				add_action( 'restrict_manage_comments', array( $this, 'filter_markup' ) );
-
-				break;
-		}
-
-		foreach ( $list_screen->get_columns() as $column ) {
-
-			if ( $model = acp_filtering()->get_filtering_model( $column ) ) {
-
-				// Hide the default date filter dropdown in WordPress
-				if ( $model instanceof ACP_Filtering_Model_Post_Date && $model->hide_default_date_dropdown() ) {
-					add_filter( 'disable_months_dropdown', '__return_true' );
-				}
-
-				if ( false === $model->get_filter_value() ) {
-					continue;
-				}
-
-				// Handle filtering request
-				switch ( true ) {
-
-					case $list_screen instanceof AC_ListScreenPost :
-						add_action( 'pre_get_posts', array( $model->get_strategy(), 'handle_filter_requests' ), 1 );
-
-						break;
-					case $list_screen instanceof AC_ListScreen_User :
-						add_action( 'pre_get_users', array( $model->get_strategy(), 'handle_filter_requests' ), 1 );
-
-						break;
-					case $list_screen instanceof AC_ListScreen_Comment :
-						add_action( 'pre_get_comments', array( $model->get_strategy(), 'handle_filter_requests' ), 2 );
-
-						break;
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param AC_Column $column
 	 *
 	 * @return string
 	 */
-	public function get_requested_filter_value( AC_Column $column ) {
-		$values = $this->get_requested_filter_values();
-
-		if ( ! isset( $values[ $column->get_name() ] ) ) {
-			return false;
-		}
-
-		return $values[ $column->get_name() ];
-	}
-
-	/**
-	 * Get filter values from request
-	 *
-	 * @since 4.0
-	 *
-	 * @return array Filter values
-	 */
-	public function get_requested_filter_values() {
-		$values = array();
-
-		$list_screen = AC()->table_screen()->get_current_list_screen();
-
-		// Single value
-		$filters = $this->get_request_var();
-
-		if ( ! empty( $filters ) ) {
-			foreach ( $filters as $name => $value ) {
-				if ( ! strlen( $value ) ) {
-					continue;
-				}
-
-				$column = $list_screen->get_column_by_name( $name );
-
-				if ( ! $column ) {
-					continue;
-				}
-
-				$model = acp_filtering()->get_filtering_model( $column );
-
-				if ( $model->is_active() ) {
-
-					// Allow the usage <img> tags as a filter value
-					$value = base64_decode( $value );
-
-					$values[ $name ] = $value;
-				}
-			}
-		}
-
-		// Ranged values
-		$filters_min = $this->get_request_var( 'min' );
-		$filters_max = $this->get_request_var( 'max' );
-
-		if ( $filters_min && $filters_max ) {
-			foreach ( $filters_min as $name => $min ) {
-				if ( ! strlen( $min ) ) {
-					$min = false;
-				}
-
-				$max = isset( $filters_max[ $name ] ) && strlen( $filters_max[ $name ] ) ? $filters_max[ $name ] : false;
-
-				if ( ! $min && ! $max ) {
-					continue;
-				}
-
-				$column = $list_screen->get_column_by_name( $name );
-
-				if ( ! $column ) {
-					continue;
-				}
-
-				$model = acp_filtering()->get_filtering_model( $column );
-
-				if ( $model->is_active() && $model->is_ranged() ) {
-					$values[ $name ] = array(
-						'min' => $min,
-						'max' => $max,
-					);
-				}
-			}
-		}
-
-		return $values;
-	}
-
-	/**
-	 * Get a request var for all columns
-	 *
-	 * @param string $suffix
-	 *
-	 * @return array|false
-	 */
-	public function get_request_var( $suffix = '' ) {
-		$key = 'acp_filter';
-
-		if ( $suffix ) {
-			$key .= '-' . ltrim( $suffix, '-' );
-		}
-
-		return filter_input( INPUT_GET, $key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
-	}
-
-	/**
-	 * Get an instance of cache
-	 *
-	 * @return ACP_Filtering_Cache
-	 */
-	public function cache( $name ) {
-		return new ACP_Filtering_Cache( $name );
-	}
-
-	/**
-	 * @since 4.0
-	 *
-	 * @param AC_ListScreen $list_screen
-	 *
-	 * @return string Filtering HTML dropdowns
-	 */
-	public function get_html_dropdowns( AC_ListScreen $list_screen ) {
+	public function update_dropdown_cache() {
 		ob_start();
 
-		foreach ( (array) $list_screen->get_columns() as $column ) {
-			$model = acp_filtering()->get_filtering_model( $column );
-
-			if ( ! $model ) {
-				continue;
-			}
-
-			if ( $model instanceof ACP_Filtering_Model_Delegated ) {
-				continue;
-			}
-
-			if ( ! $model->is_active() ) {
-				continue;
-			}
-
+		foreach ( $this->models as $model ) {
 			if ( $model->is_ranged() ) {
 				continue;
 			}
 
-			$data = $model->get_filtering_data();
+			$cache = new ACP_Filtering_Cache_Model( $model );
+			$cache->put_if_expired();
 
-			if ( ! $data ) {
-				continue;
-			}
-
-			$dropdown = ACP_Filtering_Dropdown::create( $column, $data );
-			$dropdown->display();
-
-			$this->cache( $list_screen->get_storage_key() . $column->get_name() )->set( $data );
+			$this->render_model( $model );
 		}
 
 		return ob_get_clean();
 	}
 
-	/**
-	 * @since 3.7
-	 *
-	 * @param               $columns AC_Column[] Columns
-	 * @param AC_ListScreen $list_screen
-	 */
-	public function clear_timeout( $list_screen ) {
-		$this->cache( 'timeout' . $list_screen->get_storage_key() )->delete();
-	}
-
-	/**
-	 * @since 3.5
-	 */
-	public function filter_button() {
-		?>
-		<input type="submit" name="acp_filter_action" class="button" value="<?php echo esc_attr( __( 'Filter', 'codepress-admin-columns' ) ); ?>">
-		<?php
+	public function render_markup() {
+		foreach ( $this->models as $model ) {
+			$this->render_model( $model );
+		}
 	}
 
 	/**
 	 * Display dropdown markup
+	 *
+	 * @param array $data
 	 */
-	public function filter_markup() {
-
-		// run once for users
-		remove_action( 'restrict_manage_users', array( $this, 'filter_markup' ) );
-
-		$list_screen = AC()->table_screen()->get_current_list_screen();
-
-		if ( ! $list_screen ) {
+	protected function render_model( ACP_Filtering_Model $model ) {
+		if ( $model instanceof ACP_Filtering_Model_Delegated || ! $model->is_active() ) {
 			return;
 		}
 
-		foreach ( $list_screen->get_columns() as $column ) {
-			$model = acp_filtering()->get_filtering_model( $column );
+		$column = $model->get_column();
 
-			if ( ! $model ) {
-				continue;
+		// Check filter
+		$filter_setting = $column->get_setting( 'filter' );
+
+		if ( ! $filter_setting instanceof ACP_Filtering_Settings ) {
+			return;
+		}
+
+		// Get label
+		$label = $filter_setting->get_filter_label();
+
+		if ( ! $label ) {
+			$label = $filter_setting->get_filter_label_default();
+		}
+
+		// Get name
+		$name = $column->get_name();
+
+		// Range inputs or select dropdown
+		if ( $model->is_ranged() ) {
+			$min = $model->get_request_var( 'min' );
+			$max = $model->get_request_var( 'max' );
+
+			switch ( $model->get_data_type() ) {
+				case 'date':
+					$markup = new ACP_Filtering_Markup_Ranged_Date( $name, $label, $min, $max );
+
+					break;
+				case 'numeric':
+					$markup = new ACP_Filtering_Markup_Ranged_Number( $name, $label, $min, $max );
+
+					break;
+				default:
+					return;
+			}
+		} else {
+			$enable_cache = apply_filters( 'acp/filtering/cache/enable', true, $column );
+
+			$data = $enable_cache ?
+				$this->get_data_from_cache( $model ) :
+				$model->get_filtering_data();
+
+			$defaults = array(
+				'order'        => true,
+				'options'      => array(),
+				'empty_option' => false,
+				'label'        => $label, // backcompat
+				'limit'        => 5000,
+			);
+
+			$data = array_merge( $defaults, $data );
+
+			$data = apply_filters( 'acp/filtering/dropdown_args', $data, $model->get_column() );
+
+			$markup = new ACP_Filtering_Markup_Dropdown( $name );
+			$markup->set_value( $model->get_request_var() )
+			       ->set_label( $label )
+			       ->set_order( $data['order'] );
+
+			// backwards compatible for the acp/filtering/dropdown_args filter
+			if ( is_array( $data['options'] ) ) {
+				$limit = absint( $data['limit'] );
+
+				if ( count( $data['options'] ) >= $limit ) {
+					$data['options'] = array_slice( $data['options'], 0, $limit, true );
+					$data['options'][ $markup::get_disabled_prefix() . 'limit' ] = '───── ' . sprintf( __( 'Limited to %s items' ), $limit ) . ' ─────';
+				}
+
+				$markup->set_options( $data['options'] );
 			}
 
-			if ( $model instanceof ACP_Filtering_Model_Delegated ) {
-				continue;
-			}
-
-			if ( ! $model->is_active() ) {
-				continue;
-			}
-
-			// Range inputs or select dropdown
-			if ( $model->is_ranged() ) {
-
-				$label = $column->get_setting( 'label' )->get_value();
-
-				if ( $filter_label = $column->get_setting( 'filter' )->get_value( 'filter_label' ) ) {
-					$label = $filter_label;
-				}
-
-				switch ( $model->get_data_type() ) {
-					case 'date' :
-						$this->display_range( array(
-							'name'      => $column->get_name(),
-							'label'     => $label,
-							'type'      => 'date',
-							'label_min' => __( 'Start date', 'codepress-admin-columns' ),
-							'label_max' => __( 'End date', 'codepress-admin-columns' ),
-						) );
-						break;
-					case 'numeric' :
-						$this->display_range( array(
-							'name'       => $column->get_name(),
-							'label'      => $label,
-							'type'       => 'number',
-							'label_min'  => __( 'Min', 'codepress-admin-columns' ),
-							'label_max'  => __( 'Max', 'codepress-admin-columns' ),
-							'input_type' => 'number',
-						) );
-						break;
-				}
-			} else {
-				$data = $this->cache( $list_screen->get_storage_key() . $column->get_name() )->get();
-
-				if ( ! $this->is_cache_enabled() ) {
-					$data = false;
-				}
-
-				$dropdown = ACP_Filtering_Dropdown::create( $column, $data );
-				$dropdown->set_current_value( $this->get_request_var_column( $column->get_name() ) );
-
-				// No cache yet? Display loading placeholder.
-				if ( false === $data ) {
-					$dropdown->set_loading( true );
-				}
-
-				$dropdown->display();
+			// backwards compatible for the default options, this should be done using an array as well
+			if ( true === $data['empty_option'] ) {
+				$markup->set_empty()
+				       ->set_nonempty();
+			} elseif ( is_array( $data['empty_option'] ) ) {
+				$markup->set_empty( $data['empty_option'][0] )
+				       ->set_nonempty( $data['empty_option'][1] );
 			}
 		}
 
-		do_action( 'acp/filtering/form', $list_screen );
-	}
-
-	/**
-	 * @since 4.0
-	 *
-	 * @param array $args Range arguments.
-	 */
-	private function display_range( $args = array() ) {
-		$defaults = array(
-			'name'       => '',
-			'label'      => '',
-			'type'       => '',
-			'label_min'  => '',
-			'label_max'  => '',
-			'input_type' => 'text',
-		);
-
-		$data = (object) wp_parse_args( $args, $defaults );
-
-		$min = $this->get_request_var_column( $data->name, 'min' );
-		$max = $this->get_request_var_column( $data->name, 'max' );
-
-		$min_id = 'acp-filter-min-' . $data->name;
-		$max_id = 'acp-filter-max-' . $data->name;
-		?>
-
-		<div class="acp-range <?php echo esc_attr( $data->type ); ?><?php echo ( $min || $max ) ? ' active' : ''; ?>">
-			<div class="input_group">
-				<label class="prepend" for="<?php echo esc_attr( $min_id ); ?>"><?php echo esc_html( $data->label ); ?></label>
-				<input class="min<?php echo $min ? ' active' : ''; ?>" type="<?php echo esc_attr( $data->input_type ); ?>" placeholder="<?php echo esc_attr( strtolower( $data->label_min ) ); ?>" name="acp_filter-min[<?php echo esc_attr( $data->name ); ?>]" value="<?php echo esc_attr( $min ); ?>" id="<?php echo esc_attr( $min_id ); ?>">
-				<label class="append" for="<?php echo esc_attr( $max_id ); ?>"><?php _e( 'until', 'codepress-admin-columns' ); ?></label>
-				<input class="max<?php echo $max ? ' active' : ''; ?>" type="<?php echo esc_attr( $data->input_type ); ?>" placeholder="<?php echo esc_attr( strtolower( $data->label_max ) ); ?>" name="acp_filter-max[<?php echo esc_attr( $data->name ); ?>]" value="<?php echo esc_attr( $max ); ?>" id="<?php echo esc_attr( $max_id ); ?>">
-			</div>
-		</div>
-
-		<?php
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function is_cache_enabled() {
-		return apply_filters( 'acp/filtering/use_cache', true );
-	}
-
-	/**
-	 * Get a request var for a single column
-	 *
-	 * @param string $column_name
-	 * @param string $suffix
-	 *
-	 * @return false|string|int
-	 */
-	public function get_request_var_column( $column_name, $suffix = '' ) {
-		$request_var = $this->get_request_var( $suffix );
-
-		if ( ! $request_var || ! isset( $request_var[ $column_name ] ) ) {
-			return false;
-		}
-
-		return $request_var[ $column_name ];
+		echo $markup->render();
 	}
 
 }

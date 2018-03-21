@@ -16,6 +16,9 @@ function fep_get_option( $option, $default = '', $section = 'FEP_admin_options' 
 	
     $options = get_option( $section );
 	
+	if( ! is_array( $options ) )
+		$options = array();
+	
 	$is_default = false;
 
     if ( isset( $options[$option] ) ) {
@@ -226,19 +229,34 @@ add_action('wp_enqueue_scripts', 'fep_enqueue_scripts');
 function fep_enqueue_scripts()
     {
 	
-	wp_register_style( 'fep-common-style', FEP_PLUGIN_URL . 'assets/css/common-style.css', array(), '6.2' );
-	wp_register_style( 'fep-style', FEP_PLUGIN_URL . 'assets/css/style.css', array(), '6.1' );
+	wp_register_style( 'fep-common-style', FEP_PLUGIN_URL . 'assets/css/common-style.css', array(), '7.1' );
+	wp_register_style( 'fep-style', FEP_PLUGIN_URL . 'assets/css/style.css', array(), '7.1' );
 	wp_register_style( 'fep-tokeninput-style', FEP_PLUGIN_URL . 'assets/css/token-input-facebook.css' );
-
-	if( fep_page_id() ) {
-		if( is_page( fep_page_id() ) || is_single( fep_page_id() ) ) {
-			wp_enqueue_style( 'fep-style' );
-		}
-	} else {
+	
+	if( 'always' == fep_get_option('load_css','only_in_message_page') ){
+		wp_enqueue_style( 'fep-style' );
+	} elseif( 'only_in_message_page' == fep_get_option('load_css','only_in_message_page') && fep_page_id() && ( is_page( fep_page_id() ) || is_single( fep_page_id() ) ) ){
 		wp_enqueue_style( 'fep-style' );
 	}
 	wp_enqueue_style( 'fep-common-style' );
-	$custom_css = trim( stripslashes(fep_get_option('custom_css') ) );
+	
+	$custom_css = '#fep-wrapper{';
+	$custom_css .= 'background-color:' . fep_get_option('bg_color') . ';';
+	$custom_css .= 'color:' . fep_get_option('text_color','#000000') . ';';
+	$custom_css .= '}';
+	$custom_css .= '#fep-wrapper a:not(.fep-button,.fep-button-active){color:' . fep_get_option('link_color','#000080') . ';}';
+	$custom_css .= '.fep-button{';
+	$custom_css .= 'background-color:' . fep_get_option('btn_bg_color', '#F0FCFF') . ';';
+	$custom_css .= 'color:' . fep_get_option('btn_text_color','#000000') . ';';
+	$custom_css .= '}';
+	$custom_css .= '.fep-button:hover,.fep-button-active{';
+	$custom_css .= 'background-color:' . fep_get_option('active_btn_bg_color','#D3EEF5') . ';';
+	$custom_css .= 'color:' . fep_get_option('active_btn_text_color','#000000') . ';';
+	$custom_css .= '}';
+	$custom_css .= '.fep-odd-even > div:nth-child(odd){background-color:' . fep_get_option('odd_color','#F2F7FC') . ';}';
+	$custom_css .= '.fep-odd-even > div:nth-child(even){background-color:' . fep_get_option('even_color','#FAFAFA') . ';}';
+	$custom_css .= '.fep-message .fep-message-title-heading, .fep-per-message .fep-message-title{background-color:' . fep_get_option('mgs_heading_color','#F2F7FC') . ';}';
+	$custom_css .= trim( stripslashes(fep_get_option('custom_css') ) );
 	if( $custom_css ) {
 		wp_add_inline_style( 'fep-common-style', $custom_css );
 	}
@@ -251,19 +269,29 @@ function fep_enqueue_scripts()
 			) 
 		);
 		
-	wp_register_script( 'fep-notification-script', FEP_PLUGIN_URL . 'assets/js/notification.js', array( 'jquery' ), '6.1', true );
+	wp_register_script( 'fep-notification-script', FEP_PLUGIN_URL . 'assets/js/notification.js', array( 'jquery' ), '7.2', true );
 	$call_on_ready = ( isset($_GET['fepaction']) &&
 		( ( $_GET['fepaction'] == 'viewmessage' && fep_get_new_message_number() ) || ( $_GET['fepaction'] == 'view_announcement' && fep_get_new_announcement_number() ) ) 
 		) ? '1' : '0';
 	wp_localize_script( 'fep-notification-script', 'fep_notification_script', 
-			array( 
+			apply_filters( 'fep_filter_notification_script_localize', array( 
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'nonce' => wp_create_nonce('fep-notification'),
 				'interval' => apply_filters( 'fep_filter_ajax_notification_interval', MINUTE_IN_SECONDS * 1000 ),
 				'skip' => apply_filters( 'fep_filter_skip_notification_call', 2 ), //How many times notification ajax call will be skipped if browser tab not opened
 				'show_in_title'	=> fep_get_option( 'show_unread_count_in_title', '1' ),
+				'show_in_desktop'	=> fep_get_option( 'show_unread_count_in_desktop', '1' ),
 				'call_on_ready'	=> apply_filters( 'fep_filter_notification_call_on_ready', $call_on_ready ),
-			) 
+				'play_sound'	=> fep_get_option( 'play_sound', '1' ),
+				'sound_url'	=> FEP_PLUGIN_URL . 'assets/audio/plucky.mp3',
+				'icon_url'	=> FEP_PLUGIN_URL . 'assets/images/desktop-notification-32.png',
+				'mgs_notification_title'=> __('New Message.', 'front-end-pm'),
+				'mgs_notification_body'	=> __('You have received a new message.', 'front-end-pm'),
+				'mgs_notification_url'	=> fep_query_url( 'messagebox' ),
+				'ann_notification_title'=> __('New Announcement.', 'front-end-pm'),
+				'ann_notification_body'	=> __('You have received a new announcement.', 'front-end-pm'),
+				'ann_notification_url'	=> fep_query_url( 'announcements' ),
+			))
 		);
 	
 	
@@ -312,6 +340,10 @@ function fep_query_url( $action, $arg = array() ) {
 	$url = esc_url( fep_query_url_without_esc( $action, $arg ) );
 
 	return apply_filters( 'fep_query_url_filter', $url, $args );
+}
+
+function fep_query_url_raw( $action, $arg = array() ) {
+	return esc_url_raw( fep_query_url_without_esc( $action, $arg ) );
 }
 
 function fep_query_url_without_esc( $action, $arg = array() ) {
@@ -595,11 +627,35 @@ function fep_get_userdata($data, $need = 'ID', $type = 'slug' )
 		
 		$user = get_user_by( $type , $data);
 		
-		if ( $user && in_array($need, array('ID', 'user_login', 'display_name', 'user_email', 'user_nicename', 'user_registered' )))
+		if ( $user )
 			return $user->$need;
 		else
 			return '';
 	}
+	
+function fep_user_name( $id ){
+	$which = apply_filters( 'fep_filter_show_which_name', 'display_name' );
+	
+	switch( $which ){
+		case 'first_last_name':
+			$name = fep_get_userdata( $id, 'first_name', 'id' ) . ' ' . fep_get_userdata( $id, 'last_name', 'id' );
+		break;
+		case 'last_first_name':
+			$name = fep_get_userdata( $id, 'last_name', 'id' ) . ' ' . fep_get_userdata( $id, 'first_name', 'id' );
+		break;
+		case 'first_name':
+		case 'last_name':
+		case 'user_login':
+		case 'user_nicename':
+			$name = fep_get_userdata( $id, $which, 'id' );
+		break;
+		case 'display_name':
+		default:
+			$name = fep_get_userdata( $id, 'display_name', 'id' );
+		break;
+	}
+	return apply_filters( 'fep_filter_user_name', $name, $id );
+}
 
 function fep_get_user_message_count( $value = 'all', $force = false, $user_id = false )
 {
@@ -723,10 +779,15 @@ function fep_format_date( $date, $d = '' )
 			$h_time = __( 'Unpublished', 'front-end-pm' );
 		} else {
 			$m_time = $post->post_date;
-			$time = strtotime( $post->post_date_gmt );
+			//$time = strtotime( $post->post_date_gmt );
+			$time = get_post_time( 'G', true, $post, false );
 			
 			if ( ( abs( $t_diff = time() - $time ) ) < DAY_IN_SECONDS ) {
-				$h_time = sprintf( __( '%s ago', 'front-end-pm' ), human_time_diff( $time ) );
+				if ( $t_diff < 0 ) {
+					$h_time = sprintf( __( '%s from now', 'front-end-pm' ), human_time_diff( $time ) );
+				} else {
+					$h_time = sprintf( __( '%s ago', 'front-end-pm' ), human_time_diff( $time ) );
+				}
 			} else {
 				$h_time = mysql2date( get_option( 'date_format' ). ' '.get_option( 'time_format' ), $m_time );
 			}
@@ -758,15 +819,13 @@ function fep_sort_by_priority( $a, $b ) {
 
 	
 function fep_pagination( $total = null, $per_page = null, $list_class = 'fep-pagination' ) {
-
-	$filter = ! empty( $_GET['fep-filter'] ) ? $_GET['fep-filter'] : 'total';
 	
- 	if( null === $total ) {
-		$total = fep_get_user_message_count($filter);
-	}
+	$total = apply_filters( 'fep_pagination_total', $total);
+	
 	if( null === $per_page ) {
 		$per_page = fep_get_option('messages_page',15);
 	}
+	$per_page = apply_filters( 'fep_pagination_per_page', $per_page);
 		
     $last       = ceil( absint($total) / absint($per_page) );
 	
@@ -941,7 +1000,7 @@ function fep_make_read( $parent = false, $post_id = false, $user_id = false )
 			$return = add_post_meta( $post_id, '_fep_parent_read_by_'. $user_id, time(), true );
 		}
 		if( $return ) {
-		 delete_user_meta( $user_id, '_fep_user_message_count' );
+		 delete_user_option( $user_id, '_fep_user_message_count' );
 		 	return true;
 		} else {
 			return false;
@@ -1069,7 +1128,7 @@ function fep_delete_message( $message_id, $user_id = 0 ){
 		}
 		
 	}
-	if( $should_delete_from_db ) {
+	if( $should_delete_from_db && ! get_post_meta( $id, '_fep_group', true ) ) {
 		$return = wp_trash_post( $id  );
 	}
 	return $return;
@@ -1137,6 +1196,15 @@ function fep_send_message( $message = null, $override = array() )
 	}
 	$inserted_message = get_post( $message_id );
 	
+	 do_action('fep_action_message_after_send', $message_id, $message, $inserted_message );
+	
+	return $message_id;
+}
+
+add_action( 'fep_action_message_after_send', 'fep_add_message_participants', 5, 3 );
+
+function fep_add_message_participants( $message_id, $message, $inserted_message ){
+	
 	if( $inserted_message->post_parent ) {
 		if( 'threaded' == fep_get_message_view() ){
 			if( ! in_array( $inserted_message->post_author, fep_get_participants( $inserted_message->post_parent ) )){
@@ -1151,7 +1219,6 @@ function fep_send_message( $message = null, $override = array() )
 				if( $participant != $inserted_message->post_author ){
 					fep_undelete_message( $inserted_message->post_parent, $participant);
 					delete_post_meta( $inserted_message->post_parent, '_fep_parent_read_by_'. $participant );
-					delete_user_meta( $participant, '_fep_user_message_count' );
 				}
 			}
 		}		
@@ -1163,27 +1230,28 @@ function fep_send_message( $message = null, $override = array() )
 					
 					if( ! in_array( $participant, fep_get_participants( $message_id ) )){
 						add_post_meta( $message_id, '_fep_participants', $participant );
-						delete_user_meta( $participant, '_fep_user_message_count' );
+						if( 'publish' == $inserted_message->post_status ){
+							delete_user_option( $participant, '_fep_user_message_count' );
+							delete_user_option( $participant, '_fep_notification_dismiss' );
+						}
 					}
 				}
 			} else {
 				if( ! in_array( $message['message_to_id'], fep_get_participants( $message_id ) )){
 					add_post_meta( $message_id, '_fep_participants', $message['message_to_id'] );
-					delete_user_meta( $message['message_to_id'], '_fep_user_message_count' );
+					if( 'publish' == $inserted_message->post_status ){
+						delete_user_option( $message['message_to_id'], '_fep_user_message_count' );
+						delete_user_option( $message['message_to_id'], '_fep_notification_dismiss' );
+					}
 				}
 			}
 		}		
 		if( ! in_array( $inserted_message->post_author, fep_get_participants( $message_id ) )){
 			add_post_meta( $message_id, '_fep_participants', $inserted_message->post_author );
-			delete_user_meta( $inserted_message->post_author, '_fep_user_message_count' );
 		}
 			
 		fep_make_read( true, $message_id, $inserted_message->post_author );
 	}
-	
-	 do_action('fep_action_message_after_send', $message_id, $message, $inserted_message );
-	
-	return $message_id;
 }
 
 add_action ('transition_post_status', 'fep_send_message_transition_post_status', 10, 3);
@@ -1233,7 +1301,10 @@ function fep_send_message_transition_post_status( $new_status, $old_status, $pos
 
 		foreach( $participants as $participant ) 
 		{
-			delete_user_meta( $participant, '_fep_user_message_count' );
+			delete_user_option( $participant, '_fep_user_message_count' );
+			if( $participant != $post->post_author && 'publish' == $new_status ){
+				delete_user_option( $participant, '_fep_notification_dismiss' );
+			}
 		}
 	}
 }
@@ -1276,6 +1347,7 @@ function fep_add_announcement( $announcement = null, $override = array() )
 			add_post_meta( $announcement_id, '_fep_participant_roles', $role );
 		}
 	}
+	add_post_meta( $announcement_id, '_fep_author', $inserted_announcement->post_author, true);
 	
 	 do_action('fep_action_announcement_after_added', $announcement_id, $announcement, $inserted_announcement );
 	
@@ -1326,12 +1398,12 @@ function fep_autosuggestion_ajax() {
 
 	$args = array(
 					'search' => "*{$searchq}*",
-					'search_columns' => array( 'display_name' ),
+					'search_columns' => array( 'user_login', 'display_name' ),
 					'exclude' => array( $user_ID ),
 					'number' => 5,
 					'orderby' => 'display_name',
 					'order' => 'ASC',
-					'fields' => array( 'display_name', 'user_nicename' )
+					'fields' => array( 'ID', 'display_name', 'user_nicename' )
 		);
 	
 	$args = apply_filters ('fep_autosuggestion_arguments', $args );
@@ -1348,7 +1420,7 @@ if(strlen($searchq)>0)
 		{
 				
 				?>
-				<li><a href="#" onClick="fep_fill_autosuggestion('<?php echo $user->user_nicename; ?>','<?php echo $user->display_name; ?>');return false;"><?php echo $user->display_name; ?></a></li>
+				<li><a href="#" onClick="fep_fill_autosuggestion('<?php echo $user->user_nicename; ?>','<?php echo fep_user_name($user->ID); ?>');return false;"><?php echo fep_user_name($user->ID); ?></a></li>
 				<?php
 			
 		}
@@ -1422,11 +1494,14 @@ function fep_notification_div() {
 	$unread_ann_count = fep_get_new_announcement_number();
 	$sa = sprintf(_n('%s announcement', '%s announcements', $unread_ann_count, 'front-end-pm'), number_format_i18n($unread_ann_count) );
 	
-	$class = 'fep_hide_if_both_zero';
-	if( !$unread_count && !$unread_ann_count )
-	$class .= ' fep-hide';
+	$class = 'fep-notification-bar';
+	if( !$unread_count && !$unread_ann_count ){
+		$class .= ' fep-hide';
+	} elseif( get_user_option( '_fep_notification_dismiss' ) ){
+		$class .= ' fep-hide';
+	}
 	
-	$show = '<div id="fep-notification-bar" class="'. $class . '">';
+	$show = '<div id="fep-notification-bar" class="'. $class . '"><p>';
 	$show .= __("You have", 'front-end-pm');
 	
 	$class = 'fep_unread_message_count_hide_if_zero';
@@ -1449,6 +1524,8 @@ function fep_notification_div() {
 		
 	$show .= ' ';
 	$show .= __('unread', 'front-end-pm');
+	$show .= '</p>';
+	$show .= '<button aria-label="'. esc_attr( 'Dismiss notice', 'front-end-pm' ).'" class="fep-notice-dismiss">×</button>';
 	$show .= '</div>';
 		
 	echo apply_filters('fep_header_notification', $show);

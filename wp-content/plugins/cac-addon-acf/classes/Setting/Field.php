@@ -59,7 +59,7 @@ abstract class ACA_ACF_Setting_Field extends AC_Settings_Column {
 	/**
 	 * Checks if selected value still exists in the options. If not, it will show an error message.
 	 *
-	 * @param AC_Settings_Form_Element $setting
+	 * @param AC_Settings_Form_Element_Select $setting
 	 */
 	private function check_errors( $setting ) {
 		$value = $setting->get_value();

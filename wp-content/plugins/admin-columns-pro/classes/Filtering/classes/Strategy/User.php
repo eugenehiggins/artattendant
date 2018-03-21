@@ -4,7 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-final class ACP_Filtering_Strategy_User extends ACP_Filtering_Strategy {
+class ACP_Filtering_Strategy_User extends ACP_Filtering_Strategy {
+
+	public function handle_request() {
+		add_action( 'pre_get_users', array( $this, 'handle_filter_requests' ), 1 );
+	}
 
 	/**
 	 * Handle filter request

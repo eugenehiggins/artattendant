@@ -61,6 +61,10 @@ class ACP_Filtering_Model_MetaDate extends ACP_Filtering_Model_Meta {
 				$args['max'] = date( $this->get_date_format(), strtotime( $value['max'] ) );
 			}
 
+			if ( 'U' === $this->get_date_format() ) {
+				$args['type'] = 'numeric';
+			}
+
 			return $this->get_filtering_vars_ranged( $vars, $args );
 		}
 
@@ -112,10 +116,10 @@ class ACP_Filtering_Model_MetaDate extends ACP_Filtering_Model_Meta {
 	public function get_filtering_data() {
 		$format = $this->get_filter_format();
 
-		$options = $this->get_date_options_relative( $format );
+		$options = acp_filtering_helper()->get_date_options_relative( $format );
 
 		if ( ! $options ) {
-			$options = $this->get_date_options( $this->get_meta_values(), $format, $this->get_date_format() );
+			$options = acp_filtering_helper()->get_date_options( $this->get_meta_values(), $format, $this->get_date_format() );
 		}
 
 		return array(

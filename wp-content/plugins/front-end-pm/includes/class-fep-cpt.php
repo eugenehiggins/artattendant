@@ -28,6 +28,7 @@ class Fep_Cpt {
 		add_action ('fep_save_message', array($this, 'fep_save_message'), 10, 3 );
 		
 		add_action ('fep_save_announcement', array($this, 'save_announcement_to'), 10, 3 );
+		add_action ('fep_save_announcement', array($this, 'save_announcement_author'), 10, 3 );
 		
 		add_action ('edit_form_after_title', array($this, 'edit_form_after_title') );
 		add_action ('add_meta_boxes', array($this, 'add_meta_boxes') );
@@ -183,6 +184,10 @@ function save_announcement_to( $announcement_id, $announcement, $update ){
 	
 	}
 }
+
+function save_announcement_author( $announcement_id, $announcement, $update ){
+	update_post_meta( $announcement_id, '_fep_author', $announcement->post_author );
+}
 	
 function fep_message_to_box_content( $post ) {
  
@@ -193,12 +198,12 @@ function fep_message_to_box_content( $post ) {
 			foreach( $participants as $participant ) {
 			
 				if( $participant != $post->post_author )
-				echo '<a href="'. get_edit_user_link( $participant ) .'" target="_blank">'. esc_attr( fep_get_userdata( $participant, 'display_name', 'ID' ) ) .'</a><br />';
+				echo '<a href="'. get_edit_user_link( $participant ) .'" target="_blank">'. esc_attr( fep_user_name( $participant ) ) .'</a><br />';
 			}
 		}
 		echo '<hr />';
 		echo '<h2><strong>'. __('Sender', 'front-end-pm') . '</strong></h2>';
-		echo '<a href="'. get_edit_user_link( $post->post_author ) .'" target="_blank">'. esc_attr( fep_get_userdata( $post->post_author, 'display_name', 'ID' ) ) .'</a>';
+		echo '<a href="'. get_edit_user_link( $post->post_author ) .'" target="_blank">'. esc_attr( fep_user_name( $post->post_author ) ) .'</a>';
 
 	} else {
 
@@ -219,7 +224,7 @@ function fep_message_to_box_content( $post ) {
 			wp_enqueue_script( 'fep-script' ); ?>
 							
 			<input type="hidden" name="message_to" id="fep-message-to" autocomplete="off" value="<?php echo fep_get_userdata( $to, 'user_login' ); ?>" />		
-			<input type="text" name="message_top" id="fep-message-top" autocomplete="off" value="<?php echo fep_get_userdata($to, 'display_name'); ?>" />
+			<input type="text" name="message_top" id="fep-message-top" autocomplete="off" value="<?php echo fep_user_name( fep_get_userdata($to, 'ID') ); ?>" />
 			<img src="<?php echo FEP_PLUGIN_URL; ?>assets/images/loading.gif" class="fep-ajax-img" style="display:none;"/>
 			<div id="fep-result"></div><?php
 		} 
@@ -332,7 +337,7 @@ function columns_content($column_name, $post_ID) {
 			foreach( $participants as $participant ) {
 			
 				if( $participant != $post->post_author )
-				echo '<a href="'. get_edit_user_link( $participant ) .'" target="_blank">'. esc_attr( fep_get_userdata( $participant, 'display_name', 'ID' ) ) .'</a><br />';
+				echo '<a href="'. get_edit_user_link( $participant ) .'" target="_blank">'. esc_attr( fep_user_name( $participant ) ) .'</a><br />';
 			}
 		} else {
 		_e('No Participants', 'front-end-pm');

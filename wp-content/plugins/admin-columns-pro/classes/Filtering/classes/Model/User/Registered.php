@@ -71,12 +71,18 @@ class ACP_Filtering_Model_User_Registered extends ACP_Filtering_Model {
 
 		return array(
 			'order'   => false,
-			'options' => $this->get_date_options( $this->strategy->get_values_by_db_field( 'user_registered' ), $format, 'Y-m-d H:i:s' ),
+			'options' => acp_filtering_helper()->get_date_options( $this->strategy->get_values_by_db_field( 'user_registered' ), $format, 'Y-m-d H:i:s' ),
 		);
 	}
 
 	private function get_filter_format() {
-		return $this->column->get_setting( 'filter' )->get_value( 'filter_format' );
+		$setting = $this->column->get_setting( 'filter' );
+
+		if ( ! $setting instanceof ACP_Filtering_Settings_Ranged ) {
+			return false;
+		}
+
+		return $setting->get_filter_format();
 	}
 
 }

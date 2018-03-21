@@ -32,6 +32,14 @@ function acp_filtering() {
 }
 
 /**
+ * @since 4.2
+ * @return ACP_Filtering_Helper
+ */
+function acp_filtering_helper() {
+	return ACP()->filtering()->helper();
+}
+
+/**
  * Sorting instance
  *
  * @since 4.0

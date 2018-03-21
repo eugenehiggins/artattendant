@@ -7,6 +7,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class ACP_Editing_Strategy extends ACP_Strategy {
 
 	/**
+	 * @var ACP_Editing_Model
+	 */
+	protected $model;
+
+	/**
+	 * @param ACP_Editing_Model $model
+	 */
+	public function __construct( ACP_Editing_Model $model ) {
+		$this->model = $model;
+	}
+
+	/**
+	 * @return ACP_Editing_Model
+	 */
+	public function get_model() {
+		return $this->model;
+	}
+
+	/**
 	 * Get the available items on the current page for passing them to JS
 	 *
 	 * @since 1.0
@@ -25,7 +44,7 @@ abstract class ACP_Editing_Strategy extends ACP_Strategy {
 	abstract public function user_has_write_permission( $object_id );
 
 	/**
-	 * @param int $object_id
+	 * @param int   $object_id
 	 * @param array $args
 	 *
 	 * @return mixed

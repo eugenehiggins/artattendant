@@ -11,6 +11,8 @@ function pmxe_wp_loaded() {
 
 	@ini_set("max_execution_time", $maxExecutionTime);
 
+	$scheduledExport = new \Wpae\Scheduling\Export();
+
 	if ( ! empty($_GET['zapier_subscribe']) and ! empty($_GET['api_key']) )
 	{
 		$zapier_api_key = PMXE_Plugin::getInstance()->getOption('zapier_api_key');
@@ -176,11 +178,7 @@ function pmxe_wp_loaded() {
 							}
 							elseif ( ! $export->processing and ! $export->triggered )
 							{
-								$export->set(array(
-									'triggered' => 1,
-									'exported' => 0,
-									'last_activity' => date('Y-m-d H:i:s')
-								))->update();
+                                $scheduledExport->trigger($export);
 
 								wp_send_json(array(
 									'status'     => 200,
@@ -232,52 +230,13 @@ function pmxe_wp_loaded() {
 							}
 							elseif ( (int) $export->triggered and ! (int) $export->processing )
 							{
-								$response = $export->set(array('canceled' => 0))->execute($logger, true);
+								$export->set(array('canceled' => 0))->execute($logger, true);
 
 								if ( ! (int) $export->triggered and ! (int) $export->processing )
 								{
+                                    $scheduledExport->process($export);
 
-									// trigger update child exports with correct WHERE & JOIN filters
-									if ( ! empty($export->options['cpt']) and class_exists('WooCommerce') and in_array('shop_order', $export->options['cpt']) and empty($export->parent_id))
-									{
-										$queue_exports = XmlExportWooCommerceOrder::prepare_child_exports( $export, true );
-
-										if ( empty($queue_exports) )
-										{
-											delete_option( 'wp_all_export_queue_' . $export->id );
-										}
-										else
-										{
-											update_option( 'wp_all_export_queue_' . $export->id, $queue_exports );
-										}
-									}
-									// remove child export from queue
-									if ( ! empty($export->parent_id) )
-									{
-										$queue_exports = get_option( 'wp_all_export_queue_' . $export->parent_id );
-
-										if ( ! empty($queue_exports))
-										{
-											foreach ($queue_exports as $key => $queue_export)
-											{
-												if ($queue_export == $export->id)
-												{
-													unset($queue_exports[$key]);
-												}
-											}
-										}
-
-										if ( empty($queue_exports) )
-										{
-											delete_option( 'wp_all_export_queue_' . $export->parent_id );
-										}
-										else
-										{
-											update_option( 'wp_all_export_queue_' . $export->parent_id, $queue_exports );
-										}
-									}
-
-									wp_send_json(array(
+                                    wp_send_json(array(
 										'status'     => 200,
 										'message'    => sprintf(__('Export #%s complete', 'wp_all_export_plugin'), $export->id)
 									));
@@ -395,4 +354,10 @@ function pmxe_wp_loaded() {
 			));
 		}
 	}
+
+    if(isset($_GET['action']) && $_GET['action'] == 'wpae_public_api') {
+        $router = new \Wpae\Http\Router();
+        $router->route($_GET['q'], false);
+    }
 }
+

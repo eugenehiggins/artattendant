@@ -5,34 +5,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Show a notice when add-on dependencies are not met
+ * Show a notice when plugin dependencies are not met
  *
- * @version 1.1
+ * @version 1.3
  */
-class ACA_ACF_Dependencies {
+final class ACA_ACF_Dependencies {
 
 	/**
-	 * Holds references to missing dependencies
+	 * Missing dependencies strings
 	 *
-	 * @var array
+	 * @var string[]
 	 */
-	protected $missing = array();
+	private $missing = array();
 
 	/**
-	 * Main file of the add-on
+	 * Basename of this plugin
 	 *
 	 * @var string
 	 */
-	protected $plugin_file;
+	private $basename;
 
-	/*
-	 *
-	 * @param $file string Path to the main plugin file
+	/**
+	 * @param $basename string
 	 */
-	function __construct( $plugin_file ) {
-		$this->plugin_file = $plugin_file;
+	public function __construct( $basename ) {
+		$this->basename = $basename;
 
-		add_action( 'after_plugin_row_' . plugin_basename( $plugin_file ), array( $this, 'display_notice' ), 11 );
+		add_action( 'after_plugin_row_' . $this->basename, array( $this, 'display_notice' ), 5 );
+		add_action( 'admin_head', array( $this, 'display_notice_css' ) );
 	}
 
 	/**
@@ -47,95 +47,84 @@ class ACA_ACF_Dependencies {
 	/**
 	 * Add missing dependency
 	 *
-	 * @param $label string <a> tag is allowed
+	 * @param string $label
+	 * @param string $url
+	 * @param string $version
 	 */
-	public function add_missing( $name ) {
-		$this->missing[] = $name;
+	public function add_missing( $label, $url = null, $version = null ) {
+		$label = esc_html( $label );
+
+		if ( $url ) {
+			$label = sprintf( '<a href="%s">%s</a>', esc_url( $url ), $label );
+		}
+
+		if ( $version ) {
+			$label .= ' (' . sprintf( __( 'version %s or later', 'codepress-admin-columns' ), esc_html( $version ) ) . ')';
+		}
+
+		$this->missing[] = $label;
 	}
 
-	public function is_acp_active( $version ) {
-		if ( ! function_exists( 'acp_is_version_gte' ) || ! acp_is_version_gte( $version ) ) {
-			$name = $this->get_html_link( 'https://www.admincolumns.com', 'Admin Column Pro' );
-			$name .= ' (' . sprintf( __( 'version %s or later', 'codepress-admin-columns' ), $version ) . ')';
-
-			$this->add_missing( $name );
+	public function is_missing_acp( $version ) {
+		if ( function_exists( 'acp_is_version_gte' ) && acp_is_version_gte( $version ) ) {
+			return false;
 		}
+
+		$this->add_missing( 'Admin Column Pro', 'https://www.admincolumns.com', $version );
+
+		return true;
 	}
 
 	/**
-	 * Link that performs a search in the WordPress repository
+	 * URL that performs a search in the WordPress repository
 	 *
-	 * @param $keywords string
-	 * @param $name     string
+	 * @param string $keywords
 	 *
 	 * @return string
 	 */
-	public function get_search_link( $keywords, $name ) {
+	public function get_search_url( $keywords ) {
 		$url = add_query_arg( array(
 			'tab' => 'search',
 			's'   => $keywords,
 		), admin_url( 'plugin-install.php' ) );
 
-		return $this->get_html_link( $url, $name );
-	}
-
-	/**
-	 * @param string $url
-	 * @param string $label
-	 *
-	 * @return string
-	 */
-	public function get_html_link( $url, $label ) {
-		return sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html( $label ) );
+		return $url;
 	}
 
 	/**
 	 * Show a warning when dependencies are not met
-	 *
 	 */
 	public function display_notice() {
 		if ( ! $this->has_missing() ) {
 			return;
 		}
 
-		// parse missing
-		$last_plugin = end( $this->missing );
-		$plugin_list = str_replace( ', ' . $last_plugin, __( ' and ', 'codepress-admin-columns' ) . $last_plugin, implode( ', ', $this->missing ) );
-
-		$notice = sprintf( __( 'This add-on requires %s to be installed and activated.', 'codepress-admin-columns' ), $plugin_list );
-		$sanitized_notice = wp_kses( $notice, array(
-			'a' => array(
-				'class' => true,
-				'data'  => true,
-				'href'  => true,
-				'id'    => true,
-				'title' => true,
-			),
-		) );
+		$last = end( $this->missing );
+		$missing = str_replace( ', ' . $last, __( ' and ', 'codepress-admin-columns' ) . $last, implode( ', ', $this->missing ) );
 
 		?>
 
 		<tr class="plugin-update-tr active">
 			<td colspan="3" class="plugin-update colspanchange">
 				<div class="update-message notice inline notice-error notice-alt">
-					<p><?php echo $sanitized_notice; ?></p>
+					<p><?php printf( __( 'This add-on requires %s to be installed and activated.', 'codepress-admin-columns' ), $missing ); ?></p>
 				</div>
 			</td>
 		</tr>
 
 		<?php
-
-		add_action( 'admin_footer', array( $this, 'display_notice_css' ) );
 	}
 
 	public function display_notice_css() {
-		$plugin_basename = plugin_basename( $this->plugin_file );
+		if ( ! $this->has_missing() ) {
+			return;
+		}
 
 		?>
 
 		<style>
-			.plugins tr[data-plugin='<?php echo $plugin_basename; ?>'] th,
-			.plugins tr[data-plugin='<?php echo $plugin_basename; ?>'] td {
+			.plugins tr[data-plugin='<?php echo $this->basename; ?>'] th,
+			.plugins tr[data-plugin='<?php echo $this->basename; ?>'] td {
 				box-shadow: none;
 			}
 		</style>

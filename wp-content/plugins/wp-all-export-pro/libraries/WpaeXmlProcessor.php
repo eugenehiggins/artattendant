@@ -161,8 +161,9 @@ class WpaeXmlProcessor
                         $f = $this->dom->createDocumentFragment();
                         $f->appendXML($nodeXML);
                         $this->parseElement($f);
-                        $element->parentNode->parentNode->replaceChild($f, $element->parentNode);
-
+                        if($element->parentNode->parentNode) {
+                            $element->parentNode->parentNode->replaceChild($f, $element->parentNode);
+                        }
                     } else {
                         foreach ($snippetValues as $snippetValue) {
                             $newValueNode = $element->parentNode->cloneNode(true);

@@ -14,8 +14,7 @@ class ACA_ACF_Field_File extends ACA_ACF_Field {
 		if ( $attachment_id ) {
 			if ( $attachment = get_attached_file( $attachment_id ) ) {
 				$value = ac_helper()->html->link( wp_get_attachment_url( $attachment_id ), esc_html( basename( $attachment ) ), array( 'target' => '_blank' ) );
-			}
-			else {
+			} else {
 				$value = '<em>' . __( 'Invalid attachment', 'codepress-admin-columns' ) . '</em>';
 			}
 		}

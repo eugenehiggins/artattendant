@@ -27,8 +27,14 @@ $main_site_url = ''; //Main site without http(s)://
 
 if( $main_site_url ) {
 	$_SERVER['HTTP_HOST'] = $main_site_url; //Main site without http(s)://
-	$_SERVER['REQUEST_URI'] = '';
+	//$_SERVER['REQUEST_URI'] = '';
 }
+
+empty( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] = 'localhost';
+empty( $_SERVER['REQUEST_URI'] ) && $_SERVER['REQUEST_URI'] = '/';
+empty( $_SERVER['DOCUMENT_ROOT'] ) && $_SERVER['DOCUMENT_ROOT'] = __DIR__;
+empty( $_SERVER['SCRIPT_NAME'] ) && $_SERVER['SCRIPT_NAME'] = '';
+empty( $_SERVER['PHP_SELF'] ) && $_SERVER['PHP_SELF'] = '';
 
 fep_load_wp_load();
 

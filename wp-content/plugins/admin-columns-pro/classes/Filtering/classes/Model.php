@@ -4,9 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * @property ACP_Filtering_Strategy_Post|ACP_Filtering_Strategy_Comment|ACP_Filtering_Strategy_User $strategy
- */
 abstract class ACP_Filtering_Model extends ACP_Model {
 
 	/**
@@ -30,6 +27,30 @@ abstract class ACP_Filtering_Model extends ACP_Model {
 	 */
 	abstract public function get_filtering_data();
 
+	/**
+	 * @param bool $is_ranged
+	 */
+	public function set_ranged( $is_ranged ) {
+		$this->ranged = (bool) $is_ranged;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function is_ranged() {
+		if ( null === $this->ranged ) {
+			$setting = $this->column->get_setting( 'filter' );
+			$is_ranged = $setting instanceof ACP_Filtering_Settings_Ranged && $setting->is_ranged();
+
+			$this->set_ranged( $is_ranged );
+		}
+
+		return $this->ranged;
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function is_active() {
 		$setting = $this->column->get_setting( 'filter' );
 
@@ -51,60 +72,16 @@ abstract class ACP_Filtering_Model extends ACP_Model {
 	 * @return string|array
 	 */
 	public function get_filter_value() {
-		return $this->validate_filter_value( acp_filtering()->table_screen()->get_requested_filter_value( $this->column ) );
-	}
-
-	/**
-	 * @param string|array $value
-	 *
-	 * @return array|string|false
-	 */
-	private function validate_filter_value( $value ) {
 		if ( $this->is_ranged() ) {
+			$value = array(
+				'min' => $this->get_request_var( 'min' ),
+				'max' => $this->get_request_var( 'max' ),
+			);
 
-			// Value can only be an array with min and max keys
-			if ( ! is_array( $value ) ) {
-				$value = array(
-					'min' => false,
-					'max' => false,
-				);
-			}
-
-			if ( ! isset( $value['min'] ) ) {
-				$value['min'] = false;
-			}
-
-			if ( ! isset( $value['max'] ) ) {
-				$value['max'] = false;
-			}
-		} else {
-
-			// Value can only be scalar
-			if ( ! is_scalar( $value ) ) {
-				$value = false;
-			}
+			return false !== $value['min'] || false !== $value['max'] ? $value : false;
 		}
 
-		return $value;
-	}
-
-	/**
-	 * @param bool $is_ranged
-	 */
-	public function set_ranged( $is_ranged ) {
-		$this->ranged = (bool) $is_ranged;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function is_ranged() {
-		if ( null === $this->ranged ) {
-			$setting = $this->column->get_setting( 'filter' );
-			$this->set_ranged( $setting instanceof ACP_Filtering_Settings_Ranged && $setting->is_ranged() );
-		}
-
-		return $this->ranged;
+		return $this->get_request_var();
 	}
 
 	/**
@@ -158,87 +135,6 @@ abstract class ACP_Filtering_Model extends ACP_Model {
 	}
 
 	/**
-	 * Return options for a date filter based on an array of dates
-	 *
-	 * @param array       $dates
-	 * @param string      $display How to display the date
-	 * @param string      $format  Format of the date
-	 * @param string|null $key
-	 *
-	 * @return array
-	 */
-	protected function get_date_options( array $dates, $display, $format = 'Y-m-d', $key = null ) {
-		$options = array();
-
-		switch ( $display ) {
-			case 'yearly':
-				$display = 'Y';
-				$key = 'Y';
-
-				break;
-			case 'monthly':
-				$display = 'F Y';
-				$key = 'Ym';
-
-				break;
-			case 'daily':
-				$display = 'j F Y';
-				$key = 'Ymd';
-
-				break;
-		}
-
-		if ( ! $key ) {
-			$key = $format;
-		}
-
-		foreach ( $dates as $date ) {
-			$timestamp = ac_helper()->date->get_timestamp_from_format( $date, $format );
-
-			if ( ! $timestamp ) {
-				continue;
-			}
-
-			$option = date( $key, $timestamp );
-
-			if ( ! isset( $options[ $key ] ) ) {
-				$options[ $option ] = date_i18n( $display, $timestamp );
-			}
-		}
-
-		ksort( $options, SORT_NUMERIC );
-
-		$options = array_reverse( $options, true );
-
-		return $options;
-	}
-
-	/**
-	 * @param string $format
-	 *
-	 * @return array|false
-	 */
-	protected function get_date_options_relative( $format ) {
-		$options = array();
-
-		switch ( $format ) {
-			case 'future_past':
-				$options = array(
-					'future' => __( 'Future dates', 'codepress-admin-columns' ),
-					'past'   => __( 'Past dates', 'codepress-admin-columns' ),
-				);
-
-				break;
-		}
-
-		if ( empty( $options ) ) {
-			return false;
-		}
-
-		return $options;
-	}
-
-	/**
 	 * @param string $label
 	 *
 	 * @return array
@@ -252,6 +148,53 @@ abstract class ACP_Filtering_Model extends ACP_Model {
 			sprintf( __( "Without %s", 'codepress-admin-columns' ), $label ),
 			sprintf( __( "Has %s", 'codepress-admin-columns' ), $label ),
 		);
+	}
+
+	/**
+	 * Get a request var for all columns
+	 *
+	 * @param string $suffix
+	 *
+	 * @return string|false
+	 */
+	public function get_request_var( $suffix = '' ) {
+		$key = 'acp_filter';
+
+		if ( $suffix ) {
+			$key .= '-' . ltrim( $suffix, '-' );
+		}
+
+		$values = filter_input( INPUT_GET, $key, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
+		if ( ! isset( $values[ $this->column->get_name() ] ) ) {
+			return false;
+		}
+
+		$value = $values[ $this->column->get_name() ];
+
+		if ( ! is_scalar( $value ) || mb_strlen( $value ) < 1 ) {
+			return false;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * @deprecated 4.2
+	 */
+	protected function get_date_options_relative( $format ) {
+		_deprecated_function( __METHOD__, '4.2', 'acp_filtering_helper()->get_date_options_relative()' );
+
+		return acp_filtering_helper()->get_date_options_relative( $format );
+	}
+
+	/**
+	 * @deprecated 4.2
+	 */
+	protected function get_date_options( array $dates, $display, $format = 'Y-m-d', $key = null ) {
+		_deprecated_function( __METHOD__, '4.2', 'acp_filtering_helper()->get_date_options()' );
+
+		return acp_filtering_helper()->get_date_options( $dates, $display, $format, $key );
 	}
 
 }

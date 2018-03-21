@@ -45,11 +45,11 @@ class ACA_ACF_Field_Repeater extends ACA_ACF_Field {
 	// Helpers
 
 	private function get_acf_sub_field() {
-		return ac_addon_acf()->get_acf_field( $this->column->get_setting( 'sub_field' )->get_value() );
+		return ACA_ACF_API::get_field( $this->column->get_setting( 'sub_field' )->get_value() );
 	}
 
 	public function export() {
-		return new ACP_Export_Model_Disabled( $this->column );
+		return new ACP_Export_Model_StrippedValue( $this->column );
 	}
 
 }

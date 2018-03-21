@@ -27,6 +27,12 @@ class Installer extends Ari_Installer {
         $this->add_cap();
 
         $sql = file_get_contents( ARIADMINER_INSTALL_PATH . 'install.sql' );
+        $utf8mb4_supported = DB::is_utf8mb4_supported();
+
+        if ( ! $utf8mb4_supported ) {
+            $sql = str_replace( 'utf8mb4_unicode_ci', 'utf8_general_ci', $sql );
+            $sql = str_replace( 'utf8mb4', 'utf8', $sql );
+        }
 
         $queries = DB::split_sql( $sql );
 

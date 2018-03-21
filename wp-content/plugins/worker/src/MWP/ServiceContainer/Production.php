@@ -80,45 +80,21 @@ class MWP_ServiceContainer_Production extends MWP_ServiceContainer_Abstract
 
         $mapper->addDefinition('do_upgrade', new MWP_Action_Definition('mmb_do_upgrade', array('hook_name' => 'wp_loaded', 'hook_priority' => MAX_PRIORITY_HOOK)));
         $mapper->addDefinition('remove_site', new MWP_Action_Definition('mmb_remove_site'));
-        $mapper->addDefinition('backup_clone', new MWP_Action_Definition('mmb_backup_now'));
-        $mapper->addDefinition('restore', new MWP_Action_Definition('mmb_restore_now'));
-        $mapper->addDefinition('create_post', new MWP_Action_Definition('mmb_post_create', array('hook_name' => 'init', 'hook_priority' => 9999)));
         $mapper->addDefinition('update_worker', new MWP_Action_Definition('mmb_update_worker_plugin'));
-        $mapper->addDefinition('change_post_status', new MWP_Action_Definition('mmb_change_post_status', array('hook_name' => 'init', 'hook_priority' => 9999)));
         $mapper->addDefinition('install_addon', new MWP_Action_Definition('mmb_install_addon', array('hook_name' => 'wp_loaded', 'hook_priority' => MAX_PRIORITY_HOOK)));
-        $mapper->addDefinition('get_comments', new MWP_Action_Definition('mmb_get_comments', array('hook_name' => 'init', 'hook_priority' => 9999)));
         $mapper->addDefinition('bulk_action_comments', new MWP_Action_Definition('mmb_bulk_action_comments', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('replyto_comment', new MWP_Action_Definition('mmb_reply_comment', array('hook_name' => 'init', 'hook_priority' => 9999)));
         $mapper->addDefinition('add_user', new MWP_Action_Definition('mmb_add_user', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('scheduled_backup', new MWP_Action_Definition('mmb_scheduled_backup'));
-        $mapper->addDefinition('run_task', new MWP_Action_Definition('mmb_run_task_now'));
         $mapper->addDefinition('execute_php_code', new MWP_Action_Definition('mmb_execute_php_code'));
-        $mapper->addDefinition('delete_backup', new MWP_Action_Definition('mmm_delete_backup'));
-        $mapper->addDefinition('remote_backup_now', new MWP_Action_Definition('mmb_remote_backup_now'));
-        $mapper->addDefinition('get_users', new MWP_Action_Definition('mmb_get_users', array('hook_name' => 'init', 'hook_priority' => 9999)));
         $mapper->addDefinition('edit_users', new MWP_Action_Definition('mmb_edit_users', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('get_posts', new MWP_Action_Definition('mmb_get_posts', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('delete_post', new MWP_Action_Definition('mmb_delete_post', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('delete_posts', new MWP_Action_Definition('mmb_delete_posts', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('get_pages', new MWP_Action_Definition('mmb_get_pages', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('delete_page', new MWP_Action_Definition('mmb_delete_page', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('get_plugins_themes', new MWP_Action_Definition('mmb_get_plugins_themes', array('hook_name' => 'init', 'hook_priority' => 9999)));
         $mapper->addDefinition('edit_plugins_themes', new MWP_Action_Definition('mmb_edit_plugins_themes', array('hook_name' => 'init', 'hook_priority' => 9999)));
         $mapper->addDefinition('worker_brand', new MWP_Action_Definition('mmb_worker_brand'));
         $mapper->addDefinition('maintenance', new MWP_Action_Definition('mmb_maintenance_mode'));
-        $mapper->addDefinition('get_autoupdate_plugins_themes', new MWP_Action_Definition('mmb_get_autoupdate_plugins_themes'));
-        $mapper->addDefinition('edit_autoupdate_plugins_themes', new MWP_Action_Definition('mmb_edit_autoupdate_plugins_themes'));
-        $mapper->addDefinition('ping_backup', new MWP_Action_Definition('mwp_ping_backup'));
         $mapper->addDefinition('cleanup_delete', new MWP_Action_Definition('cleanup_delete_worker', array('hook_name' => 'init', 'hook_priority' => 9999)));
-        $mapper->addDefinition('backup_req', new MWP_Action_Definition('mmb_get_backup_req'));
-        $mapper->addDefinition('change_comment_status', new MWP_Action_Definition('mmb_change_comment_status', array('hook_name' => 'init', 'hook_priority' => 9999)));
         $mapper->addDefinition('get_state', new MWP_Action_Definition(array('MWP_Action_GetState', 'execute')));
         $mapper->addDefinition('add_site', new MWP_Action_Definition(array('MWP_Action_ConnectWebsite', 'execute')));
         $mapper->addDefinition('destroy_sessions', new MWP_Action_Definition(array('MWP_Action_DestroySessions', 'execute')));
-        $mapper->addDefinition('check_connection', new MWP_Action_Definition(array('MWP_Action_CheckConnection', 'execute')));
         $mapper->addDefinition('clear_transient', new MWP_Action_Definition(array('MWP_Action_ClearTransient', 'execute')));
-        $mapper->addDefinition('get_stats', new MWP_Action_Definition(array('MWP_Action_GetStats', 'execute'), array('hook_name' => 'wp_loaded', 'hook_priority' => MAX_PRIORITY_HOOK)));
-        $mapper->addDefinition('get_stats_read', new MWP_Action_Definition(array('MWP_Action_GetStats', 'execute')));
+        $mapper->addDefinition('get_stats', new MWP_Action_Definition('mwp_get_stats', array('hook_name' => 'wp_loaded', 'hook_priority' => MAX_PRIORITY_HOOK)));
         $mapper->addDefinition('get_components_stats', new MWP_Action_Definition(array('MWP_Action_GetComponentsStats', 'execute')));
 
         // Incremental backup actions
@@ -133,12 +109,9 @@ class MWP_ServiceContainer_Production extends MWP_ServiceContainer_Abstract
         // Note that dump_tables is used for the ActionResponse_FetchFiles listener
         $mapper->addDefinition('dump_tables', new MWP_Action_Definition(array('MWP_Action_IncrementalBackup_StreamTables', 'execute')));
 
-        $mapper->addDefinition('dump_tables_into_files', new MWP_Action_Definition(array('MWP_Action_IncrementalBackup_DumpTables', 'execute')));
         $mapper->addDefinition('backup_stats', new MWP_Action_Definition(array('MWP_Action_IncrementalBackup_Stats', 'execute')));
-        $mapper->addDefinition('upload_cloner', new MWP_Action_Definition(array('MWP_Action_IncrementalBackup_UploadCloner', 'execute')));
         $mapper->addDefinition('get_table_schema', new MWP_Action_Definition(array('MWP_Action_IncrementalBackup_GetTableSchema', 'execute')));
         $mapper->addDefinition('get_view_schema', new MWP_Action_Definition(array('MWP_Action_IncrementalBackup_GetViewSchema', 'execute')));
-        $mapper->addDefinition('delete_dump_files', new MWP_Action_Definition(array('MWP_Action_IncrementalBackup_DeleteDumpFiles', 'execute')));
 
         return $mapper;
     }

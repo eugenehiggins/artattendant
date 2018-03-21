@@ -1,11 +1,11 @@
 === Front End PM ===
 Contributors: shamim51
 Tags: front end pm,front-end-pm,pm,private message,personal message,front end,frontend pm,frontend,message,widget,plugin,sidebar,shortcode,page,email,mail,contact form, secure contact form, simple contact form
-Donate link: https://www.paypal.me/hasanshamim
+Donate link: https://www.shamimsplugins.com/products/front-end-pm-pro/?utm_campaign=wordpress&utm_source=readme_pro&utm_medium=donate
 Requires at least: 4.4
-Tested up to: 4.9
-Requires PHP: 5.3
-Stable tag: 6.2
+Tested up to: 4.9.4
+Requires PHP: 5.4
+Stable tag: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,7 @@ Front End PM is a Private Messaging system to your WordPress site.This is full f
 >
 > * Multiple Recipients
 > * Only admin
+> * Group message
 > * Email Piping
 > * Read Receipt
 > * Email template
@@ -43,6 +44,8 @@ Front End PM is a Private Messaging system to your WordPress site.This is full f
 * Users can privately message one another
 * Threaded messages/Individual message
 * Ability to embed things into messages like YouTube, Photobucket, Flickr, Wordpress TV, more.
+* Notification sound.
+* Desktop notification.
 * Admins can send a public announcement for all users to see or to perticular role(s).
 * Admins can set the max amount of messages a user can keep in his/her box per role basis. This is helpful for keeping Database sizes down.
 * Admins can set how many messages to show per page in the message box.
@@ -104,8 +107,59 @@ You can visit [Front End PM](https://www.shamimsplugins.com/contact-us/?utm_camp
 5. Admin settings page.
 6. Messagebox settings.
 7. Security settings.
+8. Appearance settings.
 
 == Changelog ==
+
+= 7.4 =
+
+* Now user which name will be shown can select easily.
+* pot file updated.
+
+= 7.3 =
+
+* Fix: Header notification if closed sometimes does not show for new message.
+* option to load css as you want.
+
+= 7.2 =
+
+* Desktop notification now support more browsers.
+* New: fep_action_after_admin_options_save added.
+* Fix: Sometimes could show wrong message count in multisite.
+
+= 7.1 =
+
+* New: Notification sound.
+* New: Desktop notification.
+* New: "Misc" settings tab added in back-end settings page.
+* New: fep_filter_notification_script_localize added.
+* New: fep_filter_notification_response added.
+* Fix: Header notification sometimes did not show.
+* Fix: Multisite shows wrong message count sometimes.
+* Fix: Sometimes shows wrong time in some server.
+* Some templates changes
+* Some CSS changes.
+* pot file updated.
+
+= 6.4 =
+
+* Templates updated (announcement box, message box)
+* trigger fep_notification when ajax notification updated
+* header notification now dismissible
+* Now messages, buttons etc colors can be changed from settings page 
+* New classes added in form fields  
+* Performance improved
+
+= 6.3 =
+
+* New: fep_filter_send_email_participants added.
+* pass user_id to fep_message_query_args filter
+* pass user_id to fep_message_count_query_args filter
+* pass user_id to fep_message_query_args_'. $filter filter
+* add participants in fep_action_message_after_send hook
+* New css class added.
+* Fix: Option save not updated.
+* New feature: Group message (PRO)
 
 = 6.2 =
 
@@ -277,7 +331,7 @@ You can visit [Front End PM](https://www.shamimsplugins.com/contact-us/?utm_camp
 * Now admin can see how many users seen that announcement.
 * Use of transient increases so less db query.
 * Now Widgets can be used multiple times.You can cofigure widgets now. You can also use hooks.
-* Now use wordpress ajax for autosuggestion when typing recipent name.
+* Now use wordpress ajax for autosuggestion when typing recipient name.
 * Custom CSS support. admin can add CSS from backend to add or override this plugins CSS.
 * Now script and plugin files added only when needed.
 * You can also add or remove any file of this plugin using hook.
@@ -346,6 +400,26 @@ You can visit [Front End PM](https://www.shamimsplugins.com/contact-us/?utm_camp
 * Initial release.
 
 == Upgrade Notice ==
+
+= 6.3 =
+
+* New: fep_filter_send_email_participants added.
+* pass user_id to fep_message_query_args filter
+* pass user_id to fep_message_count_query_args filter
+* pass user_id to fep_message_query_args_'. $filter filter
+* add participants in fep_action_message_after_send hook
+* New css class added.
+* Fix: Option save not updated.
+* New feature: Group message (PRO)
+
+= 6.2 =
+
+* New: Shortcode attr.
+* New: Max file size allowed shows when size error.
+* New: fep_remove_own_avatar_from_messagebox filter.
+* Pass user data in directory hook.
+* Increase z-index for header notification
+* Fix: Title was filtered wrongly.
 
 = 6.1 =
 
@@ -508,7 +582,7 @@ You can visit [Front End PM](https://www.shamimsplugins.com/contact-us/?utm_camp
 * Now admin can see how many users seen that announcement.
 * Use of transient increases so less db query.
 * Now Widgets can be used multiple times.You can cofigure widgets now. You can also use hooks.
-* Now use wordpress ajax for autosuggestion when typing recipent name.
+* Now use wordpress ajax for autosuggestion when typing recipient name.
 * Custom CSS support. admin can add CSS from backend to add or override this plugins CSS.
 * Now script and plugin files added only when needed.
 * You can also add or remove any file of this plugin using hook.

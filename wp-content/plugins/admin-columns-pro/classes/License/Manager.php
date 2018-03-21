@@ -18,30 +18,11 @@ class ACP_License_Manager {
 	const OPTION_KEY = 'cpupdate_cac-pro';
 
 	/**
-	 * Licence Key
-	 *
-	 * @since 1.1
-	 */
-	private $licence_key;
-
-	/**
-	 * API object
-	 *
-	 * @since 1.1
-	 * @var ACP_License_API $api
-	 */
-	private $api;
-
-	/**
 	 * @since 1.0
 	 *
 	 * @param array $args [api_url, option_key, file, name, version]
 	 */
 	public function __construct() {
-
-		// reflect API settings within the update request
-		add_filter( 'http_request_args', array( $this, 'use_api_http_request_args_for_plugin_update' ), 10, 2 );
-
 		// Hook into WP update process
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_check' ) );
 
@@ -68,118 +49,13 @@ class ACP_License_Manager {
 		// Do check before installing add-on
 		add_filter( 'ac/addons/install_request/maybe_error', array( $this, 'maybe_install_error' ), 10, 2 );
 
-		// Add notifications to the plugin screen
-		add_action( 'after_plugin_row_' . ACP()->get_basename(), array( $this, 'display_plugin_row_notices' ), 11 );
-
-		// Add notice for license expiry
-		add_action( 'all_admin_notices', array( $this, 'display_license_expiry_notices' ) );
-
-		// Check for notice hide request
-		add_action( 'wp_ajax_cpac_hide_license_expiry_notice', array( $this, 'ajax_hide_license_expiry_notice' ) );
-
-		// Adds notice to update message that a licence is needed
-		add_action( 'in_plugin_update_message-' . ACP()->get_basename(), array( $this, 'need_license_message' ), 10, 2 );
-
 		// add scripts, after settings page is set.
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ), 20 );
+		add_action( 'admin_init', array( $this, 'register_admin_scripts' ) );
 		add_action( 'admin_menu', array( $this, 'scripts' ), 20 );
 		add_action( 'network_admin_menu', array( $this, 'network_scripts' ), 20 );
 
-		// check for a secure connection
-		add_action( 'wp_ajax_cpac_check_connection', array( $this, 'ajax_check_connection' ) );
-
-		// check license has been renewed
-		add_action( 'wp_ajax_cpac_check_license_renewed', array( $this, 'ajax_check_license_renewed' ) );
-
-		// check subscription renewal status once every week
-		add_action( 'shutdown', array( $this, 'do_weekly_renewal_check' ) );
-
-		add_action( 'init', array( $this, 'register_no_ssl_endpoint_rewrite_rule' ) );
-	}
-
-	/**
-	 * Register endpoint to access API over plain http
-	 *
-	 * @since 3.1.2
-	 */
-	public function register_no_ssl_endpoint_rewrite_rule() {
-		add_rewrite_rule( '^' . $this->get_no_ssl_endpoint() . '/?$', 'index.php', 'top' );
-	}
-
-	/**
-	 * Endpoint to access API over plain http
-	 *
-	 * @since 3.1.2
-	 * @return string
-	 */
-	private function get_no_ssl_endpoint() {
-		return 'cac-api-nossl';
-	}
-
-	/**
-	 * Setup an API object
-	 *
-	 * @since 1.1
-	 */
-	private function set_api() {
-		$api = new ACP_License_API();
-
-		$url = apply_filters( 'ac/api/url', ac_get_site_url() );
-
-		$use_secure = apply_filters( 'ac/api/secure', true );
-
-		// change the scheme to access the API via http
-		if ( ! $use_secure ) {
-			$url = set_url_scheme( $url, 'http' ) . '/' . $this->get_no_ssl_endpoint();
-		}
-
-		$api->set_url( $url )->set_request_arg( 'sslverify', $this->is_ssl_enabled() );
-
-		$this->api = $api;
-	}
-
-	/**
-	 * @return ACP_License_API
-	 */
-	public function api() {
-		if ( null === $this->api ) {
-			$this->set_api();
-		}
-
-		return $this->api;
-	}
-
-	/**
-	 * Tries to match API settings with the update request
-	 *
-	 * @since 3.1.2
-	 *
-	 * @param array  $r
-	 * @param string $url
-	 *
-	 * @return array
-	 */
-	public function use_api_http_request_args_for_plugin_update( $r, $url ) {
-		// only applies to api URL domain
-		if ( 0 === strpos( $url, $this->api()->get_url() ) ) {
-			$api_args = $this->api()->get_request_args();
-
-			if ( isset( $api_args['sslverify'] ) ) {
-				$r['sslverify'] = $api_args['sslverify'];
-			}
-		}
-
-		return $r;
-	}
-
-	/**
-	 * @since 1.1
-	 * @return object self
-	 */
-	public function set_licence_key( $licence_key ) {
-		$this->licence_key = $licence_key;
-
-		return $this;
+		// check subscription renewal status on a schedule
+		add_action( 'shutdown', array( $this, 'do_scheduled_renewal_check' ) );
 	}
 
 	/**
@@ -188,46 +64,27 @@ class ACP_License_Manager {
 	 * @since 3.4.3
 	 */
 	public function update_license_details() {
-		$response = $this->api()->get_license_details( $this->get_licence_key() );
+		$license = new ACP_License;
+
+		$api = new ACP_License_API();
+		$response = $api->request( 'licensedetails', array(
+			'license_key' => $license->get_key(),
+		) );
 
 		if ( isset( $response->expiry_date ) ) {
-			$this->store_license_expiry_date( $response->expiry_date );
+			$license->set_expiry_date( $response->expiry_date );
 		}
+
 		if ( isset( $response->renewal_discount ) ) {
-			$this->store_license_renewal_discount( $response->renewal_discount );
+			$license->set_renewal_discount( $response->renewal_discount );
 		}
+
+		$license->save();
 	}
 
 	/**
-	 * @since 1.0
-	 *
-	 * @param string $licence_key Licence Key
-	 *
-	 * @return object Response
+	 * Purge all plugin transients
 	 */
-	public function activate_licence( $licence_key ) {
-		$response = $this->api()->activate_licence( $licence_key );
-
-		$this->delete_licence_key();
-		$this->delete_licence_status();
-
-		if ( isset( $response->activated ) ) {
-			$this->store_licence_key( $licence_key );
-			$this->store_licence_status( 'active' );
-
-			if ( isset( $response->expiry_date ) ) {
-				$this->store_license_expiry_date( $response->expiry_date );
-			}
-			if ( isset( $response->renewal_discount ) ) {
-				$this->store_license_renewal_discount( $response->renewal_discount );
-			}
-
-			$this->purge_plugin_transients();
-		}
-
-		return $response;
-	}
-
 	public function purge_plugin_transients() {
 		delete_site_transient( 'update_plugins' );
 		delete_site_transient( 'admin-columns-pro_acppluginupdate' );
@@ -236,19 +93,6 @@ class ACP_License_Manager {
 		foreach ( AC()->addons()->get_addons() as $addon ) {
 			delete_site_transient( $addon->get_slug() . '_acppluginupdate' );
 		}
-	}
-
-	/**
-	 * @since 1.0
-	 */
-	public function deactivate_licence() {
-		$response = $this->api()->deactivate_licence( $this->get_licence_key() );
-
-		$this->delete_licence_key();
-		$this->delete_licence_status();
-		$this->delete_license_expiry_date();
-
-		return $response;
 	}
 
 	/**
@@ -273,24 +117,25 @@ class ACP_License_Manager {
 		}
 
 		if ( $basename ) {
-			$changelog = $this->api()->get_plugin_changelog( $basename );
+			$api = new ACP_License_API();
+			$response = $api->request( 'pluginchangelog', array(
+				'plugin_name' => $basename,
+			), 'html' );
 
-			if ( is_wp_error( $changelog ) ) {
-				$changelog = $changelog->get_error_message();
+			if ( is_wp_error( $response ) ) {
+				$response = $response->get_error_message();
 			}
 
-			echo $changelog;
+			echo $response;
 			exit;
 		}
 	}
 
 	/**
-	 * @see   ACP_License_API::get_plugin_install_data()
 	 * @since 1.1
 	 * @return mixed
 	 */
 	public function get_plugin_install_data( $plugin_name, $clear_cache = false ) {
-
 		if ( $clear_cache ) {
 			delete_site_transient( self::OPTION_KEY . '_plugininstall' );
 		}
@@ -299,7 +144,13 @@ class ACP_License_Manager {
 
 		// no cache, get data
 		if ( ! $plugin_install ) {
-			$plugin_install = $this->api()->get_plugin_install_data( $this->get_licence_key(), $plugin_name );
+			$license = new ACP_License();
+
+			$api = new ACP_License_API();
+			$plugin_install = $api->request( 'plugininstall', array(
+				'licence_key' => $license->get_key(),
+				'plugin_name' => $plugin_name,
+			) );
 
 			// flatten wp_error object for transient storage
 			if ( is_wp_error( $plugin_install ) ) {
@@ -321,7 +172,6 @@ class ACP_License_Manager {
 	}
 
 	/**
-	 * @see   ACP_License_API::get_plugin_update_data()
 	 * @since 1.1
 	 * @return
 	 */
@@ -330,7 +180,14 @@ class ACP_License_Manager {
 
 		// no cache, get data
 		if ( ! $plugin_update ) {
-			$plugin_update = $this->api()->get_plugin_update_data( $this->get_licence_key(), $plugin_name, $version );
+			$license = new ACP_License();
+
+			$api = new ACP_License_API();
+			$plugin_update = $api->request( 'pluginupdate', array(
+				'licence_key' => $license->get_key(),
+				'plugin_name' => $plugin_name,
+				'version'     => $version,
+			) );
 
 			// flatten wp_error object for transient storage
 			if ( is_wp_error( $plugin_update ) ) {
@@ -351,17 +208,18 @@ class ACP_License_Manager {
 	}
 
 	/**
-	 * @see   ACP_License_API::get_plugin_details()
 	 * @since 1.1
 	 * @return
 	 */
 	public function get_plugin_details() {
-
 		$plugin_details = get_site_transient( self::OPTION_KEY . '_plugindetails' );
 
 		// no cache, get data
 		if ( ! $plugin_details ) {
-			$plugin_details = $this->api()->get_plugin_details( ACP()->get_basename() );
+			$api = new ACP_License_API();
+			$plugin_details = $api->request( 'plugindetails', array(
+				'plugin_name' => ACP()->get_basename(),
+			) );
 
 			// flatten wp_error object for transient storage
 			if ( is_wp_error( $plugin_details ) ) {
@@ -391,6 +249,11 @@ class ACP_License_Manager {
 	 * @return stdClass Modified update array with custom plugin data.
 	 */
 	public function update_check( $transient ) {
+		$license = new ACP_License();
+
+		if ( ! $license->is_active() || $license->is_expired() ) {
+			return $transient;
+		};
 
 		// Addons
 		if ( $addons = $this->get_addons_update_data() ) {
@@ -403,8 +266,8 @@ class ACP_License_Manager {
 		}
 
 		// Main plugin
-		$plugin_data = $this->get_plugin_update_data( dirname( ACP()->get_basename() ), $this->get_version() );
-		if ( ! is_wp_error( $plugin_data ) && ! empty( $plugin_data->new_version ) && version_compare( $plugin_data->new_version, $this->get_version() ) > 0 ) {
+		$plugin_data = $this->get_plugin_update_data( dirname( ACP()->get_basename() ), ACP()->get_version() );
+		if ( ! is_wp_error( $plugin_data ) && ! empty( $plugin_data->new_version ) && version_compare( $plugin_data->new_version, ACP()->get_version() ) > 0 ) {
 			$transient->response[ ACP()->get_basename() ] = $plugin_data;
 		}
 
@@ -416,8 +279,11 @@ class ACP_License_Manager {
 	 * @return void
 	 */
 	public function auto_activate_licence() {
-		if ( ! $this->is_license_active() && ( $licence = $this->get_licence_key() ) ) {
-			$this->activate_licence( $licence );
+		$license = new ACP_License();
+
+		if ( $license->is_active() && $license->get_key() ) {
+			$license->set_status( 'active' )
+			        ->save();
 		}
 	}
 
@@ -440,142 +306,20 @@ class ACP_License_Manager {
 		return $plugins[ ACP()->get_basename() ][ $field ];
 	}
 
-	public function get_basename() {
-		return ACP()->get_basename();
-	}
-
-	public function get_version() {
-		return $this->get_plugin_info( 'Version' );
-	}
-
-	public function get_name() {
-		return $this->get_plugin_info( 'Name' );
-	}
-
 	/**
 	 * Check if the license for this plugin is managed per site or network
 	 *
 	 * @since 3.6
 	 * @return boolean
 	 */
-	protected function is_network_managed_license() {
+	private function is_network_managed_license() {
 		return is_multisite() && is_plugin_active_for_network( ACP()->get_basename() );
 	}
 
-	protected function update_option( $option, $value, $autoload = false ) {
-		return $this->is_network_managed_license()
-			? update_site_option( $option, $value )
-			: update_option( $option, $value, $autoload );
-	}
-
-	protected function get_option( $option, $default = false ) {
-		return $this->is_network_managed_license()
-			? get_site_option( $option, $default )
-			: get_option( $option, $default );
-	}
-
-	protected function delete_option( $option ) {
-		return $this->is_network_managed_license()
-			? delete_site_option( $option )
-			: delete_option( $option );
-	}
-
 	public function get_masked_licence_key() {
-		return str_repeat( '*', 28 ) . substr( $this->get_licence_key(), -4 );
-	}
+		$license = new ACP_License();
 
-	public function get_licence_key() {
-		if ( null === $this->licence_key ) {
-			$this->set_licence_key( trim( $this->get_option( self::OPTION_KEY ) ) );
-		}
-
-		return $this->licence_key;
-	}
-
-	public function get_licence_status() {
-		return $this->get_option( self::OPTION_KEY . '_sts' );
-	}
-
-	public function is_license_active() {
-		$status = $this->get_licence_status();
-
-		return true === $status || '1' === $status || 'active' === $status;
-	}
-
-	public function store_licence_key( $licence_key ) {
-		$this->update_option( self::OPTION_KEY, $licence_key );
-	}
-
-	public function delete_licence_key() {
-		$this->delete_option( self::OPTION_KEY );
-	}
-
-	public function store_licence_status( $status ) {
-		$this->update_option( self::OPTION_KEY . '_sts', $status ); // status is 'true' or 'expired'
-	}
-
-	public function delete_licence_status() {
-		$this->delete_option( self::OPTION_KEY . '_sts' );
-	}
-
-	public function is_ssl_enabled() {
-		return '1' === $this->get_option( self::OPTION_KEY . '_ssl' );
-	}
-
-	public function enable_ssl() {
-		$this->update_option( self::OPTION_KEY . '_ssl', '1' );
-		$this->purge_plugin_transients(); // for updater
-	}
-
-	public function disable_ssl() {
-		$this->delete_option( self::OPTION_KEY . '_ssl' );
-		$this->purge_plugin_transients(); // for updater
-	}
-
-	public function get_license_expiry_date() {
-		$expiry_date = $this->get_option( self::OPTION_KEY . '_expiry_date' );
-
-		if ( ! is_int( $expiry_date ) ) {
-			$expiry_date = strtotime( $expiry_date );
-		}
-
-		return $expiry_date;
-	}
-
-	public function store_license_expiry_date( $renewal_date ) {
-		$this->update_option( self::OPTION_KEY . '_expiry_date', $renewal_date );
-	}
-
-	public function delete_license_expiry_date() {
-		$this->delete_option( self::OPTION_KEY . '_expiry_date' );
-	}
-
-	public function get_license_renewal_discount() {
-		return $this->get_option( self::OPTION_KEY . '_renewal_discount' );
-	}
-
-	public function store_license_renewal_discount( $renewal_discount ) {
-		$this->update_option( self::OPTION_KEY . '_renewal_discount', $renewal_discount );
-	}
-
-	public function delete_license_renewal_discount() {
-		$this->delete_option( self::OPTION_KEY . '_renewal_discount' );
-	}
-
-	public function get_days_to_expiry() {
-		$days = false;
-
-		if ( $this->is_license_active() && ( $expiry_date = $this->get_license_expiry_date() ) ) {
-			$days = floor( ( $expiry_date - time() ) / DAY_IN_SECONDS );
-		}
-
-		return $days;
-	}
-
-	public function is_license_expired() {
-		$days = $this->get_days_to_expiry();
-
-		return false !== $days && $days <= 0;
+		return str_repeat( '*', 28 ) . substr( $license->get_key(), -4 );
 	}
 
 	/**
@@ -618,50 +362,14 @@ class ACP_License_Manager {
 	/**
 	 * @since 3.4.3
 	 */
-	public function ajax_check_license_renewed() {
-		// update renewal date
-		$this->update_license_details();
-
-		// check is license is renewed
-		$phases = $this->get_hide_license_notice_thresholds();
-		$is_renewed = ( $this->get_days_to_expiry() <= $phases[ count( $phases ) - 1 ] ) ? false : true;
-
-		// create message based on status
-		$message = __( 'Your license was successfully renewed!', 'codepress-admin-columns' );
-		$type = 'success';
-
-		if ( ! $is_renewed ) {
-			$message = $this->get_renewal_message() . ' <strong>' . __( 'Your license has not been renewed yet.', 'codepress-admin-columns' ) . '</strong>';
-			$type = 'error';
-		}
-
-		$notice = new AC_Notice_Plugin( ACP()->get_basename() );
-		$notice->set_message( $message )
-		       ->set_type( $type )
-		       ->display_notice();
-
-		exit;
-	}
-
-	/**
-	 * @since 3.4.3
-	 */
-	public function do_weekly_renewal_check() {
+	public function do_scheduled_renewal_check() {
 		if ( get_transient( '_cpac_renewal_check' ) ) {
 			return;
 		}
 
 		$this->update_license_details();
 
-		set_transient( '_cpac_renewal_check', 1, WEEK_IN_SECONDS ); // 7 day interval
-	}
-
-	/**
-	 * @since 3.1.2
-	 */
-	public function ajax_check_connection() {
-		echo $this->api()->test_request( ACP()->get_basename() ) ? '1' : '0';
-		exit;
+		set_transient( '_cpac_renewal_check', 1, WEEK_IN_SECONDS );
 	}
 
 	/**
@@ -680,16 +388,14 @@ class ACP_License_Manager {
 	}
 
 	public function register_admin_scripts() {
-		wp_register_style( 'acp-license-manager', ACP()->get_plugin_url() . "assets/css/license-manager" . AC()->minified() . ".css", array(), ACP()->get_version() );
-		wp_register_script( 'acp-license-manager', ACP()->get_plugin_url() . "assets/js/license-manager" . AC()->minified() . ".js", array( 'jquery' ), ACP()->get_version() );
+		wp_register_style( 'acp-license-manager', ACP()->get_plugin_url() . "assets/css/license-manager.css", array(), ACP()->get_version() );
+		wp_register_script( 'acp-license-manager', ACP()->get_plugin_url() . "assets/js/license-manager.js", array( 'jquery' ), ACP()->get_version() );
 	}
 
 	/**
 	 * @since 3.1.2
 	 */
 	public function admin_scripts() {
-		wp_enqueue_script( 'ac-connection', ACP()->get_plugin_url() . "assets/js/check-connection.js", array( 'jquery' ), $this->get_version() );
-
 		wp_enqueue_script( 'acp-license-manager' );
 		wp_enqueue_style( 'acp-license-manager' );
 	}
@@ -698,7 +404,9 @@ class ACP_License_Manager {
 	 * @since 1.0
 	 */
 	public function maybe_install_error( $error, $plugin_name ) {
-		if ( ! $this->is_license_active() ) {
+		$license = new ACP_License();
+
+		if ( ! $license->is_active() ) {
 			$error = sprintf( __( "Licence not active. Enter your licence key on <a href='%s'>the settings page</a>.", 'codepress-admin-columns' ), $this->get_license_page_url() );
 		}
 
@@ -759,62 +467,110 @@ class ACP_License_Manager {
 	}
 
 	/**
+	 * @return string|WP_Error Success message
+	 */
+	private function activate_license() {
+		$licence_key = sanitize_text_field( filter_input( INPUT_POST, 'license' ) );
+
+		if ( empty( $licence_key ) ) {
+			return new WP_Error( 'empty-license', __( 'Empty licence.', 'codepress-admin-columns' ) );
+		}
+
+		$license = new ACP_License();
+		$license->delete();
+
+		$api = new ACP_License_API();
+		$response = $api->request( 'activation', array(
+			'licence_key' => $licence_key,
+			'site_url'    => site_url(),
+		) );
+
+		if ( is_wp_error( $response ) ) {
+			return new WP_Error( 'error', $response->get_error_message() );
+		}
+
+		if ( ! isset( $response->activated ) ) {
+			return new WP_Error( 'error', __( 'Wrong response from API.', 'codepress-admin-columns' ) );
+		}
+
+		if ( isset( $response->expiry_date ) ) {
+			$license->set_expiry_date( $response->expiry_date );
+		}
+
+		if ( isset( $response->renewal_discount ) ) {
+			$license->set_renewal_discount( $response->renewal_discount );
+		}
+
+		$license->set_key( $licence_key )
+		        ->set_status( 'active' )
+		        ->save();
+
+		$this->purge_plugin_transients();
+
+		return $response->message;
+	}
+
+	/**
+	 * @return string|WP_Error Success message
+	 */
+	private function deactivate_license() {
+		$license = new ACP_License();
+
+		$api = new ACP_License_API();
+		$response = $api->request( 'deactivation', array(
+			'licence_key' => $license->get_key(),
+			'site_url'    => site_url(),
+		) );
+
+		$license->delete();
+		$this->purge_plugin_transients();
+
+		if ( is_wp_error( $response ) ) {
+			return new WP_Error( 'error', __( 'Wrong response from API.', 'codepress-admin-columns' ) . ' ' . $response->get_error_message() );
+		}
+
+		if ( ! isset( $response->deactivated ) ) {
+			return new WP_Error( 'error', __( 'Wrong response from API.', 'codepress-admin-columns' ) );
+		}
+
+		return $response->message;
+	}
+
+	/**
 	 * Handle requests for license activation and deactivation
 	 *
 	 * @since 1.0
 	 */
 	public function handle_request() {
-		$nonce = filter_input( INPUT_POST, '_acnonce' );
-
-		if ( ! $nonce ) {
+		if ( ! current_user_can( 'manage_admin_columns' ) ) {
 			return;
 		}
 
-		// Activation
-		if ( wp_verify_nonce( $nonce, 'ac-addon-activate' ) ) {
-
-			$licence_key = sanitize_text_field( filter_input( INPUT_POST, 'license' ) );
-
-			if ( empty( $licence_key ) ) {
-				AC()->notice( __( 'Empty licence.', 'codepress-admin-columns' ), 'error' );
-
-				return;
-			}
-
-			$response = $this->activate_licence( $licence_key );
-
-			if ( is_wp_error( $response ) ) {
-				AC()->notice( $response->get_error_message(), 'error' );
-			} elseif ( isset( $response->activated ) ) {
-				AC()->notice( $response->message, 'updated' );
-			} else {
-				AC()->notice( __( 'Wrong response from API.', 'codepress-admin-columns' ), 'error' );
-			}
+		if ( ! wp_verify_nonce( filter_input( INPUT_POST, '_acnonce' ), 'acp-license' ) ) {
+			return;
 		}
 
-		// Deactivation
-		if ( wp_verify_nonce( $nonce, 'ac-addon-deactivate' ) ) {
+		switch ( filter_input( INPUT_POST, 'action' ) ) {
+			case 'activate' :
+				$result = $this->activate_license();
 
-			$response = $this->deactivate_licence();
+				if ( is_wp_error( $result ) ) {
+					AC()->notice( $result->get_error_message(), 'error' );
+				} else {
+					AC()->notice( $result );
+				}
 
-			if ( is_wp_error( $response ) ) {
-				AC()->notice( __( 'Wrong response from API.', 'codepress-admin-columns' ) . ' ' . $response->get_error_message(), 'error' );
-			} elseif ( isset( $response->deactivated ) ) {
-				AC()->notice( $response->message, 'updated' );
-			} else {
-				AC()->notice( __( 'Wrong response from API.', 'codepress-admin-columns' ), 'error' );
-			}
-		}
+				break;
+			case 'deactivate' :
+				$result = $this->deactivate_license();
 
-		// Toggle SSL
-		if ( wp_verify_nonce( $nonce, 'ac-addon-toggle-ssl' ) ) {
+				if ( is_wp_error( $result ) ) {
+					AC()->notice( $result->get_error_message(), 'error' );
+				} else {
+					AC()->notice( $result );
+				}
 
-			// disable ssl
-			if ( '0' == filter_input( INPUT_POST, 'ssl' ) ) {
-				$this->disable_ssl();
-			} else {
-				$this->enable_ssl();
-			}
+				break;
 		}
 	}
 
@@ -862,7 +618,6 @@ class ACP_License_Manager {
 	 * @return void
 	 */
 	public function display() {
-
 		// When the plugin is network activated, the license is managed globally
 		if ( $this->is_network_managed_license() && ! is_network_admin() ) {
 			?>
@@ -879,7 +634,6 @@ class ACP_License_Manager {
 			</p>
 			<?php
 		} else {
-
 			/**
 			 * Hook is used for hiding the license form from the settings page
 			 *
@@ -891,320 +645,32 @@ class ACP_License_Manager {
 				return;
 			}
 
-			$licence = filter_input( INPUT_POST, 'license' );
-
-			if ( ! $licence ) {
-				$licence = $this->get_licence_key();
-			}
+			$license = new ACP_License();
 
 			?>
 
 			<form id="licence_activation" action="" method="post">
+				<?php wp_nonce_field( 'acp-license', '_acnonce' ); ?>
 
-				<?php if ( $this->is_license_active() ) : ?>
-
-					<?php wp_nonce_field( 'ac-addon-deactivate', '_acnonce' ); ?>
+				<?php if ( $license->is_active() ) : ?>
+					<input type="hidden" name="action" value="deactivate">
 
 					<p>
 						<span class="dashicons dashicons-yes"></span>
 						<?php _e( 'Automatic updates are enabled.', 'codepress-admin-columns' ); ?>
 						<input type="submit" class="button" value="<?php _e( 'Deactivate licence', 'codepress-admin-columns' ); ?>">
 					</p>
-
 				<?php else : ?>
-
-					<?php wp_nonce_field( 'ac-addon-activate', '_acnonce' ); ?>
-
-					<input type="password" value="<?php echo esc_attr( $licence ); ?>" name="license" size="30" placeholder="<?php echo esc_attr( __( 'Enter your licence code', 'codepress-admin-columns' ) ); ?>">
+					<input type="hidden" name="action" value="activate">
+					<input type="password" value="<?php echo esc_attr( $license->get_key() ); ?>" name="license" size="30" placeholder="<?php echo esc_attr( __( 'Enter your licence code', 'codepress-admin-columns' ) ); ?>">
 					<input type="submit" class="button" value="<?php _e( 'Update licence', 'codepress-admin-columns' ); ?>">
 					<p class="description">
 						<?php printf( __( 'You can find your license key on your %s.', 'codepress-admin-columns' ), '<a href="' . ac_get_site_utm_url( 'my-account', 'license-activation' ) . '" target="_blank">' . __( 'account page', 'codepress-admin-columns' ) . '</a>' ); ?>
 					</p>
-
 				<?php endif; ?>
-
 			</form>
 
-			<form id="toggle-ssl" action="" method="post" class="notice notice-warning hidden">
-
-				<?php wp_nonce_field( 'ac-addon-toggle-ssl', '_acnonce' ); ?>
-
-				<p style="padding: 20px;">
-					<?php printf( __( 'Could not connect to %s — You will not receive update notifications or be able to activate your license until this is fixed. This issue is often caused by an improperly configured SSL server (https). We recommend fixing the SSL configuration on your server, but if you need a quick fix you can:', 'codepress-admin-columns' ), ac_get_site_url() ); ?>
-					<br/><br/>
-
-					<?php
-					$ssl_value = 1;
-					$ssl_label = __( 'Enable SSL', 'codepress-admin-columns' );
-
-					if ( $this->is_ssl_enabled() ) {
-						$ssl_value = 0;
-						$ssl_label = __( 'Disable SSL', 'codepress-admin-columns' );
-					}
-					?>
-
-					<input type="hidden" name="ssl" value="<?php echo esc_attr( $ssl_value ); ?>">
-					<input type="submit" class="button" value="<?php echo esc_attr( $ssl_label ); ?>">
-
-				</p>
-			</form>
 			<?php
-		}
-	}
-
-	/**
-	 * Get renewal message
-	 *
-	 * @since 3.4.3
-	 */
-	private function get_renewal_message() {
-
-		$message = false;
-		$days_to_expiry = $this->get_days_to_expiry();
-
-		// renewal date has been set?
-		if ( $days_to_expiry !== false ) {
-			if ( $days_to_expiry > 0 ) {
-
-				if ( $days_to_expiry < 28 ) { // for plugin page
-					$days = sprintf( _n( '1 day', '%s days', $days_to_expiry, 'codepress-admin-columns' ), $days_to_expiry );
-					if ( $discount = $this->get_license_renewal_discount() ) {
-						$message = sprintf(
-							__( "Your Admin Columns Pro license will expire in %s. %s now and get a %d%% discount!", 'codepress-admin-columns' ),
-							'<strong>' . $days . '</strong>',
-							ac_helper()->html->link( ac_get_site_utm_url( 'my-account', 'renewal' ), __( 'Renew your license', 'codepress-admin-columns' ) ),
-							$discount
-						);
-					} else {
-						$message = sprintf(
-							__( "Your Admin Columns Pro license will expire in %s. %s now and get a discount!", 'codepress-admin-columns' ),
-							'<strong>' . $days . '</strong>',
-							ac_helper()->html->link( ac_get_site_utm_url( 'my-account', 'renewal' ), __( 'Renew your license', 'codepress-admin-columns' ) )
-						);
-					}
-				}
-			} else {
-				$message = sprintf(
-					__( 'Your Admin Columns Pro license has expired on %s! Renew your license now by going to your %s.', 'codepress-admin-columns' ),
-					date_i18n( get_option( 'date_format' ), $this->get_license_expiry_date() ),
-					'<a href="' . ac_get_site_utm_url( 'my-account', 'renewal' ) . '">' . __( 'My Account page', 'codepress-admin-columns' ) . '</a>'
-				);
-			}
-		}
-
-		return $message;
-	}
-
-	/**
-	 * @return string
-	 */
-	private function get_check_license_link() {
-		ob_start();
-
-		$this->check_license_link();
-
-		return ob_get_clean();
-	}
-
-	/**
-	 * Get the HTML for checking a license
-	 *
-	 * @since 3.4.3
-	 */
-	private function check_license_link() {
-		wp_enqueue_script( 'acp-license-manager' );
-		wp_enqueue_style( 'acp-license-manager' );
-		?>
-
-		<a href="#" class="cpac-check-license"><?php _e( 'Check my license', 'codepress-admin-columns' ); ?>.</a>
-
-		<?php
-	}
-
-	/**
-	 * Shows a message below the plugin on the plugins page
-	 *
-	 * @since 1.0.3
-	 */
-	public function display_plugin_row_notices() {
-		$message = false;
-
-		if ( $this->is_license_active() ) {
-			if ( $message = $this->get_renewal_message() ) {
-				$message .= $this->get_check_license_link();
-			}
-		} else {
-			$plugin_details = $this->get_plugin_details();
-
-			if ( isset( $plugin_details->version ) && version_compare( $this->get_version(), $plugin_details->version, '>=' ) ) {
-				$message = $this->get_need_license_message();
-			}
-		}
-
-		if ( $message ) {
-			$notice = new AC_Notice_Plugin( ACP()->get_basename() );
-			$notice->set_message( $message )
-			       ->display_notice();
-		}
-	}
-
-	/**
-	 * Whether the license expiry notice should be displayed, regardless of the license timeout
-	 *
-	 * @since 3.4.3
-	 */
-	public function is_license_expiry_notice_hideable() {
-		return ! AC()->admin()->is_current_page( 'settings' );
-	}
-
-	/**
-	 * Display notice for license expiry
-	 *
-	 * @since 3.4.3
-	 */
-	public function display_license_expiry_notices() {
-		global $pagenow, $current_screen;
-
-		// Only visible on plugin screen, table screen or AC settings screen
-		if ( 'plugins.php' !== $pagenow && ! AC()->admin()->is_admin_screen() && ! AC()->get_list_screen_by_wpscreen( $current_screen ) ) {
-			return;
-		}
-
-		if ( ! AC()->user_can_manage_admin_columns() ) {
-			return;
-		}
-
-		/**
-		 * @since 4.0
-		 */
-		$hide_notice = apply_filters( 'acp/hide_renewal_notice', false );
-
-		/**
-		 * Filter the visibility of the Admin Columns renewal notice
-		 *
-		 * @since 3.4.3
-		 *
-		 * @param bool $hide Whether to hide the renewal notice. Defaults to false.
-		 */
-		if ( $hide_notice || AC()->suppress_site_wide_notices() ) {
-			return;
-		}
-
-		$hide_license_timeout = get_user_meta( get_current_user_id(), 'cpac_hide_license_notice_timeout', true );
-		$hide_license_phase = get_user_meta( get_current_user_id(), 'cpac_hide_license_notice_phase', true );
-
-		if ( $this->is_license_expiry_notice_hideable() ) {
-			// Notice was blocked the final time
-			if ( $hide_license_phase == 'completed' ) {
-				return;
-			}
-
-			// Notice was blocked, and timeout hasn't been reached yet
-			if ( time() < $hide_license_timeout ) {
-				return;
-			}
-		}
-
-		// First license expiry threshold passed
-		$phases = $this->get_hide_license_notice_thresholds();
-
-		if ( $this->get_days_to_expiry() > $phases[ count( $phases ) - 1 ] ) {
-			return;
-		}
-
-		// Show a renewal message if the license needs renewal
-		if ( $message = $this->get_renewal_message() ) {
-			wp_enqueue_style( 'ac-sitewide-notices' );
-			wp_enqueue_script( 'acp-license-manager' );
-			?>
-
-			<div class="ac-message error warning">
-				<?php if ( $this->is_license_expiry_notice_hideable() ) : ?>
-					<a href="#" class="hide-notice" data-hide-notice="license-check"></a>
-				<?php endif; ?>
-				<p>
-					<?php echo $message; ?>
-					<?php $this->check_license_link(); ?>
-				</p>
-				<div class="clear"></div>
-			</div>
-
-			<?php
-		}
-	}
-
-	public function get_hide_license_notice_thresholds() {
-		return array( 0, 7, 21 );
-	}
-
-	/**
-	 * Handle an AJAX request for hiding license expiry notices
-	 *
-	 * @since 3.4.3
-	 */
-	public function ajax_hide_license_expiry_notice() {
-		$hide_license_phase = get_user_meta( get_current_user_id(), 'cpac_hide_license_notice_phase', true );
-
-		if ( $hide_license_phase != 'completed' ) {
-			$expiry_date = $this->get_license_expiry_date();
-			$phases = $this->get_hide_license_notice_thresholds();
-			$days = $this->get_days_to_expiry();
-			$phase = 0;
-
-			foreach ( $phases as $phase => $threshold ) {
-				if ( $days <= $threshold ) {
-					break;
-				}
-			}
-
-			$new_phase = $phase - 1;
-
-			if ( $new_phase == -1 ) {
-				update_user_meta( get_current_user_id(), 'cpac_hide_license_notice_timeout', 0 );
-				update_user_meta( get_current_user_id(), 'cpac_hide_license_notice_phase', 'completed' );
-			} else {
-				// Expiry date minus x days
-				update_user_meta( get_current_user_id(), 'cpac_hide_license_notice_timeout', $expiry_date - $phases[ $new_phase ] * DAY_IN_SECONDS );
-				update_user_meta( get_current_user_id(), 'cpac_hide_license_notice_phase', $new_phase );
-			}
-		}
-
-		wp_send_json_success();
-	}
-
-	/**
-	 * Message to add to update message when you have not activated your license
-	 *
-	 * @return string
-	 */
-	public function get_need_license_message() {
-		$message = sprintf(
-			__( "To enable updates, please enter your license key on the <a href='%s'>Settings</a> page. If you don't have a licence key, please see <a href='%s' target='_blank'>details & pricing</a>.", 'codepress_admin_columns' ),
-			AC()->admin()->get_link( 'settings' ),
-			ac_get_site_utm_url( 'pricing-purchase', 'plugins' )
-		);
-
-		$sanitized_message = wp_kses( $message, array(
-			'a' => array(
-				'href'   => array(),
-				'target' => array(),
-				'class'  => array(),
-			),
-		) );
-
-		return $sanitized_message;
-	}
-
-	/**
-	 * Message to add to update message when you have not activated your license
-	 *
-	 * @param  array  $plugin_data
-	 * @param  object $r
-	 *
-	 */
-	public function need_license_message( $plugin_data, $r ) {
-		if ( empty( $r->package ) ) {
-			echo '<br>' . $this->get_need_license_message();
 		}
 	}
 

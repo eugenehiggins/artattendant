@@ -15,10 +15,10 @@ class ACP_Filtering_Model_Post_Sticky extends ACP_Filtering_Model {
 			return "{$where} AND {$wpdb->posts}.ID = 0"; // Show no results
 		}
 
-		if( ! $stickies ){
+		if ( ! $stickies ) {
 			return $where;
 		}
-		
+
 		$sql_val = '1' === $this->get_filter_value() ? " IN ('" . implode( "','", $stickies ) . "')" : " NOT IN ('" . implode( "','", $stickies ) . "')";
 
 		return "{$where} AND {$wpdb->posts}.ID" . $sql_val;

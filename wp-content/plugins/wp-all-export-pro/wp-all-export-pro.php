@@ -3,15 +3,15 @@
 Plugin Name: WP All Export Pro
 Plugin URI: http://www.wpallimport.com/export/
 Description: Export any post type to a CSV or XML file. Edit the exported data, and then re-import it later using WP All Import.
-Version: 1.5.1
+Version: 1.5.2
 Author: Soflyy
 */
 
 // Enable error reporting in development
 if(getenv('WPAE_DEV')) {
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
-    xdebug_disable();
+	//error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
+    //xdebug_disable();
 }
 
 if( ! defined( 'PMXE_SESSION_COOKIE' ) ) {
@@ -30,21 +30,12 @@ define('PMXE_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
 
 if ( class_exists('PMXE_Plugin') and PMXE_EDITION == "free"){
 
-	function pmxe_notice(){
+    include_once __DIR__.'/src/WordPress/AdminNotice.php';
+    include_once __DIR__.'/src/WordPress/AdminErrorNotice.php';
+    $notice = new \Wpae\WordPress\AdminErrorNotice(printf(__('Please de-activate and remove the free version of the WP All Export before activating the paid version.', 'wp_all_export_plugin')));
+    $notice->render();
 
-		?>
-		<div class="error"><p>
-			<?php printf(__('Please de-activate and remove the free version of the WP All Export before activating the paid version.', 'wp_all_export_plugin'));
-			?>
-		</p></div>
-		<?php
-
-		deactivate_plugins( str_replace('\\', '/', dirname(__FILE__)) . '/wp-all-export-pro.php');
-
-	}
-
-	add_action('admin_notices', 'pmxe_notice');
-
+    deactivate_plugins( str_replace('\\', '/', dirname(__FILE__)) . '/wp-all-export-pro.php');
 }
 else {
 
@@ -56,7 +47,7 @@ else {
 	 */
 	define('PMXE_PREFIX', 'pmxe_');
 
-	define('PMXE_VERSION', '1.5.1');
+	define('PMXE_VERSION', '1.5.2');
 
 	define('PMXE_EDITION', 'paid');
 
@@ -331,6 +322,11 @@ else {
 			$this->load_plugin_textdomain();
 		}
 
+		public function showNoticeAndDisablePlugin($message){
+                $notice = new \Wpae\WordPress\AdminErrorNotice($message);
+                $notice->render();
+                deactivate_plugins( str_replace('\\', '/', dirname(__FILE__)) . '/wp-all-export-pro.php');
+        }
 		/**
 		 * pre-dispatching logic for admin page controllers
 		 */
@@ -354,11 +350,11 @@ else {
 			}
 
 			if ( ! is_dir($uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY) or ! is_writable($uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY)) {
-				die(sprintf(__('Uploads folder %s must be writable', 'wp_all_export_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY));
+                $this->showNoticeAndDisablePlugin(sprintf(__('Uploads folder %s must be writable', 'wp_all_export_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY));
 			}
 
 			if ( ! is_dir($uploads['basedir'] . DIRECTORY_SEPARATOR . self::UPLOADS_DIRECTORY) or ! is_writable($uploads['basedir'] . DIRECTORY_SEPARATOR . self::UPLOADS_DIRECTORY)) {
-				die(sprintf(__('Uploads folder %s must be writable', 'wp_all_export_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . self::UPLOADS_DIRECTORY));
+				$this->showNoticeAndDisablePlugin(sprintf(__('Uploads folder %s must be writable', 'wp_all_export_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . self::UPLOADS_DIRECTORY));
 			}
 
 			$functions = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
@@ -521,6 +517,7 @@ else {
 
 
 			if(strpos($className, '\\') !== false){
+
 				// project-specific namespace prefix
 				$prefix = 'Wpae\\';
 

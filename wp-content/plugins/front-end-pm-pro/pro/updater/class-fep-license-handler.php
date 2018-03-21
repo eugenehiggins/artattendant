@@ -5,7 +5,7 @@
  * This class should simplify the process of adding license information
  * to new Front End PM extensions.
  *
- * @version 1.2
+ * @version 1.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,6 +23,7 @@ class Fep_License_Handler {
 	private $item_name;
 	private $item_shortname;
 	private $version;
+	private $beta;
 	private $author = 'Shamim Hasan';
 	private $api_url = 'https://www.shamimsplugins.com/';
 
@@ -42,6 +43,7 @@ class Fep_License_Handler {
 		$this->item_name  = $_item;
 		$this->item_shortname = preg_replace( '/[^a-zA-Z0-9_\s]/', '', str_replace( ' ', '_', strtolower( $this->item_name ) ) );
 		$this->version        = $_version;
+		$this->beta			  = trim( fep_get_option( $this->item_shortname . '_beta_update', 0 ) );
 		$this->license        = trim( fep_get_option( $this->item_shortname . '_license_key', '' ) );
 		$this->author         = is_null( $_author ) ? $this->author : $_author;
 		$this->api_url        = is_null( $_api_url ) ? $this->api_url : $_api_url;
@@ -80,12 +82,14 @@ class Fep_License_Handler {
 		
 		add_filter( 'fep_admin_settings_tabs', array($this, 'admin_settings_tabs' ) );
 		add_filter( 'fep_settings_fields', array($this, 'settings_fields' ) );
+		
+		add_filter( 'fep_filter_before_admin_options_save', array($this, 'manual_license_data_input' ), 10, 2 );
 
 		// Activate license key on settings save
-		add_action( 'fep_action_before_admin_options_save', array( $this, 'activate_license' ), 10, 2 );
+		add_action( 'fep_action_after_admin_options_save', array( $this, 'activate_license' ), 10, 3 );
 
 		// Deactivate license key
-		add_action( 'fep_action_before_admin_options_save', array( $this, 'deactivate_license' ) );
+		add_action( 'admin_init', array( $this, 'deactivate_license' ) );
 
 		// Display notices to admins
 		add_action( 'admin_notices', array( $this, 'notices' ) );
@@ -104,6 +108,7 @@ class Fep_License_Handler {
 
 		$args = array(
 			'version'   => $this->version,
+			'beta'   	=> $this->beta,
 			'license'   => $this->license,
 			'author'    => $this->author,
 			'item_name'	=> $this->item_name
@@ -150,8 +155,57 @@ class Fep_License_Handler {
 				'label' => sprintf(__( '%s License.', 'front-end-pm' ), $this->item_name ),
 				'description' => $this->description()
 				);
+			$fields[$this->item_shortname . '_beta_update'] =   array(
+				'type'	=>	'checkbox',
+				'class'	=> '',
+				'section'	=> 'licenses',
+				'value' => trim( fep_get_option( $this->item_shortname . '_beta_update', 0 ) ),
+				'label' => __('Bleeding edge Update', 'front-end-pm'),
+				'cb_label' => sprintf(__( 'Enable Bleeding edge update of %s.', 'front-end-pm' ), $this->item_name ),
+				'description' => __('Not recommended in production website.', 'front-end-pm'),
+				);
+				
+			if( ( (isset( $_GET['input_license_data'] ) && $this->item_shortname == $_GET['input_license_data']) || ! empty( $_POST['_wp_http_referer'] ) )
+			&& fep_get_option( $this->item_shortname . '_license_key' )
+			){
+				$api_params = array(
+					'edd_action' => 'check_license',
+					'license'    => fep_get_option( $this->item_shortname . '_license_key' ),
+					'item_name'  => rawurlencode( $this->item_name ),
+					'url'        => urlencode( home_url() )
+				);
+				
+				$fields[$this->item_shortname . '_license_data_input'] =   array(
+					'type'	=>	'textarea',
+					'section'	=> 'licenses',
+					'value' => '',
+					'label' => sprintf(__( '%s License data', 'front-end-pm' ), $this->item_name ),
+					'description' => '<a class="button-secondary" href="'. esc_url( add_query_arg( $api_params, $this->api_url ) ).'" target="_blank">' . __( 'Get Data',  'front-end-pm' ) . '</a>',
+					);
+			}
 			return $fields;
 		}
+		
+		function manual_license_data_input( $settings, $tab ){
+			if( 'licenses' !== $tab ) {
+				return $settings;
+			}
+			
+			if( ! empty( $settings[$this->item_shortname . '_license_data_input'] ) ){
+				$data = stripslashes($settings[$this->item_shortname . '_license_data_input']);
+				$license_data = json_decode( $data );
+				if( is_object( $license_data ) ){
+					$now        = current_time( 'timestamp' );
+					$expiration = strtotime( $license_data->expires, $now );
+					
+					$this->set_transient( $data, '', $expiration - $now );
+				}
+				
+				unset($settings[$this->item_shortname . '_license_data_input']);
+			}
+			return $settings;
+		}
+		
 		
 	/**
 	 * Get license data
@@ -167,35 +221,10 @@ class Fep_License_Handler {
 			$license_data = $this->get_transient( $this->item_shortname . '_license_data' );
 			
 			if( false === $license_data ) {
-
-				// data to send in our API request
-				$api_params = array(
-					'edd_action'=> 'check_license',
-					'license' 	=> $this->license,
-					'item_name' => urlencode( $this->item_name ),
-					'url'       => home_url()
-				);
-		
-				// Call the API
-				$response = wp_remote_post(
-					$this->api_url,
-					array(
-						'timeout'   => 15,
-						'sslverify' => false,
-						'body'      => $api_params
-					)
-				);
-		
-				// make sure the response came back okay
-				if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-					return false;
-				}
-		
-				$license_data = wp_remote_retrieve_body( $response );
-		
-				$this->set_transient( $license_data );
+				$license_data = $this->api_call( 'check_license', $this->license );
 			}
 			
+			if( $license_data )
 			$license_data = json_decode( $license_data );
 			
 			return $license_data;
@@ -325,9 +354,9 @@ class Fep_License_Handler {
 	 * @access  public
 	 * @return  void
 	 */
-	public function activate_license( $settings, $tab ) {
+	public function activate_license( $old_value, $tab, $is_settings_page ) {
 		
-		if( 'licenses' !== $tab ) {
+		if( 'licenses' !== $tab || ! $is_settings_page ) {
 			return;
 		}
 		
@@ -335,7 +364,7 @@ class Fep_License_Handler {
 			return;
 		}
 		
-		if( empty( $settings[$this->item_shortname . '_license_key'] ) ){
+		if( ! fep_get_option( $this->item_shortname . '_license_key' ) ){
 			$this->delete_transient( $this->item_shortname . '_license_data' );
 			return;
 		}
@@ -348,36 +377,13 @@ class Fep_License_Handler {
 			}
 		}
 		*/
-
-		// Data to send to the API
-		$api_params = array(
-			'edd_action' => 'activate_license',
-			'license'    => $settings[$this->item_shortname . '_license_key'],
-			'item_name'  => urlencode( $this->item_name ),
-			'url'        => home_url()
-		);
-
-		// Call the API
-		$response = wp_remote_post(
-			$this->api_url,
-			array(
-				'timeout'   => 15,
-				'sslverify' => false,
-				'body'      => $api_params
-			)
-		);
-
-		// Make sure there are no errors
-		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return;
+		
+		$license_data = $this->api_call( 'activate_license', fep_get_option($this->item_shortname . '_license_key' ) );
+		
+		if( $license_data ){
+			// Tell WordPress to look for updates
+			set_site_transient( 'update_plugins', null );
 		}
-
-		// Tell WordPress to look for updates
-		set_site_transient( 'update_plugins', null );
-
-		$license_data = wp_remote_retrieve_body( $response );
-
-		$this->set_transient( $license_data );
 
 	}
 
@@ -388,39 +394,54 @@ class Fep_License_Handler {
 	 * @access  public
 	 * @return  void
 	 */
-	public function deactivate_license( $settings ) {
-
+	public function deactivate_license() {
+		if ( ! current_user_can( 'update_plugins' ) ){
+			return;
+		}
 		if( empty( $_POST[$this->item_shortname . '_license_deactivate'] ) ){
 			return;
 		}
+		if( ! fep_get_option( $this->item_shortname . '_license_key' ) ){
+			return;
+		}
 
-			// Data to send to the API
-			$api_params = array(
-				'edd_action' => 'deactivate_license',
-				'license'    => $settings[$this->item_shortname . '_license_key'],
-				'item_name'  => urlencode( $this->item_name ),
-				'url'        => home_url()
-			);
+		$this->api_call( 'deactivate_license', fep_get_option( $this->item_shortname . '_license_key' ) );
 
-			// Call the API
-			$response = wp_remote_post(
-				$this->api_url,
-				array(
-					'timeout'   => 15,
-					'sslverify' => false,
-					'body'      => $api_params
-				)
-			);
+	}
+	
+	function api_call( $action, $license ){
+		if( ! $action || ! $license )
+		return false;
+		
+		// Data to send to the API
+		$api_params = array(
+			'edd_action' => $action,
+			'license'    => $license,
+			'item_name'  => rawurlencode( $this->item_name ),
+			'url'        => urlencode( home_url() )
+		);
 
-			// Make sure there are no errors
-			if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-				return;
-			}
+		// Call the API
+		$response = wp_remote_get(
+			//$this->api_url,
+			esc_url_raw( add_query_arg( $api_params, $this->api_url ) ),
+			array(
+				'timeout'   => 15,
+				'sslverify' => false,
+				//'body'      => $api_params
+			)
+		);
 
-			$license_data = wp_remote_retrieve_body( $response );
+		// Make sure there are no errors
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return false;
+		}
 
-			$this->set_transient( $license_data );
+		$license_data = wp_remote_retrieve_body( $response );
 
+		$this->set_transient( $license_data );
+		
+		return $license_data;
 	}
 
 

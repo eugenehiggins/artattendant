@@ -3,11 +3,12 @@
 Plugin Name: ManageWP - Worker
 Plugin URI: https://managewp.com
 Description: We help you efficiently manage all your WordPress websites. <strong>Updates, backups, 1-click login, migrations, security</strong> and more, on one dashboard. This service comes in two versions: standalone <a href="https://managewp.com">ManageWP</a> service that focuses on website management, and <a href="https://godaddy.com/pro">GoDaddy Pro</a> that includes additional tools for hosting, client management, lead generation, and more.
-Version: 4.3.3
+Version: 4.5.0
 Author: ManageWP
 Author URI: https://managewp.com
 License: GPL2
 Text Domain: worker
+Network: true
 */
 
 /*
@@ -93,13 +94,9 @@ if (!function_exists('mwp_fail_safe')):
             $to = $brand['admin_email'];
         }
 
-        $fullError      = print_r($lastError, 1);
-        $workerSettings = get_option('wrksettings');
-        $userID         = 0;
-        if (!empty($workerSettings['dataown'])) {
-            $userID = (int)$workerSettings['dataown'];
-        }
-        $body = sprintf("Corrupt ManageWP Worker v%s installation detected. Site URL in question is %s. User email is %s (User ID: %s). Attempting recovery process at %s. The error that caused this:\n\n<pre>%s</pre>", $GLOBALS['MMB_WORKER_VERSION'], $siteUrl, $to, $userID, date('Y-m-d H:i:s'), $fullError);
+        $fullError = print_r($lastError, 1);
+        $serviceID = (string)get_option('mwp_service_key');
+        $body      = sprintf("Corrupt ManageWP Worker v%s installation detected. Site URL in question is %s. User email is %s (service ID: %s). Attempting recovery process at %s. The error that caused this:\n\n<pre>%s</pre>", $GLOBALS['MMB_WORKER_VERSION'], $siteUrl, $to, $serviceID, date('Y-m-d H:i:s'), $fullError);
         mail('recovery@managewp.com', $title, $body, "Content-Type: text/html");
 
         // If we're inside a cron scope, don't attempt to hide this error.
@@ -155,6 +152,7 @@ if (!class_exists('MwpWorkerResponder', false)):
         /**
          * @param Exception|Error                 $e
          * @param MWP_Http_ResponseInterface|null $response
+         *
          * @throws null
          */
         function callback($e = null, MWP_Http_ResponseInterface $response = null)
@@ -515,11 +513,7 @@ if (!function_exists('mwp_activation_hook')) {
             }
         }
 
-        if (!empty($GLOBALS['mmb_core'])) {
-            /** @var MMB_Core $core */
-            $core = $GLOBALS['mmb_core'];
-            $core->install();
-        }
+        mwp_core()->install();
     }
 }
 
@@ -558,13 +552,10 @@ if (!function_exists('mwp_try_recovery')):
     }
 endif;
 
-if (!function_exists('hide_worker_update')):
-    function hide_worker_update($value)
+if (!function_exists('add_worker_update_info')):
+    function add_worker_update_info()
     {
-        if (isset($value->response['worker/init.php'])) {
-            unset($value->response['worker/init.php']);
-        }
-        return $value;
+        echo ' The plugin is going to update itself automatically in the next few days.';
     }
 endif;
 
@@ -577,8 +568,8 @@ if (!function_exists('mwp_init')):
         // reason (eg. the site can't ping itself). Handle that case early.
         register_activation_hook(__FILE__, 'mwp_activation_hook');
 
-        $GLOBALS['MMB_WORKER_VERSION']  = '4.3.3';
-        $GLOBALS['MMB_WORKER_REVISION'] = '2018-01-05 00:00:00';
+        $GLOBALS['MMB_WORKER_VERSION']  = '4.5.0';
+        $GLOBALS['MMB_WORKER_REVISION'] = '2018-02-07 00:00:00';
 
         // Ensure PHP version compatibility.
         if (version_compare(PHP_VERSION, '5.2', '<')) {
@@ -686,7 +677,6 @@ if (!function_exists('mwp_init')):
             }
         }
 
-        // Register the autoloader that loads everything except the Google namespace.
         if (version_compare(PHP_VERSION, '5.3', '<')) {
             spl_autoload_register('mwp_autoload');
         } else {
@@ -696,7 +686,7 @@ if (!function_exists('mwp_init')):
 
         $GLOBALS['mmb_plugin_dir']   = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__));
         $GLOBALS['_mmb_item_filter'] = array();
-        $GLOBALS['mmb_core']         = $core = $GLOBALS['mmb_core_backup'] = new MMB_Core();
+        $core                        = mwp_core();
 
         $siteUrl = function_exists('get_site_option') ? get_site_option('siteurl') : get_option('siteurl');
         define('MMB_XFRAME_COOKIE', 'wordpress_'.md5($siteUrl).'_xframe');
@@ -705,32 +695,17 @@ if (!function_exists('mwp_init')):
         define('MWP_DB_DIR', MWP_BACKUP_DIR.'/mwp_db');
 
         add_filter('deprecated_function_trigger_error', '__return_false');
-        add_filter('mmb_stats_filter', 'mmb_get_extended_info');
-        add_action('plugins_loaded', 'mwp_return_core_reference', 1);
-        add_filter('cron_schedules', 'mmb_more_reccurences');
-        add_action('mmb_remote_upload', 'mmb_call_scheduled_remote_upload');
-        add_action('mwp_datasend', 'mwp_datasend');
         add_action('mwp_update_public_keys', 'mwp_refresh_live_public_keys');
         add_action('init', 'mmb_plugin_actions', 99999);
         add_filter('install_plugin_complete_actions', 'mmb_iframe_plugins_fix');
         add_filter('comment_edit_redirect', 'mwb_edit_redirect_override');
         add_action('mwp_auto_update', 'MwpRecoveryKit::selfUpdate');
-        if (!get_option('mwp_show_plugin_update')) {
-            add_filter('site_transient_update_plugins', 'hide_worker_update');
-        }
-
-        // Datasend cron.
-        if (!wp_next_scheduled('mwp_datasend')) {
-            wp_schedule_event(time(), 'threehours', 'mwp_datasend');
-        }
+        add_action('in_plugin_update_message-'.plugin_basename(__FILE__), 'add_worker_update_info');
 
         // Public key updating cron.
         if (!wp_next_scheduled('mwp_update_public_keys')) {
             wp_schedule_event(time(), 'daily', 'mwp_update_public_keys');
         }
-
-        // Register updater hooks.
-        MMB_Updater::register();
 
         register_deactivation_hook(__FILE__, array($core, 'deactivate'));
         register_uninstall_hook(dirname(__FILE__).'/functions.php', 'mwp_uninstall');

@@ -373,6 +373,10 @@
 								if ( res.redirect_to !== '#' ){
 										window.location.href = res.redirect_to;
 								} else {
+									//Anagram / custom disable draft butotn if form not submitted.
+									draftButton.removeClass('button-primary-disabled');
+									draftButton.removeAttr('disabled');
+									
 									submitButton.removeClass('button-primary-disabled');
 									form.find('span.fes-loading').remove();
 									submitButton.removeAttr('disabled'); // undisable the submit button
@@ -409,10 +413,17 @@
 							html: true,
 							type: "error"
 						});
-
+						
+						//Anagram / custom disable draft butotn if form not submitted.
+					
+						draftButton.removeAttr('disabled');
 						submitButton.removeAttr('disabled'); // undisable the submit button
 					}
+					//Anagram / custom disable draft butotn if form not submitted.
+					draftButton.removeClass('button-primary-disabled');
+					
 					submitButton.removeClass('button-primary-disabled');
+					
 					form.find('span.fes-loading').remove();
 				})
 				.fail( function(xhr, textStatus, errorThrown) {
@@ -430,6 +441,10 @@
 							html: true,
 							type: "error"
 						});
+							//Anagram / custom disable draft butotn if form not submitted.
+									draftButton.removeClass('button-primary-disabled');
+									draftButton.removeAttr('disabled');
+									
 						submitButton.removeAttr('disabled'); // undisable the submit button
 						submitButton.removeClass('button-primary-disabled');
 						form.find('span.fes-loading').remove();

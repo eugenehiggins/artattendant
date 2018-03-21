@@ -13,18 +13,23 @@ class ACA_ACF_Field_Link extends ACA_ACF_Field {
 	}
 
 	public function get_value( $id ) {
-		$url = parent::get_value( $id );
-		$label = $url['title'];
+		$link = parent::get_value( $id );
 
-		if ( ! $label ) {
-			$label = str_replace( array( 'http://', 'https://' ), '', $url['url'] );
+		if ( empty( $link ) ) {
+			return $link;
 		}
 
-		if ( '_blank' === $url['target'] ) {
+		$label = $link['title'];
+
+		if ( ! $label ) {
+			$label = str_replace( array( 'http://', 'https://' ), '', $link['url'] );
+		}
+
+		if ( '_blank' === $link['target'] ) {
 			$label .= '<span class="dashicons dashicons-external" style="font-size: 1em;"></span>';
 		}
 
-		return ac_helper()->html->link( $url['url'], $label );
+		return ac_helper()->html->link( $link['url'], $label );
 	}
 
 	// Pro

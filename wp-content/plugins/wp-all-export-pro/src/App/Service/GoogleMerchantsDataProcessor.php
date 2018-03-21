@@ -142,6 +142,11 @@ class GoogleMerchantsDataProcessor
 
         $articleData = \XmlExportCpt::prepare_data($entry, $this->snippets, false, $acfs, $woo, $woo_order, $implode_delimiter, false);
 
+        foreach($articleData as &$articleValue){
+            $articleValue = str_replace("'","**SINGLEQUOT**", $articleValue);
+            $articleValue = str_replace("\"","**DOUBLEQUOT**", $articleValue);
+        }
+
         XmlExportEngine::$exportOptions['ids'] = $this->exportFieldSlugs;
         XmlExportEngine::$exportOptions['cc_type'] = $this->exportFieldSlugs;
         XmlExportEngine::$exportOptions['cc_name'] = $this->exportFieldSlugs;

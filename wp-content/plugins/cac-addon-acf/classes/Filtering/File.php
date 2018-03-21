@@ -17,6 +17,7 @@ class ACA_ACF_Filtering_File extends ACA_ACF_Filtering {
 
 		return array(
 			'options' => $options,
+			'empty_option' => true,
 		);
 	}
 

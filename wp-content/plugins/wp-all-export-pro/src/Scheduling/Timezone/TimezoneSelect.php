@@ -10,7 +10,7 @@ class TimezoneSelect
         'Africa' => \DateTimeZone::AFRICA,
         'America' => \DateTimeZone::AMERICA,
         'Antarctica' => \DateTimeZone::ANTARCTICA,
-        'Aisa' => \DateTimeZone::ASIA,
+        'Asia' => \DateTimeZone::ASIA,
         'Atlantic' => \DateTimeZone::ATLANTIC,
         'Europe' => \DateTimeZone::EUROPE,
         'Indian' => \DateTimeZone::INDIAN,
@@ -80,7 +80,7 @@ class TimezoneSelect
                 );
 
                 $keywords = implode(',', $keywords);
-                $result .= '<option value="' . $timezone . '" ' . $selected . ' data-keywords="'.$keywords.'" >' . $data['name'] .'</option>' . "\n";
+                $result .= '<option value="' . $timezone . '" ' . $selected . ' data-keywords="'.$keywords.'" >' . str_replace("_"," ",$data['name']) .'</option>' . "\n";
             }
             $result .= '<optgroup>' . "\n";
         }

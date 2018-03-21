@@ -14,7 +14,7 @@ final class ACP_ThirdParty_bbPress_Addon {
 
 		// Listscreen
 		add_action( 'ac/list_screen_groups', array( $this, 'register_list_screen_group' ) );
-		add_action( 'ac/list_screens', array( $this, 'set_list_screen_group' ) );
+		add_action( 'ac/list_screens', array( $this, 'register_list_screens' ), 11 );
 
 		// Editing
 		add_filter( 'ac/editing/role_group', array( $this, 'editing_role_group' ), 10, 2 );
@@ -25,7 +25,7 @@ final class ACP_ThirdParty_bbPress_Addon {
 	 * @param AC_ListScreen $list_screen
 	 */
 	public function set_columns( $list_screen ) {
-		$list_screen->register_column_types_from_dir( plugin_dir_path( __FILE__ ) . 'Column', ACP::CLASS_PREFIX );
+		$list_screen->register_column_types_from_dir( plugin_dir_path( __FILE__ ) . 'Column', ACP()->get_prefix() );
 	}
 
 	/**
@@ -46,11 +46,13 @@ final class ACP_ThirdParty_bbPress_Addon {
 	 * @since 4.0
 	 * @param AC_ListScreen $list_screen
 	 */
-	public function set_list_screen_group() {
-		foreach( AC()->get_list_screens() as $list_screen ) {
-			if ( $list_screen instanceof  AC_ListScreen_Post && in_array( $list_screen->get_post_type(), $this->get_post_types() ) ) {
-				$list_screen->set_group( 'bbpress' );
-			}
+	public function register_list_screens() {
+		foreach ( $this->get_post_types() as $post_type ) {
+
+			$list_screen = new ACP_ListScreen_Post( $post_type );
+			$list_screen->set_group( 'bbpress' );
+
+			AC()->register_list_screen( $list_screen );
 		}
 	}
 

@@ -3451,18 +3451,19 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 }
 
 .wpallexport-plugin .delete_action{
-	left: 110px;
+	left: 113px;
 	bottom: 14px;
 	background: #e14d43;
 	margin-left: 5px;
 }
 
 .wpallexport-plugin .close_action{
+	width: 85px;
 	left: 20px;
 	bottom: 14px;
 	background: url("../img/remove.png") no-repeat scroll 10px 10px #e4e6e6;
 	color: #777 !important;
-	padding: 9px 15px 9px 30px;
+	padding: 9px 25px 9px 30px;
 }
 .wpallexport-plugin .wpae-custom-field ul li{
 	margin-left: 15px;

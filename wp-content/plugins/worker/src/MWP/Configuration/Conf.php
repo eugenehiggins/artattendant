@@ -142,7 +142,7 @@ class MWP_Configuration_Conf
      */
     public function getNetworkNotice()
     {
-        return $this->getNoticeHtml('Use your network administrator username to add this multisite network to your <a href="https://managewp.com" target="_blank">ManageWP</a> account.');
+        return $this->getNoticeHtml('Add this website to <a href="https://managewp.com" target="_blank">ManageWP</a> or <a href="https://godaddy.com/pro" target="_blank">GoDaddy Pro</a> dashboard to enable backups, uptime monitoring, website cleanup and a lot more! Use a <strong>network administrator</strong> account when adding the website.<br>If prompted, provide the <strong>connection key</strong> (found on the plugin page, in the Worker description) to verify that you are the website administrator.');
     }
 
     /**
@@ -273,8 +273,14 @@ class MWP_Configuration_Conf
         return $this->noti_treshold_spam_comments;
     }
 
-    public function getNotice() {
-        return $this->getNoticeHtml('Add this website to <a href="https://managewp.com" target="_blank">ManageWP</a> or <a href="https://godaddy.com/pro" target="_blank">GoDaddy Pro</a> dashboard to enable backups, uptime monitoring, website cleanup and a lot more!<br>If prompted, provide the <strong>connection key</strong> (found on the plugin page, in the Worker description) to verify that you are the website administrator.');
+    public function getNotice()
+    {
+        return $this->getNoticeHtml($this->getDefaultNoticeText());
+    }
+
+    private function getDefaultNoticeText()
+    {
+        return 'Add this website to <a href="https://managewp.com" target="_blank">ManageWP</a> or <a href="https://godaddy.com/pro" target="_blank">GoDaddy Pro</a> dashboard to enable backups, uptime monitoring, website cleanup and a lot more!<br>If prompted, provide the <strong>connection key</strong> (found on the plugin page, in the Worker description) to verify that you are the website administrator.';
     }
 
     private function getNoticeHtml($message)

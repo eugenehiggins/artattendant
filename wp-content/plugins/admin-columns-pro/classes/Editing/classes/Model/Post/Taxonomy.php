@@ -89,11 +89,11 @@ class ACP_Editing_Model_Post_Taxonomy extends ACP_Editing_Model {
 	}
 
 	/**
-	 * @param int    $id
-	 * @param string $value
+	 * @param int       $id
+	 * @param array|int $value
 	 */
 	public function save( $id, $value ) {
-		$this->set_terms( $id, $value, $this->column->get_taxonomy() );
+		return $this->set_terms( $id, $value, $this->column->get_taxonomy() );
 	}
 
 	/**
@@ -107,12 +107,14 @@ class ACP_Editing_Model_Post_Taxonomy extends ACP_Editing_Model {
 	 * @param $post     WP_Post|int
 	 * @param $term_ids int[]|int Term ID's
 	 * @param $taxonomy string Taxonomy name
+	 *
+	 * @return array
 	 */
 	protected function set_terms( $post, $term_ids, $taxonomy ) {
 		$post = get_post( $post );
 
 		if ( ! $post || ! taxonomy_exists( $taxonomy ) ) {
-			return;
+			return array();
 		}
 
 		// Filter list of terms
@@ -154,6 +156,8 @@ class ACP_Editing_Model_Post_Taxonomy extends ACP_Editing_Model {
 		}
 
 		acp_editing_helper()->update_post_last_modified( $post->ID );
+
+		return $term_ids;
 	}
 
 }

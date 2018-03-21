@@ -10,4 +10,8 @@ class ACA_ACF_Column_Media extends ACA_ACF_Column {
 		$this->register_settings_by_type( 'Media' );
 	}
 
+	public function get_formatted_id( $id ) {
+		return $id;
+	}
+
 }

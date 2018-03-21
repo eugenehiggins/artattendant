@@ -1,11 +1,25 @@
 == Changelog ==
 
+= 2.2.1 =
+Release Date: February 2nd, 2018
+
+* [Fixed] ACF date formatter works again for non ACF date formats
+* [Fixed] ACF column for Taxonomies was not working
+* [Improved] We now action `ac/column_types` to register ACF Columns
+* [Improved] Enabled Export for ACF Repeater field
+
+= 2.2 =
+Release Date: January 26th, 2018
+
+* [Improved] Empty filtering options for Image, File and oEmbed field
+* [Improved] Choose your own Time format for Time field
+* [Important] Only compatible with Admin Columns Pro 4.2 and higher
+
 = 2.1.1 =
 Release Date: December 12th, 2017
 
 * [Added] Support for the ACF Button Group Field added
 * [Improved] Date field now exports as ISO-8601 format
-
 
 = 2.1 =
 Release Date: November 22nd, 2017

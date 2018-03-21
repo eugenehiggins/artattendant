@@ -35,7 +35,7 @@ class ACP_Export_Exporter_CSV extends ACP_Export_Exporter {
 				// Write the encrypted contents to the file
 				fwrite( $fh, $csv_encrypted );
 			} catch ( Exception $e ) {
-				wp_die( __( 'The requested file could not be downloaded.', 'codepress-admin-columns' ) );
+				wp_send_json_error( __( 'The requested file could not be downloaded.', 'codepress-admin-columns' ) );
 			}
 
 			return;

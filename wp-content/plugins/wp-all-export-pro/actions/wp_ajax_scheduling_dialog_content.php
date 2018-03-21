@@ -27,19 +27,19 @@ function pmxe_wp_ajax_scheduling_dialog_content()
 
     $cron_job_key = PMXE_Plugin::getInstance()->getOption('cron_job_key');
 
-    if(!isset($post['scheduling_enable'])) {
+    if (!isset($post['scheduling_enable'])) {
         $post['scheduling_enable'] = 0;
     }
 
-    if(!isset($post['scheduling_timezone'])) {
+    if (!isset($post['scheduling_timezone'])) {
         $post['scheduling_timezone'] = 'UTC';
     }
 
-    if(!isset($post['scheduling_run_on'])) {
+    if (!isset($post['scheduling_run_on'])) {
         $post['scheduling_run_on'] = 'weekly';
     }
 
-    if(!isset($post['scheduling_times'])) {
+    if (!isset($post['scheduling_times'])) {
         $post['scheduling_times'] = array();
     }
     ?>
@@ -246,6 +246,10 @@ function pmxe_wp_ajax_scheduling_dialog_content()
 
         .manual-scheduling {
             margin-left: 26px;
+        }
+        .chosen-container .chosen-results {
+
+            margin: 0 4px 4px 0 !important;
         }
     </style>
 
@@ -462,7 +466,7 @@ function pmxe_wp_ajax_scheduling_dialog_content()
                         formData.push({name: 'action', value: 'save_scheduling'});
                         formData.push({name: 'element_id', value: <?php echo $export_id; ?>});
                         formData.push({name: 'scheduling_enable', value: schedulingEnable});
-                        console.log(formData);
+
                         $.ajax({
                             type: 'POST',
                             url: ajaxurl,
@@ -616,10 +620,10 @@ function pmxe_wp_ajax_scheduling_dialog_content()
         })(jQuery);
 
     </script>
-    <?php require __DIR__.'/../src/Scheduling/views/CommonJs.php'; ?>
+    <?php require __DIR__ . '/../src/Scheduling/views/CommonJs.php'; ?>
     <div id="post-preview" class="wpallexport-preview wpallexport-scheduling-dialog">
         <p class="wpallexport-preview-title"><strong>Scheduling Options</strong></p>
-        <div class="wpallexport-preview-content" style="max-height: 500px; overflow: visible;">
+        <div class="wpallexport-preview-content" style="max-height: 700px; overflow: visible;">
 
             <div style="margin-bottom: 20px;">
                 <label>
@@ -636,11 +640,12 @@ function pmxe_wp_ajax_scheduling_dialog_content()
                         <span class="connection-icon" style="position: absolute; top:-1px; left: 152px;">
                                     <?php include __DIR__ . '/../src/Scheduling/views/ConnectionIcon.php'; ?>
                                 </span>
-                        <?php if ( !$scheduling->checkConnection() && $hasActiveLicense) { ?>
+                        <?php if (!$scheduling->checkConnection() && $hasActiveLicense) { ?>
                             <span style="margin-left: 25px; display: inline-block; font-weight: normal;">
-                                Unable to connect - <a style="text-decoration: underline"
-                                                       href="http://wpallimport.com/support"
-                                                       onclick="return false;">please contact support</a>.
+                                                                    <span <?php if (!$scheduling->checkConnection() && $scheduling->checkLicense()) { ?> style="color: #f2b03d;" <?php } ?>>Unable to connect -</span>
+<a style="text-decoration: underline; color: #0073aa;"
+   href="http://wpallimport.com/support"
+   target="_blank">please contact support</a>.
                             </span>
                         <?php } ?>
                     </h4>
@@ -648,18 +653,12 @@ function pmxe_wp_ajax_scheduling_dialog_content()
             </div>
             <form id="scheduling-form">
                 <div style="margin-bottom: 10px; margin-left:26px;">
-                    <label>
+                    <label style="font-size: 13px;">
                         <?php _e('Run this export on a schedule.'); ?>
-                        <?php if($hasActiveLicense) { ?>
-                            <a href="#" class="help_scheduling"
-                               style="margin-left: 2px; position: relative;">
-                                <img style="width: 17px; top: -1px; position: absolute;" src="<?php echo PMXE_ROOT_URL; ?>/static/img/s-question.png" />
-                            </a>
-                        <?php } ?>
                     </label>
                 </div>
                 <div id="automatic-scheduling"
-                     style="margin-left: 21px; <?php if (!$post['scheduling_enable']) { ?> display: none; <?php } ?>">
+                     style="margin-left: 21px; <?php if ($post['scheduling_enable'] != 1) { ?> display: none; <?php } ?>">
                     <div>
                         <div class="input">
                             <label style="color: rgb(68,68,68);">
@@ -779,7 +778,8 @@ function pmxe_wp_ajax_scheduling_dialog_content()
                             echo $timezoneSelect->getTimezoneSelect($timezoneValue);
                             ?>
                         </div>
-                    </div>                    <div style="height: 60px; margin-top: 30px; <?php if (!$hasActiveLicense) { ?>display: none; <?php } ?>"
+                    </div>
+                    <div style="height: 60px; margin-top: 30px; <?php if (!$hasActiveLicense) { ?>display: none; <?php } ?>"
                          id="subscribe-filler">&nbsp;
                     </div>
                     <?php
@@ -825,9 +825,11 @@ function pmxe_wp_ajax_scheduling_dialog_content()
                                     <a href="#" class="help_scheduling">Read more.</a>
                                 </p>
                                 <input type="password" id="add-subscription-field"
-                                       style="position: absolute; z-index: 2; top: -4px; font-size:14px;" placeholder="<?php _e('Enter your license',PMXE_Plugin::LANGUAGE_DOMAIN); ?>"/>
+                                       style="position: absolute; z-index: 2; top: -4px; font-size:14px;"
+                                       placeholder="<?php _e('Enter your license', PMXE_Plugin::LANGUAGE_DOMAIN); ?>"/>
                                 <div style="position: absolute;" id="find-subscription-link"><a
-                                            href="http://www.wpallimport.com/portal/automatic-scheduling/" target="_blank"><?php _e('Find your license.'); ?></a></div>
+                                            href="http://www.wpallimport.com/portal/automatic-scheduling/"
+                                            target="_blank"><?php _e('Find your license.'); ?></a></div>
                             </div>
                         </div>
                         <?php
@@ -835,7 +837,7 @@ function pmxe_wp_ajax_scheduling_dialog_content()
                 </div>
 
             </form>
-            <?php require __DIR__.'/../src/Scheduling/views/ManualScheduling.php'; ?>
+            <?php require __DIR__ . '/../src/Scheduling/views/ManualScheduling.php'; ?>
         </div>
     </div>
     <?php

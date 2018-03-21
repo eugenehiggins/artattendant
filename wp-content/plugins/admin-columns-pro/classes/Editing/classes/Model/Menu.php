@@ -7,7 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @property AC_Column_Menu $column
  */
-class ACP_Editing_Model_Menu extends ACP_Editing_Model {
+abstract class ACP_Editing_Model_Menu extends ACP_Editing_Model {
+
+	/**
+	 * @param int $id
+	 *
+	 * @return string
+	 */
+	protected abstract function get_title( $id );
 
 	public function get_view_settings() {
 		$options = array();
@@ -36,37 +43,6 @@ class ACP_Editing_Model_Menu extends ACP_Editing_Model {
 		}
 
 		return $menus;
-	}
-
-	/**
-	 * @param int $id
-	 *
-	 * @return string|false
-	 */
-	private function get_title( $id ) {
-		$object = $this->column->get_list_screen()->get_object( $id );
-
-		// Post
-		if ( isset( $object->post_title ) ) {
-			return $object->post_title;
-		}
-
-		// Term
-		if ( isset( $object->name ) ) {
-			return $object->name;
-		}
-
-		// Comment
-		if ( isset( $object->comment_ID ) ) {
-			return $object->comment_ID;
-		}
-
-		// User
-		if ( isset( $object->display_name ) ) {
-			return $object->display_name;
-		}
-
-		return false;
 	}
 
 	/**
@@ -106,12 +82,12 @@ class ACP_Editing_Model_Menu extends ACP_Editing_Model {
 			}
 
 			$item = array(
-				'menu-item-object-id'   => $id,
-				'menu-item-db-id'       => 0,
-				'menu-item-object'      => $this->column->get_object_type(),
-				'menu-item-type'        => $this->column->get_item_type(),
-				'menu-item-title'       => $this->get_title( $id ),
-				'menu-item-status'      => 'publish',
+				'menu-item-object-id' => $id,
+				'menu-item-db-id'     => 0,
+				'menu-item-object'    => $this->column->get_object_type(),
+				'menu-item-type'      => $this->column->get_item_type(),
+				'menu-item-title'     => $this->get_title( $id ),
+				'menu-item-status'    => 'publish',
 			);
 
 			wp_update_nav_menu_item( $menu_id, 0, $item );

@@ -38,7 +38,7 @@ class ACP_LayoutScreen_Columns {
 	 */
 	public function read_only_message( $message, $list_screen ) {
 		if ( $list_screen->is_read_only() ) {
-			$message .= '<br/>' . sprintf( __( 'You can make an editable copy of this set by clicking %s on the right.', 'codepress-admin-columns' ), '"<strong>' . $this->get_add_button_test() . '</strong>"' );
+			$message .= '<br/>' . sprintf( __( 'You can make an editable copy of this set by clicking %s on the right.', 'codepress-admin-columns' ), '"<strong>' . $this->get_add_button_set() . '</strong>"' );
 		}
 
 		return $message;
@@ -156,7 +156,7 @@ class ACP_LayoutScreen_Columns {
 	 *
 	 */
 	public function preferences() {
-		return new AC_Preferences( 'layout_columns' );
+		return new AC_Preferences_Site( 'layout_columns' );
 	}
 
 	/**
@@ -187,11 +187,11 @@ class ACP_LayoutScreen_Columns {
 	public function admin_scripts() {
 		wp_deregister_script( 'select2' ); // try to remove any other version of select2
 
-		wp_enqueue_style( 'acp-layouts', $this->get_assets_url() . "css/layouts" . AC()->minified() . ".css", array(), ACP()->get_version() );
-		wp_enqueue_style( 'acp-layouts-select2', $this->get_assets_url() . "css/select2.min.css", array(), '4.0.2' );
+		wp_enqueue_style( 'acp-layouts', $this->get_assets_url() . "css/layouts.css", array(), ACP()->get_version() );
+		wp_enqueue_style( 'acp-layouts-select2', $this->get_assets_url() . "css/select2.css", array(), '4.0.2' );
 
-		wp_register_script( 'acp-layouts-select2', $this->get_assets_url() . "js/select2" . AC()->minified() . ".js", array( 'jquery' ), ACP()->get_version() );
-		wp_enqueue_script( 'acp-layouts', $this->get_assets_url() . "js/layouts" . AC()->minified() . ".js", array( 'acp-layouts-select2' ), ACP()->get_version() );
+		wp_register_script( 'acp-layouts-select2', $this->get_assets_url() . "js/select2.js", array( 'jquery' ), ACP()->get_version() );
+		wp_enqueue_script( 'acp-layouts', $this->get_assets_url() . "js/layouts.js", array( 'acp-layouts-select2' ), ACP()->get_version() );
 
 		wp_localize_script( 'acp-layouts', 'acp_layouts', array(
 			'roles'  => __( 'Select roles', 'codepress-admin-columns' ),
@@ -200,7 +200,10 @@ class ACP_LayoutScreen_Columns {
 		) );
 	}
 
-	private function get_add_button_test() {
+	/**
+	 * @return string
+	 */
+	private function get_add_button_set() {
 		return __( '+ Add set', 'codepress-admin-columns' );
 	}
 
@@ -214,7 +217,7 @@ class ACP_LayoutScreen_Columns {
 				<h3>
 					<span class="header-content"><?php _e( 'Column Sets', 'codepress-admin-columns' ); ?></span>
 					<a class="button add-new">
-						<span class="add"><?php echo esc_html( $this->get_add_button_test() ); ?></span>
+						<span class="add"><?php echo esc_html( $this->get_add_button_set() ); ?></span>
 						<span class="close"><?php echo esc_html( __( 'Cancel', 'codepress-admin-columns' ) ); ?></span>
 					</a>
 				</h3>

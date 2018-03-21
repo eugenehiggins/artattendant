@@ -11,6 +11,10 @@ final class ACP_Sorting_Strategy_Comment extends ACP_Sorting_Strategy {
 	 */
 	protected $query;
 
+	public function manage_sorting() {
+		add_action( 'pre_get_comments', array( $this, 'handle_sorting_request' ) );
+	}
+
 	private function set_comment_query( WP_Comment_Query $query ) {
 		$this->query = $query;
 

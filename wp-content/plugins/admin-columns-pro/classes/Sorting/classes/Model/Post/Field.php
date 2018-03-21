@@ -32,7 +32,7 @@ class ACP_Sorting_Model_Post_Field extends ACP_Sorting_Model {
 		$ids = array();
 
 		foreach ( $this->strategy->get_results( $args ) as $object ) {
-			$ids[ $object->id ] = $object->value;
+			$ids[ $object->id ] = $this->format( $object->value );
 
 			wp_cache_delete( $object->id, 'posts' );
 		}
@@ -40,6 +40,15 @@ class ACP_Sorting_Model_Post_Field extends ACP_Sorting_Model {
 		return array(
 			'ids' => $this->sort( $ids ),
 		);
+	}
+
+	/**
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	protected function format( $value ) {
+		return $value;
 	}
 
 	/**
@@ -55,6 +64,5 @@ class ACP_Sorting_Model_Post_Field extends ACP_Sorting_Model {
 
 		return "$wpdb->posts.ID AS id, $wpdb->posts.`" . esc_sql( $this->field ) . '` AS value';
 	}
-
 
 }

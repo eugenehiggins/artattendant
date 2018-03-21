@@ -11,7 +11,7 @@ class ACP_Column_User_Nickname extends AC_Column_User_Nickname
 	implements ACP_Column_EditingInterface, ACP_Column_SortingInterface {
 
 	public function sorting() {
-		return new ACP_Sorting_Model( $this );
+		return new ACP_Sorting_Model_Meta( $this );
 	}
 
 	public function editing() {

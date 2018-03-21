@@ -50,7 +50,7 @@
 
             if(elementId) {
 
-                var $element = $('.custom_column[rel="' + elementId + '"]')
+                var $element = $('.custom_column[rel="' + elementId + '"]');
                 window.$pmxeBackupElementContent = $element.html();
                 window.$pmxeBackupElement = $element;
 
@@ -70,8 +70,23 @@
                 $element.find('input[name="cc_value[]"]').val($('select[name=column_value_type]').find('option:selected').attr('label'));
                 //cc_name
                 $element.find('input[name="cc_name[]"]').val($('input.column_name').val());
-                //cc_settings
-                $element.find('input[name="cc_settings[]"]').val("");
+                var elementType = $('select[name=column_value_type]').val();
+
+                if( elementType == 'date' ||
+                    elementType == 'comment_date' ||
+                    elementType == 'user_registered' ||
+                    elementType == 'post_modified') {
+
+                    var $dateType = $('select.date_field_export_data').val();
+                    if ($dateType == 'unix')
+                        $element.find('input[name^=cc_settings]').val('unix');
+                    else
+                        $element.find('input[name^=cc_settings]').val($('.pmxe_date_format').val());
+                }
+                else {
+                    //cc_settings
+                    $element.find('input[name="cc_settings[]"]').val("");
+                }
                 //cc_combine_multiple_fields
                 $element.find('input[name="cc_combine_multiple_fields[]"]').val($('input[name="combine_multiple_fields"]:checked').val());
                 //cc_combine_multiple_fields_value
@@ -90,6 +105,7 @@
                 var $elementType = $addAnotherForm.find('select[name=column_value_type]');
                 // element label, options and other stuff
                 var $elementDetails = $elementType.find('option:selected');
+                var elementTypeVal = $elementType.val();
 
                 requestData.push({
                     name: "ids[]",
@@ -113,11 +129,7 @@
                 });
                 requestData.push({
                     name: "cc_type[]",
-                    value: $elementType.val()
-                });
-                requestData.push({
-                    name: "cc_options[]",
-                    value:1
+                    value: elementTypeVal
                 });
                 requestData.push({
                     name: "cc_value[]",
@@ -127,10 +139,7 @@
                     name: "cc_name[]",
                     value: $elementName.val()
                 });
-                requestData.push({
-                    name: "cc_settings[]",
-                    value: ""
-                });
+                
                 requestData.push({
                     name: "cc_options[]",
                     value: $elementDetails.attr('options')
@@ -144,8 +153,33 @@
                     value: $addAnotherForm.find('#combine_multiple_fields_value').val()
                 });
 
+                if( elementTypeVal == 'date' ||
+                    elementTypeVal == 'comment_date' ||
+                    elementTypeVal == 'user_registered' ||
+                    elementTypeVal == 'post_modified') {
+
+                    var dateType = $addAnotherForm.find('select.date_field_export_data').val();
+                    if (dateType == 'unix') {
+                        requestData.push({
+                            name: "cc_settings[]",
+                            value: 'unix'
+                        });
+                    }
+                    else {
+                        requestData.push({
+                            name: "cc_settings[]",
+                            value: $addAnotherForm.find('.pmxe_date_format').val()
+                        });
+                    }
+                }
+                else {
+                    requestData.push({
+                        name: "cc_settings[]",
+                        value: ""
+                    });
+                }
             }
-            
+            console.log(requestData);
             requestData = $.param(requestData);
 
             var request = {

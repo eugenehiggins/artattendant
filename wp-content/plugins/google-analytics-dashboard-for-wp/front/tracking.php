@@ -35,23 +35,27 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 
 		public function init() {
 			// excluded roles
-			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_track_exclude'], true ) || ( $this->gadwp->config->options['ga_dash_excludesa'] && current_user_can( 'manage_network' ) ) ) {
+			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['track_exclude'], true ) || ( $this->gadwp->config->options['superadmin_tracking'] && current_user_can( 'manage_network' ) ) ) {
 				return;
 			}
 
-			if ( 'universal' == $this->gadwp->config->options['ga_dash_tracking_type'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
+			if ( 'universal' == $this->gadwp->config->options['tracking_type'] && $this->gadwp->config->options['tableid_jail'] ) {
 
 				// Analytics
 				require_once 'tracking-analytics.php';
-				$this->analytics = new GADWP_Tracking_Analytics();
+
+				if ( 1 == $this->gadwp->config->options['ga_with_gtag'] ) {
+					$this->analytics = new GADWP_Tracking_GlobalSiteTag();
+				} else {
+					$this->analytics = new GADWP_Tracking_Analytics();
+				}
 
 				if ( $this->gadwp->config->options['amp_tracking_analytics'] ) {
 					$this->analytics_amp = new GADWP_Tracking_Analytics_AMP();
 				}
-
 			}
 
-			if ( 'tagmanager' == $this->gadwp->config->options['ga_dash_tracking_type'] && $this->gadwp->config->options['web_containerid'] ) {
+			if ( 'tagmanager' == $this->gadwp->config->options['tracking_type'] && $this->gadwp->config->options['web_containerid'] ) {
 
 				// Tag Manager
 				require_once 'tracking-tagmanager.php';

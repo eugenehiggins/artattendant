@@ -30,7 +30,7 @@ class ACA_ACF_Editing_Taxonomy extends ACA_ACF_Editing {
 	public function get_ajax_options( $request ) {
 
 		// ACF Free
-		if ( ac_addon_acf()->is_acf_free() ) {
+		if ( ACA_ACF_API::is_free() ) {
 			return acp_editing_helper()->get_terms_list( array(
 				'taxonomy' => $this->get_taxonomy(),
 				'search'   => $request['search'],

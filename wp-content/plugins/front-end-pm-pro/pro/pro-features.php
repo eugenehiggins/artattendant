@@ -36,6 +36,7 @@ class Fep_Pro_Features {
 			require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-email-piping.php' );
 			require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-read-receipt.php' );
 			require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-role-to-role-block.php' );
+			require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-group-message.php' );
 			
 			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 				require( FEP_PLUGIN_DIR . 'pro/includes/class-fep-pro-ajax.php' );
@@ -49,6 +50,7 @@ class Fep_Pro_Features {
 			add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts' ) );
 			
 			add_action( 'admin_init', array($this, 'update' ) );
+			add_action( 'fep_pro_plugin_update', array($this, 'pro_update' ) );
     	}
 		
     function filters()
@@ -84,6 +86,9 @@ class Fep_Pro_Features {
 	function admin_enqueue_scripts()
     {
 		wp_register_script( 'fep-oa-script', plugins_url( '/assets/js/oa-script.js', __FILE__ ), array( 'jquery' ), '5.2', true );
+		
+		wp_register_style( 'fep-tokeninput-style', FEP_PLUGIN_URL . 'assets/css/token-input-facebook.css' );
+		wp_register_script( 'fep-tokeninput-script', FEP_PLUGIN_URL . 'assets/js/jquery.tokeninput.js', array( 'jquery' ), '6.1', true );
     }
 	
 	function update(){
@@ -97,6 +102,13 @@ class Fep_Pro_Features {
 			fep_update_option( 'plugin_pro_version', FEP_PLUGIN_VERSION );
 		}
 	
+	}
+	
+	function pro_update( $prev_ver ){
+	
+		if( version_compare( $prev_ver, '7.2', '<' ) ){
+			delete_option('api_calls');
+		}
 	}
 	
 } //End Class

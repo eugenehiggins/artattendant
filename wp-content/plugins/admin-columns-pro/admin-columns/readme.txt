@@ -3,8 +3,8 @@ Contributors: codepress, tschutter, davidmosterd, engelen, dungengronovius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 4.5
-Tested up to: 4.9.1
-Stable tag: 3.0.7
+Tested up to: 4.9.4
+Stable tag: 3.1.5
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -218,9 +218,45 @@ You can find a list of the available actions and filters (and examples on how to
 
 == Changelog ==
 
+= 3.1.5 =
+
+Release Date: March 13th, 2018
+
+* [Improved] Minor improvements and PHP warning fixes
+
+= 3.1.4 =
+
+Release Date: February 6th, 2018
+
+[Removed] Removed 'acp/column_types' action
+[Fixed] Small typo in help text
+[Update] Updated languages from wordpress.org
+
+= 3.1.3 =
+
+Release Date: January 30th, 2018
+
+* [Fixed] Added protected AC_ListScreen::get_object_by_id with deprecated message
+
+= 3.1.1 =
+
+Release Date: January 29th, 2018
+
+* [Fixed] Fixed fatal error for custom taxonomy columns
+
+= 3.1 =
+
+Release Date: January 29th, 2018
+
+* [Improved] Admin Columns Capability is now always set
+* [Improved] Database update message is only visible for administartors
+* [Improved] Links starting with # are now marked as internal
+* [Removed] Removed support for the Link/Bookmark list table
+* [Added] Added date time settings for columns that use dates
+
 = 3.0.7 =
 
-Release Date: December 22nd, 2017
+Release Date: December 12th, 2017
 
 * [Added] New setting for content fields: String limit (Limit on words or characters)
 * [Improved] Merged the roles column into the author column

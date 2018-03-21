@@ -3,8 +3,8 @@ Contributors: shazdeh
 Plugin Name: Menu Item Visibility Control
 Tags: menu, nav-menu, navigation, navigation menu, conditional tags, context, filter
 Requires at least: 3.1
-Tested up to: 4.7.2
-Stable tag: 0.3.5
+Tested up to: 4.9.2
+Stable tag: 0.3.7
 
 Control individual menu items' visibility based on your desired condition.
 
@@ -35,13 +35,13 @@ To show the menu item only to users with "administrator" role:
 1. Visibility Control
 
 
-== Frequently Asked Questions ==
-
-= <a id="conflict"></a>I don't see the Nav Menu Roles options in the admin menu items?  =
-Please see this page: https://wordpress.org/plugins/nav-menu-roles/faq/
-
-
 == Changelog ==
+
+= 0.3.7 =
+* Fix JS error on Menus manager
+
+= 0.3.6 =
+* Revamp of how fields are added to WP UI, should prevent conflict with other plugins and themes.
 
 = 0.3.5 =
 * Possible fatal error prevention

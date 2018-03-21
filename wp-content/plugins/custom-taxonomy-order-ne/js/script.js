@@ -74,7 +74,5 @@ function customtaxorder_orderalpha() {
 
 // Ascending sort
 function customtaxorder_asc_sort(a, b) {
-	//return (jQuery(b).text()) < (jQuery(a).text()) ? 1 : -1;
-	//console.log (jQuery(a).text());
-	return jQuery(a).text().toUpperCase().localeCompare(jQuery(b).text().toUpperCase());
+	return jQuery(a).text().localeCompare(jQuery(b).text(), undefined, {numeric: true, sensitivity: 'base'});
 }

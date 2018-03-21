@@ -143,11 +143,17 @@ final class XmlExportCpt
                                         if (!empty($imgs)){
                                             foreach ($imgs as $img) {
                                                 if ( is_numeric($img) ){
-                                                    $gallery_images[] = wp_get_attachment_url($img) . "|" . wp_get_attachment_caption($img);
+                                                    $attachment = get_post($img);
+                                                    $gallery_images[] = base64_encode(json_encode(array(
+                                                        'url' => wp_get_attachment_url($img),
+                                                        'title' => $attachment->post_title,
+                                                        'caption' => wp_get_attachment_caption($img),
+                                                        'alt' => get_post_meta($img, '_wp_attachment_image_alt', true),
+                                                        'description' => $attachment->post_content
+                                                    )));
                                                 }
                                             }
                                         }
-                                        $gallery_images = array_unique($gallery_images);
                                         $postContent = str_replace("ids=\"". implode(",", $imgs) ."\"", "ids=\"". implode(",", $gallery_images) ."\"", $postContent);
                                     }
                                 }
@@ -191,6 +197,7 @@ final class XmlExportCpt
 						case 'image_caption':
 						case 'image_description':
 						case 'image_alt':
+                        case 'image_featured':
 
 							$field_options = json_decode($fieldOptions, true);
 

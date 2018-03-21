@@ -17,7 +17,7 @@ class ACP_Export_TableScreenOptions {
 	}
 
 	public function preferences() {
-		return new AC_Preferences( 'show_export_button' );
+		return new AC_Preferences_Site( 'show_export_button' );
 	}
 
 	/**
@@ -61,6 +61,10 @@ class ACP_Export_TableScreenOptions {
 	 * @param AC_ListScreen $list_screen
 	 */
 	public function get_show_export_button_setting( $list_screen ) {
+		if ( ! $list_screen instanceof ACP_Export_ListScreen ) {
+			return;
+		}
+
 		?>
 
 		<label>

@@ -2,7 +2,7 @@
 namespace Ari\Controllers;
 
 use Ari\Utils\Request as Request;
-use Ari\Utils\Object as Object_Helper;
+use Ari\Utils\Object_Helper as Object_Helper;
 
 class Controller {
     private $model = null;

@@ -4,7 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ACP_ListScreen_MSSite extends AC_ListScreen {
+class ACP_ListScreen_MSSite extends AC_ListScreenWP
+	implements ACP_Editing_ListScreen {
 
 	public function __construct() {
 		$this->set_label( __( 'Network Sites' ) );
@@ -15,17 +16,23 @@ class ACP_ListScreen_MSSite extends AC_ListScreen {
 		$this->set_meta_type( 'site' );
 		$this->set_group( 'network' );
 		$this->set_network_only( true );
-
-		/* @see WP_MS_Sites_List_Table */
-		$this->set_list_table_class( 'WP_MS_Sites_List_Table' );
 	}
 
 	/**
 	 * @since 4.0
 	 * @return WP_Site Site object
 	 */
-	protected function get_object_by_id( $site_id ) {
+	protected function get_object( $site_id ) {
 		return get_site( $site_id );
+	}
+
+	/**
+	 * @return WP_MS_Sites_List_Table
+	 */
+	public function get_list_table() {
+		require_once( ABSPATH . 'wp-admin/includes/class-wp-ms-sites-list-table.php' );
+
+		return new WP_MS_Sites_List_Table( array( 'screen' => $this->get_screen_id() ) );
 	}
 
 	public function set_manage_value_callback() {
@@ -56,7 +63,11 @@ class ACP_ListScreen_MSSite extends AC_ListScreen {
 	protected function register_column_types() {
 		$this->register_column_type( new ACP_Column_Actions() );
 
-		$this->register_column_types_from_dir( ACP()->get_plugin_dir() . 'classes/Column/NetworkSite', ACP::CLASS_PREFIX );
+		$this->register_column_types_from_dir( ACP()->get_plugin_dir() . 'classes/Column/NetworkSite', ACP()->get_prefix() );
+	}
+
+	public function editing( $model ) {
+		return new ACP_Editing_Strategy_Site( $model );
 	}
 
 }

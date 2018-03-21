@@ -188,7 +188,7 @@ class FES_Setup {
 			$minify = apply_filters( 'fes_output_minified_versions', $minify );
 			wp_enqueue_script( 'fes_form', fes_plugin_url . 'assets/js/frontend-form.js', array(
 					'jquery'
-			), fes_plugin_version ); //anagram / geet remove minify for troubleshooting
+			), '4.76' ); //anagram / geet remove minify for troubleshooting
 
 			$options = array(
 				'ajaxurl'             => admin_url( 'admin-ajax.php' ),

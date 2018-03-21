@@ -4,18 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ACP_Sorting_Model_Post_AuthorName extends ACP_Sorting_Model {
+/**
+ * @property ACP_Column_Post_AuthorName $column
+ */
+class ACP_Sorting_Model_Post_AuthorName extends ACP_Sorting_Model_Post_Field {
 
-	public function get_sorting_vars() {
-		$ids = array();
+	public function __construct( $column ) {
+		parent::__construct( $column );
 
+		$this->set_field( 'post_author' );
+	}
+
+	protected function format( $value ) {
+		/** @var ACP_Settings_Column_User $setting */
 		$setting = $this->column->get_setting( 'user' );
 
-		foreach ( $this->strategy->get_results() as $id ) {
-			$ids[ $id ] = $setting->get_user_name( $this->column->get_raw_value( $id ) );
-		}
-
-		return array( 'ids' => $this->sort( $ids ) );
+		return $setting->get_user_name( $value );
 	}
 
 }

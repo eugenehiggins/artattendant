@@ -76,4 +76,85 @@ class ACP_Filtering_Helper {
 		return $terms;
 	}
 
+	/**
+	 * Return options for a date filter based on an array of dates
+	 *
+	 * @param array       $dates
+	 * @param string      $display How to display the date
+	 * @param string      $format  Format of the date
+	 * @param string|null $key
+	 *
+	 * @return array
+	 */
+	public function get_date_options( array $dates, $display, $format = 'Y-m-d', $key = null ) {
+		$options = array();
+
+		switch ( $display ) {
+			case 'yearly':
+				$display = 'Y';
+				$key = 'Y';
+
+				break;
+			case 'monthly':
+				$display = 'F Y';
+				$key = 'Ym';
+
+				break;
+			case 'daily':
+				$display = 'j F Y';
+				$key = 'Ymd';
+
+				break;
+		}
+
+		if ( ! $key ) {
+			$key = $format;
+		}
+
+		foreach ( $dates as $date ) {
+			$timestamp = ac_helper()->date->get_timestamp_from_format( $date, $format );
+
+			if ( ! $timestamp ) {
+				continue;
+			}
+
+			$option = date( $key, $timestamp );
+
+			if ( ! isset( $options[ $key ] ) ) {
+				$options[ $option ] = date_i18n( $display, $timestamp );
+			}
+		}
+
+		ksort( $options, SORT_NUMERIC );
+
+		$options = array_reverse( $options, true );
+
+		return $options;
+	}
+
+	/**
+	 * @param string $format
+	 *
+	 * @return array|false
+	 */
+	public function get_date_options_relative( $format ) {
+		$options = array();
+
+		switch ( $format ) {
+			case 'future_past':
+				$options = array(
+					'future' => __( 'Future dates', 'codepress-admin-columns' ),
+					'past'   => __( 'Past dates', 'codepress-admin-columns' ),
+				);
+
+				break;
+		}
+
+		if ( empty( $options ) ) {
+			return false;
+		}
+
+		return $options;
+	}
+
 }

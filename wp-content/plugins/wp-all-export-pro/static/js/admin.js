@@ -234,7 +234,7 @@
 	}, 10);
 
 	// help icons
-	$('.wpallexport-help').tipsy({
+    $('.wpallexport-help, .help_scheduling').tipsy({
 		gravity: function() {
 			var ver = 'n';
 			if ($(document).scrollTop() < $(this).offset().top - $('.tipsy').height() - 2) {
@@ -1745,6 +1745,9 @@
 					case 'sql':
 						$('.sql_field_type').show();
 						break;
+					case 'content':
+						$('.content_field_type').show();
+						break;
 					case 'woo':
 							switch (selected_value){
 								case 'item_data___upsell_ids':
@@ -2471,7 +2474,7 @@
 						var $leftOffset = ($(window).width() - 715) / 2;
 
 						var $pointer = $('.wp-pointer').last();
-						$pointer.css({'position': 'fixed', 'top': '10%', 'left': $leftOffset + 'px'});
+						$pointer.css({'position': 'absolute', 'top': '50px', 'left': $leftOffset + 'px'});
 
 						$pointer.find('a.close').remove();
 						$pointer.find('.wp-pointer-buttons').append('<button class="save-changes button button-primary button-hero wpallexport-large-button" style="float: right; background-image: none;">Save</button>');

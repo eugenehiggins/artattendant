@@ -409,9 +409,7 @@ $options = \PMXE_Plugin::getInstance()->getOption();
                         e.preventDefault();
                         return false;
                     }
-
-                    $(this).find('.easing-spinner').toggle();
-
+                    
                     var $button = $(this);
 
                     var formData = $('#scheduling-form :input').serializeArray();
@@ -421,7 +419,7 @@ $options = \PMXE_Plugin::getInstance()->getOption();
                     formData.push({name: 'element_id', value: <?php echo $export_id; ?>});
                     formData.push({name: 'scheduling_enable', value: $('input[name="scheduling_enable"]:checked').val()});
 
-                    $(this).find('.easing-spinner').toggle();
+                    $button.find('.easing-spinner').toggle();
 
                     $.ajax({
                         type: 'POST',
@@ -670,27 +668,23 @@ $options = \PMXE_Plugin::getInstance()->getOption();
                                 </span>
                                 <?php if (!$scheduling->checkConnection() && $hasActiveLicense) { ?>
                                     <span style="margin-left: 25px; display: inline-block; font-weight: normal;">
-                                Unable to connect to the scheduling Service. Please contact support at <a
+
+                                        <span <?php if(!$scheduling->checkConnection() && $scheduling->checkLicense() ) { ?> style="color: #f2b03d;" <?php } ?>>Unable to connect to the scheduling Service. Please contact support at</span>
+                                        <a style="text-decoration: underline; color: #0073aa;"
                                                 href="http://wpallimport.com/support"
-                                                onclick="return false;">http://wpallimport.com/support</a>
+                                                target="_blank">http://wpallimport.com/support</a>
                             </span>
                                 <?php } ?>
                             </h4>
                         </label>
                     </div>
                     <div style="margin-bottom: 10px; margin-left:26px;">
-                        <label>
+                        <label style="font-size: 13px;">
                             <?php _e('Run this export on a schedule.'); ?>
-                            <?php if($hasActiveLicense) { ?>
-                            <a href="#" class="help_scheduling"
-                               style="margin-left: 2px; position: relative;">
-                                <img style="width: 17px; top: -1px; position: absolute;" src="<?php echo PMXE_ROOT_URL; ?>/static/img/s-question.png" />
-                            </a>
-                            <?php } ?>
                         </label>
                     </div>
                     <div id="automatic-scheduling"
-                         style="margin-left: 21px; <?php if (!$post['scheduling_enable']) { ?> display: none; <?php } ?>">
+                         style="margin-left: 21px; <?php if ($post['scheduling_enable'] != 1) { ?> display: none; <?php } ?>">
                         <div>
                             <div class="input">
                                 <label style="color: rgb(68,68,68);">
@@ -743,7 +737,7 @@ $options = \PMXE_Plugin::getInstance()->getOption();
                                             value="monthly"/> <?php _e('Every month on the first...', PMXE_Plugin::LANGUAGE_DOMAIN); ?>
                                 </label>
                             </div>
-                            <input type="hidden" name="scheduling_monthly_days" value="<?php echo $post['scheduling_monthly_days']; ?>" id="monthly_days"/>
+                            <input type="hidden" name="scheduling_monthly_days" value="<?php if (isset($post['scheduling_monthly_days'])) echo $post['scheduling_monthly_days']; ?>" id="monthly_days"/>
                             <?php
                             if (isset($post['scheduling_monthly_days'])) {
                                 $monthlyArray = explode(',', $post['scheduling_monthly_days']);

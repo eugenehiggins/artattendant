@@ -345,10 +345,10 @@ if ( ! class_exists('XmlExportWooCommerce') )
 				}
 
 				if(\Wpae\App\Service\WooCommerceVersion::isWooCommerceNewerThan('3.0')) {
-				    $available_data['existing_taxonomies'][] = array(
+				    $available_data['product_fields'][] = array(
                         'name'  => 'Product Visibility',
                         'label' => 'product_visibility',
-                        'type'  => 'cats',
+                        'type'  => 'woo',
                         'auto'  => true
                     );
                 }
@@ -664,7 +664,12 @@ if ( ! class_exists('XmlExportWooCommerce') )
 						}
 
 						break;
-					
+
+                    case 'product_visibility':
+                        $product = wc_get_product( $record->ID );
+                        $data[$element_name] = apply_filters('pmxe_woo_field', pmxe_filter($product->get_catalog_visibility(), $fieldSnipped), $element_value, $record->ID);
+                        break;
+
 					default:
 
 						$cur_meta_values = get_post_meta($record->ID, $element_value);
@@ -802,13 +807,15 @@ if ( ! class_exists('XmlExportWooCommerce') )
 		{			
 			$data_to_export = $this->prepare_export_data( $record, $options, $element_key );
 
-			foreach ($data_to_export as $key => $data)
-			{
-				if($key == 'Price' || $key == 'Regular Price' || $key == 'Sale Price'){
-					$data = pmxe_prepare_price($data, false, true, true);
-				}
-				wp_all_export_write_article( $article, $key, $data );
-			}
+			$rawPrices = false;
+            $rawPrices = apply_filters('wp_all_export_raw_prices', $rawPrices);
+
+            foreach ($data_to_export as $key => $data) {
+                if ($key == 'Price' || $key == 'Regular Price' || $key == 'Sale Price') {
+                    $data = $rawPrices ? $data :pmxe_prepare_price($data, false, true, true);
+                }
+                wp_all_export_write_article($article, $key, $data);
+            }
 		}
 
 		public function get_element_header( & $headers, $options, $element_key )
@@ -904,10 +911,13 @@ if ( ! class_exists('XmlExportWooCommerce') )
 					$element_name = (empty($element_name_parts[1])) ? 'untitled_' . $elId : $element_name_parts[1];
 				}
 
-				if($key == 'Price' || $key == 'Regular Price' || $key == 'Sale Price'){
-					$data = pmxe_prepare_price($data, false, true, true);
-				}
-				
+                $rawPrices = false;
+                $rawPrices = apply_filters('wp_all_export_raw_prices', $rawPrices);
+
+                if ($key == 'Price' || $key == 'Regular Price' || $key == 'Sale Price') {
+                    $data = $rawPrices? $data :pmxe_prepare_price($data, false, true, true);
+                }
+
 				$xmlWriter = apply_filters('wp_all_export_add_before_element', $xmlWriter, $element_name, XmlExportEngine::$exportID, $record->ID);
 
 				$xmlWriter->beginElement($element_name_ns, $element_name, null);
@@ -1060,6 +1070,10 @@ if ( ! class_exists('XmlExportWooCommerce') )
                     $templateOptions['custom_value'][] = '{'. $element_name .'[1]}';
                     $templateOptions['custom_format'][] = 0;
                     break;
+                case 'product_visibility':
+                    $templateOptions['is_product_visibility'] = 'xpath';
+                    $templateOptions['single_product_visibility'] = '{'. $element_name .'[1]}';
+                    break;
 				case 'attributes':
 						
 					global $wp_taxonomies;									
@@ -1113,7 +1127,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
 
                                 foreach ($attributeOptions as $templateKey => $xpathKey){
 
-                                    if ( isset($templateOptions[$templateKey]) && ! in_array('{'. $xpathKey . $attribute_name .'[1]}', $templateOptions[$templateKey]) ){
+                                    if ( ! isset($templateOptions[$templateKey]) || ! in_array('{'. $xpathKey . $attribute_name .'[1]}', $templateOptions[$templateKey]) ){
                                         $templateOptions[$templateKey][]  = '{'. $xpathKey . $attribute_name .'[1]}';
                                     }
                                     else{

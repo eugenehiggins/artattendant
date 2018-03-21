@@ -6,6 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class ACP_Filtering_Strategy_Post extends ACP_Filtering_Strategy {
 
+	public function handle_request() {
+		add_action( 'pre_get_posts', array( $this, 'handle_filter_requests' ), 1 );
+	}
+
 	/**
 	 * Handle filter request
 	 *
@@ -41,7 +45,7 @@ final class ACP_Filtering_Strategy_Post extends ACP_Filtering_Strategy {
 			ORDER BY 1
 		";
 
-		$values = $wpdb->get_col( $wpdb->prepare( $sql, $this->column->get_post_type() ) );
+		$values = $wpdb->get_col( $wpdb->prepare( $sql, $this->get_column()->get_post_type() ) );
 
 		if ( empty( $values ) ) {
 			return array();

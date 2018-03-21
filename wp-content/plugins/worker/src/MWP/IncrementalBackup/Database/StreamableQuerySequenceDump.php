@@ -55,7 +55,7 @@ class MWP_IncrementalBackup_Database_StreamableQuerySequenceDump
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\n\n"
         ));
 
-        $allTables = MWP_Backup_ArrayHelper::arrayColumn($this->getConnection()->query('SHOW TABLES')->fetchAll());
+        $allTables = self::arrayColumn($this->getConnection()->query('SHOW TABLES')->fetchAll());
         $tables    = array_intersect($allTables, $this->options->getTables() ? $this->options->getTables() : $allTables);
 
         foreach ($tables as $tableName) {
@@ -253,5 +253,18 @@ class MWP_IncrementalBackup_Database_StreamableQuerySequenceDump
         }
 
         return $values;
+    }
+
+    private static function arrayColumn($array, $columnIndex = 0)
+    {
+        $result = array();
+        foreach ($array as $arr) {
+            if (!is_array($arr)) {
+                continue;
+            }
+            $arr = array_values($arr);
+            $result[] = $arr[$columnIndex];
+        }
+        return $result;
     }
 }

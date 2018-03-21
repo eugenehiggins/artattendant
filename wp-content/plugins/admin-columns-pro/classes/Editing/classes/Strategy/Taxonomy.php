@@ -64,7 +64,7 @@ class ACP_Editing_Strategy_Taxonomy extends ACP_Editing_Strategy {
 		}
 
 		if ( ! is_a( $term, 'WP_Term' ) ) {
-			$term = get_term_by( 'id', $term, $this->column->get_taxonomy() );
+			$term = get_term_by( 'id', $term, $this->get_column()->get_taxonomy() );
 		}
 
 		if ( ! $term || is_wp_error( $term ) ) {
@@ -78,7 +78,7 @@ class ACP_Editing_Strategy_Taxonomy extends ACP_Editing_Strategy {
 	 * @since 4.0
 	 */
 	public function update( $id, $args ) {
-		return wp_update_term( $id, $this->column->get_taxonomy(), $args );
+		return wp_update_term( $id, $this->get_column()->get_taxonomy(), $args );
 	}
 
 }

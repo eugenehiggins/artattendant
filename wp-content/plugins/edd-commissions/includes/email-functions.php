@@ -96,6 +96,10 @@ function eddc_get_email_template_tags() {
 			'tag'         => 'item_tax',
 			'description' => __( 'The amount of tax calculated for the item', 'eddc' ),
 		),
+		array(
+			'tag'         => 'sitename',
+			'description' => __( 'Your site name', 'eddc' ),
+		),
 	);
 
 	return apply_filters( 'eddc_email_template_tags', $tags );
@@ -113,7 +117,7 @@ function eddc_get_email_template_tags() {
  * @param       int $rate The commission rate of the user
  * @return      string $message The email body
  */
-function eddc_parse_template_tags( $message, $download_id, $commission_id, $commission_amount, $rate,  $payment_id ) { //anagram / geet - added $payment_id
+function eddc_parse_template_tags( $message, $download_id, $commission_id, $commission_amount, $rate,  $payment_id  ) { //anagram / geet - added $payment_id
 	$commission = new EDD_Commission( $commission_id );
 	$download   = new EDD_Download( $commission->download_id );
 
@@ -132,6 +136,7 @@ function eddc_parse_template_tags( $message, $download_id, $commission_id, $comm
 	$amount    = html_entity_decode( edd_currency_filter( edd_format_amount( $commission->amount ) ) );
 	$date      = date_i18n( get_option( 'date_format' ), strtotime( $commission->date_created ) );
 	$user      = get_userdata( $commission->user_id );
+	$sitename  = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
 
 	if ( 'percentage' === $commission->type ) {
 		$rate = $commission->rate . '%';
@@ -162,7 +167,7 @@ function eddc_parse_template_tags( $message, $download_id, $commission_id, $comm
 		}
 	}
 
-	 // anagram / geet -  overwrite download to show image
+	// anagram / geet -  overwrite download to show image
 	$download  = edd_email_tag_download_list( $payment_id );
 
 	$message = str_replace( '{download}', $item_purchased, $message );
@@ -174,8 +179,9 @@ function eddc_parse_template_tags( $message, $download_id, $commission_id, $comm
 	$message = str_replace( '{commission_id}', $commission->id, $message );
 	$message = str_replace( '{item_price}', $item_price, $message );
 	$message = str_replace( '{item_tax}', $item_tax, $message );
+	$message = str_replace( '{sitename}', $sitename, $message );
 
-	//anagram added some template tags
+	//anagram / geet added some template tags
 	$payment_id = get_post_meta( $commission_id, '_edd_commission_payment_id', true );
 	$address = edd_email_tag_billing_address( $payment_id );
 	$message = str_replace( '{billing_address}', $address  , $message );
@@ -197,7 +203,7 @@ function eddc_email_alert( $user_id, $commission_amount, $rate, $download_id, $c
 		return;
 	}
 
-	if ( get_user_meta( $user->ID, 'eddc_disable_user_sale_alerts', true ) ) {
+	if ( get_user_meta( $user_id, 'eddc_disable_user_sale_alerts', true ) ) {
 		return;
 	}
 
@@ -208,7 +214,7 @@ function eddc_email_alert( $user_id, $commission_amount, $rate, $download_id, $c
 	$message = edd_get_option( 'edd_commissions_email_message', eddc_get_email_default_body() );
 
 	// Parse template tags
-	$message = eddc_parse_template_tags( $message, $download_id, $commission_id, $commission_amount, $rate, $payment_id ); //anagram / geet - added $payment_id
+	$message = eddc_parse_template_tags( $message, $download_id, $commission_id, $commission_amount, $rate , $payment_id ); //anagram / geet - added $payment_id
 	$message = apply_filters( 'eddc_sale_alert_email', $message, $user_id, $commission_amount, $rate, $download_id, $commission_id );
 
 	if ( class_exists( 'EDD_Emails' ) ) {

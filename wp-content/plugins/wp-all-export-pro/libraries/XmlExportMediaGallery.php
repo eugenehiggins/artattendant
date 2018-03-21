@@ -171,15 +171,24 @@ final class XmlExportMediaGallery
 
 		$data = array();
 
-		if ( ! empty(self::$images) )
-		{
-			foreach (self::$images as $image) 
-			{
-				$v = self::get_media( str_replace("image_", "", $field), $image );
+        switch ($field){
 
-				$data[] = $v;
-			}
-		}
+            case 'image_featured':
+                $data[] = empty(self::$featured_image) ? '' : wp_get_attachment_url( self::$featured_image->ID );
+                break;
+            default:
+                if ( ! empty(self::$images) )
+                {
+                    foreach (self::$images as $image)
+                    {
+                        $v = self::get_media( str_replace("image_", "", $field), $image );
+
+                        $data[] = $v;
+                    }
+                }
+                break;
+
+        }
 
 		return $data;
 	}
@@ -323,7 +332,10 @@ final class XmlExportMediaGallery
 					}
 				}
 				break;
-
+            case 'image_featured':
+                $templateOptions['is_featured'] = 0;
+                $templateOptions['is_featured_xpath'] = '{'. $element_name .'[1]}';
+                break;
 			case 'attachments':					
 			case 'attachment_url':				
 				$templateOptions['atch_delim'] = '|';

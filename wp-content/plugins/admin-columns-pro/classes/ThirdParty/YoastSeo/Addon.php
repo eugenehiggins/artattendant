@@ -17,7 +17,7 @@ final class ACP_ThirdParty_YoastSeo_Addon {
 	 */
 	public function set_columns( $list_screen ) {
 		if ( $this->is_active() ) {
-			$list_screen->register_column_types_from_dir( plugin_dir_path( __FILE__ ) . 'Column', ACP::CLASS_PREFIX );
+			$list_screen->register_column_types_from_dir( plugin_dir_path( __FILE__ ) . 'Column', ACP()->get_prefix() );
 		}
 	}
 

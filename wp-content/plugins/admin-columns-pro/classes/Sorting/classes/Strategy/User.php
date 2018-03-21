@@ -16,6 +16,10 @@ final class ACP_Sorting_Strategy_User extends ACP_Sorting_Strategy {
 	 */
 	private $user_query;
 
+	public function manage_sorting() {
+		add_action( 'pre_get_users', array( $this, 'handle_sorting_request' ) );
+	}
+
 	/**
 	 * @param array $args
 	 *

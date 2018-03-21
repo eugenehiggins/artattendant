@@ -100,10 +100,18 @@ var myDropzone = new Dropzone("#media-uploader", {
 */
     success: function (file, response) {
 	    //console.log(response);
-        file.previewElement.setAttribute("data-file-id", response);
-         file.previewElement.classList.add("dz-success");
+        file.previewElement.setAttribute("data-file-id", response.data.media_id);
+        file.previewElement.classList.add("dz-success");
         file['attachment_id'] = response.data.media_id; // push the id for future reference
-        var ids = jQuery('#media-ids').val() + ',' + response.data.media_id;
+        var ids = jQuery('#media-ids').val();
+
+		if(jQuery('#media-ids').val()==''){
+			ids = response.data.media_id;
+		}else{
+			ids = ids + ',' + response.data.media_id;
+		}
+
+
         jQuery('#media-ids').val(ids);
         this.emit("thumbnail", file, response.data.image_url);
         //console.log(ids);
@@ -139,16 +147,19 @@ var myDropzone = new Dropzone("#media-uploader", {
                 'handle_delete_media_nonce': dropParam.nonce
             },
             success: function (response) {
-	            //console.log(response);
+	            //console.log(response.data.deleted_id);
 	            var ids = jQuery('#media-ids').val();
 	            var idsarray = ids.split(',');
-	            idsarray = idsarray.filter(function( obj ) {
-				    return obj !== image_id;
+				//remove deleted item form field val
+	            idsarray = jQuery.grep(idsarray, function(value) {
+				  return value != image_id;
 				});
+
 				jQuery('#media-ids').val(idsarray);
 		     //console.log("Details saved successfully!!!");
 		      },
 		      error: function (xhr, ajaxOptions, thrownError) {
+
 		      //  alert(xhr.status);
 		       // alert(thrownError);
 		      }

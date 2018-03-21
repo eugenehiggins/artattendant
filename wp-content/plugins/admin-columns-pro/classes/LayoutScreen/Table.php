@@ -10,7 +10,6 @@ class ACP_LayoutScreen_Table {
 		add_action( 'ac/table/list_screen', array( $this, 'set_current_layout' ), 9 ); // Early priority
 		add_action( 'admin_footer', array( $this, 'switcher' ) );
 		add_action( 'ac/table_scripts', array( $this, 'table_scripts' ) );
-		add_action( 'acp/filtering/form', array( $this, 'add_current_layout_form' ) );
 	}
 
 	/**
@@ -95,19 +94,7 @@ class ACP_LayoutScreen_Table {
 	 */
 	public function table_scripts() {
 		wp_enqueue_script( 'acp-layouts', ACP()->get_plugin_url() . 'assets/js/layouts-listings-screen.js', array( 'jquery' ), ACP()->get_version() );
-		wp_enqueue_style( 'acp-layouts', ACP()->get_plugin_url() . 'assets/css/layouts-listings-screen' . AC()->minified() . '.css', array(), ACP()->get_version() );
-	}
-
-	/**
-	 * Add current layout to filter form. Prevents loading the wrong layout, when changing layout in column settings.
-	 *
-	 * @param AC_Listscreen $list_screen
-	 */
-	public function add_current_layout_form( $list_screen ) {
-		wp_nonce_field( 'select-layout', '_ac_nonce', false );
-		?>
-		<input type="hidden" name="layout" value="<?php echo esc_attr( $list_screen->get_layout_id() ); ?>">
-		<?php
+		wp_enqueue_style( 'acp-layouts', ACP()->get_plugin_url() . 'assets/css/layouts-listings-screen.css', array(), ACP()->get_version() );
 	}
 
 }

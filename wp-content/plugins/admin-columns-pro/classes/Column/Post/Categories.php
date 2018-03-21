@@ -19,10 +19,7 @@ class ACP_Column_Post_Categories extends AC_Column_Post_Categories
 	}
 
 	public function filtering() {
-		$model = new ACP_Filtering_Model_Delegated( $this );
-		$model->set_dropdown_attr_id( 'cat' );
-
-		return $model;
+		return new ACP_Filtering_Model_Delegated( $this, 'cat' );
 	}
 
 	public function export() {

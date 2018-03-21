@@ -363,8 +363,6 @@ class EDD_Commission {
 	/**
 	 * Setup Functions
 	 *
-
-	/**
 	 * Setup the property that determines whether the commission is a renewal or not.
 	 *
 	 * @since       3.3

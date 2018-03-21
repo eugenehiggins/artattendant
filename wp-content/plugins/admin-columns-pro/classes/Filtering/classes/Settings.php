@@ -43,7 +43,6 @@ class ACP_Filtering_Settings extends AC_Settings_Column
 	}
 
 	public function create_view() {
-
 		$filter = $this->create_element( 'radio', 'filter' )
 		               ->set_options( array(
 			               'on'  => __( 'Yes' ),
@@ -57,7 +56,7 @@ class ACP_Filtering_Settings extends AC_Settings_Column
 		     ->set( 'setting', $filter );
 
 		$filter_label = $this->create_element( 'text', 'filter_label' )
-		                     ->set_attribute( 'placeholder', sprintf( __( "All %s", 'codepress-admin-columns' ), $this->column->get_setting( 'label' )->get_value() ) );
+		                     ->set_attribute( 'placeholder', $this->get_filter_label_default() );
 
 		// Sub settings
 		$label_view = new AC_View();
@@ -69,6 +68,36 @@ class ACP_Filtering_Settings extends AC_Settings_Column
 		$view->set( 'sections', array( $label_view ) );
 
 		return $view;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function get_label_from_column() {
+		$label = $this->sanitize_label( $this->column->get_setting( 'label' )->get_value() );
+
+		if ( ! $label ) {
+			$label = $this->sanitize_label( $this->column->get_label() );
+		}
+
+		return $label;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_filter_label_default() {
+		$label = $this->sanitize_label( $this->column->get_setting( 'label' )->get_value() );
+
+		if ( ! $label ) {
+			$label = $this->sanitize_label( $this->column->get_label() );
+		}
+
+		if ( $this->column instanceof ACP_Column_FilteringInterface && ! $this->column->filtering()->is_ranged() ) {
+			$label = sprintf( __( "Any %s", 'codepress-admin-columns' ), $label );
+		}
+
+		return $label;
 	}
 
 	/**
@@ -96,11 +125,15 @@ class ACP_Filtering_Settings extends AC_Settings_Column
 		return 'on' === $this->filter;
 	}
 
+	protected function sanitize_label( $label ) {
+		return trim( strip_tags( $label ) );
+	}
+
 	/**
 	 * @return string
 	 */
 	public function get_filter_label() {
-		return strip_tags( $this->filter_label );
+		return $this->sanitize_label( $this->filter_label );
 	}
 
 	/**

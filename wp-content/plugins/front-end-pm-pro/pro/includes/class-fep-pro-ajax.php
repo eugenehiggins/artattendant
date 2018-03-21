@@ -20,6 +20,7 @@ class Fep_Pro_Ajax
     function actions_filters()
     	{
 			add_action('wp_ajax_fep_mr_ajax', array($this, 'mr_ajax_callback' ) );
+			add_action('wp_ajax_fep_group_members', array($this, 'fep_group_members' ) );
     	}
 
 	function mr_ajax_callback() {
@@ -34,7 +35,7 @@ class Fep_Pro_Ajax
 		
 		$args = array(
 			'search' => "*{$searchq}*",
-			'search_columns' => array( 'display_name' ),
+			'search_columns' => array( 'user_login', 'display_name' ),
 			'exclude' => $already,
 			'number' => 10,
 			'orderby' => 'display_name',
@@ -55,7 +56,48 @@ class Fep_Pro_Ajax
 			{
 				$ret[] = array(
 						'id' => $user->ID,
-						'name' => apply_filters( 'fep_autosuggestion_user_name', $user->display_name, $user->ID )
+						'name' => fep_user_name( $user->ID )
+					);
+			}
+		}
+		
+		wp_send_json($ret);
+		}
+		die();
+	}
+	
+	function fep_group_members() {
+		
+		if ( check_ajax_referer( 'fep_group_members', 'token', false )) {
+		
+		$searchq = $_POST['q'];
+		$already = empty( $_POST['x'] ) ? array() : explode( ',', $_POST['x']);
+		
+		
+		$args = array(
+			'search' => "*{$searchq}*",
+			'search_columns' => array( 'user_login', 'display_name' ),
+			'exclude' => $already,
+			'number' => 10,
+			'orderby' => 'display_name',
+			'order' => 'ASC',
+			'fields' => array( 'ID', 'display_name' )
+		);
+		
+		$ret = array();
+			
+		if(strlen($searchq)>0)
+		{
+			$args = apply_filters ('fep_group_members_suggestion_arguments', $args );
+		
+			// The Query
+			$users = get_users( $args );
+		
+			foreach( $users as $user)
+			{
+				$ret[] = array(
+						'id' => $user->ID,
+						'name' => fep_user_name( $user->ID )
 					);
 			}
 		}

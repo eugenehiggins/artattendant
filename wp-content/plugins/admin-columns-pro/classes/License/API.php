@@ -11,13 +11,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class ACP_License_API {
 
+	const URL = 'https://www.admincolumns.com';
+
+	const PROXY = 'https://api.admincolumns.com';
+
 	/**
-	 * API url
-	 *
-	 * @since 3.1.2
-	 * @var $url string
+	 * @var string
 	 */
-	public $url;
+	protected $url;
+
+	/**
+	 * @var bool
+	 */
+	protected $use_proxy = true;
 
 	/**
 	 * Request args
@@ -25,7 +31,7 @@ class ACP_License_API {
 	 * @since 3.1.2
 	 * @var $request_arg array
 	 */
-	public $request_args;
+	protected $request_args;
 
 	/**
 	 * Constructor
@@ -34,37 +40,11 @@ class ACP_License_API {
 	 */
 	public function __construct() {
 		$this->request_args = array(
-			'timeout'   => 15,
-			'sslverify' => false,
-			'body'      => array(
+			'timeout' => 15,
+			'body'    => array(
 				'wc-api' => 'software-licence-api',
 			),
 		);
-	}
-
-	/**
-	 * Set url
-	 *
-	 * @since 3.1.2
-	 *
-	 * @param $api_url
-	 *
-	 * @return ACP_License_API
-	 */
-	public function set_url( $api_url ) {
-		$this->url = $api_url;
-
-		return $this;
-	}
-
-	/**
-	 * Get url
-	 *
-	 * @since 3.1.2
-	 * @return string
-	 */
-	public function get_url() {
-		return $this->url;
 	}
 
 	/**
@@ -75,7 +55,7 @@ class ACP_License_API {
 	 * @param $key
 	 * @param $value
 	 *
-	 * @return ACP_License_API
+	 * @return $this
 	 */
 	public function set_request_arg( $key, $value ) {
 		$this->request_args[ $key ] = $value;
@@ -94,159 +74,56 @@ class ACP_License_API {
 	}
 
 	/**
-	 * Activate a license by its license key
-	 *
-	 * @since 3.0
-	 *
-	 * @param string $licence_key Licence Key
-	 *
-	 * @return mixed API Response
+	 * @return string
 	 */
-	public function activate_licence( $licence_key ) {
-
-		$response = $this->request( array(
-			'request'     => 'activation',
-			'licence_key' => $licence_key,
-			'site_url'    => site_url(),
-		) );
-
-		return $response;
+	public function get_url() {
+		return $this->url;
 	}
 
 	/**
-	 * Activate a license by its license key
+	 * @param string $url
 	 *
-	 * @since 3.0
-	 *
-	 * @param $licence_key
-	 *
-	 * @return mixed API Response
+	 * @return $this
 	 */
-	public function deactivate_licence( $licence_key ) {
+	public function set_url( $url ) {
+		$this->url = $url;
 
-		$response = $this->request( array(
-			'request'     => 'deactivation',
-			'licence_key' => $licence_key,
-			'site_url'    => site_url() // identifying
-		) );
-
-		return $response;
+		return $this;
 	}
 
 	/**
-	 * Plugin HTML changelog
-	 *
-	 * @since 3.0
-	 *
-	 * @param $plugin_basename
-	 *
-	 * @return mixed API Response
+	 * @return bool
 	 */
-	public function get_plugin_changelog( $plugin_basename ) {
-
-		$response = $this->request( array(
-			'request'     => 'pluginchangelog',
-			'plugin_name' => $plugin_basename,
-		), 'html' );
-
-		return $response;
+	public function is_use_proxy() {
+		return $this->use_proxy;
 	}
 
 	/**
-	 * Get remote plugin update data in the WP format: url, slug, package, new_version, id
+	 * @param bool $use_proxy
 	 *
-	 * @since 1.1
-	 *
-	 * @param string $licence_key Licence Key
-	 * @param string $plugin_basename Plugin basename
-	 *
-	 * @return mixed API Response
+	 * @return $this
 	 */
-	public function get_plugin_install_data( $licence_key, $plugin_basename ) {
+	public function set_use_proxy( $use_proxy ) {
+		$this->use_proxy = $use_proxy;
 
-		$response = $this->request( array(
-			'request'     => 'plugininstall',
-			'licence_key' => $licence_key,
-			'plugin_name' => $plugin_basename,
-		) );
-
-		return $response;
+		return $this;
 	}
 
 	/**
-	 * Get remote plugin update data in the WP format: url, slug, package, new_version, id (old:name, slug, download_link, version)
+	 * Get the URL to call
 	 *
-	 * @since 1.1
-	 *
-	 * @param string $licence_key Licence Key
-	 * @param string $plugin_basename Plugin basename
-	 * @param string $current_version Plugin's current version
-	 *
-	 * @return mixed API Response
+	 * @return string
 	 */
-	public function get_plugin_update_data( $licence_key, $plugin_basename, $current_version ) {
+	private function get_request_url() {
+		if ( null !== $this->url ) {
+			return $this->url;
+		}
 
-		$response = $this->request( array(
-			'request'     => 'pluginupdate',
-			'licence_key' => $licence_key,
-			'plugin_name' => $plugin_basename,
-			'version'     => $current_version,
-		) );
+		if ( $this->use_proxy ) {
+			return self::PROXY;
+		}
 
-		return $response;
-	}
-
-	/**
-	 * Get remote plugin update data in the WP format: ...
-	 *
-	 * @since 1.1
-	 *
-	 * @param string $plugin_basename
-	 *
-	 * @return mixed API Response
-	 */
-	public function get_plugin_details( $plugin_basename ) {
-
-		$response = $this->request( array(
-			'request'     => 'plugindetails',
-			'plugin_name' => $plugin_basename,
-		) );
-
-		return $response;
-	}
-
-	/**
-	 * Get license details
-	 *
-	 * @since 3.4.3
-	 *
-	 * @param string $license_key
-	 *
-	 * @return mixed API Response
-	 */
-	public function get_license_details( $license_key ) {
-
-		$response = $this->request( array(
-			'request'     => 'licensedetails',
-			'license_key' => $license_key,
-		) );
-
-		return $response;
-	}
-
-	/**
-	 * Test request
-	 *
-	 * @since 3.1.2
-	 *
-	 * @param string $plugin_basename
-	 *
-	 * @return mixed API response
-	 */
-	public function test_request( $plugin_basename ) {
-		$response = $this->get_plugin_details( $plugin_basename );
-
-		return is_wp_error( $response ) && 'http_request_failed' == $response->get_error_code() ? false : true;
+		return self::URL;
 	}
 
 	/**
@@ -254,35 +131,47 @@ class ACP_License_API {
 	 *
 	 * @since 1.1
 	 *
-	 * @param array $body
+	 * @param string $action
+	 * @param array  $body
 	 * @param string $format
 	 *
-	 * @return mixed API Response
+	 * @return WP_Error|object API Response
 	 */
-	protected function request( $body, $format = 'json' ) {
+	public function request( $action, array $body, $format = 'json' ) {
+		$body['request'] = $action;
 
-		$this->request_args['body'] = array_merge( $this->request_args['body'], $body );
-
-		$result = wp_remote_post( $this->url, $this->request_args );
-
-		if ( is_wp_error( $result ) ) {
-			return $result;
+		foreach ( $body as $k => $v ) {
+			$this->request_args['body'][ $k ] = $v;
 		}
 
-		$response = wp_remote_retrieve_body( $result );
+		$response = wp_remote_post( $this->get_request_url(), $this->request_args );
+		$result = wp_remote_retrieve_body( $response );
 
-		if ( 'json' == $format ) {
-			$response = json_decode( $response );
+		// retry with proxy disabled
+		if ( empty( $result ) && $this->use_proxy ) {
+			$this->use_proxy = false;
+
+			return $this->request( $action, $body );
 		}
 
-		if ( isset( $response->error ) ) {
-			return new WP_Error( $response->code, $response->message );
+		if ( is_wp_error( $response ) ) {
+			return $response;
 		}
-		elseif ( empty( $response ) ) {
+
+		// TODO: format is a strange thing, it should always be JSON
+		if ( 'json' === $format ) {
+			$result = json_decode( $result );
+
+			if ( isset( $result->error ) ) {
+				return new WP_Error( $result->code, $result->message );
+			}
+		}
+
+		if ( empty( $result ) ) {
 			return new WP_Error( 'empty_response', __( 'Empty response from API.', 'codepress-admin-columns' ) );
 		}
 
-		return $response;
+		return $result;
 	}
 
 }

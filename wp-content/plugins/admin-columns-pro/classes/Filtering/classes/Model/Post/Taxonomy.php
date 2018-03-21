@@ -4,10 +4,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * @property ACP_Filtering_Strategy_Post $strategy
+ */
 class ACP_Filtering_Model_Post_Taxonomy extends ACP_Filtering_Model {
 
 	public function get_filtering_vars( $vars ) {
-		return $this->strategy->get_filterable_request_vars_taxonomy( $vars, $this->get_filter_value(), $this->column->get_taxonomy() );
+		if ( $this->strategy instanceof ACP_Filtering_Strategy_Post ) {
+			return $this->strategy->get_filterable_request_vars_taxonomy( $vars, $this->get_filter_value(), $this->column->get_taxonomy() );
+		}
+
+		return $vars;
 	}
 
 	public function get_filtering_data() {

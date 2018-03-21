@@ -1,7 +1,7 @@
 <?php
 namespace Ari\Models;
 
-use Ari\Utils\Object as Object_Helper;
+use Ari\Utils\Object_Helper as Object_Helper;
 
 class Model {
     private $name = null;

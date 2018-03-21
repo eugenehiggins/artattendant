@@ -39,7 +39,6 @@ class ACP_Editing_TableScreen {
 			return;
 		}
 
-		$minified = AC()->minified();
 		$plugin_url = ACP()->editing()->get_plugin_url();
 		$version = ACP()->editing()->get_version();
 
@@ -48,19 +47,20 @@ class ACP_Editing_TableScreen {
 		wp_register_script( 'acp-editing-select2', $plugin_url . 'library/select2/select2.min.js', array( 'jquery' ), $version );
 		wp_register_style( 'acp-editing-select2-css', $plugin_url . 'library/select2/select2.css', array(), $version );
 		wp_register_style( 'acp-editing-select2-bootstrap', $plugin_url . 'library/select2/select2-bootstrap.css', array(), $version );
-		wp_register_script( 'acp-editing-bootstrap-editable', $plugin_url . "library/bootstrap-editable/js/bootstrap-editable{$minified}.js", array( 'jquery', 'acp-editing-bootstrap' ), $version );
+		wp_register_script( 'acp-editing-bootstrap-editable', $plugin_url . "library/bootstrap-editable/js/bootstrap-editable.min.js", array( 'jquery', 'acp-editing-bootstrap' ), $version );
 		wp_register_style( 'acp-editing-bootstrap-editable', $plugin_url . 'library/bootstrap-editable/css/bootstrap-editable.css', array(), $version );
 
 		// Main
-		wp_register_script( 'acp-editing-table', $plugin_url . 'assets/js/table' . $minified . '.js', array( 'jquery', 'acp-editing-bootstrap-editable' ), $version );
-		wp_register_style( 'acp-editing-table', $plugin_url . 'assets/css/table' . $minified . '.css', array(), $version );
+		wp_register_script( 'acp-editing-table', $plugin_url . 'assets/js/table.js', array( 'jquery', 'acp-editing-bootstrap-editable' ), $version );
+		wp_register_style( 'acp-editing-table', $plugin_url . 'assets/css/table.css', array(), $version );
 
 		// Allow JS to access the column and item data for this list screen on the edit page
 		wp_localize_script( 'acp-editing-table', 'ACP_Editing_Columns', $column_data );
 		wp_localize_script( 'acp-editing-table', 'ACP_Editing_Items', $column_items );
 		wp_localize_script( 'acp-editing-table', 'ACP_Editing', array(
 			'inline_edit' => array(
-				'active' => '1' === $this->preferences()->get( $list_screen->get_key() ),
+				'persistent' => $this->persistent_editing( $list_screen ),
+				'active'     => '1' === $this->preferences()->get( $list_screen->get_key() ),
 			),
 			// Translations
 			'i18n'        => array(
@@ -216,9 +216,11 @@ class ACP_Editing_TableScreen {
 		$data = array(
 			'rawvalue'  => $value,
 
-			// Display HTML
+			// Cell HTML
 			'cell_html' => $display_value,
-			'row_html'  => $list_screen->get_single_row( $id ) // Mostly for Default columns
+
+			// Row HTML. Mainly used to fetch the return value from default columns.
+			'row_html'  => $list_screen instanceof AC_ListScreenWP ? $list_screen->get_single_row( $id ) : '',
 		);
 
 		/**
@@ -231,6 +233,15 @@ class ACP_Editing_TableScreen {
 		$data = apply_filters( 'acp/editing/result', $data, $id, $column );
 
 		wp_send_json_success( $data );
+	}
+
+	/**
+	 * @param AC_ListScreen $list_screen
+	 *
+	 * @return bool
+	 */
+	private function persistent_editing( $list_screen ) {
+		return (bool) apply_filters( 'acp/editing/persistent', false, $list_screen );
 	}
 
 	/**
@@ -468,7 +479,7 @@ class ACP_Editing_TableScreen {
 	 * @return AC_Preferences
 	 */
 	public function preferences() {
-		return new AC_Preferences( 'editability_state' );
+		return new AC_Preferences_Site( 'editability_state' );
 	}
 
 }

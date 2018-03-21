@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Admin Columns Pro
-Version: 4.1.1
+Version: 4.2.6
 Description: Customize columns on the administration screens for post(types), users and other content. Filter and sort content, and edit posts directly from the posts overview. All via an intuitive, easy-to-use drag-and-drop interface.
 Author: Admin Columns
 Author URI: https://www.admincolumns.com
@@ -74,8 +74,23 @@ final class ACP_Full {
 	 * Non compatible add-ons will be deactivated
 	 */
 	public function deactivate_incompatible_addons() {
-		$this->deactivate_incompatible_plugin( 'cac-addon-woocommerce/cac-addon-woocommerce.php', '2.0' );
-		$this->deactivate_incompatible_plugin( 'cac-addon-acf/cac-addon-acf.php', '2.0' );
+		$addons = array(
+			'ac-addon-acf/ac-addon-acf.php'                         => '2.2.2',
+			'ac-addon-buddypress/ac-addon-buddypress.php'           => '1.2',
+			'ac-addon-events-calendar/ac-addon-events-calendar.php' => '1.1',
+			'ac-addon-ninjaforms/ac-addon-ninjaforms.php'           => '1.1',
+			'ac-addon-pods/ac-addon-pods.php'                       => '1.1',
+			'ac-addon-types/ac-addon-types.php'                     => '1.2',
+			'ac-addon-woocommerce/ac-addon-woocommerce.php'         => '3.0.3',
+
+			// Deprecated
+			'cac-addon-acf/cac-addon-acf.php'                       => '2.2.2',
+			'cac-addon-woocommerce/cac-addon-woocommerce.php'       => '3.0.3',
+		);
+
+		foreach ( $addons as $file => $version ) {
+			$this->deactivate_incompatible_plugin( $file, $version );
+		}
 	}
 
 	/**

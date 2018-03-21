@@ -694,6 +694,7 @@ if (!class_exists('XmlExportUser')) {
                 case 'user_pass':
                     $templateOptions['pmui']['pass'] = '{' . $element_name . '[1]}';
                     $templateOptions['is_update_password'] = 1;
+					$templateOptions['is_hashed_wordpress_password'] = 1;
                     break;
                 case 'user_nicename':
                     $templateOptions['pmui']['nicename'] = '{' . $element_name . '[1]}';

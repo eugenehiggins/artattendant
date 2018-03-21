@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ACP_ListScreen_MSUser extends AC_ListScreen_User {
+class ACP_ListScreen_MSUser extends ACP_ListScreen_User {
 
 	public function __construct() {
 		parent::__construct();
@@ -16,9 +16,15 @@ class ACP_ListScreen_MSUser extends AC_ListScreen_User {
 		$this->set_screen_id( 'users-network' );
 		$this->set_group( 'network' );
 		$this->set_network_only( true );
+	}
 
-		/* @see WP_MS_Users_List_Table */
-		$this->set_list_table_class( 'WP_MS_Users_List_Table' );
+	/**
+	 * @return WP_MS_Users_List_Table
+	 */
+	public function get_list_table() {
+		require_once( ABSPATH . 'wp-admin/includes/class-wp-ms-users-list-table.php' );
+
+		return new WP_MS_Users_List_Table( array( 'screen' => $this->get_screen_id() ) );
 	}
 
 	/**
@@ -33,11 +39,15 @@ class ACP_ListScreen_MSUser extends AC_ListScreen_User {
 	 * @since 4.0
 	 * @return string HTML
 	 */
-	public function get_single_row( $user_id ) {
+	public function get_single_row( $id ) {
 		ob_start();
-		parent::get_single_row( $user_id );
+		$this->get_list_table()->single_row( $this->get_object( $id ) );
 
 		return ob_get_clean();
+	}
+
+	public function filtering( $model ) {
+		return new ACP_Filtering_Strategy_User( $model );
 	}
 
 }

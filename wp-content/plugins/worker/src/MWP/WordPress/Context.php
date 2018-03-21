@@ -658,6 +658,16 @@ class MWP_WordPress_Context
         return is_multisite();
     }
 
+    public function isMainSite()
+    {
+        return is_main_site();
+    }
+
+    public function isNetworkAdmin()
+    {
+        return is_network_admin();
+    }
+
     public function getSiteId()
     {
         return get_current_blog_id();

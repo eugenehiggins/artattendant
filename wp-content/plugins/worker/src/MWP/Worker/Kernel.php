@@ -70,6 +70,8 @@ class MWP_Worker_Kernel
             return;
         }
 
+        @ini_set('display_errors', false);
+
         try {
             // Get action info.
             $actionRegistry   = $container->getActionRegistry();

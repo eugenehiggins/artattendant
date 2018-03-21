@@ -2,7 +2,7 @@
 namespace Ari\Views;
 
 use Ari\Utils\Filter as Filter;
-use Ari\Utils\Object as Object_Helper;
+use Ari\Utils\Object_Helper as Object_Helper;
 
 class View {
     protected $model = null;

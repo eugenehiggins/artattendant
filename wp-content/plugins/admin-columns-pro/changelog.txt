@@ -1,12 +1,81 @@
 == Changelog ==
 
+= 4.2.6 =
+Release Date: March 16th, 2018
+
+* [Fixed] Ranged filtering on User overview fixed
+* [Fixed] Reintroduced filtering for Network users
+
+= 4.2.5 =
+Release Date: March 15th, 2018
+
+* [Fixed] Multisite Users screen was not usable because of a fatal error
+
+= 4.2.4 =
+Release Date: March 13th, 2018
+
+* [Added] You can now change the duration of caching in seconds using acp/filtering/cache/seconds (defaults to 10)
+* [Added] Gravatar display added for User related columns
+* [Fixed] Inline edit for Date Time picker fixed
+* [Improved] Filter dropdowns now displayed in alphabetical order by default
+* [Dependency] Requires ACF addon 2.2.2 if active
+* [Dependency] Requires WooCommerce addon 3.0.3 if active
+* [Updated] The filter for enabling cache on the filter dropdowns is now acp/filtering/cache/enable
+* [Updated] When selecting a Post Type the label will be updated for the Post Count (user) column
+
+= 4.2.3 =
+Release Date: February 6th, 2018
+
+* [Added] Added deprecated hook `do_action( 'acp/column_types' )`
+* [Fixed] Fixed default sorting for hierarchical pages
+* [Fixed] Fiexed issue where some page ordering plugins would no longer be sorted correctly
+* [Fixed] Fixed sorting on media items in grid view mode
+* [Fixed] Delegated filter menu's (e.g. categories) no longer appear when disabled
+* [Updated] Admin Column Core changes
+    * [Removed] Removed 'acp/column_types' action
+    * [Fixed] Small typo in help text
+    * [Update] Updated languages from wordpress.org
+
+= 4.2.2 =
+Release Date: January 31th, 2018
+
+* [Fixed] Assets for filtering and sorting were not loading
+
+= 4.2.1 =
+Release Date: January 30th, 2018
+
+* [Fixed] Editing, Filtering and Sorting was not possible for Media and Comment columns
+* [Fixed] Editing for Menu Column is fixed
+* [Improved] Filtering drop downs now have a maximum width of 200px
+* [Updated] Admin Column Core changes
+    * [Fixed] Added AC_ListScreen::get_object_by_id with deprecated message
+    * [Fixed] Fixed fatal error for custom taxonomy columns
+
+= 4.2 =
+Release Date: January 29th, 2018
+
+* [Added] Ancestor column for hierarchical post types
+* [Added] Latest comment column for posts
+* [Added] Post Type column for comments
+* [Added] Language column for users
+* [Added] Enable persistent editing by adding `add_filter( 'acp/editing/persistent', '__return_true' );` to your functions.php
+* [Improved] Default Filtering label prefix changed from 'All' to 'Any'
+* [Improved] Ping status, last name and first name column sorting is now faster
+* [Improved] Adding a new column will enable sorting by default
+* [Updated] Admin Column Core changes
+    * [Improved] Admin Columns Capability is now always set
+    * [Improved] Database update message is only visible for administartors
+    * [Improved] Links starting with # are now marked as internal
+    * [Removed] Removed support for the Link/Bookmark list table
+    * [Added] Added date time settings for columns that use dates
+
 = 4.1.1 =
 Release Date: December 12th, 2017
 
 * [Added] Sorting support for Yoast SEO and Readability column
 * [Added] Export support for Yoast columns
 * [Fixed] Word Limit setting now accepts 0 and empty strings
-* [Fixed] Removed double tooltips for Yoast columns wen sorting is active
+* [Fixed] Removed double tooltips for Yoast columns when sorting is active
 * [Improvement] Small database updates run in the background
 * [Improvement] Improved Export for media columns
 * [Improvement] Empty char can be set per Export Model
@@ -23,7 +92,7 @@ Release Date: December 12th, 2017
 = 4.1 =
 Release Date: November 22nd, 2017
 
-* [Added] Internal domains for the  Link Count can now be changed by using the following filter: add_filter( 'ac/column/linkcount/domains', $internal_domains )
+* [Added] Internal domains for the Link Count can now be changed by using the following filter: add_filter( 'ac/column/linkcount/domains', $internal_domains )
 * [Improvement] Added Exporting
 * [Improvement] When switching to a different layout, the WP status filters are taken into account
 

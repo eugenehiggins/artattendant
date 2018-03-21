@@ -169,7 +169,7 @@ class Fep_Role_To_Role_Block
 			return;
 			
 			if( 'newmessage' == $where
-				&& fep_get_option('oa-can-send-to-admin', 1 )
+				&& fep_get_option('oa-can-send-to-admin', 0 )
 				&& ( ! empty( $_POST['fep_send_to_admin'] ) || ! fep_current_user_can( 'mr_newmessage_to_users') ) )
 				return;
 			
@@ -194,13 +194,13 @@ class Fep_Role_To_Role_Block
 				if( is_array( $to ) ){
 					foreach( $to as $t ){
 						if( get_current_user_id() != $t && ( 'fep_all' == $b['to_role'] ||  in_array( $b['to_role'], get_userdata( $t )->roles ) ) ){
-							$errors->add( 'pro_to' , sprintf(__('You cannot message to %s', 'front-end-pm'), fep_get_userdata( $t, 'display_name', 'id' )));
+							$errors->add( 'pro_to' , sprintf(__('You cannot message to %s', 'front-end-pm'), fep_user_name( $t )));
 							//return;
 						}
 					}
 				} else {
 					if( get_current_user_id() != $to && ( 'fep_all' == $b['to_role'] || in_array( $b['to_role'], get_userdata( $to )->roles ) ) ){
-						$errors->add( 'pro_to' , sprintf(__('You cannot message to %s', 'front-end-pm'), fep_get_userdata( $to, 'display_name', 'id' )));
+						$errors->add( 'pro_to' , sprintf(__('You cannot message to %s', 'front-end-pm'), fep_user_name( $to )));
 						//return;
 					}
 				}

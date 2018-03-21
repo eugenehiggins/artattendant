@@ -20,18 +20,18 @@ class ACA_ACF_Setting_Date extends AC_Settings_Column_Date
 		return $this->column->get_field()->get( 'display_format' );
 	}
 
-	protected function get_date_options() {
+	protected function get_custom_format_options() {
 		$label = __( 'ACF Date Format', 'codepress-admin-columns' );
 
 		$options = array(
-			'acf' => $this->get_html_label( array(
-				'label'       => $label,
-				'date_format' => $this->get_acf_date_format(),
-				'description' => sprintf( __( "%s uses the %s from it's field settings.", 'codepress-admin-columns' ), $label, '"' . __( 'Display Format', 'codepress-admin-columns' ) . '"' ),
-			) ),
+			'acf' => $this->get_html_label(
+				$label,
+				$this->get_acf_date_format(),
+				sprintf( __( "%s uses the %s from it's field settings.", 'codepress-admin-columns' ), $label, '"' . __( 'Display Format', 'codepress-admin-columns' ) . '"' )
+			),
 		);
 
-		return ac_helper()->array->insert( parent::get_date_options(), $options, 'diff' );
+		return ac_helper()->array->insert( parent::get_custom_format_options(), $options, 'diff' );
 	}
 
 	public function format( $value, $original_value ) {
@@ -43,7 +43,7 @@ class ACA_ACF_Setting_Date extends AC_Settings_Column_Date
 			return date_i18n( $this->get_acf_date_format(), strtotime( $value ) );
 		}
 
-		return parent::format( $value, $original_value );
+		return parent::format( strtotime( $value ), $original_value );
 	}
 
 }

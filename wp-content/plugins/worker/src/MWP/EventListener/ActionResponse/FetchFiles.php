@@ -9,7 +9,7 @@
  */
 
 /**
- * Registered by MWP_Action_IncrementalBackup_FetchFiles and MWP_Action_IncrementalBackup_DumpTables actions
+ * Registered by MWP_Action_IncrementalBackup_FetchFiles action
  */
 class MWP_EventListener_ActionResponse_FetchFiles implements Symfony_EventDispatcher_EventSubscriberInterface
 {
